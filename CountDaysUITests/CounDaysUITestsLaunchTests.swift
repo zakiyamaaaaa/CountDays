@@ -1,13 +1,13 @@
 //
-//  CounDaysUITestsLaunchTests.swift
-//  CounDaysUITests
+//  CountDaysUITestsLaunchTests.swift
+//  CountDaysUITests
 //
 //  Created by shoichiyamazaki on 2023/08/24.
 //
 
 import XCTest
 
-final class CounDaysUITestsLaunchTests: XCTestCase {
+final class CountDaysUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

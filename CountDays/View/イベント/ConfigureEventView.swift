@@ -10,6 +10,9 @@ import RealmSwift
 
 struct ConfigureEventView: View {
     
+    /// 毎年のイベントの場合、どのようにDateを処理すればいいか
+    /// FrequentTypeによって日にちのカウント方法を変更する
+    /// .annualの場合、365のあまり、もしくは
     @Environment(\.presentationMode) var presentationMode
 //    @Binding var selectedDate: Date
     @State private var eventName = ""
@@ -24,6 +27,7 @@ struct ConfigureEventView: View {
     @State var selectedTextColor: TextColor = .white
     @State private var isTrashAnimation = false
     @State private var showDeleteAlert = false
+    @State private var dayAtMonthly = 1
     @FocusState private var focusField: Bool
     private let initialEventName = EventCardViewModel.defaultStatus.title
     @ObservedObject var realmMock: RealmMockStore
@@ -49,6 +53,7 @@ struct ConfigureEventView: View {
     @StateObject var dateViewModel = DateViewModel()
     @State var frequentType: FrequentType = .never
     @State var eventType: EventType = .countup
+    @State var dayOfWeek: DayOfWeek = .sunday
     var selectedStyle: EventDisplayStyle = .standard
     private let bgColorList: [BackgroundColor] = BackgroundColor.allCases
     private let txtColorList: [TextColor] = TextColor.allCases
@@ -72,13 +77,13 @@ struct ConfigureEventView: View {
                     
 //                    let date = Date(timeIntervalSinceNow: -100000)
                     let date = dateViewModel.selectedDate
-                    let day = CalendarViewModel.getDay(to: date)
+                    let day = CalendarViewModel.getDay(to: date, frequentType: frequentType, dayAtMonthly: dayAtMonthly)
                     let hour = CalendarViewModel.getHour(to: date)
                     let minute = CalendarViewModel.getMinute(to: date)
                     let second = CalendarViewModel.getSecond(to: date)
                     
                      ZStack {
-                         EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, day: day ?? 1, hour: hour ?? 111, minute: minute ?? 111, second: second ?? 20, style: EventDisplayStyle(rawValue: selectedStyleIndex)!, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond)
+                         EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, day: day ?? 1, hour: hour ?? 111, minute: minute ?? 111, second: second ?? 20, style: EventDisplayStyle(rawValue: selectedStyleIndex)!, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, frequentType: frequentType)
 //                         EventCardView(title: eventTitle.isEmpty ? "イベント名" : eventTitle, day: day ?? 1, hour: hour ?? 111, minute: minute ?? 111, style: EventDisplayStyle(rawValue: selectedStyleIndex)!, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor)
                          Button {
                              self.showDeleteAlert.toggle()
@@ -278,7 +283,7 @@ struct ConfigureEventView: View {
                             .foregroundColor(.white)
                     }
                     TextField("", text: $eventTitle,
-                                        onEditingChanged: { editing in
+                              onEditingChanged: { editing in
                     })
                     .padding(.horizontal,40)
                     .border(.white)
@@ -301,8 +306,6 @@ struct ConfigureEventView: View {
                         .padding(.horizontal,30)
                 }
                 
-                
-                
                 Button {
                     focusField = false
                 } label: {
@@ -312,39 +315,63 @@ struct ConfigureEventView: View {
                 .background(focusField ? .mint : .gray)
                 .tint(.white)
                 .clipShape(Circle())
-                
             }
             
             Button {
                 isShowSheet.toggle()
             } label: {
                 HStack {
-                    
-                    Image(systemName: "calendar")
-                        .padding()
-                    
+
+                    VStack {
+                        Image(systemName: "calendar")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .padding(.horizontal)
+
+                        if frequentType != .never {
+                            Text("リピート")
+                                .font(.system(size: 10))
+                                .foregroundColor(.white)
+                                .background(Color.red)
+                        }
+                    }
+
                     VStack(alignment: .leading) {
-                        
-                        let date = dateViewModel.selectedDate
-                        Text(dateViewModel.dateText(date: date))
-                        
+                        HStack {
+                            let date = dateViewModel.selectedDate
+                            let year = dateViewModel.getYearText(date: date)
+                            let month = dateViewModel.getMonthText(date: date)
+                            let day = dateViewModel.getDayText(date: date)
+                            switch frequentType {
+                            case .never:
+//                                Text(dateViewModel.dateText(date: date))
+                                Text(year + "/" + month + "/" + day)
+                            case .annual:
+                                Text("毎年：")
+                                Text(month + "月" + day + "日")
+                            case .monthly:
+                                Text("毎月：")
+                                Text(dayAtMonthly.description + "日")
+                            case .weekly:
+                                Text("毎週：")
+                                Text(dayOfWeek.stringValue)
+                            }
+                        }
                         Text("終日")
-                        
+
                     }
                     .foregroundColor(.white)
                     Spacer()
                 }
                 .frame(height: 80.0)
                 .frame(alignment: .leading)
-                .frame(maxWidth: .infinity)
                 .foregroundColor(.black)
                 .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.highlighted))
             }.sheet(isPresented: $isShowSheet) {
+                ConfigureDateView(eventType: $eventType, frequentType: $frequentType, dateViewModel: _dateViewModel, monthlyDay: $dayAtMonthly, weeklyDate: $dayOfWeek)
                 
-                ConfigureDateView(dateViewModel: _dateViewModel)
-//                ConfigureDateView(selectedDate: $dateViewModel.selectedDate)
             }
-            
+
             Spacer()
         }
         .padding()
@@ -359,12 +386,12 @@ struct ConfigureEventView: View {
         VStack {
             TabView(selection: $selectedStyleIndex) {
                 let date = dateViewModel.selectedDate
-                let day = CalendarViewModel.getDay(to: date)
+                let day = CalendarViewModel.getDay(to: date, frequentType: frequentType)
                 let hour = CalendarViewModel.getHour(to: date)
                 let minute = CalendarViewModel.getMinute(to: date)
                 let second = CalendarViewModel.getSecond(to: date)
                 VStack {
-                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, day: day ?? 1, hour: hour ?? 111, minute: minute ?? 3, second: second ?? 20, style: .standard, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor)
+                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, day: day ?? 1, hour: hour ?? 111, minute: minute ?? 3, second: second ?? 20, style: .standard, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, frequentType: frequentType)
                         .tag(0)
                     Button {
                         showStyleDetailConfiguration.toggle()
@@ -377,7 +404,7 @@ struct ConfigureEventView: View {
                         .presentationDetents([.medium])
                 }
                 
-                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, day: day ?? 1, hour: hour ?? 111, minute: minute ?? 3, second: second ?? 20, style: .circle, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor)
+                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, day: day ?? 1, hour: hour ?? 111, minute: minute ?? 3, second: second ?? 20, style: .circle, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, frequentType: frequentType)
                     .tag(1)
                 
             }

@@ -51,7 +51,7 @@ struct CountDaysWidgetEntryView : View {
     var body: some View {
 //        let startComponents = DateComponents(year: 2023,month: 6,day: 2)
         let startDate = mockEventModel.date
-        let day = CalendarViewModel.getDay(to: startDate)
+        let day = CalendarViewModel.getDay(to: startDate, frequentType: .never)
         let hour = CalendarViewModel.getHour(to: startDate)
         
         VStack(alignment: .leading) {

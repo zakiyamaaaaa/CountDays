@@ -19,13 +19,14 @@ struct EventCardView: View {
     var showHour: Bool = true
     var showMinute: Bool = true
     var showSecond: Bool = false
+    var frequentType: FrequentType
+    var eventType: EventType = .countup
     let width = UIScreen.main.bounds.width
     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     
     @State var currentSecond = 20
     
     var body: some View {
-        
         ZStack {
             Rectangle()
                 .foregroundColor(backgroundColor.color)
@@ -41,6 +42,7 @@ struct EventCardView: View {
                     Text(title)
                         .padding(.vertical, 10)
                     Spacer()
+                    let a = "hoge"
                     Text("\(day)日")
                         .font(.system(size: 30))
                     HStack() {
@@ -100,6 +102,6 @@ struct EventCardView: View {
 
 struct EventCardView_Previews: PreviewProvider {
     static var previews: some View {
-        EventCardView(title: "sanoke1", day: 1, hour: 2, minute: 3, second: 20, style: .standard, backgroundColor: .primary, textColor: .white)
+        EventCardView(title: "sanoke1", day: 1, hour: 2, minute: 3, second: 20, style: .standard, backgroundColor: .primary, textColor: .white, frequentType: .never)
     }
 }

@@ -42,7 +42,7 @@ import SwiftUI
 
 final class RealmModel: ObservableObject {
     /// TODO: スキーマバージョンを1になおす
-    private static var config = Realm.Configuration(schemaVersion: 2)
+    private static var config = Realm.Configuration(schemaVersion: 4)
     private static var realm = try! Realm(configuration: config)
     
     /// 保存されているuserを返す
@@ -127,6 +127,10 @@ class Event: Object, ObjectKeyIdentifiable {
     @Persisted var displayStyle: EventDisplayStyle
     @Persisted var frequentType: FrequentType = .never
     @Persisted var eventType: EventType = .countup
+    @Persisted var dayAtMonthly: Int = 1
+    @Persisted var hour: Int = 0
+    @Persisted var minute: Int = 0
+    @Persisted var dayOfWeek: DayOfWeek = .sunday
     @Persisted var displayHour: Bool = true
     @Persisted var displayMinute: Bool = true
     @Persisted var displaySecond: Bool = false
@@ -137,7 +141,7 @@ class Event: Object, ObjectKeyIdentifiable {
         
     }
     
-    init(title: String, date: Date, textColor: TextColor, backgroundColor: BackgroundColor, displayStyle: EventDisplayStyle, fontSize: Float, frequentType: FrequentType = .never, eventType: EventType = .countup,   displayHour: Bool = true, displayMinute: Bool = true, displaySecond: Bool = false) {
+    init(title: String, date: Date, textColor: TextColor, backgroundColor: BackgroundColor, displayStyle: EventDisplayStyle, fontSize: Float, frequentType: FrequentType = .never, eventType: EventType = .countup, dayAtMonthly: Int = 1, hour: Int = 0, minute: Int = 0, dayOfWeek: DayOfWeek = .sunday, displayHour: Bool = true, displayMinute: Bool = true, displaySecond: Bool = false) {
         super.init()
         self.id = id
         self.title = title
@@ -148,6 +152,10 @@ class Event: Object, ObjectKeyIdentifiable {
         self.backgroundColor = backgroundColor
         self.displayStyle = displayStyle
         self.fontSize = fontSize
+        self.dayAtMonthly = dayAtMonthly
+        self.hour = hour
+        self.minute = minute
+        self.dayOfWeek = dayOfWeek
         self.displayHour = displayHour
         self.displayMinute = displayMinute
         self.displaySecond = displaySecond

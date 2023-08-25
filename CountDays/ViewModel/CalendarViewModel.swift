@@ -15,8 +15,23 @@ class CalendarViewModel: ObservableObject {
         return cal
     }()
     
-    static func getDay(to: Date) -> Int? {
-        return calendar.dateComponents([.day], from: to, to: Date()).day
+    static func getDay(to: Date, frequentType: FrequentType, dayAtMonthly: Int = 1) -> Int? {
+        
+        switch frequentType {
+        case .annual: /// 毎年カウント
+            return ((calendar.dateComponents([.day], from: to, to: Date()).day ?? 1) % 365)
+        case .monthly: /// 毎月カウント
+            let day = (calendar.dateComponents([.month, .day], from: to, to: Date()).day ?? 0) - dayAtMonthly + 1
+            return day
+        case .weekly: /// 毎週カウント
+            let today = calendar.component(.weekday, from: Date())
+            let target = calendar.component(.weekday, from: to)
+            let day = (today - target) < 0 ? today - target + 7 : today - target
+            
+            return day
+        case .never:
+            return calendar.dateComponents([.day], from: to, to: Date()).day
+        }
     }
     
     static func getMonth(to: Date) -> Int? {

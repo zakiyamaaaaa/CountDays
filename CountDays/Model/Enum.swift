@@ -25,7 +25,7 @@ enum FrequentType: String, CaseIterable, Identifiable, PersistableEnum {
     case annual = "年に一度繰り返す"
     case monthly = "毎月繰り返す"
     case weekly = "週に一度繰り返す"
-    case daily = "毎日繰り返す"
+//    case daily = "毎日繰り返す"
     
     var id: String { rawValue }
     
@@ -39,9 +39,35 @@ enum FrequentType: String, CaseIterable, Identifiable, PersistableEnum {
             return .red
         case .weekly:
             return .mint
-        case .daily:
-            return .indigo
         }
+    }
+}
+
+enum DayOfWeek: Int, CaseIterable, PersistableEnum {
+    case sunday
+    case monday
+    case tuesday
+    case wednesday
+    case thursday
+    case friday
+    case saturday
     
+    var stringValue: String {
+        switch self {
+        case .sunday:
+            return "日曜日"
+        case .monday:
+            return "月曜日"
+        case .tuesday:
+            return "火曜日"
+        case .wednesday:
+            return "水曜日"
+        case .thursday:
+            return "木曜日"
+        case .friday:
+            return "金曜日"
+        case .saturday:
+            return "土曜日"
+        }
     }
 }

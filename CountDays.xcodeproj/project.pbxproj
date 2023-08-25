@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		394A5C742A9712DF006A7232 /* CounDaysApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5C732A9712DF006A7232 /* CounDaysApp.swift */; };
+		394A5C742A9712DF006A7232 /* CountDaysApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5C732A9712DF006A7232 /* CountDaysApp.swift */; };
 		394A5C782A9712E0006A7232 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 394A5C772A9712E0006A7232 /* Assets.xcassets */; };
 		394A5C7B2A9712E0006A7232 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 394A5C7A2A9712E0006A7232 /* Preview Assets.xcassets */; };
-		394A5C852A9712E0006A7232 /* CounDaysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5C842A9712E0006A7232 /* CounDaysTests.swift */; };
-		394A5C8F2A9712E0006A7232 /* CounDaysUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5C8E2A9712E0006A7232 /* CounDaysUITests.swift */; };
-		394A5C912A9712E0006A7232 /* CounDaysUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5C902A9712E0006A7232 /* CounDaysUITestsLaunchTests.swift */; };
+		394A5C852A9712E0006A7232 /* CountDaysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5C842A9712E0006A7232 /* CountDaysTests.swift */; };
+		394A5C8F2A9712E0006A7232 /* CountDaysUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5C8E2A9712E0006A7232 /* CountDaysUITests.swift */; };
+		394A5C912A9712E0006A7232 /* CountDaysUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5C902A9712E0006A7232 /* CountDaysUITestsLaunchTests.swift */; };
 		394A5C9E2A971349006A7232 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5C9D2A971349006A7232 /* ContentView.swift */; };
 		394A5CA82A9713C3006A7232 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA22A9713C3006A7232 /* EventCard.swift */; };
 		394A5CA92A9713C3006A7232 /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA32A9713C3006A7232 /* ColorUtility.swift */; };
@@ -20,9 +20,6 @@
 		394A5CAB2A9713C3006A7232 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA52A9713C3006A7232 /* NotificationCenter.swift */; };
 		394A5CAC2A9713C3006A7232 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA62A9713C3006A7232 /* Color.swift */; };
 		394A5CAD2A9713C3006A7232 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA72A9713C3006A7232 /* Enum.swift */; };
-		394A5CB02A9714D4006A7232 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 394A5CAF2A9714D4006A7232 /* Realm */; };
-		394A5CB22A9714D4006A7232 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 394A5CB12A9714D4006A7232 /* RealmSwift */; };
-		394A5CB52A9714E5006A7232 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 394A5CB42A9714E5006A7232 /* Algorithms */; };
 		394A5CBA2A97151A006A7232 /* EventCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB62A97151A006A7232 /* EventCardViewModel.swift */; };
 		394A5CBB2A97151A006A7232 /* RealmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB72A97151A006A7232 /* RealmViewModel.swift */; };
 		394A5CBC2A97151A006A7232 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB82A97151A006A7232 /* DateViewModel.swift */; };
@@ -57,11 +54,15 @@
 		394A5CFF2A971754006A7232 /* CountDaysWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 394A5CEA2A971753006A7232 /* CountDaysWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		394A5D062A97183D006A7232 /* CountDaysWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CF52A971753006A7232 /* CountDaysWidget.swift */; };
 		394A5D072A971857006A7232 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA42A9713C3006A7232 /* RealmModel.swift */; };
-		394A5D092A971980006A7232 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 394A5D082A971980006A7232 /* Realm */; };
-		394A5D0B2A971986006A7232 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 394A5D0A2A971986006A7232 /* RealmSwift */; };
 		394A5D0C2A971995006A7232 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB92A97151A006A7232 /* CalendarViewModel.swift */; };
 		394A5D0D2A9719A2006A7232 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA62A9713C3006A7232 /* Color.swift */; };
 		394A5D0F2A9719AC006A7232 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA72A9713C3006A7232 /* Enum.swift */; };
+		39FFFA532A973D6E001AE0D7 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA522A973D6E001AE0D7 /* Algorithms */; };
+		39FFFA562A973D7A001AE0D7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA552A973D7A001AE0D7 /* Realm */; };
+		39FFFA582A973D7A001AE0D7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA572A973D7A001AE0D7 /* RealmSwift */; };
+		39FFFA5A2A973D99001AE0D7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA592A973D99001AE0D7 /* Realm */; };
+		39FFFA5C2A973D99001AE0D7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA5B2A973D99001AE0D7 /* RealmSwift */; };
+		39FFFA5D2A975695001AE0D7 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB82A97151A006A7232 /* DateViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,14 +71,14 @@
 			containerPortal = 394A5C682A9712DF006A7232 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 394A5C6F2A9712DF006A7232;
-			remoteInfo = CounDays;
+			remoteInfo = CountDays;
 		};
 		394A5C8B2A9712E0006A7232 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 394A5C682A9712DF006A7232 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 394A5C6F2A9712DF006A7232;
-			remoteInfo = CounDays;
+			remoteInfo = CountDays;
 		};
 		394A5CFD2A971754006A7232 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -103,15 +104,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		394A5C702A9712DF006A7232 /* CounDays.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CounDays.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		394A5C732A9712DF006A7232 /* CounDaysApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounDaysApp.swift; sourceTree = "<group>"; };
+		394A5C702A9712DF006A7232 /* CountDays.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountDays.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		394A5C732A9712DF006A7232 /* CountDaysApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDaysApp.swift; sourceTree = "<group>"; };
 		394A5C772A9712E0006A7232 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		394A5C7A2A9712E0006A7232 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		394A5C802A9712E0006A7232 /* CounDaysTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CounDaysTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		394A5C842A9712E0006A7232 /* CounDaysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounDaysTests.swift; sourceTree = "<group>"; };
-		394A5C8A2A9712E0006A7232 /* CounDaysUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CounDaysUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		394A5C8E2A9712E0006A7232 /* CounDaysUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounDaysUITests.swift; sourceTree = "<group>"; };
-		394A5C902A9712E0006A7232 /* CounDaysUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounDaysUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		394A5C802A9712E0006A7232 /* CountDaysTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountDaysTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		394A5C842A9712E0006A7232 /* CountDaysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDaysTests.swift; sourceTree = "<group>"; };
+		394A5C8A2A9712E0006A7232 /* CountDaysUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountDaysUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		394A5C8E2A9712E0006A7232 /* CountDaysUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDaysUITests.swift; sourceTree = "<group>"; };
+		394A5C902A9712E0006A7232 /* CountDaysUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDaysUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		394A5C9D2A971349006A7232 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		394A5CA22A9713C3006A7232 /* EventCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 		394A5CA32A9713C3006A7232 /* ColorUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtility.swift; sourceTree = "<group>"; };
@@ -151,7 +152,7 @@
 		394A5CF72A971753006A7232 /* CountDaysWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = CountDaysWidget.intentdefinition; sourceTree = "<group>"; };
 		394A5CF82A971754006A7232 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		394A5CFA2A971754006A7232 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		394A5D042A97178B006A7232 /* CounDays.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CounDays.entitlements; sourceTree = "<group>"; };
+		394A5D042A97178B006A7232 /* CountDays.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CountDays.entitlements; sourceTree = "<group>"; };
 		394A5D052A9717D3006A7232 /* CountDaysWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CountDaysWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,9 +161,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				394A5CB52A9714E5006A7232 /* Algorithms in Frameworks */,
-				394A5CB22A9714D4006A7232 /* RealmSwift in Frameworks */,
-				394A5CB02A9714D4006A7232 /* Realm in Frameworks */,
+				39FFFA582A973D7A001AE0D7 /* RealmSwift in Frameworks */,
+				39FFFA562A973D7A001AE0D7 /* Realm in Frameworks */,
+				39FFFA532A973D6E001AE0D7 /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,8 +185,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				394A5D0B2A971986006A7232 /* RealmSwift in Frameworks */,
-				394A5D092A971980006A7232 /* Realm in Frameworks */,
+				39FFFA5C2A973D99001AE0D7 /* RealmSwift in Frameworks */,
+				39FFFA5A2A973D99001AE0D7 /* Realm in Frameworks */,
 				394A5CEF2A971753006A7232 /* SwiftUI.framework in Frameworks */,
 				394A5CED2A971753006A7232 /* WidgetKit.framework in Frameworks */,
 			);
@@ -198,7 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				394A5D052A9717D3006A7232 /* CountDaysWidgetExtension.entitlements */,
-				394A5C722A9712DF006A7232 /* CounDays */,
+				394A5C722A9712DF006A7232 /* CountDays */,
 				394A5CD22A971566006A7232 /* aaa.swift */,
 				394A5CD72A971566006A7232 /* AddEventButton.swift */,
 				394A5CD92A971567006A7232 /* CalendarView2.swift */,
@@ -207,8 +208,8 @@
 				394A5CD32A971566006A7232 /* TestView2.swift */,
 				394A5CD42A971566006A7232 /* ViewExtension.swift */,
 				394A5CE22A9715DA006A7232 /* MockStore.swift */,
-				394A5C832A9712E0006A7232 /* CounDaysTests */,
-				394A5C8D2A9712E0006A7232 /* CounDaysUITests */,
+				394A5C832A9712E0006A7232 /* CountDaysTests */,
+				394A5C8D2A9712E0006A7232 /* CountDaysUITests */,
 				394A5CF02A971753006A7232 /* CountDaysWidget */,
 				394A5CEB2A971753006A7232 /* Frameworks */,
 				394A5C712A9712DF006A7232 /* Products */,
@@ -218,27 +219,27 @@
 		394A5C712A9712DF006A7232 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				394A5C702A9712DF006A7232 /* CounDays.app */,
-				394A5C802A9712E0006A7232 /* CounDaysTests.xctest */,
-				394A5C8A2A9712E0006A7232 /* CounDaysUITests.xctest */,
+				394A5C702A9712DF006A7232 /* CountDays.app */,
+				394A5C802A9712E0006A7232 /* CountDaysTests.xctest */,
+				394A5C8A2A9712E0006A7232 /* CountDaysUITests.xctest */,
 				394A5CEA2A971753006A7232 /* CountDaysWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		394A5C722A9712DF006A7232 /* CounDays */ = {
+		394A5C722A9712DF006A7232 /* CountDays */ = {
 			isa = PBXGroup;
 			children = (
-				394A5D042A97178B006A7232 /* CounDays.entitlements */,
+				394A5D042A97178B006A7232 /* CountDays.entitlements */,
 				394A5C9F2A9713A6006A7232 /* View */,
 				394A5CA02A9713AD006A7232 /* ViewModel */,
 				394A5CA12A9713B4006A7232 /* Model */,
-				394A5C732A9712DF006A7232 /* CounDaysApp.swift */,
+				394A5C732A9712DF006A7232 /* CountDaysApp.swift */,
 				394A5C9D2A971349006A7232 /* ContentView.swift */,
 				394A5C772A9712E0006A7232 /* Assets.xcassets */,
 				394A5C792A9712E0006A7232 /* Preview Content */,
 			);
-			path = CounDays;
+			path = CountDays;
 			sourceTree = "<group>";
 		};
 		394A5C792A9712E0006A7232 /* Preview Content */ = {
@@ -249,21 +250,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		394A5C832A9712E0006A7232 /* CounDaysTests */ = {
+		394A5C832A9712E0006A7232 /* CountDaysTests */ = {
 			isa = PBXGroup;
 			children = (
-				394A5C842A9712E0006A7232 /* CounDaysTests.swift */,
+				394A5C842A9712E0006A7232 /* CountDaysTests.swift */,
 			);
-			path = CounDaysTests;
+			path = CountDaysTests;
 			sourceTree = "<group>";
 		};
-		394A5C8D2A9712E0006A7232 /* CounDaysUITests */ = {
+		394A5C8D2A9712E0006A7232 /* CountDaysUITests */ = {
 			isa = PBXGroup;
 			children = (
-				394A5C8E2A9712E0006A7232 /* CounDaysUITests.swift */,
-				394A5C902A9712E0006A7232 /* CounDaysUITestsLaunchTests.swift */,
+				394A5C8E2A9712E0006A7232 /* CountDaysUITests.swift */,
+				394A5C902A9712E0006A7232 /* CountDaysUITestsLaunchTests.swift */,
 			);
-			path = CounDaysUITests;
+			path = CountDaysUITests;
 			sourceTree = "<group>";
 		};
 		394A5C9F2A9713A6006A7232 /* View */ = {
@@ -350,9 +351,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		394A5C6F2A9712DF006A7232 /* CounDays */ = {
+		394A5C6F2A9712DF006A7232 /* CountDays */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 394A5C942A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CounDays" */;
+			buildConfigurationList = 394A5C942A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CountDays" */;
 			buildPhases = (
 				394A5C6C2A9712DF006A7232 /* Sources */,
 				394A5C6D2A9712DF006A7232 /* Frameworks */,
@@ -364,19 +365,19 @@
 			dependencies = (
 				394A5CFE2A971754006A7232 /* PBXTargetDependency */,
 			);
-			name = CounDays;
+			name = CountDays;
 			packageProductDependencies = (
-				394A5CAF2A9714D4006A7232 /* Realm */,
-				394A5CB12A9714D4006A7232 /* RealmSwift */,
-				394A5CB42A9714E5006A7232 /* Algorithms */,
+				39FFFA522A973D6E001AE0D7 /* Algorithms */,
+				39FFFA552A973D7A001AE0D7 /* Realm */,
+				39FFFA572A973D7A001AE0D7 /* RealmSwift */,
 			);
-			productName = CounDays;
-			productReference = 394A5C702A9712DF006A7232 /* CounDays.app */;
+			productName = CountDays;
+			productReference = 394A5C702A9712DF006A7232 /* CountDays.app */;
 			productType = "com.apple.product-type.application";
 		};
-		394A5C7F2A9712E0006A7232 /* CounDaysTests */ = {
+		394A5C7F2A9712E0006A7232 /* CountDaysTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 394A5C972A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CounDaysTests" */;
+			buildConfigurationList = 394A5C972A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CountDaysTests" */;
 			buildPhases = (
 				394A5C7C2A9712E0006A7232 /* Sources */,
 				394A5C7D2A9712E0006A7232 /* Frameworks */,
@@ -387,14 +388,14 @@
 			dependencies = (
 				394A5C822A9712E0006A7232 /* PBXTargetDependency */,
 			);
-			name = CounDaysTests;
-			productName = CounDaysTests;
-			productReference = 394A5C802A9712E0006A7232 /* CounDaysTests.xctest */;
+			name = CountDaysTests;
+			productName = CountDaysTests;
+			productReference = 394A5C802A9712E0006A7232 /* CountDaysTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		394A5C892A9712E0006A7232 /* CounDaysUITests */ = {
+		394A5C892A9712E0006A7232 /* CountDaysUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 394A5C9A2A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CounDaysUITests" */;
+			buildConfigurationList = 394A5C9A2A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CountDaysUITests" */;
 			buildPhases = (
 				394A5C862A9712E0006A7232 /* Sources */,
 				394A5C872A9712E0006A7232 /* Frameworks */,
@@ -405,9 +406,9 @@
 			dependencies = (
 				394A5C8C2A9712E0006A7232 /* PBXTargetDependency */,
 			);
-			name = CounDaysUITests;
-			productName = CounDaysUITests;
-			productReference = 394A5C8A2A9712E0006A7232 /* CounDaysUITests.xctest */;
+			name = CountDaysUITests;
+			productName = CountDaysUITests;
+			productReference = 394A5C8A2A9712E0006A7232 /* CountDaysUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		394A5CE92A971753006A7232 /* CountDaysWidgetExtension */ = {
@@ -424,8 +425,8 @@
 			);
 			name = CountDaysWidgetExtension;
 			packageProductDependencies = (
-				394A5D082A971980006A7232 /* Realm */,
-				394A5D0A2A971986006A7232 /* RealmSwift */,
+				39FFFA592A973D99001AE0D7 /* Realm */,
+				39FFFA5B2A973D99001AE0D7 /* RealmSwift */,
 			);
 			productName = CountDaysWidgetExtension;
 			productReference = 394A5CEA2A971753006A7232 /* CountDaysWidgetExtension.appex */;
@@ -457,7 +458,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 394A5C6B2A9712DF006A7232 /* Build configuration list for PBXProject "CounDays" */;
+			buildConfigurationList = 394A5C6B2A9712DF006A7232 /* Build configuration list for PBXProject "CountDays" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -467,16 +468,16 @@
 			);
 			mainGroup = 394A5C672A9712DF006A7232;
 			packageReferences = (
-				394A5CAE2A9714D4006A7232 /* XCRemoteSwiftPackageReference "realm-swift" */,
-				394A5CB32A9714E5006A7232 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				39FFFA512A973D6E001AE0D7 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				39FFFA542A973D7A001AE0D7 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 394A5C712A9712DF006A7232 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				394A5C6F2A9712DF006A7232 /* CounDays */,
-				394A5C7F2A9712E0006A7232 /* CounDaysTests */,
-				394A5C892A9712E0006A7232 /* CounDaysUITests */,
+				394A5C6F2A9712DF006A7232 /* CountDays */,
+				394A5C7F2A9712E0006A7232 /* CountDaysTests */,
+				394A5C892A9712E0006A7232 /* CountDaysUITests */,
 				394A5CE92A971753006A7232 /* CountDaysWidgetExtension */,
 			);
 		};
@@ -552,7 +553,7 @@
 				394A5CA82A9713C3006A7232 /* EventCard.swift in Sources */,
 				394A5CAA2A9713C3006A7232 /* RealmModel.swift in Sources */,
 				394A5CD12A97153D006A7232 /* ConfigureEventView.swift in Sources */,
-				394A5C742A9712DF006A7232 /* CounDaysApp.swift in Sources */,
+				394A5C742A9712DF006A7232 /* CountDaysApp.swift in Sources */,
 				394A5CDB2A971567006A7232 /* TestView2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,7 +562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				394A5C852A9712E0006A7232 /* CounDaysTests.swift in Sources */,
+				394A5C852A9712E0006A7232 /* CountDaysTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,8 +570,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				394A5C912A9712E0006A7232 /* CounDaysUITestsLaunchTests.swift in Sources */,
-				394A5C8F2A9712E0006A7232 /* CounDaysUITests.swift in Sources */,
+				394A5C912A9712E0006A7232 /* CountDaysUITestsLaunchTests.swift in Sources */,
+				394A5C8F2A9712E0006A7232 /* CountDaysUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +585,7 @@
 				394A5D0D2A9719A2006A7232 /* Color.swift in Sources */,
 				394A5CF62A971753006A7232 /* CountDaysWidget.swift in Sources */,
 				394A5CFB2A971754006A7232 /* CountDaysWidget.intentdefinition in Sources */,
+				39FFFA5D2A975695001AE0D7 /* DateViewModel.swift in Sources */,
 				394A5D072A971857006A7232 /* RealmModel.swift in Sources */,
 				394A5CF42A971753006A7232 /* CountDaysWidgetLiveActivity.swift in Sources */,
 			);
@@ -594,12 +596,12 @@
 /* Begin PBXTargetDependency section */
 		394A5C822A9712E0006A7232 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 394A5C6F2A9712DF006A7232 /* CounDays */;
+			target = 394A5C6F2A9712DF006A7232 /* CountDays */;
 			targetProxy = 394A5C812A9712E0006A7232 /* PBXContainerItemProxy */;
 		};
 		394A5C8C2A9712E0006A7232 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 394A5C6F2A9712DF006A7232 /* CounDays */;
+			target = 394A5C6F2A9712DF006A7232 /* CountDays */;
 			targetProxy = 394A5C8B2A9712E0006A7232 /* PBXContainerItemProxy */;
 		};
 		394A5CFE2A971754006A7232 /* PBXTargetDependency */ = {
@@ -730,10 +732,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = CounDays/CounDays.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CountDays/CountDays.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CounDays/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CountDays/Preview Content\"";
 				DEVELOPMENT_TEAM = Q5HUKBE6ZQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -747,7 +749,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CounDays;
+				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDays;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -761,10 +763,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = CounDays/CounDays.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CountDays/CountDays.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CounDays/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CountDays/Preview Content\"";
 				DEVELOPMENT_TEAM = Q5HUKBE6ZQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -778,7 +780,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CounDays;
+				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDays;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -797,12 +799,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CounDaysTests;
+				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDaysTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CounDays.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CounDays";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CountDays.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CountDays";
 			};
 			name = Debug;
 		};
@@ -817,12 +819,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CounDaysTests;
+				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDaysTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CounDays.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CounDays";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CountDays.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CountDays";
 			};
 			name = Release;
 		};
@@ -835,12 +837,12 @@
 				DEVELOPMENT_TEAM = Q5HUKBE6ZQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CounDaysUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDaysUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CounDays;
+				TEST_TARGET_NAME = CountDays;
 			};
 			name = Debug;
 		};
@@ -853,12 +855,12 @@
 				DEVELOPMENT_TEAM = Q5HUKBE6ZQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CounDaysUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDaysUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CounDays;
+				TEST_TARGET_NAME = CountDays;
 			};
 			name = Release;
 		};
@@ -881,7 +883,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CounDays.CountDaysWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDays.CountDaysWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -909,7 +911,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CounDays.CountDaysWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDays.CountDaysWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -921,7 +923,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		394A5C6B2A9712DF006A7232 /* Build configuration list for PBXProject "CounDays" */ = {
+		394A5C6B2A9712DF006A7232 /* Build configuration list for PBXProject "CountDays" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				394A5C922A9712E0006A7232 /* Debug */,
@@ -930,7 +932,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		394A5C942A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CounDays" */ = {
+		394A5C942A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CountDays" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				394A5C952A9712E0006A7232 /* Debug */,
@@ -939,7 +941,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		394A5C972A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CounDaysTests" */ = {
+		394A5C972A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CountDaysTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				394A5C982A9712E0006A7232 /* Debug */,
@@ -948,7 +950,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		394A5C9A2A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CounDaysUITests" */ = {
+		394A5C9A2A9712E0006A7232 /* Build configuration list for PBXNativeTarget "CountDaysUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				394A5C9B2A9712E0006A7232 /* Debug */,
@@ -969,15 +971,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		394A5CAE2A9714D4006A7232 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		394A5CB32A9714E5006A7232 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+		39FFFA512A973D6E001AE0D7 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-algorithms.git";
 			requirement = {
@@ -985,32 +979,40 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		39FFFA542A973D7A001AE0D7 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		394A5CAF2A9714D4006A7232 /* Realm */ = {
+		39FFFA522A973D6E001AE0D7 /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 394A5CAE2A9714D4006A7232 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		394A5CB12A9714D4006A7232 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 394A5CAE2A9714D4006A7232 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
-		394A5CB42A9714E5006A7232 /* Algorithms */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 394A5CB32A9714E5006A7232 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			package = 39FFFA512A973D6E001AE0D7 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
 		};
-		394A5D082A971980006A7232 /* Realm */ = {
+		39FFFA552A973D7A001AE0D7 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 394A5CAE2A9714D4006A7232 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 39FFFA542A973D7A001AE0D7 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
-		394A5D0A2A971986006A7232 /* RealmSwift */ = {
+		39FFFA572A973D7A001AE0D7 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 394A5CAE2A9714D4006A7232 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 39FFFA542A973D7A001AE0D7 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		39FFFA592A973D99001AE0D7 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 39FFFA542A973D7A001AE0D7 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		39FFFA5B2A973D99001AE0D7 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 39FFFA542A973D7A001AE0D7 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
