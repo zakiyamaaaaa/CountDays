@@ -57,6 +57,7 @@ struct ConfigureEventView: View {
     
     var body: some View {
         NavigationStack {
+            
             VStack(spacing: 0) {
                 headerView
                 
@@ -372,6 +373,7 @@ struct ConfigureEventView: View {
         .background(ColorUtility.backgroundary)
     }
     
+    @State var number = 0
     /// イベントの表示スタイルを編集するビュー
     ///他のところで使われていないので、ファンクションに切り出す方が良いかも
     private var styleView: some View {
@@ -379,24 +381,30 @@ struct ConfigureEventView: View {
             TabView(selection: $selectedStyleIndex) {
                 let date = dateViewModel.selectedDate
                 VStack {
-                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .standard, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, frequentType: frequentType)
-                        .tag(0)
+                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .standard, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, showSecond: showSecond, frequentType: frequentType)
+                        
+                        
                     Button {
                         showStyleDetailConfiguration.toggle()
                     } label: {
                         Text("詳細設定")
                     }
                 }
+                .tag(0)
                 .sheet(isPresented: $showStyleDetailConfiguration) {
                     EventDetailConfigurationView(showHour: $showHour, showMinute: $showMinute, showSecond: $showSecond)
                         .presentationDetents([.medium])
                 }
                 
-                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .circle, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, frequentType: frequentType)
+                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .circle, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, showSecond: showSecond, frequentType: frequentType)
                     .tag(1)
                 
             }
+            .onChange(of: selectedStyleIndex, perform: { newValue in
+                print(newValue)
+            })
             .tabViewStyle(.page)
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
