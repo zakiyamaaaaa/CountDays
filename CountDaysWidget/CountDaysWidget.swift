@@ -51,8 +51,10 @@ struct CountDaysWidgetEntryView : View {
     var body: some View {
 //        let startComponents = DateComponents(year: 2023,month: 6,day: 2)
         let startDate = mockEventModel.date
-        let day = CalendarViewModel.getDay(to: startDate, frequentType: .never)
-        let hour = CalendarViewModel.getHour(to: startDate)
+//        let day = CalendarViewModel.getDay(target: startDate, eventType:, frequentType: <#T##FrequentType#>: startDate, frequentType: .never)
+        let day = 1
+        let hour = 0
+//        let hour = CalendarViewModel.getHour(to: startDate)
         
         VStack(alignment: .leading) {
             HStack {
@@ -62,9 +64,9 @@ struct CountDaysWidgetEntryView : View {
             }.padding(.top)
             
             Spacer()
-            Text("\(day?.description ?? "aaa")日")
+            Text("\(day.description)日")
                 .font(.system(size: 27))
-            Text("\(hour?.description ?? "aaa")時間")
+            Text("\(hour.description)時間")
                 .padding(.bottom)
         }.padding(.leading)
         

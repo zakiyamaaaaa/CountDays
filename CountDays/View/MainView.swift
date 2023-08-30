@@ -59,11 +59,9 @@ struct MainView: View {
                             if i >= 1 {
                                 let card = realmCards[i - 1]
                                 
-                                let day = CalendarViewModel.getDay(to: card.date, frequentType: card.frequentType)!
-                                let hour = CalendarViewModel.getHour(to: card.date)!
-                                let minute = CalendarViewModel.getMinute(to: card.date)!
-                                let second = CalendarViewModel.getSecond(to: card.date)!
-                                EventCardView(title: card.title, day: day, hour: hour, minute: minute, second: second, style: card.displayStyle, backgroundColor: card.backgroundColor, textColor: card.textColor, frequentType: .never)
+                                
+                                
+                                EventCardView(title: card.title, date: card.date, style: card.displayStyle, backgroundColor: card.backgroundColor, textColor: card.textColor, frequentType: .never)
                                     .onTapGesture {
                                         isShowConfigured.toggle()
                                         selectedEvent = realmCards[i - 1]

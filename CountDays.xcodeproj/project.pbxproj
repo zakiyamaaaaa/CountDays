@@ -63,6 +63,7 @@
 		39FFFA5A2A973D99001AE0D7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA592A973D99001AE0D7 /* Realm */; };
 		39FFFA5C2A973D99001AE0D7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA5B2A973D99001AE0D7 /* RealmSwift */; };
 		39FFFA5D2A975695001AE0D7 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB82A97151A006A7232 /* DateViewModel.swift */; };
+		39FFFA5F2A9992C0001AE0D7 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +155,7 @@
 		394A5CFA2A971754006A7232 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		394A5D042A97178B006A7232 /* CountDays.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CountDays.entitlements; sourceTree = "<group>"; };
 		394A5D052A9717D3006A7232 /* CountDaysWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CountDaysWidgetExtension.entitlements; sourceTree = "<group>"; };
+		39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,7 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				394A5CD62A971566006A7232 /* MainView.swift */,
-				394A5CE52A9716B2006A7232 /* イベント */,
+				394A5CE52A9716B2006A7232 /* イベント設定 */,
 				394A5CE42A9716A1006A7232 /* 設定 */,
 				394A5CBF2A971528006A7232 /* AddEventView.swift */,
 				394A5CBE2A971528006A7232 /* EventCardView.swift */,
@@ -299,6 +301,7 @@
 				394A5CA22A9713C3006A7232 /* EventCard.swift */,
 				394A5CA52A9713C3006A7232 /* NotificationCenter.swift */,
 				394A5CA42A9713C3006A7232 /* RealmModel.swift */,
+				39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -314,7 +317,7 @@
 			path = "設定";
 			sourceTree = "<group>";
 		};
-		394A5CE52A9716B2006A7232 /* イベント */ = {
+		394A5CE52A9716B2006A7232 /* イベント設定 */ = {
 			isa = PBXGroup;
 			children = (
 				394A5CCD2A97153D006A7232 /* ConfigureEventView.swift */,
@@ -322,7 +325,7 @@
 				394A5CCB2A97153D006A7232 /* CalendarView.swift */,
 				394A5CCC2A97153D006A7232 /* EventDetailConfigurationView.swift */,
 			);
-			name = "イベント";
+			name = "イベント設定";
 			path = "イベント";
 			sourceTree = "<group>";
 		};
@@ -530,6 +533,7 @@
 				394A5CBA2A97151A006A7232 /* EventCardViewModel.swift in Sources */,
 				394A5CDC2A971567006A7232 /* ViewExtension.swift in Sources */,
 				394A5D062A97183D006A7232 /* CountDaysWidget.swift in Sources */,
+				39FFFA5F2A9992C0001AE0D7 /* TimePicker.swift in Sources */,
 				394A5CC92A971535006A7232 /* PrivacyPolicyView.swift in Sources */,
 				394A5CA92A9713C3006A7232 /* ColorUtility.swift in Sources */,
 				394A5CBB2A97151A006A7232 /* RealmViewModel.swift in Sources */,

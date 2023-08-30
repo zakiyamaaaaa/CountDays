@@ -9,10 +9,7 @@ import SwiftUI
 
 struct EventCardView: View {
     var title: String
-    var day: Int
-    var hour: Int
-    var minute: Int
-    var second: Int
+    var date: Date
     var style: EventDisplayStyle
     var backgroundColor: BackgroundColor
     var textColor: TextColor
@@ -28,6 +25,10 @@ struct EventCardView: View {
     
     var body: some View {
         ZStack {
+            let day = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).days
+            let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
+            let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
+            let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
             Rectangle()
                 .foregroundColor(backgroundColor.color)
                 .frame(width: width*1/3 + 10, height: width*1/3 + 10)
@@ -42,23 +43,31 @@ struct EventCardView: View {
                     Text(title)
                         .padding(.vertical, 10)
                     Spacer()
-                    let a = "hoge"
-                    Text("\(day)日")
-                        .font(.system(size: 30))
-                    HStack() {
+                    
+                    if second < 0 && eventType == .countdown && frequentType == .never {
+                        HStackLayout(alignment: .center) {
+                            Text("終了")
+                            
+                            Image(systemName: "checkmark.circle.fill")
+                        }
+                        Spacer()
+                    } else {
+                        Text("\(day)日")
+                            .font(.system(size: 30))
+                        HStack() {
+                            
+                            Text("\(hour)時間")
+                                .isHidden(hidden: !showHour)
+                            Text("\(minute)分")
+                                .isHidden(hidden: !showMinute)
+                            
+                        }
                         
-                        Text("\(hour)時間")
-                            .isHidden(hidden: !showHour)
-                        Text("\(minute)分")
-                            .isHidden(hidden: !showMinute)
-                        
+                        Text("\(currentSecond)秒")
+                            .onReceive(timer) { value in
+                                currentSecond = DateViewModel().getSecondNumber(date: value)
+                            }.isHidden(hidden: !showSecond)
                     }
-                    
-                    Text("\(currentSecond)秒")
-                        .onReceive(timer) { value in
-                            currentSecond = DateViewModel().getSecondNumber(date: value)
-                        }.isHidden(hidden: !showSecond)
-                    
                     
                 }
                 .foregroundColor(textColor.color)
@@ -83,11 +92,16 @@ struct EventCardView: View {
                             )
                         
                         VStack {
-                            Text("\(day)")
-                                .font(.system(size: 30))
-                                .fontWeight(.bold)
-                            Text("日")
+                            if second < 0 && eventType == .countdown && frequentType == .never {
+                                Text("終了")
                                 
+                                Image(systemName: "checkmark.circle.fill")
+                            } else {
+                                Text("\(day)")
+                                    .font(.system(size: 30))
+                                    .fontWeight(.bold)
+                                Text("日")
+                            }
                         }
                         .rotationEffect(.degrees(90))
                         .foregroundColor(textColor.color)
@@ -102,6 +116,6 @@ struct EventCardView: View {
 
 struct EventCardView_Previews: PreviewProvider {
     static var previews: some View {
-        EventCardView(title: "sanoke1", day: 1, hour: 2, minute: 3, second: 20, style: .standard, backgroundColor: .primary, textColor: .white, frequentType: .never)
+        EventCardView(title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .standard, backgroundColor: .primary, textColor: .white, frequentType: .annual, eventType: .countdown)
     }
 }
