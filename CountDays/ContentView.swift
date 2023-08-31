@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
+    init(){
+           UITableView.appearance().backgroundColor = UIColor.gray
+       }
+       
+       var body: some View {
+           List{
+               Text("要素1")
+                   .foregroundColor(.black)
+               Text("要素2")
+               Text("要素3")
+           }
+           .background(.yellow)
+           .scrollContentBackground(Visibility.hidden)
+       }
 }
 
 struct ContentView_Previews: PreviewProvider {

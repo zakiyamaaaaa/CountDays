@@ -10,16 +10,10 @@ import SwiftUI
 struct PrivacyPolicyView: View {
     var body: some View {
         VStack(alignment: .leading) {
-            
-            Text("プライバシーポリシー")
-                .font(.system(size: 30,weight: .bold))
-                .backgroundStyle(.opacity(0.3))
-                .padding([.leading, .top])
+            HeaderView(title: "プライバシーポリシー")
                 
             ScrollView(showsIndicators: false) {
                 Text("""
-        プライバシーポリシー
-
         このプライバシーポリシー（以下、「本ポリシー」といいます。）は、[アプリ名]（以下、「当社」といいます。）が提供する[アプリ名]アプリケーション（以下、「アプリ」といいます。）におけるユーザーの個人情報の収集、使用、共有に関する方針を定めるものです。アプリをご利用いただく際には、本ポリシーに同意いただいたものとみなします。
 
         1. 収集する情報
@@ -55,9 +49,13 @@ struct PrivacyPolicyView: View {
     """)
                 .multilineTextAlignment(.leading)
             }
+            
             .padding(20)
             .statusBarHidden()
+            
         }
+        .background(ColorUtility.backgroundary)
+        .foregroundColor(.white)
     }
 }
 

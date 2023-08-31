@@ -15,7 +15,11 @@ struct SettingView: View {
     @State private var isDeleteAllEvent = false
     
     var body: some View {
-        NavigationView {
+        settingView
+    }
+    
+    private var settingView: some View {
+        NavigationStack {
             List {
                 Section {
                     HStack {
@@ -25,6 +29,7 @@ struct SettingView: View {
                         Text("アップグレード")
                             .font(.system(size: 20))
                     }
+                    .listRowBackground(ColorUtility.secondary)
                 }
                 
                 HStack {
@@ -37,13 +42,15 @@ struct SettingView: View {
                             .resizable()
                             .frame(width: 40, height: 40)
                     }
+                    
                     Text("通知")
                         .font(.system(size: 20))
+                    
                     Spacer()
                     Toggle(isOn: $isToggle) {
                         
                     }
-                }
+                }.listRowBackground(ColorUtility.secondary)
                 
                 Section {
                     HStack {
@@ -55,6 +62,7 @@ struct SettingView: View {
                             .foregroundColor(.red)
                         Spacer()
                     }
+                    .listRowBackground(ColorUtility.secondary)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         isDeleteAllEvent.toggle()
@@ -85,6 +93,7 @@ struct SettingView: View {
                         
                         Spacer()
                     }
+                    .listRowBackground(ColorUtility.secondary)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         #if targetEnvironment(simulator)
@@ -104,6 +113,7 @@ struct SettingView: View {
                             .font(.system(size: 20))
                         Spacer()
                     }
+                    .listRowBackground(ColorUtility.secondary)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         isPrivacyView.toggle()
@@ -113,11 +123,14 @@ struct SettingView: View {
                         Image(systemName: "doc.circle.fill")
                             .resizable()
                             .frame(width: 40, height: 40)
+                            
                         Text("利用規約")
                             .font(.system(size: 20))
                             
                         Spacer()
                     }
+                    .foregroundColor(.white)
+                    .listRowBackground(ColorUtility.secondary)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         isTermView.toggle()
@@ -131,11 +144,16 @@ struct SettingView: View {
                 }.sheet(isPresented: $isInquiry) {
                     MailView()
                 }
-
             }
+            .padding()
+            .foregroundColor(.white)
+            .scrollContentBackground(.hidden)
+            .background(ColorUtility.backgroundary)
             .navigationTitle("設定")
             .environment(\.defaultMinListRowHeight, 67)
-            
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground( Color.black, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
         }
     }
 }

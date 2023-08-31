@@ -64,6 +64,7 @@
 		39FFFA5C2A973D99001AE0D7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA5B2A973D99001AE0D7 /* RealmSwift */; };
 		39FFFA5D2A975695001AE0D7 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB82A97151A006A7232 /* DateViewModel.swift */; };
 		39FFFA5F2A9992C0001AE0D7 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */; };
+		39FFFA612AA04FFB001AE0D7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +157,7 @@
 		394A5D042A97178B006A7232 /* CountDays.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CountDays.entitlements; sourceTree = "<group>"; };
 		394A5D052A9717D3006A7232 /* CountDaysWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CountDaysWidgetExtension.entitlements; sourceTree = "<group>"; };
 		39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
+		39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +279,7 @@
 				394A5CE42A9716A1006A7232 /* 設定 */,
 				394A5CBF2A971528006A7232 /* AddEventView.swift */,
 				394A5CBE2A971528006A7232 /* EventCardView.swift */,
+				39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				394A5CCF2A97153D006A7232 /* CalendarView.swift in Sources */,
 				394A5CAB2A9713C3006A7232 /* NotificationCenter.swift in Sources */,
 				394A5CE12A971567006A7232 /* CalendarView2.swift in Sources */,
+				39FFFA612AA04FFB001AE0D7 /* HeaderView.swift in Sources */,
 				394A5CDF2A971567006A7232 /* AddEventButton.swift in Sources */,
 				394A5CAD2A9713C3006A7232 /* Enum.swift in Sources */,
 				394A5CCE2A97153D006A7232 /* ConfigureDateView.swift in Sources */,

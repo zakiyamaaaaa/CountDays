@@ -10,18 +10,15 @@ import SwiftUI
 struct TermView: View {
     var body: some View {
         VStack(alignment: .leading) {
-            
-            Text("利用規約")
-                .font(.system(size: 30,weight: .bold))
-                .backgroundStyle(.opacity(0.3))
-                .padding([.leading, .top])
-                
+            HeaderView(title: "利用規約")
+
             ScrollView(showsIndicators: false) {
                 Text("""
-        この利用規約（以下、「本規約」といいます。）は、[アプリ名]（以下、「当社」といいます。）が提供する[アプリ名]アプリケーション（以下、「アプリ」といいます。）の利用に関する条件を定めるものです。アプリをご利用いただく際には、本規約に同意いただいたものとみなします。
+    この利用規約（以下、「本規約」といいます。）は、[アプリ名]（以下、「当社」といいます。）が提供する[アプリ名]アプリケーション（以下、「アプリ」といいます。）の利用に関する条件を定めるものです。アプリをご利用いただく際には、本規約に同意いただいたものとみなします。
+    
     
     1. サービスの提供
-        当社は、アプリを通じて[サービスの説明]を提供します。ユーザーは、本規約に従い、アプリを利用できます。
+    当社は、アプリを通じて[サービスの説明]を提供します。ユーザーは、本規約に従い、アプリを利用できます。
     
     2. 利用規約の変更
         当社は、必要に応じて本規約を変更することがあります。変更後の利用規約は、アプリ内での表示をもって通知された時点で効力を生じるものとします。
@@ -44,14 +41,16 @@ struct TermView: View {
     8. 連絡先
     本規約に関するお問い合わせは、以下の連絡先までご連絡ください。
                     [連絡先情報]
-    
-                 以上
+
+    以上
     """)
                 .multilineTextAlignment(.leading)
             }
             .padding(20)
             .statusBarHidden()
         }
+        .background(ColorUtility.backgroundary)
+        .foregroundColor(.white)
     }
 }
 
