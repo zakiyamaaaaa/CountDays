@@ -239,7 +239,7 @@ struct ConfigureEventView: View {
             .padding()
 
             Spacer()
-            Button(isCreation ? "保存" : "更新") {
+            Button(isCreation ? "登録" : "更新") {
                 
                 if eventTitle.isEmpty {
                     /// TODO: イベント名を入力してくださいエラーメッセージ表示
@@ -259,10 +259,14 @@ struct ConfigureEventView: View {
                 NotificationCenter.registerNotification(event: event)
                 presentationMode.wrappedValue.dismiss()
             }
-            .frame(width: 80, height: 50)
+            .frame(width: 100, height: 50)
+            .tint(.white)
+            .fontWeight(.bold)
             .font(.system(size: 20))
-            .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.highlighted))
+            .disabled(eventTitle.isEmpty)
+            .background(RoundedRectangle(cornerRadius: 30).fill( eventTitle.isEmpty ? ColorUtility.disable : ColorUtility.preffered))
             .padding()
+            .animation(.default, value: eventTitle.isEmpty)
         }
         .frame(height: 80)
         .background(ColorUtility.primary)
@@ -386,7 +390,7 @@ struct ConfigureEventView: View {
             TabView(selection: $selectedStyleIndex) {
                 let date = dateViewModel.selectedDate
                 VStack {
-                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .standard, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, showSecond: showSecond, frequentType: frequentType)
+                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .standard, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, frequentType: frequentType, eventType: eventType)
                         
                         
                     Button {

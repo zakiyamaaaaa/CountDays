@@ -15,4 +15,6 @@ struct ColorUtility {
     static let highlighted = Color(white: 0.4, opacity: 1.0)
     static let inActive = Color(white: 0.4, opacity: 1.0)
     static let active = Color(white: 0.0, opacity: 1.0)
+    static let disable = Color(white: 0.0, opacity: 1.0)
+    static let preffered = Color(red: 0.2, green: 0.8, blue: 0.2)
 }

@@ -69,120 +69,7 @@ struct ConfigureDateView: View {
                     
                     ScrollView {
                         
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("イベント")
-                                let selectedDate = selectingDate
-                                switch selectedEventType {
-                                case .countdown:
-                                    Text("カウントダウン")
-                                        .foregroundColor(.white)
-                                        .fontWeight(.bold)
-                                    
-                                    HStack {
-                                        switch selectedFrequentType {
-                                        case .never:
-                                            if CalendarViewModel.isPastDate(selectedDate) && selectedEventType == .countdown{
-                                                Text("終了")
-                                                    .font(.system(size: 25))
-                                                    .fontWeight(.bold)
-                                                    .foregroundColor(Color.red)
-                                            }
-                                            Text(dateViewModel.getYearText(date: selectedDate) + "年")
-                                                .font(.system(size: 25))
-                                                .fontWeight(.bold)
-                                            Text("\(dateViewModel.getMonthText(date: selectedDate))月")
-                                                .font(.system(size: 25))
-                                                .fontWeight(.bold)
-                                            Text("\(dateViewModel.getDayText(date: selectedDate))日")
-                                                .font(.system(size: 25))
-                                                .fontWeight(.bold)
-                                        case .annual:
-                                            Text("毎年")
-                                                .font(.system(size: 25))
-                                                .fontWeight(.bold)
-                                            Text("\(dateViewModel.getMonthText(date: selectedDate))月")
-                                                .font(.system(size: 25))
-                                                .fontWeight(.bold)
-                                            Text("\(dateViewModel.getDayText(date: selectedDate))日")
-                                                .font(.system(size: 25))
-                                                .fontWeight(.bold)
-                                        case .monthly:
-                                            Text("毎月")
-                                                .font(.system(size: 25))
-                                                .fontWeight(.bold)
-                                            Text("\(selectingMonthlyDay)日")
-                                                .font(.system(size: 25))
-                                                .fontWeight(.bold)
-                                        case .weekly:
-                                            Text("毎週")
-                                                .font(.system(size: 25))
-                                                .fontWeight(.bold)
-                                            Text(selectingWeeklyDate.stringValue)
-                                                .font(.system(size: 25))
-                                                .fontWeight(.bold)
-                                        }
-                                    }
-                                case .countup:
-                                    Text("カウントアップ")
-                                        .foregroundColor(.white)
-                                        .fontWeight(.bold)
-                                    HStack {
-                                        Text(dateViewModel.getYearText(date: selectedDate) + "年")
-                                            .font(.system(size: 25))
-                                            .fontWeight(.bold)
-                                        Text("\(dateViewModel.getMonthText(date: selectedDate))月")
-                                            .font(.system(size: 25))
-                                            .fontWeight(.bold)
-                                        Text("\(dateViewModel.getDayText(date: selectedDate))日")
-                                            .font(.system(size: 25))
-                                            .fontWeight(.bold)
-                                        
-                                        
-                                        if !CalendarViewModel.isPastDate(selectedDate) {
-                                            Button {
-                                                /// ポップアップ表示
-                                                selectedPopup.toggle()
-                                            } label: {
-                                                Image(systemName: "exclamationmark.circle.fill")
-                                                    .tint(.orange)
-                                            }
-                                        }
-                                    }
-                                }
-                                
-                                
-                            }
-                            .padding()
-                            
-                            Spacer()
-                            
-                            /// 設定を保存するところ
-                            Button {
-                                
-                                if selectedFrequentType == .weekly {
-                                    selectingDate = CalendarViewModel.getDateAtWeekly(dayAtWeek: selectingWeeklyDate)
-                                    selectedWeeklyDate = selectingWeeklyDate
-                                    dateViewModel.selectedDate = selectingDate
-                                } else {
-                                    dateViewModel.selectedDate = selectingDate
-                                    
-                                    dateViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
-                                }
-                                
-                                
-                                
-                                dismiss()
-                            } label: {
-                                Image(systemName: "checkmark")
-                                    .padding()
-                                    .background(RoundedRectangle(cornerRadius: 20).fill(ColorUtility.highlighted))
-                                    .tint(.white)
-                                    .padding()
-                            }
-                            
-                        }
-                        .background(ColorUtility.primary)
+                        headerView
                         
                         VStack {
                             Picker("イベントタイプ", selection: $selectedEventType) {
@@ -306,27 +193,148 @@ struct ConfigureDateView: View {
             
             
             if selectedPopup {
-                HStack {
+                ZStack {
+                    HStack {
+                        
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.black)
+                    .opacity(0.5)
                     
+                    HStack {
+                        Text("未来の日付を基準にカウントする場合、カウント日数がマイナスになっちゃうよ！！")
+                            .foregroundColor(.black)
+                    }
+                    .frame(width: 300, height: 100)
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    .disabled(!selectedPopup)
+                    .allowsHitTesting(selectedPopup)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.black)
-                .opacity(0.5)
+                .onTapGesture {
+                    if selectedPopup {
+                        selectedPopup = false
+                    }
+                }
+            }
+        }
+    }
+    
+    private var headerView: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("イベント")
+                let selectedDate = selectingDate
+                switch selectedEventType {
+                case .countdown:
+                    Text("カウントダウン")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                    
+                    HStack {
+                        switch selectedFrequentType {
+                        case .never:
+                            if CalendarViewModel.isPastDate(selectedDate) && selectedEventType == .countdown{
+                                Text("終了")
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color.red)
+                            }
+                            Text(dateViewModel.getYearText(date: selectedDate) + "年")
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                            Text("\(dateViewModel.getMonthText(date: selectedDate))月")
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                            Text("\(dateViewModel.getDayText(date: selectedDate))日")
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                        case .annual:
+                            Text("毎年")
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                            Text("\(dateViewModel.getMonthText(date: selectedDate))月")
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                            Text("\(dateViewModel.getDayText(date: selectedDate))日")
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                        case .monthly:
+                            Text("毎月")
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                            Text("\(selectingMonthlyDay)日")
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                        case .weekly:
+                            Text("毎週")
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                            Text(selectingWeeklyDate.stringValue)
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                        }
+                    }
+                case .countup:
+                    Text("カウントアップ")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                    HStack {
+                        Text(dateViewModel.getYearText(date: selectedDate) + "年")
+                            .font(.system(size: 25))
+                            .fontWeight(.bold)
+                        Text("\(dateViewModel.getMonthText(date: selectedDate))月")
+                            .font(.system(size: 25))
+                            .fontWeight(.bold)
+                        Text("\(dateViewModel.getDayText(date: selectedDate))日")
+                            .font(.system(size: 25))
+                            .fontWeight(.bold)
+                        
+                        
+                        if !CalendarViewModel.isPastDate(selectedDate) {
+                            Button {
+                                /// ポップアップ表示
+                                selectedPopup.toggle()
+                            } label: {
+                                Image(systemName: "exclamationmark.circle.fill")
+                                    .tint(.orange)
+                            }
+                        }
+                    }
+                }
                 
-                HStack {
-                    Text("未来の日付を基準にカウントする場合、カウント日数がマイナスになっちゃう！！")
-                        .foregroundColor(.black)
+                
+            }
+            .padding()
+            
+            Spacer()
+            
+            /// 設定を保存するところ
+            Button {
+                
+                if selectedFrequentType == .weekly {
+                    selectingDate = CalendarViewModel.getDateAtWeekly(dayAtWeek: selectingWeeklyDate)
+                    selectedWeeklyDate = selectingWeeklyDate
+                    dateViewModel.selectedDate = selectingDate
+                } else {
+                    dateViewModel.selectedDate = selectingDate
+                    
+                    dateViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
                 }
-                .frame(width: 300, height: 100)
-                .background(Color.white)
-                .cornerRadius(20)
+                
+                
+                
+                dismiss()
+            } label: {
+                Image(systemName: "checkmark")
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 20).fill(ColorUtility.highlighted))
+                    .tint(.white)
+                    .padding()
             }
+            
         }
-        .onTapGesture {
-            if selectedPopup {
-                selectedPopup = false
-            }
-        }
+        .background(ColorUtility.primary)
     }
     
     /// 毎月のカウントビュー
