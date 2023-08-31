@@ -204,12 +204,12 @@ struct ConfigureDateView: View {
                     HStack {
                         Text("未来の日付を基準にカウントする場合、カウント日数がマイナスになっちゃうよ！！")
                             .foregroundColor(.black)
+                            .padding()
                     }
-                    .frame(width: 300, height: 100)
+                    .frame(width: 200, height: 200)
                     .background(Color.white)
                     .cornerRadius(20)
-                    .disabled(!selectedPopup)
-                    .allowsHitTesting(selectedPopup)
+                    
                 }
                 .onTapGesture {
                     if selectedPopup {
@@ -224,6 +224,7 @@ struct ConfigureDateView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text("イベント")
+                    .foregroundColor(.white)
                 let selectedDate = selectingDate
                 switch selectedEventType {
                 case .countdown:
@@ -243,36 +244,46 @@ struct ConfigureDateView: View {
                             Text(dateViewModel.getYearText(date: selectedDate) + "年")
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
+                                .foregroundColor(.white)
                             Text("\(dateViewModel.getMonthText(date: selectedDate))月")
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
+                                .foregroundColor(.white)
                             Text("\(dateViewModel.getDayText(date: selectedDate))日")
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
+                                .foregroundColor(.white)
                         case .annual:
                             Text("毎年")
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
+                                .foregroundColor(.white)
                             Text("\(dateViewModel.getMonthText(date: selectedDate))月")
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
+                                .foregroundColor(.white)
                             Text("\(dateViewModel.getDayText(date: selectedDate))日")
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
+                                .foregroundColor(.white)
                         case .monthly:
                             Text("毎月")
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
+                                .foregroundColor(.white)
                             Text("\(selectingMonthlyDay)日")
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
+                                .foregroundColor(.white)
                         case .weekly:
                             Text("毎週")
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
+                                .foregroundColor(.white)
                             Text(selectingWeeklyDate.stringValue)
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
+                                .foregroundColor(.white)
                         }
                     }
                 case .countup:
@@ -283,20 +294,27 @@ struct ConfigureDateView: View {
                         Text(dateViewModel.getYearText(date: selectedDate) + "年")
                             .font(.system(size: 25))
                             .fontWeight(.bold)
+                            .foregroundColor(.white)
                         Text("\(dateViewModel.getMonthText(date: selectedDate))月")
                             .font(.system(size: 25))
                             .fontWeight(.bold)
+                            .foregroundColor(.white)
                         Text("\(dateViewModel.getDayText(date: selectedDate))日")
                             .font(.system(size: 25))
                             .fontWeight(.bold)
+                            .foregroundColor(.white)
                         
                         
                         if !CalendarViewModel.isPastDate(selectedDate) {
                             Button {
-                                /// ポップアップ表示
-                                selectedPopup.toggle()
+                                withAnimation(.spring()) {
+                                    /// ポップアップ表示
+                                    selectedPopup.toggle()
+                                }
+                                
                             } label: {
                                 Image(systemName: "exclamationmark.circle.fill")
+                                    .foregroundColor(.orange)
                                     .tint(.orange)
                             }
                         }

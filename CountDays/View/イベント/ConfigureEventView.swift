@@ -322,59 +322,72 @@ struct ConfigureEventView: View {
             Button {
                 isShowSheet.toggle()
             } label: {
-                HStack {
-
-                    VStack {
-                        Image(systemName: "calendar")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .padding(.horizontal)
-
-                        if frequentType != .never {
-                            Text("リピート")
-                                .font(.system(size: 10))
-                                .foregroundColor(.white)
-                                .background(Color.red)
-                        }
-                    }
-
-                    VStack(alignment: .leading) {
-                        HStack {
-                            let date = dateViewModel.selectedDate
-                            let year = dateViewModel.getYearText(date: date)
-                            let month = dateViewModel.getMonthText(date: date)
-                            let day = dateViewModel.getDayText(date: date)
-                            switch frequentType {
-                            case .never:
-//                                Text(dateViewModel.dateText(date: date))
-                                Text(year + "/" + month + "/" + day)
-                            case .annual:
-                                Text("毎年：")
-                                Text(month + "月" + day + "日")
-                            case .monthly:
-                                Text("毎月：")
-                                Text(day + "日")
-                            case .weekly:
-                                Text("毎週：")
-                                Text(dayOfWeek.stringValue)
+                VStack(alignment: .leading) {
+                    Text(eventType.rawValue)
+                        .foregroundColor(.black)
+                        .frame(width: 150, height: 30)
+                        .background(.white)
+                        .cornerRadius(20)
+                        .padding(.leading)
+                        .padding(.bottom, 3)
+                    HStack {
+                        
+                        VStack {
+                            
+                            
+                            Image(systemName: "calendar")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .padding(.horizontal)
+                            
+                            if frequentType != .never {
+                                Text("リピート")
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.white)
+                                    .background(Color.red)
                             }
                         }
-                        Text("終日")
-
+                        
+                        VStack(alignment: .leading) {
+                            
+                            HStack {
+                                let date = dateViewModel.selectedDate
+                                let year = dateViewModel.getYearText(date: date)
+                                let month = dateViewModel.getMonthText(date: date)
+                                let day = dateViewModel.getDayText(date: date)
+                                switch frequentType {
+                                case .never:
+                                    //                                Text(dateViewModel.dateText(date: date))
+                                    Text(year + "/" + month + "/" + day)
+                                case .annual:
+                                    Text("毎年：")
+                                    Text(month + "月" + day + "日")
+                                case .monthly:
+                                    Text("毎月：")
+                                    Text(day + "日")
+                                case .weekly:
+                                    Text("毎週：")
+                                    Text(dayOfWeek.stringValue)
+                                }
+                            }
+                            Text("終日")
+                            
+                        }
+                        .foregroundColor(.white)
+                        Spacer()
                     }
-                    .foregroundColor(.white)
-                    Spacer()
-                }
-                .frame(height: 80.0)
-                .frame(alignment: .leading)
-                .foregroundColor(.black)
-                .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.highlighted))
-            }.sheet(isPresented: $isShowSheet) {
-                ConfigureDateView(eventType: $eventType, frequentType: $frequentType, dateViewModel: _dateViewModel, weeklyDate: $dayOfWeek)
+                    
+                }.sheet(isPresented: $isShowSheet) {
+                    ConfigureDateView(eventType: $eventType, frequentType: $frequentType, dateViewModel: _dateViewModel, weeklyDate: $dayOfWeek)
+                    
+                }.frame(height: 120.0)
+                    .frame(alignment: .leading)
+                    .foregroundColor(.black)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.highlighted))
                 
             }
-
-            Spacer()
+                
+                Spacer()
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
