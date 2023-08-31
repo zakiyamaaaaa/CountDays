@@ -31,24 +31,7 @@ struct MainView: View {
     var selectedEventStyle: EventDisplayStyle = .standard
     var body: some View {
         VStack {
-            HStack {
-                Text("ようこそ")
-                    .font(.system(size: 35,weight: .bold))
-                    .padding()
-                Spacer()
-                
-                Button {
-                    isSettingButton.toggle()
-                } label: {
-                    Image(systemName: "ellipsis.circle")
-                        .resizable()
-                        .frame(width: 30,height: 30)
-                }
-                .padding()
-            }
-            .foregroundColor(.white)
-            .frame(height: 80)
-            .background(ColorUtility.secondary)
+            headerView
             
             ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: columns, spacing: 10) {
@@ -106,7 +89,27 @@ struct MainView: View {
             
         }
         .background(ColorUtility.backgroundary)
-
+    }
+    
+    private var headerView: some View {
+        HStack {
+            Text("ようこそ")
+                .font(.system(size: 35,weight: .bold))
+                .padding()
+            Spacer()
+            
+            Button {
+                isSettingButton.toggle()
+            } label: {
+                Image(systemName: "ellipsis.circle")
+                    .resizable()
+                    .frame(width: 30,height: 30)
+            }
+            .padding()
+        }
+        .foregroundColor(.white)
+        .frame(height: 80)
+        .background(ColorUtility.primary)
     }
 }
 

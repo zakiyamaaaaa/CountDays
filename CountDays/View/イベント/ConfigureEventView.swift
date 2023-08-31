@@ -54,6 +54,8 @@ struct ConfigureEventView: View {
     var selectedStyle: EventDisplayStyle = .standard
     private let bgColorList: [BackgroundColor] = BackgroundColor.allCases
     private let txtColorList: [TextColor] = TextColor.allCases
+    @State var positionX = -10
+     var positionY = 0
     
     var body: some View {
         NavigationStack {
@@ -232,7 +234,7 @@ struct ConfigureEventView: View {
             .frame(width: 50, height: 50)
             .foregroundColor(.white)
             .font(.system(size: 30))
-            .background(Color.gray)
+            .background(ColorUtility.secondary)
             .clipShape(Circle())
             .padding()
 
@@ -259,11 +261,11 @@ struct ConfigureEventView: View {
             }
             .frame(width: 80, height: 50)
             .font(.system(size: 20))
-            .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
+            .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.highlighted))
             .padding()
         }
         .frame(height: 80)
-        .background(ColorUtility.backgroundary)
+        .background(ColorUtility.primary)
     }
     
     /// イベントタイトル名編集もしくは日付を設定するボタンを表示するビュー
@@ -271,20 +273,15 @@ struct ConfigureEventView: View {
         VStack {
             HStack {
                 ZStack(alignment: .leading) {
-                    if eventTitle.isEmpty {
-                        Text("入力してください")
-                            .foregroundColor(.white)
-                    }
+                    
                     TextField("", text: $eventTitle,
                               onEditingChanged: { editing in
                     })
-                    .padding(.horizontal,40)
                     .border(.white)
                     .font(.system(size: 30))
                     .padding()
                     .foregroundColor(.white)
                     .frame(height : 80.0)
-                    .frame(maxWidth: .infinity)
                     .background(RoundedRectangle(cornerRadius: 20)
                         .fill(ColorUtility.secondary))
                     .overlay(
@@ -294,21 +291,29 @@ struct ConfigureEventView: View {
                     .padding(.vertical, 10)
                     .focused($focusField)
                     
-                    Text("イベント名")
-                        .foregroundColor(.gray)
-                        .padding(.horizontal,30)
+                    if eventTitle.isEmpty {
+                        Text("イベント名を入力")
+                            .foregroundColor(.gray)
+                            .padding(.horizontal,30)
+                            .allowsHitTesting(false)
+                            
+                    }
                 }
                 
-                Button {
-                    focusField = false
-                } label: {
-                    Image(systemName: "checkmark")
+                if focusField {
+                    Button {
+                        focusField = false
+                        
+                    } label: {
+                        Image(systemName: "checkmark")
+                    }
+                    .padding()
+                    .background(focusField ? .mint : .gray)
+                    .tint(.white)
+                    .clipShape(Circle())
                 }
-                .padding()
-                .background(focusField ? .mint : .gray)
-                .tint(.white)
-                .clipShape(Circle())
-            }
+            }.animation(.spring(), value: focusField)
+            
             
             Button {
                 isShowSheet.toggle()
