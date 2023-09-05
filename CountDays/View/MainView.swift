@@ -8,11 +8,17 @@
 import SwiftUI
 import Algorithms
 import RealmSwift
+import StoreKit
 
 struct MainView: View {
+    @StateObject var store: Store = Store()
     @State private var isShow = false
     @State private var isShowConfigured = false
+    @State private var isShowUpgradeAlert = false
+    @State private var isShowUpgradeView = false
     @State private var isSettingButton = false
+    @State private var product: Product?
+    @State private var isPurchased = false
 //    @StateObject var mock = MockStore()
     @StateObject var realmMock = RealmMockStore()
 //    @StateObject var defaultEvent = EventCardViewModel.defaultStatus
@@ -57,9 +63,23 @@ struct MainView: View {
                             } else if i == 0 {
                                 AddEventView()
                                     .onTapGesture {
+                                        /// 課金ユーザーかどうかを判定し、課金してたら２個以上OK。無課金は１個まで
+                                        
+                                        #if DEBUG
                                         isShow.toggle()
                                         selectedEvent = EventCardViewModel.defaultStatus
-                                    }
+                                        #else
+                                        if self.isPurchased {
+                                            /// 課金ユーザー
+                                            isShow.toggle()
+                                            selectedEvent = EventCardViewModel.defaultStatus
+                                        } else {
+                                            
+                                            ///　無課金
+                                            isShowUpgradeAlert.toggle()
+                                        }
+                                        #endif
+                                }
                                     
                             }
                             
@@ -71,6 +91,23 @@ struct MainView: View {
                         ConfigureEventView(realmMock: realmMock, event: $selectedEvent, isCreation: true)
                     }.sheet(isPresented: $isSettingButton) {
                         SettingView()
+                    }.sheet(isPresented: $isShowUpgradeView) {
+                        UpgradeView()
+                    }
+                    .alert("２個以上のイベントを作成するにはアップグレードが必要です", isPresented: $isShowUpgradeAlert) {
+                        Button("OK") {
+                            isShowUpgradeView.toggle()
+                        }
+                    }
+                    .task {
+                        guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }
+                        self.product = product
+                        do {
+                            try await self.isPurchased = store.isPurchased(product)
+                        } catch(let error) {
+                            print(error.localizedDescription)
+                        }
+                        
                     }
                 }
             }

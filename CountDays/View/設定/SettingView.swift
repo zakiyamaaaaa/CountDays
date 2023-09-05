@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct SettingView: View {
-    @State var isToggle = true
+    @EnvironmentObject var store: Store
+    @State var allowNotification = true
     @State private var isTermView = false
     @State private var isPrivacyView = false
     @State private var isInquiry = false
     @State private var isDeleteAllEvent = false
+    @State private var showUpgradeView = false
     
+    init() {
+        
+    }
+ 
     var body: some View {
         settingView
     }
@@ -30,6 +36,9 @@ struct SettingView: View {
                             .font(.system(size: 20))
                     }
                     .listRowBackground(ColorUtility.secondary)
+                    .onTapGesture {
+                        showUpgradeView.toggle()
+                    }
                 }
                 
                 HStack {
@@ -47,7 +56,7 @@ struct SettingView: View {
                         .font(.system(size: 20))
                     
                     Spacer()
-                    Toggle(isOn: $isToggle) {
+                    Toggle(isOn: $allowNotification) {
                         
                     }
                 }.listRowBackground(ColorUtility.secondary)
@@ -143,6 +152,8 @@ struct SettingView: View {
                     PrivacyPolicyView()
                 }.sheet(isPresented: $isInquiry) {
                     MailView()
+                }.sheet(isPresented: $showUpgradeView) {
+                    UpgradeView()
                 }
             }
             .padding()
@@ -155,11 +166,25 @@ struct SettingView: View {
             .toolbarBackground( Color.black, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
+        .onAppear {
+            UNUserNotificationCenter.current().getNotificationSettings { settings in
+                switch settings.authorizationStatus {
+                case .authorized, .notDetermined, .provisional, .ephemeral:
+                    allowNotification = true
+                case .denied:
+                    allowNotification = false
+                @unknown default:
+                    allowNotification = true
+                }
+            }
+        }
     }
 }
 
 struct SettingView_Previews: PreviewProvider {
+    @StateObject static var store = Store()
     static var previews: some View {
         SettingView()
+            .environmentObject(store)
     }
 }

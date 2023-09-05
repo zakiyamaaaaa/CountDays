@@ -91,7 +91,6 @@ struct ConfigureDateView: View {
                             
                         }
                         
-                        ZStack {
                             
                             HStack {
                                 Menu(selectedFrequentType.rawValue) {
@@ -109,10 +108,12 @@ struct ConfigureDateView: View {
                                 .tint(.white)
                                 .padding()
                             }
+                            
                             .border(selectedFrequentType == .never ? .clear : selectedFrequentType.color, width: 5)
                             .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.primary))
                             .isHidden(hidden: selectedEventType == .countup)
-                            
+                            .padding()
+                
                             switch selectedEventType {
                             case .countdown:
                                 
@@ -140,8 +141,6 @@ struct ConfigureDateView: View {
                                     .tint(selectedFrequentType.color)
                             }
                             
-                            
-                        }
                         
                         if !isAllDayEvent {
                             VStack() {
@@ -426,7 +425,7 @@ struct ConfigureDateView: View {
 
 struct ConfigureDateView_Previews: PreviewProvider {
     @State static var frequent = FrequentType.never
-    @State static var event: EventType = .countup
+    @State static var event: EventType = .countdown
     @State static var weeklyDate: DayOfWeek = .sunday
     @StateObject static var dateViewModel = DateViewModel()
     static var previews: some View {

@@ -65,6 +65,9 @@
 		39FFFA5D2A975695001AE0D7 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB82A97151A006A7232 /* DateViewModel.swift */; };
 		39FFFA5F2A9992C0001AE0D7 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */; };
 		39FFFA612AA04FFB001AE0D7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */; };
+		39FFFA642AA07919001AE0D7 /* UpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA632AA07919001AE0D7 /* UpgradeView.swift */; };
+		39FFFA662AA07F37001AE0D7 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA652AA07F37001AE0D7 /* ProductViewModel.swift */; };
+		39FFFA682AA5C0CB001AE0D7 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA672AA5C0CB001AE0D7 /* Store.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +161,10 @@
 		394A5D052A9717D3006A7232 /* CountDaysWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CountDaysWidgetExtension.entitlements; sourceTree = "<group>"; };
 		39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
 		39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		39FFFA622AA07366001AE0D7 /* StorekitTest.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StorekitTest.storekit; sourceTree = "<group>"; };
+		39FFFA632AA07919001AE0D7 /* UpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeView.swift; sourceTree = "<group>"; };
+		39FFFA652AA07F37001AE0D7 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
+		39FFFA672AA5C0CB001AE0D7 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +209,7 @@
 		394A5C672A9712DF006A7232 = {
 			isa = PBXGroup;
 			children = (
+				39FFFA622AA07366001AE0D7 /* StorekitTest.storekit */,
 				394A5D052A9717D3006A7232 /* CountDaysWidgetExtension.entitlements */,
 				394A5C722A9712DF006A7232 /* CountDays */,
 				394A5CD22A971566006A7232 /* aaa.swift */,
@@ -280,6 +288,7 @@
 				394A5CBF2A971528006A7232 /* AddEventView.swift */,
 				394A5CBE2A971528006A7232 /* EventCardView.swift */,
 				39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */,
+				39FFFA632AA07919001AE0D7 /* UpgradeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,6 +300,7 @@
 				394A5CB82A97151A006A7232 /* DateViewModel.swift */,
 				394A5CB62A97151A006A7232 /* EventCardViewModel.swift */,
 				394A5CB72A97151A006A7232 /* RealmViewModel.swift */,
+				39FFFA652AA07F37001AE0D7 /* ProductViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -305,6 +315,7 @@
 				394A5CA52A9713C3006A7232 /* NotificationCenter.swift */,
 				394A5CA42A9713C3006A7232 /* RealmModel.swift */,
 				39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */,
+				39FFFA672AA5C0CB001AE0D7 /* Store.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -559,10 +570,13 @@
 				394A5CDD2A971567006A7232 /* EventConfigurationButtonStyle.swift in Sources */,
 				394A5C9E2A971349006A7232 /* ContentView.swift in Sources */,
 				394A5CA82A9713C3006A7232 /* EventCard.swift in Sources */,
+				39FFFA642AA07919001AE0D7 /* UpgradeView.swift in Sources */,
 				394A5CAA2A9713C3006A7232 /* RealmModel.swift in Sources */,
+				39FFFA682AA5C0CB001AE0D7 /* Store.swift in Sources */,
 				394A5CD12A97153D006A7232 /* ConfigureEventView.swift in Sources */,
 				394A5C742A9712DF006A7232 /* CountDaysApp.swift in Sources */,
 				394A5CDB2A971567006A7232 /* TestView2.swift in Sources */,
+				39FFFA662AA07F37001AE0D7 /* ProductViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

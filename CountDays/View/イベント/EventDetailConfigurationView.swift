@@ -6,12 +6,19 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct EventDetailConfigurationView: View {
+    
+    @EnvironmentObject var store: Store
     @Binding var showHour: Bool
     @Binding var showMinute: Bool
     @State var showHourandMinute: Bool = true
     @Binding var showSecond: Bool
+    @State private var isPurchased = false
+    @State private var product: Product?
+    @State private var isShowUpgradeAlert = false
+    @State private var isShowUpgradeView = false
     
 //    init(showHour: Binding<Bool>, showMinute: Binding<Bool>, showSecond: Binding<Bool>) {
 //        self._showHour = showHour
@@ -51,12 +58,43 @@ struct EventDetailConfigurationView: View {
                             .foregroundColor(.white)
                     }
                 }
+                .onTapGesture {
+                    if !isPurchased {
+                        showSecond = false
+                    }
+                }
                 .onChange(of: showSecond, perform: { newValue in
-                    showSecond = newValue
+                    print("change")
+                    if isPurchased {
+                        showSecond = newValue
+                    } else {
+//                        showSecond = false
+                        isShowUpgradeAlert.toggle()
+                    }
                 })
+                .sheet(isPresented: $isShowUpgradeView, content: {
+                    UpgradeView()
+                })
+                .alert("アップグレードが必要です", isPresented: $isShowUpgradeAlert) {
+                    Button("OK") {
+                        isShowUpgradeView.toggle()
+                    }
+                }
                 .listRowBackground(Color.primary)
             }
-            
+            .task {
+                guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }
+                self.product = product
+                do {
+                    try await self.isPurchased = store.isPurchased(product)
+                    showSecond = isPurchased
+                } catch(let error) {
+                    print(error.localizedDescription)
+                }
+            }
+            .onAppear {
+                print("Apeear")
+            }
             .scrollContentBackground(.hidden)
             .background(ColorUtility.backgroundary)
         }
@@ -71,8 +109,8 @@ struct EventDetailConfigurationView: View {
 
 struct EventDetailConfigurationView_Previews: PreviewProvider {
     @State static var a = true
-    
+    @StateObject static var store = Store()
     static var previews: some View {
-        EventDetailConfigurationView(showHour: $a, showMinute: $a, showHourandMinute: a, showSecond: $a)
+        EventDetailConfigurationView(showHour: $a, showMinute: $a, showHourandMinute: a, showSecond: $a).environmentObject(store)
     }
 }
