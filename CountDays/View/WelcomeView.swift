@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @State private var opacity: Double = 0
+    @State private var scaleFlag = false
     @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack(alignment: .leading) {
@@ -17,41 +18,84 @@ struct WelcomeView: View {
                     .padding(.bottom, 5)
                 BlurView(text: "Your Memory", textSize: 38, startTime: 1.85)
                     
-                BlurView(text: "App created by Shoichi Yamzaki", textSize: 16, startTime: 3.76)
+                Text("App created by Shoichi Yamzaki")
+                    .opacity(opacity)
+                    .padding(.top, 30)
+                    .animation(.easeIn(duration: 1).delay(4), value: opacity)
+//                BlurView(text: "App created by Shoichi Yamzaki", textSize: 16, startTime: 3.76)
                         .padding(.top, 30)
+            }
+            .onAppear {
+                opacity = 1
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    opacity = 1.0
-                }
-            }
+            
             HStack {
                 Spacer()
-                Button {
-                    dismiss()
-                } label: {
-                    Text("Get started")
-                        .frame(width: 200, height: 60)
-                        .foregroundColor(.white)
-                        .background(ColorUtility.highlighted)
-                        .cornerRadius(30)
+                ZStack {
+                    Button {
                         
-                }
-                .opacity(opacity)
-                .animation(.easeIn(duration: 1).delay(7), value: opacity)
-                .transition(.opacity)
-                .onAppear {
-                    opacity = 1
+                    } label: {
+                        Text("")
+                            .frame(width: 200, height: 60)
+                            .background(.clear)
+                            .cornerRadius(30)
+                            .scaleEffect(1.1)
+                            
+                    }.overlay {
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(.white , lineWidth: 1)
+                            .scaleEffect(1.0)
+                            .opacity(scaleFlag ? 0 : 1)
+                            .scaleEffect(scaleFlag ? 1.3 : 1.0)
+                            
+                            .animation(.easeIn(duration: 1.4).repeat(while: true, autoreverses: false), value: scaleFlag)
+                            
+                    }
+                    .opacity(opacity)
+                    .animation(.easeIn(duration: 1).delay(8), value: opacity)
+                    
+                    Button {
+                        HapticFeedbackManager.shared.play(.impact(.medium))
+                        dismiss()
+                    } label: {
+                        Text("Get started")
+                        
+                            .frame(width: 200, height: 60)
+                            .foregroundColor(.white)
+                            .background(ColorUtility.highlighted)
+                            .cornerRadius(30)
+                            
+                        
+                    }
+                    .buttonStyle(BounceButtonStyle())
+                    .opacity(opacity)
+                    .animation(.easeIn(duration: 1).delay(6), value: opacity)
+                    .onAppear {
+                        opacity = 1
+                        scaleFlag.toggle()
+                    }
                 }
                 
                 Spacer()
             }
         }
-        
+        .interactiveDismissDisabled()
         .background(ColorUtility.primary)
         
+    }
+}
+
+import struct SwiftUI.Animation
+
+extension Animation {
+    func `repeat`(while expression: Bool, autoreverses: Bool = true) -> Animation {
+        if expression {
+            return self.repeatForever(autoreverses: autoreverses)
+        } else {
+            return self
+        }
     }
 }
 
