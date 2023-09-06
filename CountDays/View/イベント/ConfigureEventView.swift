@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 import RealmSwift
 import Photos
 import PhotosUI
@@ -16,6 +17,8 @@ struct ConfigureEventView: View {
     /// FrequentTypeによって日にちのカウント方法を変更する
     /// .annualの場合、365のあまり、もしくは
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var store: Store
+    @State var isPurchased = false
     @State private var eventName = ""
     @State private var isShowSheet = false
     @State private var isFirstButtonSelected = true
@@ -146,6 +149,20 @@ struct ConfigureEventView: View {
                         textColorView
                     }
                 }
+            }
+        }
+        .task {
+            guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }
+            
+            do {
+                try await self.isPurchased = store.isPurchased(product)
+                
+                #if DEBUG
+                self.isPurchased = true
+                #endif
+                
+            } catch(let error) {
+                print(error.localizedDescription)
             }
         }
         .onAppear{
@@ -492,47 +509,34 @@ struct ConfigureEventView: View {
                                 .scaledToFill()
                                 .clipShape(RoundedRectangle(cornerRadius: 20))
                                 .frame(width: 150, height: 150)
-//                                .background {
-//                                    RoundedRectangle(cornerRadius: 20).fill(
-//                                        LinearGradient(
-//                                            colors: [.yellow, .orange],
-//                                            startPoint: .top,
-//                                            endPoint: .bottom
-//                                        )
-//                                    )
-//
-//                                }
                                 .overlay(content: {
                                     RoundedRectangle(cornerRadius: 20)
                                         .stroke(lineWidth: 5)
                                         .fill(.red)
                                 })
                                 .cornerRadius(20)
-//                                .border( selectedBackgroundColor == .none ? .red : .clear, width: 2)
-//                                .cornerRadius(20)
-    //                        EditBackgroundImage(imageState: imageViewModel.imageState, imageViewModel: imageViewModel)
                                 .overlay(alignment: .center) {
                                     PhotosPicker(selection: $selectedPhoto, label: {
                                         Rectangle()
                                             .frame(width: 150, height: 150)
-                                        .foregroundColor(.clear)})
+                                        .foregroundColor(.clear)
+//                                        Button {
+//
+//                                        } label: {
+//                                            Text("BUTTON")
+//                                        }
+//                                        .frame(width: 150, height: 150)
+//                                        .background(.orange)
+//                                        .foregroundColor(.orange)
+
+                                    })
                                     .onChange(of: selectedPhoto) { pickedItem in
                                         Task {
                                             if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
                                                 selectedImage = uiImage
                                             }
-                                            //                                                        guard let imageData = try await pickedItem?.loadTransferable(type: Data.self) else { return }
-                                            //                                                        guard let pickedImage = NSUIImage(data: imageData) else { return }
-                                            //                                                        selectedImage = pickedImage
                                         }
                                     }
-                                    //                                PhotosPicker(selection: $imageViewModel.imageSelection,
-                                    //                                             matching: .images,
-                                    //                                             photoLibrary: .shared()) {
-                                    //                                    Rectangle()
-                                    //                                        .frame(width: 150, height: 150)
-                                    //                                        .foregroundColor(.clear)
-                                    //                                }
                                 }
                            
                             }  else {
@@ -540,6 +544,14 @@ struct ConfigureEventView: View {
                                     .cornerRadius(20)
                                     .foregroundColor(.gray)
                                     .frame(width: 150, height: 150)
+                                    .onChange(of: selectedPhoto) { pickedItem in
+                                        Task {
+                                            if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
+                                                selectedImage = uiImage
+                                                selectedBackgroundColor = .none
+                                            }
+                                        }
+                                    }
                                     .overlay(alignment: .center) {
                                         Image(systemName: "photo.on.rectangle.angled")
                                             .resizable()
@@ -550,28 +562,48 @@ struct ConfigureEventView: View {
                                             .symbolRenderingMode(.multicolor)
                                             .font(.system(size: 30))
                                             .foregroundColor(.blue)
-                                        PhotosPicker(selection: $selectedPhoto, label: {
-                                                        Rectangle()
-                                                            .frame(width: 150, height: 150)
-                                                            .foregroundColor(.clear)})
-                                    .onChange(of: selectedPhoto) { pickedItem in
-                                        Task {
-                                            if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
-                                                selectedImage = uiImage
-                                                selectedBackgroundColor = .none
-                                            }
-                                        }
+                                        
+//                                        if self.isPurchased {
+//                                        if isPurchased {
+                                            
+                                    
+                                }
+                                if isPurchased {
+                                    PhotosPicker(selection: $selectedPhoto, label: {
+                                        Rectangle()
+                                            .frame(width: 150, height: 150)
+                                            .foregroundColor(.clear)
+                                        
+                                    })
+                                } else {
+                                    
+                                    Button {
+                                        isShowUpgradeAlert.toggle()
+                                    } label: {
+                                        Text("")
+                                            .frame(width: 150, height: 150)
                                     }
+                                    .background(.clear)
                                 }
                             }
                         }
                 }
+                .alert("画像設定にはアップグレードが必要です", isPresented: $isShowUpgradeAlert) {
+                    Button("OK") {
+                        isShowUpgradeView.toggle()
+                    }
+                }
+                .sheet(isPresented: $isShowUpgradeView) {
+                    UpgradeView()
+                }
             }
+            
         }
         .ignoresSafeArea()
         .background(ColorUtility.backgroundary)
     }
-    
+    @State private var isShowUpgradeView = false
+    @State private var isShowUpgradeAlert = false
     /// テキストの色を編集するビュー
     private var textColorView: some View {
         ScrollView(showsIndicators: false) {
@@ -653,8 +685,9 @@ struct ConfigureEventView_Previews: PreviewProvider {
     @State static var eventTitle = ""
     @State static var events = try! Realm().objects(Event.self)
     @State static var date = EventCardViewModel.defaultStatus.date
+    @StateObject static var store = Store()
     static var previews: some View {
-        ConfigureEventView(realmMock: RealmMockStore(), event: $event, isCreation: true, eventTitle: eventTitle)
+        ConfigureEventView(realmMock: RealmMockStore(), event: $event, isCreation: true, eventTitle: eventTitle).environmentObject(store)
     }
 }
 

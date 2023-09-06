@@ -20,12 +20,6 @@ struct EventDetailConfigurationView: View {
     @State private var isShowUpgradeAlert = false
     @State private var isShowUpgradeView = false
     
-//    init(showHour: Binding<Bool>, showMinute: Binding<Bool>, showSecond: Binding<Bool>) {
-//        self._showHour = showHour
-//        self._showMinute = showMinute
-//        self._showSecond = showSecond
-//    }
-    
     var body: some View {
         VStack(alignment: .leading) {
             Text("イベント表示設定")
