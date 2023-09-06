@@ -64,22 +64,24 @@ struct EventDetailConfigurationView: View {
                     }
                 }
                 .onChange(of: showSecond, perform: { newValue in
-                    print("change")
-                    if isPurchased {
-                        showSecond = newValue
-                    } else {
-//                        showSecond = false
+                    if newValue && isPurchased {
+                        showSecond = true
+                    } else if newValue && !isPurchased {
                         isShowUpgradeAlert.toggle()
+                    } else if !newValue && isPurchased {
+                        showSecond = false
                     }
-                })
-                .sheet(isPresented: $isShowUpgradeView, content: {
-                    UpgradeView()
                 })
                 .alert("アップグレードが必要です", isPresented: $isShowUpgradeAlert) {
                     Button("OK") {
                         isShowUpgradeView.toggle()
                     }
                 }
+                .sheet(isPresented: $isShowUpgradeView, onDismiss: {
+                    showSecond = false
+                }, content: {
+                    UpgradeView()
+                })
                 .listRowBackground(Color.primary)
             }
             .task {

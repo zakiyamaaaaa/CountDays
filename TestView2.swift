@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import PhotosUI
+import RealmSwift
+import Foundation
 
 struct TestView2: View {
     @State var selectedDate = Date()
     var dateViewModel = DateViewModel()
+    @State private var selectedImage: UIImage? = nil
+    @State private var selectedPhoto: PhotosPickerItem? = nil
     
     var body: some View {
         VStack {
@@ -23,10 +28,58 @@ struct TestView2: View {
                     .fontWeight(.bold)
             }
             
-//            CalendarView(dateViewModel: dateViewModel)
-//                .cornerRadius(20)
-//                .padding()
-//                .preferredColorScheme(.dark)
+            if let image = selectedImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .frame(width: 150, height: 150)
+                    .overlay(content: {
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(lineWidth: 5)
+                            .fill(.red)
+                    })
+                    .cornerRadius(20)
+                    .overlay(alignment: .center) {
+                        PhotosPicker(selection: $selectedPhoto, label: {
+                            Rectangle()
+                                .frame(width: 150, height: 150)
+                            .foregroundColor(.clear)})
+                        .onChange(of: selectedPhoto) { pickedItem in
+                            Task {
+                                if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
+                                    selectedImage = uiImage
+                                }
+                                
+                            }
+                        }
+                    }
+               
+                }  else {
+                    Rectangle()
+                        .foregroundColor(.gray)
+                        .frame(width: 150, height: 150)
+                        .overlay(alignment: .center) {
+                            PhotosPicker(selection: $selectedPhoto, label: {
+                                            Rectangle()
+                                                .frame(width: 150, height: 150)
+                                                .foregroundColor(.clear)})
+                        .onChange(of: selectedPhoto) { pickedItem in
+                            Task {
+                                if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
+                                    selectedImage = uiImage
+                                }
+                            }
+                        }
+                    }
+                }
+            Button {
+                
+            } label: {
+                Text("保存する")
+            }
+
+            
         }
     }
 }

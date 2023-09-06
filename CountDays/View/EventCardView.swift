@@ -12,6 +12,7 @@ struct EventCardView: View {
     var date: Date
     var style: EventDisplayStyle
     var backgroundColor: BackgroundColor
+    var image: UIImage?
     var textColor: TextColor
     var showHour: Bool = true
     var showMinute: Bool = true
@@ -32,16 +33,29 @@ struct EventCardView: View {
                 
                 Rectangle()
                     .foregroundColor(backgroundColor.color)
-                    .frame(width: width*1/3 + 10, height: width*1/3 + 10)
+                    .frame(width: 150, height: 150)
                     .cornerRadius(30)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 30)
-                            .stroke(.white, lineWidth: 3)
-                    )
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 30)
+//                            .stroke(.white, lineWidth: 3)
+//                    )
                 
                 switch style {
                 case .standard:
+                    if let image = image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 150, height: 150)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            
+//                            .foregroundColor(.mint)
+                    }
+                    
+                    
                     VStack(alignment: .leading) {
+                        
+                        
                         Text(title)
                             .padding(.vertical, 10)
                         Spacer()
@@ -73,6 +87,8 @@ struct EventCardView: View {
                     .foregroundColor(textColor.color)
                     .frame(width: width*1/3, height: width*1/3)
                     .padding()
+                    
+                    
                 case .circle:
                     VStack {
                         Text(title)

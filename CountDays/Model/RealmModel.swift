@@ -9,8 +9,6 @@ import Foundation
 import RealmSwift
 import SwiftUI
 
-// TODO: Event型の保存
-
 /// イベントモデル
 /// UserModel
 /// id: ユーザーの一意なID
@@ -42,7 +40,7 @@ import SwiftUI
 
 final class RealmModel: ObservableObject {
     /// TODO: スキーマバージョンを1になおす
-    private static var config = Realm.Configuration(schemaVersion: 4)
+    private static var config = Realm.Configuration(schemaVersion: 6)
     private static var realm = try! Realm(configuration: config)
     
     /// 保存されているuserを返す
@@ -128,6 +126,8 @@ class Event: Object, ObjectKeyIdentifiable {
     @Persisted var frequentType: FrequentType = .never
     @Persisted var eventType: EventType = .countup
     @Persisted var dayAtMonthly: Int = 1
+//    @objc dynamic var imageData: NSData?
+    @Persisted var imageData: Data?
     @Persisted var hour: Int = 0
     @Persisted var minute: Int = 0
     @Persisted var dayOfWeek: DayOfWeek = .sunday
@@ -141,7 +141,7 @@ class Event: Object, ObjectKeyIdentifiable {
         
     }
     
-    init(title: String, date: Date, textColor: TextColor, backgroundColor: BackgroundColor, displayStyle: EventDisplayStyle, fontSize: Float, frequentType: FrequentType = .never, eventType: EventType = .countup, dayAtMonthly: Int = 1, hour: Int = 0, minute: Int = 0, dayOfWeek: DayOfWeek = .sunday, displayHour: Bool = true, displayMinute: Bool = true, displaySecond: Bool = false) {
+    init(title: String, date: Date, textColor: TextColor, backgroundColor: BackgroundColor, displayStyle: EventDisplayStyle, fontSize: Float, frequentType: FrequentType = .never, eventType: EventType = .countup, dayAtMonthly: Int = 1, hour: Int = 0, minute: Int = 0, dayOfWeek: DayOfWeek = .sunday, displayHour: Bool = true, displayMinute: Bool = true, displaySecond: Bool = false, image: UIImage? = nil) {
         super.init()
         self.id = id
         self.title = title
@@ -159,6 +159,16 @@ class Event: Object, ObjectKeyIdentifiable {
         self.displayHour = displayHour
         self.displayMinute = displayMinute
         self.displaySecond = displaySecond
+        
+        /// 画像の変換処理。ファイルサイズをリサイズ
+        if let image = image, let pngData = image.pngData(), let jpegData = image.resize().jpegData(compressionQuality: 0.8)  {
+            
+            print("ファイルサイズ")
+            print(pngData.count)
+            print(jpegData.count)
+        
+            self.imageData = jpegData
+        }
     }
 }
 

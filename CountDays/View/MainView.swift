@@ -35,6 +35,16 @@ struct MainView: View {
     @State var selectedEvent = Event()
     @State var selectedIndex = 0
     var selectedEventStyle: EventDisplayStyle = .standard
+    
+    func createImage(cardImage: Event ) -> UIImage? {
+        var image: UIImage? = nil
+        if let data = cardImage.imageData, let uiImage = UIImage(data: data as Data) {
+            image = uiImage
+        }
+        
+        return image
+    }
+    
     var body: some View {
         VStack {
             headerView
@@ -48,9 +58,12 @@ struct MainView: View {
                             if i >= 1 {
                                 let card = realmCards[i - 1]
                                 
+                                let image = createImage(cardImage: card)
+//                                Image(uiImage: UIImage(data: card.imageData! as Data)!)
                                 
-                                
-                                EventCardView(title: card.title, date: card.date, style: card.displayStyle, backgroundColor: card.backgroundColor, textColor: card.textColor, frequentType: .never)
+//                                print("IMAGE")
+//                                print(image)
+                                EventCardView(title: card.title, date: card.date, style: card.displayStyle, backgroundColor: card.backgroundColor, image: image, textColor: card.textColor, frequentType: card.frequentType)
                                     .onTapGesture {
                                         isShowConfigured.toggle()
                                         selectedEvent = realmCards[i - 1]

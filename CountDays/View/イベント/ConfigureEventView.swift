@@ -7,6 +7,8 @@
 
 import SwiftUI
 import RealmSwift
+import Photos
+import PhotosUI
 
 struct ConfigureEventView: View {
     
@@ -23,6 +25,8 @@ struct ConfigureEventView: View {
     @State private var focusButton = false
     @State var selectedStyleIndex = 0
     @State var selectedBackgroundColor: BackgroundColor = .primary
+    @State private var selectedBackgroundStyle: BackgroundStyle = .simple
+//    @State private var selectedBackgroundImage: Image
     @State var selectedTextColor: TextColor = .white
     @State private var isTrashAnimation = false
     @State private var showDeleteAlert = false
@@ -47,7 +51,10 @@ struct ConfigureEventView: View {
         GridItem(.flexible()),
         GridItem(.flexible()),
     ]
+    @State private var selectedImage: UIImage? = nil
+    @State private var selectedPhoto: PhotosPickerItem? = nil
     @StateObject var dateViewModel = DateViewModel()
+    @StateObject var imageViewModel = ImageModel()
     @State var frequentType: FrequentType = .never
     @State var eventType: EventType = .countup
     @State var dayOfWeek: DayOfWeek = .sunday
@@ -78,7 +85,7 @@ struct ConfigureEventView: View {
                     let date = dateViewModel.selectedDate
                     
                      ZStack {
-                         EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: EventDisplayStyle(rawValue: selectedStyleIndex)!, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, frequentType: frequentType, eventType: eventType)
+                         EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: EventDisplayStyle(rawValue: selectedStyleIndex)!, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, frequentType: frequentType, eventType: eventType)
 //                         EventCardView(title: eventTitle.isEmpty ? "イベント名" : eventTitle, day: day ?? 1, hour: hour ?? 111, minute: minute ?? 111, style: EventDisplayStyle(rawValue: selectedStyleIndex)!, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor)
                          Button {
                              self.showDeleteAlert.toggle()
@@ -144,11 +151,13 @@ struct ConfigureEventView: View {
         .onAppear{
         
             print(event.date)
+//            selectedBackgroundImage = imageViewModel.imageSelection
             eventDate = event.date
             dateViewModel.selectedDate = event.date
             showHour = event.displayHour
             showMinute = event.displayMinute
             showSecond = event.displaySecond
+            
 //            selectedFrequentType = event.frequentType
 //            selectedEventType = event.eventType
         }
@@ -245,7 +254,7 @@ struct ConfigureEventView: View {
                     /// TODO: イベント名を入力してくださいエラーメッセージ表示
                     return
                 }
-                let event = Event(title: eventTitle, date: dateViewModel.selectedDate, textColor: selectedTextColor, backgroundColor: selectedBackgroundColor, displayStyle: EventDisplayStyle(rawValue: selectedStyleIndex)!, fontSize: 1.0, dayOfWeek: dayOfWeek, displayHour: showHour, displayMinute: showMinute, displaySecond: showSecond)
+                let event = Event(title: eventTitle, date: dateViewModel.selectedDate, textColor: selectedTextColor, backgroundColor: selectedBackgroundColor, displayStyle: EventDisplayStyle(rawValue: selectedStyleIndex)!, fontSize: 1.0, dayOfWeek: dayOfWeek, displayHour: showHour, displayMinute: showMinute, displaySecond: showSecond, image: selectedImage)
                 
                 switch isCreation {
                     /// 新規作成
@@ -433,28 +442,132 @@ struct ConfigureEventView: View {
         .ignoresSafeArea()
         .background(ColorUtility.backgroundary)
     }
+    enum BackgroundStyle: String, CaseIterable {
+        
+        case simple = "シンプル"
+        case image = "画像"
+    }
     
     /// 背景色を編集するビュー
     private var backgroundColorView: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVGrid(columns: columns, spacing: 5) {
-                ForEach(bgColorList, id: \.self) { item in
-                    RoundedRectangle(cornerRadius: 10).fill(LinearGradient(colors: [item.color, item.color], startPoint: .topLeading, endPoint: .bottomTrailing))
-                        .frame(width: 80, height: 80)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(item == selectedBackgroundColor ? .red : .clear, lineWidth: 2)
-                        )
-                        .onTapGesture(perform: {
-                            selectedBackgroundColor = item
-                            print(item.color)
-                        })
-                        .padding()
+        VStack {
+            
+            Picker("背景スタイル", selection: $selectedBackgroundStyle) {
+                ForEach(BackgroundStyle.allCases, id: \.self) { id in
+                    Text(id.rawValue)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding()
+            
+            switch selectedBackgroundStyle {
+            case .simple:
+                ScrollView(showsIndicators: false) {
+                    LazyVGrid(columns: columns, spacing: 5) {
+                        ForEach(bgColorList, id: \.self) { item in
+                            if let color = item.color {
+                                RoundedRectangle(cornerRadius: 10).fill(LinearGradient(colors: [color, color], startPoint: .topLeading, endPoint: .bottomTrailing))
+                                    .frame(width: 80, height: 80)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(item == selectedBackgroundColor ? .red : .clear, lineWidth: 2)
+                                    )
+                                    .onTapGesture(perform: {
+                                        selectedBackgroundColor = item
+                                        print(color)
+                                    })
+                                    .padding()
+                            }
+                        }
+                    }
+                }
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            case .image:
+                ScrollView(showsIndicators: false) {
+                    ZStack {
+                        if let image = selectedImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                                .frame(width: 150, height: 150)
+//                                .background {
+//                                    RoundedRectangle(cornerRadius: 20).fill(
+//                                        LinearGradient(
+//                                            colors: [.yellow, .orange],
+//                                            startPoint: .top,
+//                                            endPoint: .bottom
+//                                        )
+//                                    )
+//
+//                                }
+                                .overlay(content: {
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(lineWidth: 5)
+                                        .fill(.red)
+                                })
+                                .cornerRadius(20)
+//                                .border( selectedBackgroundColor == .none ? .red : .clear, width: 2)
+//                                .cornerRadius(20)
+    //                        EditBackgroundImage(imageState: imageViewModel.imageState, imageViewModel: imageViewModel)
+                                .overlay(alignment: .center) {
+                                    PhotosPicker(selection: $selectedPhoto, label: {
+                                        Rectangle()
+                                            .frame(width: 150, height: 150)
+                                        .foregroundColor(.clear)})
+                                    .onChange(of: selectedPhoto) { pickedItem in
+                                        Task {
+                                            if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
+                                                selectedImage = uiImage
+                                            }
+                                            //                                                        guard let imageData = try await pickedItem?.loadTransferable(type: Data.self) else { return }
+                                            //                                                        guard let pickedImage = NSUIImage(data: imageData) else { return }
+                                            //                                                        selectedImage = pickedImage
+                                        }
+                                    }
+                                    //                                PhotosPicker(selection: $imageViewModel.imageSelection,
+                                    //                                             matching: .images,
+                                    //                                             photoLibrary: .shared()) {
+                                    //                                    Rectangle()
+                                    //                                        .frame(width: 150, height: 150)
+                                    //                                        .foregroundColor(.clear)
+                                    //                                }
+                                }
+                           
+                            }  else {
+                                Rectangle()
+                                    .cornerRadius(20)
+                                    .foregroundColor(.gray)
+                                    .frame(width: 150, height: 150)
+                                    .overlay(alignment: .center) {
+                                        Image(systemName: "photo.on.rectangle.angled")
+                                            .resizable()
+                                            .foregroundColor(.white)
+                                            .frame(width: 50, height: 50)
+                                        Image(systemName: "plus.circle.fill")
+                                            .offset(x: 25, y: 25)
+                                            .symbolRenderingMode(.multicolor)
+                                            .font(.system(size: 30))
+                                            .foregroundColor(.blue)
+                                        PhotosPicker(selection: $selectedPhoto, label: {
+                                                        Rectangle()
+                                                            .frame(width: 150, height: 150)
+                                                            .foregroundColor(.clear)})
+                                    .onChange(of: selectedPhoto) { pickedItem in
+                                        Task {
+                                            if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
+                                                selectedImage = uiImage
+                                                selectedBackgroundColor = .none
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                 }
             }
         }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .background(ColorUtility.backgroundary)
     }
@@ -485,6 +598,53 @@ struct ConfigureEventView: View {
 }
     
 
+/// Appleのコードを参考に作ったPhoto picker用のコード。使ってない
+struct BackgroundImage: View {
+    let imageState: ImageState
+    
+    var body: some View {
+        switch imageState {
+        case .success(let image):
+            image.resizable()
+        case .loading:
+            ProgressView()
+        case .empty:
+            Image(systemName: "photo.on.rectangle.angled")
+                .font(.system(size: 40))
+                .foregroundColor(.white)
+        case .failure:
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 40))
+                .foregroundColor(.white)
+        }
+    }
+}
+
+struct EditBackgroundImage: View {
+    let imageState: ImageState
+    let imageViewModel: ImageModel
+    
+    var body: some View {
+        BackgroundImage(imageState: imageState)
+            .scaledToFill()
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .frame(width: 150, height: 150)
+            .background {
+                RoundedRectangle(cornerRadius: 20).fill(
+                    LinearGradient(
+                        colors: [.yellow, .orange],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                
+            }
+            .border(imageViewModel.imageSelection != nil ? .red : .clear)
+            .cornerRadius(20)
+            
+        
+    }
+}
 
 
 

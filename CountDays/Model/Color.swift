@@ -53,8 +53,9 @@ enum BackgroundColor: String, RawRepresentable, CaseIterable, PersistableEnum {
     case pink
     case indigo
     case teal
+    case none
     
-    var color: Color {
+    var color: Color? {
         switch self {
         case .primary:
             return .primary
@@ -74,6 +75,8 @@ enum BackgroundColor: String, RawRepresentable, CaseIterable, PersistableEnum {
             return .teal
         case .yellow:
             return .yellow
+        case .none:
+            return nil
         }
     }
 }
