@@ -168,23 +168,20 @@ struct ConfigureEventView: View {
         .onAppear{
         
             print(event.date)
-//            selectedBackgroundImage = imageViewModel.imageSelection
             eventDate = event.date
             dateViewModel.selectedDate = event.date
             showHour = event.displayHour
             showMinute = event.displayMinute
             showSecond = event.displaySecond
-            
-//            selectedFrequentType = event.frequentType
-//            selectedEventType = event.eventType
         }
     }
-    
+    @State private var bounce = false
     /// 設定選択ビュー
     private var configurationSelectionView: some View {
         HStack {
             Spacer()
             Button {
+                HapticFeedbackManager.shared.play(.impact(.medium))
                 if !isFirstButtonSelected {
                     isFirstButtonSelected = true
                     isSecondButtonSelected = false
@@ -193,6 +190,9 @@ struct ConfigureEventView: View {
                 }
             } label: {
                 Image(systemName: "calendar")
+                    .font(.system(size: 23))
+                    .scaleEffect(isFirstButtonSelected ? 1.1 : 1.0)
+                    .animation(.interpolatingSpring(stiffness: 200, damping: 5, initialVelocity: 1), value: isFirstButtonSelected)
             }
             .buttonStyle(EventConfigurationButtonStyle(active: $isFirstButtonSelected))
             .overlay(
@@ -203,6 +203,7 @@ struct ConfigureEventView: View {
             Spacer()
             
             Button {
+                HapticFeedbackManager.shared.play(.impact(.medium))
                 if !isSecondButtonSelected {
                     isFirstButtonSelected = false
                     isSecondButtonSelected = true
@@ -211,13 +212,16 @@ struct ConfigureEventView: View {
                 }
             } label: {
                 Image(systemName: "wand.and.stars.inverse")
-                    
+                    .font(.system(size: 23))
+                    .scaleEffect(isSecondButtonSelected ? 1.1 : 1.0)
+                    .animation(.interpolatingSpring(stiffness: 200, damping: 5, initialVelocity: 1), value: isSecondButtonSelected)
             }
             .buttonStyle(EventConfigurationButtonStyle(active: $isSecondButtonSelected))
             
             
             Spacer()
             Button {
+                HapticFeedbackManager.shared.play(.impact(.medium))
                 if !isThirdButtonSelected {
                     isFirstButtonSelected = false
                     isSecondButtonSelected = false
@@ -226,6 +230,11 @@ struct ConfigureEventView: View {
                 }
             } label: {
                 Image(systemName: "paintbrush.fill")
+                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                    .font(.system(size: 23))
+                    .scaleEffect(isThirdButtonSelected ? 1.1 : 1.0)
+                    .animation(.interpolatingSpring(stiffness: 200, damping: 5, initialVelocity: 1), value: isThirdButtonSelected)
+
             }
             .buttonStyle(EventConfigurationButtonStyle(active: $isThirdButtonSelected))
 
@@ -233,6 +242,7 @@ struct ConfigureEventView: View {
             Spacer()
             
             Button {
+                HapticFeedbackManager.shared.play(.impact(.medium))
                 if !isFourthButtonSelected {
                     isFirstButtonSelected = false
                     isSecondButtonSelected = false
@@ -241,6 +251,9 @@ struct ConfigureEventView: View {
                 }
             } label: {
                 Image(systemName: "textformat")
+                    .font(.system(size: 23))
+                    .scaleEffect(isFourthButtonSelected ? 1.1 : 1.0)
+                    .animation(.interpolatingSpring(stiffness: 200, damping: 5, initialVelocity: 1), value: isFourthButtonSelected)
             }
             .buttonStyle(EventConfigurationButtonStyle(active: $isFourthButtonSelected))
             
@@ -272,7 +285,7 @@ struct ConfigureEventView: View {
                     return
                 }
                 let event = Event(title: eventTitle, date: dateViewModel.selectedDate, textColor: selectedTextColor, backgroundColor: selectedBackgroundColor, displayStyle: EventDisplayStyle(rawValue: selectedStyleIndex)!, fontSize: 1.0, dayOfWeek: dayOfWeek, displayHour: showHour, displayMinute: showMinute, displaySecond: showSecond, image: selectedImage)
-                
+                HapticFeedbackManager.shared.play(.impact(.heavy))
                 switch isCreation {
                     /// 新規作成
                     case true:
@@ -285,6 +298,7 @@ struct ConfigureEventView: View {
                 NotificationCenter.registerNotification(event: event)
                 presentationMode.wrappedValue.dismiss()
             }
+            .buttonStyle(BounceButtonStyle())
             .frame(width: 100, height: 50)
             .tint(.white)
             .fontWeight(.bold)

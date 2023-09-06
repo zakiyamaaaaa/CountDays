@@ -102,8 +102,10 @@ struct MainView: View {
                     }.sheet(isPresented: $isShowConfigured) {
                         
                         ConfigureEventView(realmMock: realmMock, event: $selectedEvent, isCreation: false)
+                            .environmentObject(store)
                     }.sheet(isPresented: $isShow) {
                         ConfigureEventView(realmMock: realmMock, event: $selectedEvent, isCreation: true)
+                            .environmentObject(store)
                     }.sheet(isPresented: $isSettingButton) {
                         SettingView()
                     }.sheet(isPresented: $isShowUpgradeView) {

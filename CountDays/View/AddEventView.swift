@@ -24,28 +24,6 @@ struct AddEventView: View {
             }
             .frame(width: width*2/5, height: width*1/3)
         }
-//        NavigationStack {
-//            ZStack {
-//                
-//                Button{
-//                    // ここに押下イベント
-//                    isPresented.toggle()
-//                } label: {
-//                    Text("追加")
-//                }
-//                .frame(width: width*1/3, height: width*1/3)
-//                .background(ColorUtility.highlighted)
-//                .cornerRadius(30)
-//                .overlay{
-//                    RoundedRectangle(cornerRadius: 30)
-//                        .stroke(lineWidth: 5)
-//                        .fill(Color.black)
-//
-//                }
-            
-//        }.background(ColorUtility.backgroundary)
-
-        
     }
 }
 

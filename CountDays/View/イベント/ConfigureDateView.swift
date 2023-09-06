@@ -25,6 +25,7 @@ struct ConfigureDateView: View {
     @State var selectingHour: Int = 0
     @State var selectingMinute: Int = 0
     @State var selectedPopup = false
+    @State private var buttonPressd = false
     
     init(eventType: Binding<EventType>, frequentType: Binding<FrequentType>, dateViewModel: StateObject<DateViewModel>, weeklyDate: Binding<DayOfWeek>) {
         let font = UIFont.systemFont(ofSize: 20)
@@ -105,6 +106,7 @@ struct ConfigureDateView: View {
                                         }
                                     }
                                 }
+                                .foregroundColor(.white)
                                 .tint(.white)
                                 .padding()
                             }
@@ -328,7 +330,7 @@ struct ConfigureDateView: View {
             
             /// 設定を保存するところ
             Button {
-                
+                HapticFeedbackManager.shared.play(.impact(.medium))
                 if selectedFrequentType == .weekly {
                     selectingDate = CalendarViewModel.getDateAtWeekly(dayAtWeek: selectingWeeklyDate)
                     selectedWeeklyDate = selectingWeeklyDate
@@ -339,17 +341,24 @@ struct ConfigureDateView: View {
                     dateViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
                 }
                 
-                
-                
                 dismiss()
             } label: {
                 Image(systemName: "checkmark")
+                    .tint(.white)
+                    .bold(buttonPressd)
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 20).fill(ColorUtility.highlighted))
-                    .tint(.white)
+                    
                     .padding()
+                    .animation(.easeIn, value: buttonPressd)
             }
-            
+            .buttonStyle(BounceButtonStyle())
+            .onLongPressGesture {
+                print("Long pressed")
+            } onPressingChanged: { value in
+                print(value)
+                buttonPressd = value
+            }
         }
         .background(ColorUtility.primary)
     }
