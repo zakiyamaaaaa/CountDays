@@ -157,7 +157,7 @@ struct MainView: View {
     
     private var headerView: some View {
         HStack {
-            Text("ようこそ")
+            Text(greetingString())
                 .font(.system(size: 35,weight: .bold))
                 .padding()
             Spacer()
@@ -174,6 +174,15 @@ struct MainView: View {
         .foregroundColor(.white)
         .frame(height: 80)
         .background(ColorUtility.primary)
+    }
+    
+    private func greetingString() -> String {
+        if counter == 1 {
+            return "はじめまして"
+        }
+        
+        let greetingList = ["ようこそ", "こんにちは", "調子どう？", "Thanks", "🫶"]
+        return greetingList.shuffled().first!
     }
 }
 
