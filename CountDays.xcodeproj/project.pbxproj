@@ -72,6 +72,8 @@
 		39FFFA6C2AA7A783001AE0D7 /* VersionUpCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA6B2AA7A783001AE0D7 /* VersionUpCheck.swift */; };
 		39FFFA6F2AA84656001AE0D7 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA6E2AA84656001AE0D7 /* Extension.swift */; };
 		39FFFA702AA8479F001AE0D7 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA6E2AA84656001AE0D7 /* Extension.swift */; };
+		39FFFA722AA86667001AE0D7 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA712AA86667001AE0D7 /* WelcomeView.swift */; };
+		39FFFA742AA872B2001AE0D7 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA732AA872B2001AE0D7 /* AppStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +174,8 @@
 		39FFFA692AA74BF1001AE0D7 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		39FFFA6B2AA7A783001AE0D7 /* VersionUpCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionUpCheck.swift; sourceTree = "<group>"; };
 		39FFFA6E2AA84656001AE0D7 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		39FFFA712AA86667001AE0D7 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		39FFFA732AA872B2001AE0D7 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,7 +293,6 @@
 		394A5C9F2A9713A6006A7232 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				39FFFA6D2AA84645001AE0D7 /* Extension */,
 				394A5CD62A971566006A7232 /* MainView.swift */,
 				394A5CE52A9716B2006A7232 /* イベント設定 */,
 				394A5CE42A9716A1006A7232 /* 設定 */,
@@ -297,6 +300,7 @@
 				394A5CBE2A971528006A7232 /* EventCardView.swift */,
 				39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */,
 				39FFFA632AA07919001AE0D7 /* UpgradeView.swift */,
+				39FFFA712AA86667001AE0D7 /* WelcomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,7 +323,9 @@
 			children = (
 				394A5CA62A9713C3006A7232 /* Color.swift */,
 				394A5CA32A9713C3006A7232 /* ColorUtility.swift */,
+				39FFFA732AA872B2001AE0D7 /* AppStorage.swift */,
 				394A5CA72A9713C3006A7232 /* Enum.swift */,
+				39FFFA6E2AA84656001AE0D7 /* Extension.swift */,
 				394A5CA22A9713C3006A7232 /* EventCard.swift */,
 				394A5CA52A9713C3006A7232 /* NotificationCenter.swift */,
 				394A5CA42A9713C3006A7232 /* RealmModel.swift */,
@@ -373,14 +379,6 @@
 				394A5CFA2A971754006A7232 /* Info.plist */,
 			);
 			path = CountDaysWidget;
-			sourceTree = "<group>";
-		};
-		39FFFA6D2AA84645001AE0D7 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				39FFFA6E2AA84656001AE0D7 /* Extension.swift */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -570,6 +568,7 @@
 				394A5CA92A9713C3006A7232 /* ColorUtility.swift in Sources */,
 				394A5CBB2A97151A006A7232 /* RealmViewModel.swift in Sources */,
 				394A5CC02A971528006A7232 /* EventCardView.swift in Sources */,
+				39FFFA722AA86667001AE0D7 /* WelcomeView.swift in Sources */,
 				394A5CC62A971535006A7232 /* SettingView.swift in Sources */,
 				394A5CC72A971535006A7232 /* MailView.swift in Sources */,
 				394A5CC82A971535006A7232 /* TermView.swift in Sources */,
@@ -577,6 +576,7 @@
 				394A5CCF2A97153D006A7232 /* CalendarView.swift in Sources */,
 				394A5CAB2A9713C3006A7232 /* NotificationCenter.swift in Sources */,
 				394A5CE12A971567006A7232 /* CalendarView2.swift in Sources */,
+				39FFFA742AA872B2001AE0D7 /* AppStorage.swift in Sources */,
 				39FFFA612AA04FFB001AE0D7 /* HeaderView.swift in Sources */,
 				394A5CDF2A971567006A7232 /* AddEventButton.swift in Sources */,
 				394A5CAD2A9713C3006A7232 /* Enum.swift in Sources */,

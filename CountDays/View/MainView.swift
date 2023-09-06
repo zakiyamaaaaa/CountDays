@@ -11,12 +11,14 @@ import RealmSwift
 import StoreKit
 
 struct MainView: View {
+    @AppStorage(AppStorageKey.launchTimes.rawValue) var counter = 0
     @StateObject var store: Store = Store()
     @State private var isShow = false
     @State private var isShowConfigured = false
     @State private var isShowUpgradeAlert = false
     @State private var isShowUpgradeView = false
     @State private var isSettingButton = false
+    @State private var isShowWelcomeView = false
     @State private var product: Product?
     @State private var isPurchased = false
 //    @StateObject var mock = MockStore()
@@ -122,12 +124,24 @@ struct MainView: View {
                         }
                         
                     }
+                    
                 }
             }
+            .onAppear {
+                if counter == 0 {
+                    isShowWelcomeView.toggle()
+                }
+                counter += 1
+            }
+            .sheet(isPresented: $isShowWelcomeView, content: {
+                WelcomeView()
+            })
             .background(ColorUtility.backgroundary)
             
             Spacer()
             
+            #if DEBUG
+            Text("Launch Time:\(counter)")
             Button {
                 
                 print("notification request")
@@ -136,7 +150,7 @@ struct MainView: View {
             } label: {
                 Text("Notification")
             }
-            
+            #endif
         }
         .background(ColorUtility.backgroundary)
     }
