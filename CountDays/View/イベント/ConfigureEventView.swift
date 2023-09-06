@@ -191,6 +191,7 @@ struct ConfigureEventView: View {
             } label: {
                 Image(systemName: "calendar")
                     .font(.system(size: 23))
+                    .bold(isFirstButtonSelected)
                     .scaleEffect(isFirstButtonSelected ? 1.1 : 1.0)
                     .animation(.interpolatingSpring(stiffness: 200, damping: 5, initialVelocity: 1), value: isFirstButtonSelected)
             }
@@ -213,6 +214,7 @@ struct ConfigureEventView: View {
             } label: {
                 Image(systemName: "wand.and.stars.inverse")
                     .font(.system(size: 23))
+                    .bold(isSecondButtonSelected)
                     .scaleEffect(isSecondButtonSelected ? 1.1 : 1.0)
                     .animation(.interpolatingSpring(stiffness: 200, damping: 5, initialVelocity: 1), value: isSecondButtonSelected)
             }
@@ -231,6 +233,7 @@ struct ConfigureEventView: View {
             } label: {
                 Image(systemName: "paintbrush.fill")
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                    .bold(isThirdButtonSelected)
                     .font(.system(size: 23))
                     .scaleEffect(isThirdButtonSelected ? 1.1 : 1.0)
                     .animation(.interpolatingSpring(stiffness: 200, damping: 5, initialVelocity: 1), value: isThirdButtonSelected)
@@ -251,6 +254,7 @@ struct ConfigureEventView: View {
                 }
             } label: {
                 Image(systemName: "textformat")
+                    .bold(isFourthButtonSelected)
                     .font(.system(size: 23))
                     .scaleEffect(isFourthButtonSelected ? 1.1 : 1.0)
                     .animation(.interpolatingSpring(stiffness: 200, damping: 5, initialVelocity: 1), value: isFourthButtonSelected)
