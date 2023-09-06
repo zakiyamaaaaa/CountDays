@@ -15,17 +15,16 @@ struct SettingView: View {
     @State private var isInquiry = false
     @State private var isDeleteAllEvent = false
     @State private var showUpgradeView = false
-    
-    init() {
-        
-    }
  
     var body: some View {
         settingView
+            
     }
     
     private var settingView: some View {
+        VStack {
         NavigationStack {
+            
             List {
                 Section {
                     HStack {
@@ -63,6 +62,83 @@ struct SettingView: View {
                 
                 Section {
                     HStack {
+                        Image(systemName: "paperplane.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                        Text("お問い合わせ")
+                            .font(.system(size: 20))
+                        
+                        Spacer()
+                    }
+                    .listRowBackground(ColorUtility.secondary)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        #if targetEnvironment(simulator)
+                        #else
+                            isInquiry.toggle()
+                        #endif
+                    }
+                }
+                let url = URL(string: "hogehoge.com")!
+                Section("共有+プライバシー") {
+                    HStack {
+                        ShareLink(item: url) {
+                            HStack {
+                                Image(systemName: "square.and.arrow.up.circle.fill")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                Text("アプリを共有する")
+                                    .font(.system(size: 20))
+                            }
+                        }
+                        Spacer()
+                    }
+                    .listRowBackground(ColorUtility.secondary)
+                    
+                    HStack {
+                        Image(systemName: "lock.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                        Text("プライバシーポリシー")
+                            .font(.system(size: 20))
+                        Spacer()
+                    }
+                    .listRowBackground(ColorUtility.secondary)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        isPrivacyView.toggle()
+                    }
+                    
+                    HStack {
+                        Image(systemName: "doc.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            
+                        Text("利用規約")
+                            .font(.system(size: 20))
+                            
+                        Spacer()
+                    }
+                    
+                    .foregroundColor(.white)
+                    .listRowBackground(ColorUtility.secondary)
+                    .ignoresSafeArea(.all)
+                    .onTapGesture {
+                        isTermView.toggle()
+                    }
+                    
+                }.sheet(isPresented: $isTermView) {
+                    TermView()
+                }.sheet(isPresented: $isPrivacyView) {
+                    PrivacyPolicyView()
+                }.sheet(isPresented: $isInquiry) {
+                    MailView()
+                }.sheet(isPresented: $showUpgradeView) {
+                    UpgradeView()
+                }
+                
+                Section {
+                    HStack {
                         Image(systemName: "trash.circle.fill")
                             .resizable()
                             .frame(width: 40, height: 40)
@@ -91,72 +167,8 @@ struct SettingView: View {
                         Text("OK")
                     }
                 }
-                
-                Section {
-                    HStack {
-                        Image(systemName: "paperplane.circle.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                        Text("お問い合わせ")
-                            .font(.system(size: 20))
-                        
-                        Spacer()
-                    }
-                    .listRowBackground(ColorUtility.secondary)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        #if targetEnvironment(simulator)
-                        #else
-                            isInquiry.toggle()
-                        #endif
-                    }
-                }
-                
-                Section("プライバシー") {
-                    
-                    HStack {
-                        Image(systemName: "lock.circle.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                        Text("プライバシーポリシー")
-                            .font(.system(size: 20))
-                        Spacer()
-                    }
-                    .listRowBackground(ColorUtility.secondary)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        isPrivacyView.toggle()
-                    }
-                    
-                    HStack {
-                        Image(systemName: "doc.circle.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            
-                        Text("利用規約")
-                            .font(.system(size: 20))
-                            
-                        Spacer()
-                    }
-                    .foregroundColor(.white)
-                    .listRowBackground(ColorUtility.secondary)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        isTermView.toggle()
-                    }
-                    
-                    
-                }.sheet(isPresented: $isTermView) {
-                    TermView()
-                }.sheet(isPresented: $isPrivacyView) {
-                    PrivacyPolicyView()
-                }.sheet(isPresented: $isInquiry) {
-                    MailView()
-                }.sheet(isPresented: $showUpgradeView) {
-                    UpgradeView()
-                }
             }
-            .padding()
+            .padding(.top, 10)
             .foregroundColor(.white)
             .scrollContentBackground(.hidden)
             .background(ColorUtility.backgroundary)
@@ -177,6 +189,7 @@ struct SettingView: View {
                     allowNotification = true
                 }
             }
+        }
         }
     }
 }

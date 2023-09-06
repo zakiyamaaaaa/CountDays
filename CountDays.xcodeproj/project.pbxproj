@@ -345,8 +345,8 @@
 		394A5CE42A9716A1006A7232 /* 設定 */ = {
 			isa = PBXGroup;
 			children = (
-				394A5CC52A971535006A7232 /* PrivacyPolicyView.swift */,
 				394A5CC22A971535006A7232 /* SettingView.swift */,
+				394A5CC52A971535006A7232 /* PrivacyPolicyView.swift */,
 				394A5CC42A971535006A7232 /* TermView.swift */,
 				394A5CC32A971535006A7232 /* MailView.swift */,
 			);
