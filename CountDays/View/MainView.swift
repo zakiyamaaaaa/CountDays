@@ -25,7 +25,7 @@ struct MainView: View {
     @StateObject var realmMock = RealmMockStore()
 //    @StateObject var defaultEvent = EventCardViewModel.defaultStatus
     @EnvironmentObject var viewModel: RealmViewModel
-    
+    @State private var scale = false
     let dateViewModel = DateViewModel()
     let columns: [GridItem] = [
         GridItem(.flexible(minimum: 30)),
@@ -46,7 +46,6 @@ struct MainView: View {
         
         return image
     }
-    
     var body: some View {
         VStack {
             headerView
@@ -77,25 +76,40 @@ struct MainView: View {
 
                             } else if i == 0 {
                                 AddEventView()
-                                    .onTapGesture {
-                                        /// 課金ユーザーかどうかを判定し、課金してたら２個以上OK。無課金は１個まで
-                                        
-                                        #if DEBUG
-                                        isShow.toggle()
-                                        selectedEvent = EventCardViewModel.defaultStatus
-                                        #else
-                                        if self.isPurchased {
-                                            /// 課金ユーザー
-                                            isShow.toggle()
-                                            selectedEvent = EventCardViewModel.defaultStatus
-                                        } else {
-                                            
-                                            ///　無課金
-                                            isShowUpgradeAlert.toggle()
-                                        }
-                                        #endif
-                                }
-                                    
+                                    .scaleEffect(scale ? 1.1: 1.0)
+                                    .simultaneousGesture(
+                                            DragGesture(minimumDistance: 0)
+                                                .onChanged { _ in
+                                                    withAnimation {
+                                                        scale = true
+                                                    }
+                                                    
+                                                }
+                                                
+                                                .onEnded { _ in
+                                                    HapticFeedbackManager.shared.play(.impact(.medium))
+                                                    withAnimation {
+                                                        scale = false
+                                                    }
+                                                    
+                                                    /// 課金ユーザーかどうかを判定し、課金してたら２個以上OK。無課金は１個まで
+                                                    
+                                                    #if DEBUG
+                                                    isShow.toggle()
+                                                    selectedEvent = EventCardViewModel.defaultStatus
+                                                    #else
+                                                    if self.isPurchased {
+                                                        /// 課金ユーザー
+                                                        isShow.toggle()
+                                                        selectedEvent = EventCardViewModel.defaultStatus
+                                                    } else {
+                                                        
+                                                        ///　無課金
+                                                        isShowUpgradeAlert.toggle()
+                                                    }
+                                                    #endif
+                                                }
+                                        )
                             }
                             
                         }

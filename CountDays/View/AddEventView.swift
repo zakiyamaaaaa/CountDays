@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddEventView: View {
     @State private var isPresented = false
+    @State private var scale = false
     let width = UIScreen.main.bounds.width
     var body: some View {
         ZStack {
@@ -24,6 +25,7 @@ struct AddEventView: View {
             }
             .frame(width: width*2/5, height: width*1/3)
         }
+        
     }
 }
 

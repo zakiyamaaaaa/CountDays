@@ -42,7 +42,7 @@ struct EventCardView: View {
                 
                 switch style {
                 case .standard:
-                    if let image = image {
+                    if backgroundColor == .none, let image = image {
                         Image(uiImage: image)
                             .resizable()
                             .scaledToFill()

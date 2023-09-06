@@ -27,6 +27,7 @@ struct ConfigureEventView: View {
     @State private var isFourthButtonSelected = false
     @State private var focusButton = false
     @State var selectedStyleIndex = 0
+    
     @State var selectedBackgroundColor: BackgroundColor = .primary
     @State private var selectedBackgroundStyle: BackgroundStyle = .simple
 //    @State private var selectedBackgroundImage: Image
@@ -54,7 +55,10 @@ struct ConfigureEventView: View {
         GridItem(.flexible()),
         GridItem(.flexible()),
     ]
+    /// 選択しているスタイル
+    @State private var selectingBackgroundStyle: BackgroundStyle = .simple
     @State private var selectedImage: UIImage? = nil
+    @State private var selectingImage: UIImage?
     @State private var selectedPhoto: PhotosPickerItem? = nil
     @StateObject var dateViewModel = DateViewModel()
     @StateObject var imageViewModel = ImageModel()
@@ -66,6 +70,14 @@ struct ConfigureEventView: View {
     private let txtColorList: [TextColor] = TextColor.allCases
     @State var positionX = -10
      var positionY = 0
+    
+//    func checkImage() {
+//        if selectingBackgroundStyle == .image {
+//            selectedImage = selectingImage
+//        } else if selectingBackgroundStyle == .image {
+//            selectedImage = nil
+//        }
+//    }
     
     var body: some View {
         NavigationStack {
@@ -447,7 +459,7 @@ struct ConfigureEventView: View {
             TabView(selection: $selectedStyleIndex) {
                 let date = dateViewModel.selectedDate
                 VStack {
-                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .standard, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, frequentType: frequentType, eventType: eventType)
+                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .standard, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, frequentType: frequentType, eventType: eventType)
                         
                         
                     Button {
@@ -509,6 +521,7 @@ struct ConfigureEventView: View {
                                     )
                                     .onTapGesture(perform: {
                                         selectedBackgroundColor = item
+                                        selectingBackgroundStyle = .simple
                                         print(color)
                                     })
                                     .padding()
@@ -530,7 +543,7 @@ struct ConfigureEventView: View {
                                 .overlay(content: {
                                     RoundedRectangle(cornerRadius: 20)
                                         .stroke(lineWidth: 5)
-                                        .fill(.red)
+                                        .fill(selectedBackgroundColor == .none ? .red : .clear)
                                 })
                                 .cornerRadius(20)
                                 .overlay(alignment: .center) {
@@ -580,11 +593,6 @@ struct ConfigureEventView: View {
                                             .symbolRenderingMode(.multicolor)
                                             .font(.system(size: 30))
                                             .foregroundColor(.blue)
-                                        
-//                                        if self.isPurchased {
-//                                        if isPurchased {
-                                            
-                                    
                                 }
                                 if isPurchased {
                                     PhotosPicker(selection: $selectedPhoto, label: {
