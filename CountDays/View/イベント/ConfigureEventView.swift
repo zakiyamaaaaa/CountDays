@@ -474,8 +474,11 @@ struct ConfigureEventView: View {
                         .presentationDetents([.medium])
                 }
                 
-                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .circle, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor, showSecond: showSecond, frequentType: frequentType)
+                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .circle, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showSecond: showSecond, frequentType: frequentType)
                     .tag(1)
+                
+                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .calendar, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showSecond: showSecond, frequentType: frequentType)
+                    .tag(2)
                 
             }
             .onChange(of: selectedStyleIndex, perform: { newValue in

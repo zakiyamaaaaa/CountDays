@@ -107,39 +107,51 @@ struct EventCardView: View {
             let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
             let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
             let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
-            Text(title)
-                .foregroundColor(textColor.color)
             ZStack {
-                
-                Circle()
-                    .stroke(
-                        Color.pink.opacity(0.5),
-                        lineWidth: 10
-                    )
-                Circle()
-                    .trim(from: 0, to: 0.25)
-                    .stroke(
-                        Color.pink,
-                        style: StrokeStyle(lineWidth: 10, lineCap: .round)
-                    )
-                
-                VStack {
-                    if second < 0 && eventType == .countdown && frequentType == .never {
-                        Text("終了")
-                        
-                        Image(systemName: "checkmark.circle.fill")
-                    } else {
-                        Text("\(day)")
-                            .font(.system(size: 30))
-                            .fontWeight(.bold)
-                        Text("日")
-                    }
+                if backgroundColor == .none, let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 150, height: 150)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
-                .rotationEffect(.degrees(90))
-                .foregroundColor(textColor.color)
+                VStack {
+                    Text(title)
+                        .foregroundColor(textColor.color)
+                    ZStack {
+                        
+                        
+                        Circle()
+                            .stroke(
+                                Color.pink.opacity(0.5),
+                                lineWidth: 10
+                            )
+                        Circle()
+                            .trim(from: 0, to: 0.25)
+                            .stroke(
+                                Color.pink,
+                                style: StrokeStyle(lineWidth: 10, lineCap: .round)
+                            )
+                        
+                        VStack {
+                            if second < 0 && eventType == .countdown && frequentType == .never {
+                                Text("終了")
+                                
+                                Image(systemName: "checkmark.circle.fill")
+                            } else {
+                                Text("\(day)")
+                                    .font(.system(size: 30))
+                                    .fontWeight(.bold)
+                                Text("日")
+                            }
+                        }
+                        .rotationEffect(.degrees(90))
+                        .foregroundColor(textColor.color)
+                    }
+                    .frame(width: width/5)
+                    .rotationEffect(.degrees(-90))
+                }
             }
-            .frame(width: width/5)
-            .rotationEffect(.degrees(-90))
         }
     }
     
@@ -161,6 +173,15 @@ struct EventCardView: View {
                 Rectangle()
                     .foregroundColor(.white)
                     .frame(width: 150, height: 130)
+                
+                if backgroundColor == .none, let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 150, height: 150)
+                        .clipShape(Rectangle())
+                }
+                
                 VStack {
                     if second < 0 && eventType == .countdown && frequentType == .never {
                         Text("終了")
