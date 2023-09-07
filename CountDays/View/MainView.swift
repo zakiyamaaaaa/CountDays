@@ -60,10 +60,6 @@ struct MainView: View {
                                 let card = realmCards[i - 1]
                                 
                                 let image = createImage(cardImage: card)
-//                                Image(uiImage: UIImage(data: card.imageData! as Data)!)
-                                
-//                                print("IMAGE")
-//                                print(image)
                                 EventCardView(title: card.title, date: card.date, style: card.displayStyle, backgroundColor: card.backgroundColor, image: image, textColor: card.textColor, frequentType: card.frequentType)
                                     .onTapGesture {
                                         isShowConfigured.toggle()
@@ -72,10 +68,26 @@ struct MainView: View {
                                         let _ = print(i)
                                         let _ = print(selectedEvent.title)
                                     }
+                                    .contextMenu {
+                                        let cardView = EventCardView(title: card.title, date: card.date, style: card.displayStyle, backgroundColor: card.backgroundColor, image: image, textColor: card.textColor, frequentType: card.frequentType)
+                                        let render = ImageRenderer(content: cardView)
+                                        if let imageSnap = render.uiImage {
+                                            ShareLink(item: Image(uiImage: imageSnap),
+                                                      preview: SharePreview("CountDays", image: Image(systemName: "square.and.arrow.up")),
+                                                      label: {
+                                                HStack {
+                                                    Image(systemName: "square.and.arrow.up")
+                                                    Text("MyShareLabel")
+                                                }
+                                            })
+                                        }
+
+                                    }
                                     
 
                             } else if i == 0 {
                                 AddEventView()
+                                    .padding()
                                     .scaleEffect(scale ? 1.1: 1.0)
                                     .simultaneousGesture(
                                             DragGesture(minimumDistance: 0)
@@ -110,6 +122,16 @@ struct MainView: View {
                                                     #endif
                                                 }
                                         )
+                                    .contextMenu {
+                                        ShareLink(item: "Hello",
+                                                  preview: SharePreview("CountDays", image: Image(systemName: "square.and.arrow.up")),
+                                                  label: {
+                                            HStack {
+                                                Image(systemName: "square.and.arrow.up")
+                                                Text("MyShareLabel")
+                                            }
+                                        })
+                                    }
                             }
                             
                         }
@@ -140,7 +162,6 @@ struct MainView: View {
                         }
                         
                     }
-                    
                 }
             }
             .onAppear {

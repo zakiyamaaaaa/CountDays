@@ -15,6 +15,7 @@ struct TestView2: View {
     var dateViewModel = DateViewModel()
     @State private var selectedImage: UIImage? = nil
     @State private var selectedPhoto: PhotosPickerItem? = nil
+    @State var image: UIImage?
     
     var body: some View {
         VStack {
@@ -74,13 +75,30 @@ struct TestView2: View {
                     }
                 }
             Button {
+                let render = ImageRenderer(content: imageSampleView)
+                if let image = render.uiImage {
+                    self.image = image
+                }
                 
             } label: {
-                Text("保存する")
+                Text("複製")
             }
-
             
+            if let image {
+                Image(uiImage: image)
+            }
         }
+    }
+    
+    private var imageSampleView: some View {
+        ZStack {
+            Rectangle()
+                .frame(width: 100, height: 100)
+                .foregroundColor(.red)
+            Image(systemName: "lock.fill")
+                .resizable()
+                .frame(width: 100, height: 100)
+        }.cornerRadius(20)
     }
 }
 
