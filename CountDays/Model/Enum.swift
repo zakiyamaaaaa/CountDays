@@ -12,6 +12,7 @@ import SwiftUI
 enum EventDisplayStyle: Int, CaseIterable, PersistableEnum {
     case standard = 0
     case circle = 1
+    case calendar = 2
 }
 
 enum EventType: String, CaseIterable, Identifiable, PersistableEnum {

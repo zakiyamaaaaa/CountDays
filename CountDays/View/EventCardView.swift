@@ -35,104 +35,159 @@ struct EventCardView: View {
                     .foregroundColor(backgroundColor.color)
                     .frame(width: 150, height: 150)
                     .cornerRadius(30)
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 30)
-//                            .stroke(.white, lineWidth: 3)
-//                    )
                 
                 switch style {
                 case .standard:
-                    if backgroundColor == .none, let image = image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 150, height: 150)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                            
-//                            .foregroundColor(.mint)
-                    }
-                    
-                    
-                    VStack(alignment: .leading) {
-                        
-                        
-                        Text(title)
-                            .padding(.vertical, 10)
-                        Spacer()
-                        
-                        if second < 0 && eventType == .countdown && frequentType == .never {
-                            HStackLayout(alignment: .center) {
-                                Text("終了")
-                                
-                                Image(systemName: "checkmark.circle.fill")
-                            }
-                            Spacer()
-                        } else {
-                            Text("\(day)日")
-                                .font(.system(size: 30))
-                            HStack() {
-                                
-                                Text("\(hour)時間")
-                                    .isHidden(hidden: !showHour)
-                                Text("\(minute)分")
-                                    .isHidden(hidden: !showMinute)
-                                
-                            }
-                            
-                            Text("\(second)秒")
-                                .isHidden(hidden: !showSecond)
-                        }
-                        
-                    }
-                    .foregroundColor(textColor.color)
-                    .frame(width: width*1/3, height: width*1/3)
-                    .padding()
-                    
-                    
+                    standardView
                 case .circle:
-                    VStack {
-                        Text(title)
-                            .foregroundColor(textColor.color)
-                        ZStack {
-                            
-                            Circle()
-                                .stroke(
-                                    Color.pink.opacity(0.5),
-                                    lineWidth: 10
-                                )
-                            Circle()
-                                .trim(from: 0, to: 0.25)
-                                .stroke(
-                                    Color.pink,
-                                    style: StrokeStyle(lineWidth: 10, lineCap: .round)
-                                )
-                            
-                            VStack {
-                                if second < 0 && eventType == .countdown && frequentType == .never {
-                                    Text("終了")
-                                    
-                                    Image(systemName: "checkmark.circle.fill")
-                                } else {
-                                    Text("\(day)")
-                                        .font(.system(size: 30))
-                                        .fontWeight(.bold)
-                                    Text("日")
-                                }
-                            }
-                            .rotationEffect(.degrees(90))
-                            .foregroundColor(textColor.color)
-                        }
-                        .frame(width: width/5)
-                        .rotationEffect(.degrees(-90))
+                    circleView
+                case .calendar:
+                    calendarView
+                }
+            }
+        }
+    }
+    
+    private var standardView: some View {
+        ZStack {
+            let day = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).days
+            let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
+            let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
+            let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
+
+            if backgroundColor == .none, let image = image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 150, height: 150)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+            }
+
+
+            VStack(alignment: .leading) {
+
+
+                Text(title)
+                    .padding(.vertical, 10)
+                Spacer()
+
+                if second < 0 && eventType == .countdown && frequentType == .never {
+                    HStackLayout(alignment: .center) {
+                        Text("終了")
+
+                        Image(systemName: "checkmark.circle.fill")
+                    }
+                    Spacer()
+                } else {
+                    Text("\(day)日")
+                        .font(.system(size: 30))
+                    HStack() {
+
+                        Text("\(hour)時間")
+                            .isHidden(hidden: !showHour)
+                        Text("\(minute)分")
+                            .isHidden(hidden: !showMinute)
+
+                    }
+
+                    Text("\(second)秒")
+                        .isHidden(hidden: !showSecond)
+                }
+
+            }
+            .foregroundColor(textColor.color)
+            .frame(width: width*1/3, height: width*1/3)
+            .padding()
+        }
+    }
+    
+    private var circleView: some View {
+        VStack {
+            let day = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).days
+            let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
+            let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
+            let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
+            Text(title)
+                .foregroundColor(textColor.color)
+            ZStack {
+                
+                Circle()
+                    .stroke(
+                        Color.pink.opacity(0.5),
+                        lineWidth: 10
+                    )
+                Circle()
+                    .trim(from: 0, to: 0.25)
+                    .stroke(
+                        Color.pink,
+                        style: StrokeStyle(lineWidth: 10, lineCap: .round)
+                    )
+                
+                VStack {
+                    if second < 0 && eventType == .countdown && frequentType == .never {
+                        Text("終了")
+                        
+                        Image(systemName: "checkmark.circle.fill")
+                    } else {
+                        Text("\(day)")
+                            .font(.system(size: 30))
+                            .fontWeight(.bold)
+                        Text("日")
+                    }
+                }
+                .rotationEffect(.degrees(90))
+                .foregroundColor(textColor.color)
+            }
+            .frame(width: width/5)
+            .rotationEffect(.degrees(-90))
+        }
+    }
+    
+    private var calendarView: some View {
+        VStack(spacing: 0) {
+            let day = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).days
+            let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
+            let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
+            let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.red)
+                    .frame(width: 152, height: 25)
+                Text(title)
+                    .foregroundColor(textColor.color)
+            }
+            
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.white)
+                    .frame(width: 150, height: 130)
+                VStack {
+                    if second < 0 && eventType == .countdown && frequentType == .never {
+                        Text("終了")
+                        
+                        Image(systemName: "checkmark.circle.fill")
+                    } else {
+                        Text("\(day)")
+                            .font(.system(size: 50))
+                            .fontWeight(.bold)
+                        Text("日")
+                            .font(.system(size: 20))
                     }
                 }
             }
         }
+        .compositingGroup()
+        .shadow(radius: 3, x:3, y:5)
     }
 }
 
 struct EventCardView_Previews: PreviewProvider {
     static var previews: some View {
+        EventCardView(title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .calendar, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
+        
         EventCardView(title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .standard, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
+        
+        EventCardView(title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .circle, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
+        
     }
 }
