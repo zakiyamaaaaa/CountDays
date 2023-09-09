@@ -27,8 +27,6 @@ struct ConfigureEventView: View {
     @State private var isFourthButtonSelected = false
     @State private var focusButton = false
     @State var selectedStyleIndex = 0
-    
-    @State var selectedBackgroundColor: BackgroundColor = .primary
     @State private var selectedBackgroundStyle: BackgroundStyle = .simple
 //    @State private var selectedBackgroundImage: Image
     @State var selectedTextColor: TextColor = .white
@@ -57,8 +55,14 @@ struct ConfigureEventView: View {
     ]
     /// 選択しているスタイル
     @State private var selectingBackgroundStyle: BackgroundStyle = .simple
-    @State private var selectedImage: UIImage? = nil
+    @State private var selectedImage: UIImage?
     @State private var selectingImage: UIImage?
+    @State var selectedBackgroundColor: BackgroundColor = .primary {
+        didSet {
+            HapticFeedbackManager.shared.play(.impact(.light))
+        }
+    }
+    
     @State private var selectedPhoto: PhotosPickerItem? = nil
     @StateObject var dateViewModel = DateViewModel()
     @StateObject var imageViewModel = ImageModel()
@@ -68,16 +72,6 @@ struct ConfigureEventView: View {
     var selectedStyle: EventDisplayStyle = .standard
     private let bgColorList: [BackgroundColor] = BackgroundColor.allCases
     private let txtColorList: [TextColor] = TextColor.allCases
-    @State var positionX = -10
-     var positionY = 0
-    
-//    func checkImage() {
-//        if selectingBackgroundStyle == .image {
-//            selectedImage = selectingImage
-//        } else if selectingBackgroundStyle == .image {
-//            selectedImage = nil
-//        }
-//    }
     
     var body: some View {
         NavigationStack {
@@ -180,11 +174,15 @@ struct ConfigureEventView: View {
         .onAppear{
         
             print(event.date)
+            eventTitle = event.title
             eventDate = event.date
             dateViewModel.selectedDate = event.date
             showHour = event.displayHour
             showMinute = event.displayMinute
             showSecond = event.displaySecond
+            selectedBackgroundColor = event.backgroundColor
+            selectedTextColor = event.textColor
+            
         }
     }
     @State private var bounce = false
@@ -327,7 +325,7 @@ struct ConfigureEventView: View {
         .frame(height: 80)
         .background(ColorUtility.primary)
     }
-    
+    @State private var showCropView = false
     /// イベントタイトル名編集もしくは日付を設定するボタンを表示するビュー
     private var eventTitleView: some View {
         VStack {
@@ -497,8 +495,8 @@ struct ConfigureEventView: View {
         case simple = "シンプル"
         case image = "画像"
     }
-    
-    /// 背景色を編集するビュー
+    @State private var photosItem: PhotosPickerItem?
+    /// MARK: - 背景色を編集するビュー
     private var backgroundColorView: some View {
         VStack {
             
@@ -538,54 +536,97 @@ struct ConfigureEventView: View {
                 ScrollView(showsIndicators: false) {
                     ZStack {
                         if let image = selectedImage {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFill()
-                                .clipShape(RoundedRectangle(cornerRadius: 20))
-                                .frame(width: 150, height: 150)
-                                .overlay(content: {
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(lineWidth: 5)
-                                        .fill(selectedBackgroundColor == .none ? .red : .clear)
-                                })
-                                .cornerRadius(20)
-                                .overlay(alignment: .center) {
-                                    PhotosPicker(selection: $selectedPhoto, label: {
-                                        Rectangle()
-                                            .frame(width: 150, height: 150)
-                                        .foregroundColor(.clear)
-//                                        Button {
-//
-//                                        } label: {
-//                                            Text("BUTTON")
-//                                        }
-//                                        .frame(width: 150, height: 150)
-//                                        .background(.orange)
-//                                        .foregroundColor(.orange)
-
+                            VStack {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    .frame(width: 150, height: 150)
+                                    .overlay(content: {
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(lineWidth: 5)
+                                            .fill(selectedBackgroundColor == .none ? .red : .clear)
                                     })
-                                    .onChange(of: selectedPhoto) { pickedItem in
-                                        Task {
-                                            if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
-                                                selectedImage = uiImage
+                                    .cornerRadius(20)
+                                    .onTapGesture {
+                                        showCropView.toggle()
+//                                        if selectedBackgroundColor != .none {
+//                                            selectedBackgroundColor = .none
+//                                            selectingImage = selectedImage
+//                                            showCropView.toggle()
+//                                        } else {
+//                                            showCropView.toggle()
+//                                        }
+                                    }
+                                    .photosPicker(isPresented: $show, selection: $photosItem)
+                                    .onChange(of: photosItem) { newValue in
+                                        if let newValue {
+                                            Task {
+                                                if let imageData = try? await newValue.loadTransferable(type: Data.self), let image = UIImage(data: imageData) {
+                                                    await MainActor.run(body: {
+                                                        selectingImage = image
+                                                        showCropView.toggle()
+                                                    })
+                                                }
                                             }
                                         }
                                     }
+                                
+                                Button {
+                                    show.toggle()
+                                } label: {
+                                    Text("画像を変更")
+                                        .fontWeight(.bold)
+                                        .frame(width: 130, height: 60)
+                                        .background(.blue)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(30)
                                 }
+                                .padding()
+                            }
+
+//                                .photosPicker(isPresented: $show, selection: $photosItem)
+//                                .onChange(of: photosItem) { newValue in
+//                                    if let newValue {
+//                                        Task {
+//                                            if let imageData = try? await newValue.loadTransferable(type: Data.self), let image = UIImage(data: imageData) {
+//                                                await MainActor.run(body: {
+//                                                    selectingImage = image
+//                                                    showCropView.toggle()
+//                                                })
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                                .overlay(alignment: .center) {
+//                                    PhotosPicker(selection: $selectedPhoto, label: {
+//                                        Rectangle()
+//                                            .frame(width: 150, height: 150)
+//                                        .foregroundColor(.clear)
+////                                        Button {
+////
+////                                        } label: {
+////                                            Text("BUTTON")
+////                                        }
+////                                        .frame(width: 150, height: 150)
+////                                        .background(.orange)
+////                                        .foregroundColor(.orange)
+//
+//                                    })
+//                                    .onChange(of: selectedPhoto) { pickedItem in
+//                                        Task {
+//                                            if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
+//                                                selectedImage = uiImage
+//                                            }
+//                                        }
+//                                    }
+//                                }
                            
                             }  else {
                                 Rectangle()
                                     .cornerRadius(20)
                                     .foregroundColor(.gray)
                                     .frame(width: 150, height: 150)
-                                    .onChange(of: selectedPhoto) { pickedItem in
-                                        Task {
-                                            if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
-                                                selectedImage = uiImage
-                                                selectedBackgroundColor = .none
-                                            }
-                                        }
-                                    }
                                     .overlay(alignment: .center) {
                                         Image(systemName: "photo.on.rectangle.angled")
                                             .resizable()
@@ -596,14 +637,35 @@ struct ConfigureEventView: View {
                                             .symbolRenderingMode(.multicolor)
                                             .font(.system(size: 30))
                                             .foregroundColor(.blue)
-                                }
+                                            
+                                    }
+                                    .onTapGesture {
+                                        show.toggle()
+                                    }
+                                    .photosPicker(isPresented: $show, selection: $photosItem)
+                                    .onChange(of: photosItem) { newValue in
+                                        if let newValue {
+                                            Task {
+                                                if let imageData = try? await newValue.loadTransferable(type: Data.self), let image = UIImage(data: imageData) {
+                                                    await MainActor.run(body: {
+                                                        selectingImage = image
+                                                        showCropView.toggle()
+                                                    })
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
+//                                    .cropImagePicker(show: $show, croppedImage: $selectedImage  )
+                                    
                                 if isPurchased {
-                                    PhotosPicker(selection: $selectedPhoto, label: {
-                                        Rectangle()
-                                            .frame(width: 150, height: 150)
-                                            .foregroundColor(.clear)
-                                        
-                                    })
+                                    
+//                                    PhotosPicker(selection: $selectedPhoto, label: {
+//                                        Rectangle()
+//                                            .frame(width: 150, height: 150)
+//                                            .foregroundColor(.clear)
+//
+//                                    })
                                 } else {
                                     
                                     Button {
@@ -615,6 +677,7 @@ struct ConfigureEventView: View {
                                     .background(.clear)
                                 }
                             }
+                        
                         }
                 }
                 .alert("画像設定にはアップグレードが必要です", isPresented: $isShowUpgradeAlert) {
@@ -625,6 +688,16 @@ struct ConfigureEventView: View {
                 .sheet(isPresented: $isShowUpgradeView) {
                     UpgradeView()
                 }
+                .sheet(isPresented: $showCropView, content: {
+                    CropView(image: selectingImage) { croppedImage, status in
+                        if let croppedImage {
+                            self.selectedImage = croppedImage
+                            selectedBackgroundColor = .none
+                        } else {
+                            /// 画像編集エラー
+                        }
+                    }
+                })
             }
             
         }
@@ -633,6 +706,7 @@ struct ConfigureEventView: View {
     }
     @State private var isShowUpgradeView = false
     @State private var isShowUpgradeAlert = false
+    @State private var show = false
     /// テキストの色を編集するビュー
     private var textColorView: some View {
         ScrollView(showsIndicators: false) {

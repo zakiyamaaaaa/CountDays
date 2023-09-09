@@ -161,7 +161,7 @@ class Event: Object, ObjectKeyIdentifiable {
         self.displaySecond = displaySecond
         
         /// 画像の変換処理。ファイルサイズをリサイズ
-        if let image = image, let pngData = image.pngData(), let jpegData = image.resize().jpegData(compressionQuality: 0.8)  {
+        if let image, let pngData = image.pngData(), let jpegData = image.resize().jpegData(compressionQuality: 0.8)  {
             
             print("ファイルサイズ")
             print(pngData.count)

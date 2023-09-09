@@ -55,7 +55,7 @@ struct EventCardView: View {
             let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
             let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
 
-            if backgroundColor == .none, let image = image {
+            if backgroundColor == .none, let image {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
@@ -65,9 +65,7 @@ struct EventCardView: View {
 
 
             VStack(alignment: .leading) {
-
-
-                Text(title)
+                Text(title.isEmpty ? "イベント名" : title)
                     .padding(.vertical, 10)
                 Spacer()
 
@@ -179,7 +177,7 @@ struct EventCardView: View {
                         .resizable()
                         .scaledToFill()
                         .frame(width: 150, height: 150)
-                        .clipShape(Rectangle())
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
                 
                 VStack {
@@ -197,6 +195,7 @@ struct EventCardView: View {
                 }
             }
         }
+        .cornerRadius(30)
         .compositingGroup()
         .shadow(radius: 3, x:3, y:5)
     }
