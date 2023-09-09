@@ -31,35 +31,85 @@ struct UpgradeView: View {
                     Text(price, format: priceFormatStyle)
                     Text(displayPrice)
                     
-                    
-                    Text("アップグレードをすると次の機能が使えるようになります")
-                        .font(.system(size: 30, weight: .bold))
-                        .foregroundColor(.white)
-                        .padding()
-                    
-                    Text("作成できるイベント数が１個までだったのが無制限に！")
-                        .font(.system(size: 20))
-                        .foregroundColor(.white)
-                        .padding()
-                    
-                    Text("イベントの背景に画像を設定可能に！")
-                        .font(.system(size: 20))
-                        .foregroundColor(.white)
-                        .padding()
-                    
-                    Text("カウントに秒数を表示可能に！")
-                        .font(.system(size: 20))
-                        .foregroundColor(.white)
-                        .padding()
-                    Text("アップデートの追加機能を先行招待！")
-                        .font(.system(size: 20))
-                        .foregroundColor(.white)
-                        .padding()
+                    VStack(alignment: .leading) {
+                        Text("アップグレードをすると次の機能が使えるようになります")
+                            .font(.system(size: 30, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(.vertical)
+                        
+                        Group {
+                            Text("イベント数の上限解除！")
+                                .foregroundColor(.white)
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .padding(.bottom,3)
+                            
+                            Text("作成できるイベント数が１個までだったのが無制限になります")
+                                .font(.system(size: 20))
+                                .foregroundColor(.white)
+                            
+                            Image("upgrade1")
+                                .padding()
+                                .padding(.bottom, 30)
+                        }
+                            
+                        Group {
+                            Text("背景に画像を設定可能に！")
+                                .foregroundColor(.white)
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .padding(.bottom,3)
+                            
+                            Text("あなただけのオリジナルイベントを設定できます")
+                                .font(.system(size: 20))
+                                .foregroundColor(.white)
+                            
+                            Image("upgrade2")
+                                .resizable()
+                                .scaledToFit()
+                                .padding()
+                                .padding(.bottom, 30)
+                        }
+                        
+                        Group {
+                            Text("様々な表示スタイルが選択可能に！")
+                                .foregroundColor(.white)
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .padding(.bottom,3)
+                            
+                            Text("あなたの好きなデザイナを選ぶことができます")
+                                .font(.system(size: 20))
+                                .foregroundColor(.white)
+                            
+                            Image("upgrade3")
+                                .padding()
+                                .padding(.bottom, 30)
+                        }
+                        
+                        Group {
+                            Text("追加機能を先行招待！")
+                                .foregroundColor(.white)
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .padding(.bottom,3)
+                            
+                            Text("アップデートによる追加機能を先行して利用することができます")
+                                .font(.system(size: 20))
+                                .foregroundColor(.white)
+                            
+                            Image("upgrade4")
+                                .resizable()
+                                .scaledToFit()
+                                .padding()
+                                .padding(.bottom, 30)
+                        }
+                        
+                    }
+                    .padding()
                 }
             }
             .task {
-//                guard let product = try? await viewModel.fetchProducts(productID).first else { return }
-//                    viewModel.product = product
                 guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }
                 self.product = product
                 do {
