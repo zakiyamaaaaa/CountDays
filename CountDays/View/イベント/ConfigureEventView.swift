@@ -27,6 +27,7 @@ struct ConfigureEventView: View {
     @State private var isFourthButtonSelected = false
     @State private var focusButton = false
     @State var selectedStyleIndex = 0
+    @State var selectingStyleIndex = 0
     @State private var selectedBackgroundStyle: BackgroundStyle = .simple
 //    @State private var selectedBackgroundImage: Image
     @State var selectedTextColor: TextColor = .white
@@ -48,6 +49,7 @@ struct ConfigureEventView: View {
     @State var showMinute = true
     @State var showSecond = false
     @State var displayLang: DisplayLang = .jp
+    @State var showStyleAlert = false
     
     let columns: [GridItem] = [
         GridItem(.flexible(minimum: 30)),
@@ -70,7 +72,7 @@ struct ConfigureEventView: View {
     @State var frequentType: FrequentType = .never
     @State var eventType: EventType = .countup
     @State var dayOfWeek: DayOfWeek = .sunday
-    var selectedStyle: EventDisplayStyle = .standard
+//    var selectedStyle: EventDisplayStyle = .standard
     private let bgColorList: [BackgroundColor] = BackgroundColor.allCases
     private let txtColorList: [TextColor] = TextColor.allCases
     
@@ -93,9 +95,9 @@ struct ConfigureEventView: View {
                     .hidden()
                     
                     let date = dateViewModel.selectedDate
-                    
+                    let style: EventDisplayStyle = isPurchased ? EventDisplayStyle(rawValue: selectedStyleIndex)! : .standard
                      ZStack {
-                         EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: EventDisplayStyle(rawValue: selectedStyleIndex)!, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, displayLang: displayLang, frequentType: frequentType, eventType: eventType)
+                         EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: style, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, displayLang: displayLang, frequentType: frequentType, eventType: eventType)
 //                         EventCardView(title: eventTitle.isEmpty ? "イベント名" : eventTitle, day: day ?? 1, hour: hour ?? 111, minute: minute ?? 111, style: EventDisplayStyle(rawValue: selectedStyleIndex)!, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor)
                          Button {
                              self.showDeleteAlert.toggle()
@@ -165,7 +167,7 @@ struct ConfigureEventView: View {
                 try await self.isPurchased = store.isPurchased(product)
                 
                 #if DEBUG
-                self.isPurchased = true
+                self.isPurchased = false
                 #endif
                 
             } catch(let error) {
@@ -299,7 +301,8 @@ struct ConfigureEventView: View {
                     /// TODO: イベント名を入力してくださいエラーメッセージ表示
                     return
                 }
-                let event = Event(title: eventTitle, date: dateViewModel.selectedDate, textColor: selectedTextColor, backgroundColor: selectedBackgroundColor, displayStyle: EventDisplayStyle(rawValue: selectedStyleIndex)!, fontSize: 1.0, dayOfWeek: dayOfWeek, displayHour: showHour, displayMinute: showMinute, displaySecond: showSecond, image: selectedImage)
+                let style: EventDisplayStyle = isPurchased ? EventDisplayStyle(rawValue: selectedStyleIndex)! : .standard
+                let event = Event(title: eventTitle, date: dateViewModel.selectedDate, textColor: selectedTextColor, backgroundColor: selectedBackgroundColor, displayStyle: style, fontSize: 1.0, dayOfWeek: dayOfWeek, displayHour: showHour, displayMinute: showMinute, displaySecond: showSecond, image: selectedImage)
                 HapticFeedbackManager.shared.play(.impact(.heavy))
                 switch isCreation {
                     /// 新規作成
@@ -468,20 +471,59 @@ struct ConfigureEventView: View {
                     }
                 }
                 .tag(0)
-                .sheet(isPresented: $showStyleDetailConfiguration) {
+                ZStack {
                     
-//                    let displayEnglish = diplayLang == .en
-//                    let flag = Binding(displayEnglish)
+                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .circle, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showSecond: showSecond, displayLang: displayLang, frequentType: frequentType)
+                        
+                    if !isPurchased {
+                        VStack {
+                            Image(systemName: "lock.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.white)
+                            Button {
+                                showStyleAlert.toggle()
+                            } label: {
+                                Color.clear
+                                    .frame(width: 200, height: 200)
+                            }
+                            .frame(width: 200, height: 200)
+                            .background(.black)
+                            .opacity(0.5)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            Text("このスタイルはロックされています")
+                                .foregroundColor(.white)
+                        }
+                    }
+                }.tag(1)
+                
+                ZStack {
                     
-                    EventDetailConfigurationView(showHour: $showHour, showMinute: $showMinute, displayLang: $displayLang, showSecond: $showSecond)
-                        .presentationDetents([.medium])
-                }
-                
-                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .circle, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showSecond: showSecond, displayLang: displayLang, frequentType: frequentType)
-                    .tag(1)
-                
-                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .calendar, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showSecond: showSecond, displayLang: displayLang, frequentType: frequentType)
-                    .tag(2)
+                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .calendar, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showSecond: showSecond, displayLang: displayLang, frequentType: frequentType)
+                        
+                    if !isPurchased {
+                        VStack {
+                            Image(systemName: "lock.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.white)
+                            Button {
+                                showStyleAlert.toggle()
+                            } label: {
+                                Color.clear
+                                    .frame(width: 200, height: 200)
+                            }
+                            .frame(width: 200, height: 200)
+                            .background(.black)
+                            .opacity(0.5)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            Text("このスタイルはロックされています")
+                                .foregroundColor(.white)
+                        }
+                    }
+                }.tag(2)
                 
             }
             .onChange(of: selectedStyleIndex, perform: { newValue in
@@ -489,6 +531,18 @@ struct ConfigureEventView: View {
             })
             .tabViewStyle(.page)
             .indexViewStyle(.page(backgroundDisplayMode: .always))
+            .sheet(isPresented: $showStyleDetailConfiguration) {
+                
+                EventDetailConfigurationView(showHour: $showHour, showMinute: $showMinute, displayLang: $displayLang, showSecond: $showSecond)
+                    .presentationDetents([.medium])
+            }
+            .alert("このスタイルを利用するにはアップグレードが必要です", isPresented: $showStyleAlert) {
+                Button("OK") {
+                    isShowUpgradeView.toggle()
+                }
+            }.sheet(isPresented: $isShowUpgradeView) {
+                UpgradeView()
+            }
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
