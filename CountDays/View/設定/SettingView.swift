@@ -15,7 +15,10 @@ struct SettingView: View {
     @State private var isInquiry = false
     @State private var isDeleteAllEvent = false
     @State private var showUpgradeView = false
- 
+    @State private var showShareDialog = false
+    @State private var showShareText = false
+    @State private var showQRCodeShare = false
+    
     var body: some View {
         settingView
             
@@ -79,21 +82,21 @@ struct SettingView: View {
                         #endif
                     }
                 }
-                let url = URL(string: "hogehoge.com")!
+                
                 Section("共有+プライバシー") {
                     HStack {
-                        ShareLink(item: url) {
-                            HStack {
-                                Image(systemName: "square.and.arrow.up.circle.fill")
-                                    .resizable()
-                                    .frame(width: 40, height: 40)
-                                Text("アプリを共有する")
-                                    .font(.system(size: 20))
-                            }
-                        }
+                        Image(systemName: "square.and.arrow.up.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                        Text("アプリを共有する")
+                            .font(.system(size: 20))
+                        
                         Spacer()
                     }
                     .listRowBackground(ColorUtility.secondary)
+                    .onTapGesture {
+                        showShareDialog.toggle()
+                    }
                     
                     HStack {
                         Image(systemName: "lock.circle.fill")
@@ -167,7 +170,32 @@ struct SettingView: View {
                         Text("OK")
                     }
                 }
+                .confirmationDialog("シェア方法", isPresented: $showShareDialog) {
+                    Button {
+                        showShareText.toggle()
+                    } label: {
+                        Text("テキスト")
+                    }
+                    
+                    Button {
+                        showQRCodeShare.toggle()
+                    } label: {
+                        Text("QRコード")
+                    }
+                }
+                
             }
+            .sheet(isPresented: $showShareText, content: {
+                let text = "ほげほげ"
+//                let image = UIImage(named: "QRCodeSample")!
+                let url = "https://www.hogehoge.com"
+                ShareSheet(photo: nil, text: text, urlString: url)
+            })
+            .sheet(isPresented: $showQRCodeShare, content: {
+                let image = UIImage(named: "QRCodeSample")!
+                let url = "https://www.hogehoge.com"
+                ShareSheet(photo: image, text: "QRCODW Share", urlString: url)
+            })
             .padding(.top, 10)
             .foregroundColor(.white)
             .scrollContentBackground(.hidden)
@@ -191,6 +219,75 @@ struct SettingView: View {
             }
         }
         }
+    }
+    
+    // シェアボタン
+   func shareApp(shareText: String, shareImage: Image, shareLink: String) {
+       let items = [shareText, shareImage] as [Any]
+       let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+       let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+       let rootVC = windowScene?.windows.first?.rootViewController
+       rootVC?.present(activityVC, animated: true,completion: {})
+   }
+}
+
+struct ShareSheet: UIViewControllerRepresentable {
+    let photo: UIImage?
+    let text: String?
+    let urlString: String
+    
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        
+        let url = URL(string: urlString)!
+        let itemSource = ShareActivityItemSource(shareText: text, shareImage: photo, shareURL: url)
+        var activityItems = [Any]()
+        if let photo {
+            activityItems.append(photo)
+        } else if let text {
+            activityItems.append(text)
+        }
+        activityItems.append(urlString)
+        activityItems.append(itemSource)
+//        let activityItems: [Any] = [photo, text, itemSource]
+
+        let controller = UIActivityViewController(
+            activityItems: activityItems,
+            applicationActivities: nil)
+
+        return controller
+    }
+
+    func updateUIViewController(_ vc: UIActivityViewController, context: Context) {
+    }
+}
+
+import LinkPresentation
+
+class ShareActivityItemSource: NSObject, UIActivityItemSource {
+
+    var shareText: String?
+    var shareImage: UIImage?
+    var shareURL: URL
+    var linkMetaData = LPLinkMetadata()
+
+    init(shareText: String?, shareImage: UIImage?, shareURL: URL) {
+        self.shareText = shareText
+        self.shareImage = shareImage
+        self.shareURL = shareURL
+        linkMetaData.title = "CountDays App"
+        super.init()
+    }
+
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return UIImage(named: "QRCodeSample") as Any
+    }
+
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return nil
+    }
+
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        return linkMetaData
     }
 }
 

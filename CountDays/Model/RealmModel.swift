@@ -40,7 +40,7 @@ import SwiftUI
 
 final class RealmModel: ObservableObject {
     /// TODO: スキーマバージョンを1になおす
-    private static var config = Realm.Configuration(schemaVersion: 6)
+    private static var config = Realm.Configuration(schemaVersion: 7)
     private static var realm = try! Realm(configuration: config)
     
     /// 保存されているuserを返す
@@ -135,13 +135,14 @@ class Event: Object, ObjectKeyIdentifiable {
     @Persisted var displayMinute: Bool = true
     @Persisted var displaySecond: Bool = false
     @Persisted var fontSize: Float
+    @Persisted var displayLang: DisplayLang
     let user = LinkingObjects(fromType: User.self, property: "events")
     
     override init() {
         
     }
     
-    init(title: String, date: Date, textColor: TextColor, backgroundColor: BackgroundColor, displayStyle: EventDisplayStyle, fontSize: Float, frequentType: FrequentType = .never, eventType: EventType = .countup, dayAtMonthly: Int = 1, hour: Int = 0, minute: Int = 0, dayOfWeek: DayOfWeek = .sunday, displayHour: Bool = true, displayMinute: Bool = true, displaySecond: Bool = false, image: UIImage? = nil) {
+    init(title: String, date: Date, textColor: TextColor, backgroundColor: BackgroundColor, displayStyle: EventDisplayStyle, fontSize: Float, frequentType: FrequentType = .never, eventType: EventType = .countup, dayAtMonthly: Int = 1, hour: Int = 0, minute: Int = 0, dayOfWeek: DayOfWeek = .sunday, displayHour: Bool = true, displayMinute: Bool = true, displaySecond: Bool = false, image: UIImage? = nil, displayLang: DisplayLang = .jp) {
         super.init()
         self.id = id
         self.title = title
@@ -159,7 +160,7 @@ class Event: Object, ObjectKeyIdentifiable {
         self.displayHour = displayHour
         self.displayMinute = displayMinute
         self.displaySecond = displaySecond
-        
+        self.displayLang = displayLang
         /// 画像の変換処理。ファイルサイズをリサイズ
         if let image, let pngData = image.pngData(), let jpegData = image.resize().jpegData(compressionQuality: 0.8)  {
             

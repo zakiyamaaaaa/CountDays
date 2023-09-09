@@ -47,6 +47,7 @@ struct ConfigureEventView: View {
     @State var showHour = true
     @State var showMinute = true
     @State var showSecond = false
+    @State var displayLang: DisplayLang = .jp
     
     let columns: [GridItem] = [
         GridItem(.flexible(minimum: 30)),
@@ -94,7 +95,7 @@ struct ConfigureEventView: View {
                     let date = dateViewModel.selectedDate
                     
                      ZStack {
-                         EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: EventDisplayStyle(rawValue: selectedStyleIndex)!, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, frequentType: frequentType, eventType: eventType)
+                         EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: EventDisplayStyle(rawValue: selectedStyleIndex)!, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, displayLang: displayLang, frequentType: frequentType, eventType: eventType)
 //                         EventCardView(title: eventTitle.isEmpty ? "イベント名" : eventTitle, day: day ?? 1, hour: hour ?? 111, minute: minute ?? 111, style: EventDisplayStyle(rawValue: selectedStyleIndex)!, backgroundColor: selectedBackgroundColor, textColor: selectedTextColor)
                          Button {
                              self.showDeleteAlert.toggle()
@@ -182,7 +183,7 @@ struct ConfigureEventView: View {
             showSecond = event.displaySecond
             selectedBackgroundColor = event.backgroundColor
             selectedTextColor = event.textColor
-            
+            displayLang = event.displayLang
         }
     }
     @State private var bounce = false
@@ -457,7 +458,7 @@ struct ConfigureEventView: View {
             TabView(selection: $selectedStyleIndex) {
                 let date = dateViewModel.selectedDate
                 VStack {
-                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .standard, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, frequentType: frequentType, eventType: eventType)
+                    EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .standard, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showHour: showHour, showMinute: showMinute, showSecond: showSecond, displayLang: displayLang, frequentType: frequentType, eventType: eventType)
                         
                         
                     Button {
@@ -468,14 +469,18 @@ struct ConfigureEventView: View {
                 }
                 .tag(0)
                 .sheet(isPresented: $showStyleDetailConfiguration) {
-                    EventDetailConfigurationView(showHour: $showHour, showMinute: $showMinute, showSecond: $showSecond)
+                    
+//                    let displayEnglish = diplayLang == .en
+//                    let flag = Binding(displayEnglish)
+                    
+                    EventDetailConfigurationView(showHour: $showHour, showMinute: $showMinute, displayLang: $displayLang, showSecond: $showSecond)
                         .presentationDetents([.medium])
                 }
                 
-                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .circle, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showSecond: showSecond, frequentType: frequentType)
+                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .circle, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showSecond: showSecond, displayLang: displayLang, frequentType: frequentType)
                     .tag(1)
                 
-                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .calendar, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showSecond: showSecond, frequentType: frequentType)
+                EventCardView(title: eventTitle.isEmpty ? initialEventName : eventTitle, date: date, style: .calendar, backgroundColor: selectedBackgroundColor, image: selectedImage, textColor: selectedTextColor, showSecond: showSecond, displayLang: displayLang, frequentType: frequentType)
                     .tag(2)
                 
             }
@@ -709,26 +714,50 @@ struct ConfigureEventView: View {
     @State private var show = false
     /// テキストの色を編集するビュー
     private var textColorView: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVGrid(columns: columns, spacing: 5) {
-                ForEach(txtColorList, id: \.self) { item in
-                    
-                    Text("Aa")
-                        .foregroundColor(item.color)
-                        .font(.system(size: 50))
-                        .frame(width: 80, height: 80)
-                        .border(item == selectedTextColor ?  .red : .clear)
-                        .onTapGesture(perform: {
-                            selectedTextColor = item
-                            print(item.color)
-                        })
+        ZStack {
+            ScrollView(showsIndicators: false) {
+                LazyVGrid(columns: columns, spacing: 5) {
+                    ForEach(txtColorList, id: \.self) { item in
+                        
+                        Text("Aa")
+                            .foregroundColor(item.color)
+                            .font(.system(size: 50))
+                            .frame(width: 80, height: 80)
+                            .border(item == selectedTextColor ?  .red : .clear)
+                            .onTapGesture(perform: {
+                                selectedTextColor = item
+                                print(item.color)
+                            })
+                    }
                 }
             }
+            .padding()
+            
+            VStack {
+                Spacer()
+                Button {
+                    withAnimation {
+                        displayLang = displayLang.rawValue == 0 ? .en : .jp
+                    }
+                    
+                } label: {
+                    let text = displayLang == .jp ? "日" : "Day"
+                    Text(text)
+                        .foregroundColor(.black)
+                    
+                }
+                .frame(width: 50, height: 50)
+                .background(.white)
+                .clipShape(Circle())
+                .buttonStyle(BounceButtonStyle())
+                .padding()
+            }
+            
         }
-        .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .background(ColorUtility.backgroundary)
+        
     }
 }
     

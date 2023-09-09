@@ -17,6 +17,7 @@ struct EventCardView: View {
     var showHour: Bool = true
     var showMinute: Bool = true
     var showSecond: Bool = false
+    var displayLang: DisplayLang = .jp
     var frequentType: FrequentType
     var eventType: EventType = .countup
     let width = UIScreen.main.bounds.width
@@ -25,11 +26,6 @@ struct EventCardView: View {
     var body: some View {
         TimelineView(.periodic(from: date, by: 1)) { timeline in
             ZStack {
-                
-                let day = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).days
-                let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
-                let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
-                let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
                 
                 Rectangle()
                     .foregroundColor(backgroundColor.color)
@@ -54,7 +50,12 @@ struct EventCardView: View {
             let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
             let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
             let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
-
+            let dayText = displayLang.dateText.day
+            let hourText = displayLang.dateText.hour
+            let minuteText = displayLang.dateText.minute
+            let secondText = displayLang.dateText.second
+            
+            
             if backgroundColor == .none, let image {
                 Image(uiImage: image)
                     .resizable()
@@ -62,7 +63,7 @@ struct EventCardView: View {
                     .frame(width: 150, height: 150)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
             }
-
+            
 
             VStack(alignment: .leading) {
                 Text(title.isEmpty ? "イベント名" : title)
@@ -71,24 +72,24 @@ struct EventCardView: View {
 
                 if second < 0 && eventType == .countdown && frequentType == .never {
                     HStackLayout(alignment: .center) {
-                        Text("終了")
+                        Text(displayLang.finishText)
 
                         Image(systemName: "checkmark.circle.fill")
                     }
                     Spacer()
                 } else {
-                    Text("\(day)日")
+                    Text(day.description + dayText)
                         .font(.system(size: 30))
                     HStack() {
 
-                        Text("\(hour)時間")
+                        Text(hour.description + hourText)
                             .isHidden(hidden: !showHour)
-                        Text("\(minute)分")
+                        Text(minute.description + minuteText)
                             .isHidden(hidden: !showMinute)
 
                     }
 
-                    Text("\(second)秒")
+                    Text(second.description + secondText)
                         .isHidden(hidden: !showSecond)
                 }
 
@@ -105,6 +106,11 @@ struct EventCardView: View {
             let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
             let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
             let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
+            
+            let dayText = displayLang.dateText.day
+            let hourText = displayLang.dateText.hour
+            let minuteText = displayLang.dateText.minute
+            let secondText = displayLang.dateText.second
             ZStack {
                 if backgroundColor == .none, let image = image {
                     Image(uiImage: image)
@@ -114,7 +120,7 @@ struct EventCardView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
                 VStack {
-                    Text(title)
+                    Text(title.isEmpty ? "イベント名" : title)
                         .foregroundColor(textColor.color)
                     ZStack {
                         
@@ -133,14 +139,14 @@ struct EventCardView: View {
                         
                         VStack {
                             if second < 0 && eventType == .countdown && frequentType == .never {
-                                Text("終了")
+                                Text(displayLang.finishText)
                                 
                                 Image(systemName: "checkmark.circle.fill")
                             } else {
                                 Text("\(day)")
                                     .font(.system(size: 30))
                                     .fontWeight(.bold)
-                                Text("日")
+                                Text(displayLang.dateText.day)
                             }
                         }
                         .rotationEffect(.degrees(90))
@@ -159,11 +165,17 @@ struct EventCardView: View {
             let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
             let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
             let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
+            
+            let dayText = displayLang.dateText.day
+            let hourText = displayLang.dateText.hour
+            let minuteText = displayLang.dateText.minute
+            let secondText = displayLang.dateText.second
+            
             ZStack {
                 Rectangle()
                     .foregroundColor(.red)
                     .frame(width: 152, height: 25)
-                Text(title)
+                Text(title.isEmpty ? "イベント名" : title)
                     .foregroundColor(textColor.color)
             }
             
@@ -182,14 +194,14 @@ struct EventCardView: View {
                 
                 VStack {
                     if second < 0 && eventType == .countdown && frequentType == .never {
-                        Text("終了")
+                        Text(displayLang.finishText)
                         
                         Image(systemName: "checkmark.circle.fill")
                     } else {
                         Text("\(day)")
                             .font(.system(size: 50))
                             .fontWeight(.bold)
-                        Text("日")
+                        Text(displayLang.dateText.day)
                             .font(.system(size: 20))
                     }
                 }

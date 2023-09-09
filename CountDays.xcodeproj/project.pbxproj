@@ -236,8 +236,6 @@
 				394A5CD72A971566006A7232 /* AddEventButton.swift */,
 				394A5CD92A971567006A7232 /* CalendarView2.swift */,
 				394A5CD52A971566006A7232 /* EventConfigurationButtonStyle.swift */,
-				394A5CD82A971566006A7232 /* TestView.swift */,
-				394A5CD32A971566006A7232 /* TestView2.swift */,
 				394A5CD42A971566006A7232 /* ViewExtension.swift */,
 				394A5CE22A9715DA006A7232 /* MockStore.swift */,
 				394A5C832A9712E0006A7232 /* CountDaysTests */,
@@ -307,13 +305,13 @@
 				394A5CD62A971566006A7232 /* MainView.swift */,
 				394A5CE52A9716B2006A7232 /* イベント設定 */,
 				394A5CE42A9716A1006A7232 /* 設定 */,
+				39FFFA802AAC3DC5001AE0D7 /* Sandbox */,
 				394A5CBF2A971528006A7232 /* AddEventView.swift */,
 				394A5CBE2A971528006A7232 /* EventCardView.swift */,
 				39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */,
 				39FFFA632AA07919001AE0D7 /* UpgradeView.swift */,
 				39FFFA712AA86667001AE0D7 /* WelcomeView.swift */,
 				39FFFA7A2AA9C093001AE0D7 /* CustomImagePicker.swift */,
-				39FFFA7E2AA9C318001AE0D7 /* TestView3.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -393,6 +391,16 @@
 				394A5CFA2A971754006A7232 /* Info.plist */,
 			);
 			path = CountDaysWidget;
+			sourceTree = "<group>";
+		};
+		39FFFA802AAC3DC5001AE0D7 /* Sandbox */ = {
+			isa = PBXGroup;
+			children = (
+				394A5CD82A971566006A7232 /* TestView.swift */,
+				394A5CD32A971566006A7232 /* TestView2.swift */,
+				39FFFA7E2AA9C318001AE0D7 /* TestView3.swift */,
+			);
+			path = Sandbox;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

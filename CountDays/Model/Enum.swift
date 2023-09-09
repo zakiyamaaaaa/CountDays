@@ -15,6 +15,29 @@ enum EventDisplayStyle: Int, CaseIterable, PersistableEnum {
     case calendar = 2
 }
 
+enum DisplayLang: Int, PersistableEnum {
+    case jp = 0
+    case en = 1
+    
+    var dateText: (day:String, hour: String, minute:String, second: String) {
+        switch self {
+        case .jp:
+            return ("日","時間","分","秒")
+        case .en:
+            return ("Day","Hour","Min","Second")
+        }
+    }
+    
+    var finishText: String {
+        switch self {
+        case .jp:
+            return "終了"
+        case .en:
+            return "Finish"
+        }
+    }
+}
+
 enum EventType: String, CaseIterable, Identifiable, PersistableEnum {
     case countdown = "カウントダウン"
     case countup = "カウントアップ"

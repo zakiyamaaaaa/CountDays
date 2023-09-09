@@ -13,12 +13,19 @@ struct EventDetailConfigurationView: View {
     @EnvironmentObject var store: Store
     @Binding var showHour: Bool
     @Binding var showMinute: Bool
+    @Binding var displayLang: DisplayLang
     @State var showHourandMinute: Bool = true
     @Binding var showSecond: Bool
     @State private var isPurchased = false
+    @State private var displayLangEnglish: Bool = false {
+        willSet {
+            displayLang = newValue ? .en : .jp
+        }
+    }
     @State private var product: Product?
     @State private var isShowUpgradeAlert = false
     @State private var isShowUpgradeView = false
+    
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -66,16 +73,12 @@ struct EventDetailConfigurationView: View {
                         showSecond = false
                     }
                 })
-                .alert("アップグレードが必要です", isPresented: $isShowUpgradeAlert) {
-                    Button("OK") {
-                        isShowUpgradeView.toggle()
-                    }
+                .listRowBackground(Color.primary)
+                
+                Toggle(isOn: $displayLangEnglish) {
+                    Text("時刻表記を英語")
+                        .foregroundColor(.white)
                 }
-                .sheet(isPresented: $isShowUpgradeView, onDismiss: {
-                    showSecond = false
-                }, content: {
-                    UpgradeView()
-                })
                 .listRowBackground(Color.primary)
             }
             .task {
@@ -91,6 +94,16 @@ struct EventDetailConfigurationView: View {
             .onAppear {
                 print("Apeear")
             }
+            .alert("アップグレードが必要です", isPresented: $isShowUpgradeAlert) {
+                Button("OK") {
+                    isShowUpgradeView.toggle()
+                }
+            }
+            .sheet(isPresented: $isShowUpgradeView, onDismiss: {
+                showSecond = false
+            }, content: {
+                UpgradeView()
+            })
             .scrollContentBackground(.hidden)
             .background(ColorUtility.backgroundary)
         }
@@ -105,8 +118,9 @@ struct EventDetailConfigurationView: View {
 
 struct EventDetailConfigurationView_Previews: PreviewProvider {
     @State static var a = true
+    @State static var b: DisplayLang = .jp
     @StateObject static var store = Store()
     static var previews: some View {
-        EventDetailConfigurationView(showHour: $a, showMinute: $a, showHourandMinute: a, showSecond: $a).environmentObject(store)
+        EventDetailConfigurationView(showHour: $a, showMinute: $a, displayLang: $b, showHourandMinute: a, showSecond: $a).environmentObject(store)
     }
 }

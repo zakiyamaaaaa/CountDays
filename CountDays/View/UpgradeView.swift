@@ -23,6 +23,7 @@ struct UpgradeView: View {
             HeaderView(title: "アップグレード")
             ScrollView {
                 VStack(alignment: .leading) {
+                    #if DEBUG
                     Text("アップグレード")
                     
                     let price = product?.price ?? 0
@@ -30,7 +31,7 @@ struct UpgradeView: View {
                     let priceFormatStyle = product?.priceFormatStyle ?? Decimal.FormatStyle.Currency(code: "JPY")
                     Text(price, format: priceFormatStyle)
                     Text(displayPrice)
-                    
+                    #endif
                     VStack(alignment: .leading) {
                         Text("アップグレードをすると次の機能が使えるようになります")
                             .font(.system(size: 30, weight: .bold))
