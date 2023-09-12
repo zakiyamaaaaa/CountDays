@@ -21,7 +21,7 @@ struct CalendarView: UIViewRepresentable {
     func makeUIView(context: Context) -> UICalendarView {
         let view = UICalendarView()
         let selection = UICalendarSelectionSingleDate(delegate: context.coordinator)
-        let dateSelected = dateSelected
+//        let dateSelected = dateSelected
         let dateComponents = DateComponents(
             calendar: Calendar(identifier: .gregorian),
             year: dateViewModel.getYearNumber(date: dateSelected),
@@ -52,8 +52,6 @@ struct CalendarView: UIViewRepresentable {
         public func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
 //            parent.dateViewModel.selectedDate = dateComponents?.date ?? Date()
             parent.dateSelected = dateComponents?.date ?? Date()
-            print("selected")
-            print(dateComponents?.date)
         }
         
     }
@@ -62,7 +60,6 @@ struct CalendarView: UIViewRepresentable {
 struct CalendarView_Previews: PreviewProvider {
     @State static var selectedDatePreview: Date = Date()
     static var previews: some View {
-//        CalendarView(dateViewModel: DateViewModel())
         CalendarView(dateSelected: $selectedDatePreview)
     }
 }

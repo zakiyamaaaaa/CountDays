@@ -78,6 +78,7 @@
 		39FFFA782AA8AAE3001AE0D7 /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA772AA8AAE3001AE0D7 /* HapticFeedback.swift */; };
 		39FFFA7B2AA9C093001AE0D7 /* CustomImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA7A2AA9C093001AE0D7 /* CustomImagePicker.swift */; };
 		39FFFA7F2AA9C318001AE0D7 /* TestView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA7E2AA9C318001AE0D7 /* TestView3.swift */; };
+		39FFFA822AAEB518001AE0D7 /* EventCardView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA812AAEB518001AE0D7 /* EventCardView2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +186,7 @@
 		39FFFA792AA9465D001AE0D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		39FFFA7A2AA9C093001AE0D7 /* CustomImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePicker.swift; sourceTree = "<group>"; };
 		39FFFA7E2AA9C318001AE0D7 /* TestView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView3.swift; sourceTree = "<group>"; };
+		39FFFA812AAEB518001AE0D7 /* EventCardView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardView2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +310,7 @@
 				39FFFA802AAC3DC5001AE0D7 /* Sandbox */,
 				394A5CBF2A971528006A7232 /* AddEventView.swift */,
 				394A5CBE2A971528006A7232 /* EventCardView.swift */,
+				39FFFA812AAEB518001AE0D7 /* EventCardView2.swift */,
 				39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */,
 				39FFFA632AA07919001AE0D7 /* UpgradeView.swift */,
 				39FFFA712AA86667001AE0D7 /* WelcomeView.swift */,
@@ -601,6 +604,7 @@
 				394A5CE12A971567006A7232 /* CalendarView2.swift in Sources */,
 				39FFFA742AA872B2001AE0D7 /* AppStorage.swift in Sources */,
 				39FFFA612AA04FFB001AE0D7 /* HeaderView.swift in Sources */,
+				39FFFA822AAEB518001AE0D7 /* EventCardView2.swift in Sources */,
 				394A5CDF2A971567006A7232 /* AddEventButton.swift in Sources */,
 				394A5CAD2A9713C3006A7232 /* Enum.swift in Sources */,
 				394A5CCE2A97153D006A7232 /* ConfigureDateView.swift in Sources */,

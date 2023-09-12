@@ -62,8 +62,10 @@ struct MainView: View {
                                 let image = createImage(cardImage: card)
                                 EventCardView(title: card.title, date: card.date, style: card.displayStyle, backgroundColor: card.backgroundColor, image: image, textColor: card.textColor, frequentType: card.frequentType)
                                     .onTapGesture {
-                                        isShowConfigured.toggle()
+                                        
                                         selectedEvent = realmCards[i - 1]
+                                        
+                                        isShowConfigured.toggle()
                                         self.selectedIndex = i
                                         let _ = print(i)
                                         let _ = print(selectedEvent.title)
@@ -135,12 +137,13 @@ struct MainView: View {
                             }
                             
                         }
-                    }.sheet(isPresented: $isShowConfigured) {
+                    }.sheet(isPresented: $isShowConfigured) {[selectedEvent] in
                         
-                        ConfigureEventView(realmMock: realmMock, event: $selectedEvent, isCreation: false)
+                        ConfigureEventView(realmMock: realmMock, event: $selectedEvent, isCreation: false, eventCardViewModel: EventCardViewModel2(event: selectedEvent))
                             .environmentObject(store)
+                        
                     }.sheet(isPresented: $isShow) {
-                        ConfigureEventView(realmMock: realmMock, event: $selectedEvent, isCreation: true)
+                        ConfigureEventView(realmMock: realmMock, event: $selectedEvent, isCreation: true, eventCardViewModel: EventCardViewModel2(event: EventCardViewModel.defaultStatus))
                             .environmentObject(store)
                     }.sheet(isPresented: $isSettingButton) {
                         SettingView()

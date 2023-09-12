@@ -66,6 +66,10 @@ struct EventCardView: View {
             
 
             VStack(alignment: .leading) {
+//                if let event {
+//                    Text(event.title)
+//                        .foregroundColor(.white)
+//                }
                 Text(title.isEmpty ? "イベント名" : title)
                     .padding(.vertical, 10)
                 Spacer()
@@ -214,12 +218,14 @@ struct EventCardView: View {
 }
 
 struct EventCardView_Previews: PreviewProvider {
+//    var event = EventCardViewModel.defaultStatus
     static var previews: some View {
-        EventCardView(title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .calendar, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
-        
-        EventCardView(title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .standard, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
-        
-        EventCardView(title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .circle, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
+        let event = EventCardViewModel.defaultStatus
+//        EventCardView(event: event, title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .calendar, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
+//        
+//        EventCardView(title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .standard, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
+//        
+//        EventCardView(title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .circle, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
         
     }
 }

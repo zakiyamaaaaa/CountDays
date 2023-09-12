@@ -16,6 +16,7 @@ struct ConfigureDateView: View {
     @State private var isAllDayEvent = true
     @State private var editingHour = false
     @StateObject var dateViewModel: DateViewModel
+    @StateObject var eventViewModel: EventCardViewModel2
     var daysList = Array(1...30)
     var hourList = Array(0...23)
     var minuteList = Array(0...59)
@@ -27,7 +28,7 @@ struct ConfigureDateView: View {
     @State var selectedPopup = false
     @State private var buttonPressd = false
     
-    init(eventType: Binding<EventType>, frequentType: Binding<FrequentType>, dateViewModel: StateObject<DateViewModel>, weeklyDate: Binding<DayOfWeek>) {
+    init(eventType: Binding<EventType>, frequentType: Binding<FrequentType>, dateViewModel: StateObject<DateViewModel>, weeklyDate: Binding<DayOfWeek>, eventViewModel: StateObject<EventCardViewModel2>) {
         let font = UIFont.systemFont(ofSize: 20)
         
             // 選択中のセグメントの色
@@ -50,7 +51,7 @@ struct ConfigureDateView: View {
 //        _initialMonthlyDay = State(initialValue: monthlyDay.wrappedValue)
 //        _initialWeeklyDate = State(initialValue: weeklyDate.wrappedValue)
         
-        let day = dateViewModel.wrappedValue.getDayNumber(date: dateViewModel.wrappedValue.selectedDate)
+        let day = dateViewModel.wrappedValue.getDayNumber(date: eventViewModel.wrappedValue.selectedDate)
         
         _selectingMonthlyDay = State(initialValue: day)
         _selectingWeeklyDate = State(initialValue: weeklyDate.wrappedValue)
@@ -58,7 +59,9 @@ struct ConfigureDateView: View {
         _selectedFrequentType = frequentType
         _selectedEventType = eventType
         _dateViewModel = dateViewModel
-        _selectingDate = State(initialValue: dateViewModel.wrappedValue.selectedDate)
+        _eventViewModel = eventViewModel
+        _selectingDate = State(initialValue: eventViewModel.wrappedValue.selectedDate)
+//        _selectingDate = State(initialValue: dateViewModel.wrappedValue.selectedDate)
 //        _selectedDate = selectedDate
     }
     
@@ -227,6 +230,7 @@ struct ConfigureDateView: View {
                 Text("イベント")
                     .foregroundColor(.white)
                 let selectedDate = selectingDate
+//                let selectedDate = eventViewModel.selectedDate
                 switch selectedEventType {
                 case .countdown:
                     Text("カウントダウン")
@@ -334,11 +338,13 @@ struct ConfigureDateView: View {
                 if selectedFrequentType == .weekly {
                     selectingDate = CalendarViewModel.getDateAtWeekly(dayAtWeek: selectingWeeklyDate)
                     selectedWeeklyDate = selectingWeeklyDate
-                    dateViewModel.selectedDate = selectingDate
+//                    dateViewModel.selectedDate = selectingDate
+                    eventViewModel.selectedDate = selectingDate
                 } else {
-                    dateViewModel.selectedDate = selectingDate
-                    
+//                    dateViewModel.selectedDate = selectingDate
+//                    eventViewModel.selectedDate = selectingDate
                     dateViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
+                    eventViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
                 }
                 
                 dismiss()
@@ -437,7 +443,10 @@ struct ConfigureDateView_Previews: PreviewProvider {
     @State static var event: EventType = .countdown
     @State static var weeklyDate: DayOfWeek = .sunday
     @StateObject static var dateViewModel = DateViewModel()
+    @StateObject static var eventViewModel = EventCardViewModel2(event: EventCardViewModel.defaultStatus)
     static var previews: some View {
-        ConfigureDateView(eventType: $event, frequentType: $frequent, dateViewModel: _dateViewModel, weeklyDate: $weeklyDate)
+        let event = EventCardViewModel.defaultStatus
+        let vm = EventCardViewModel2(event: event)
+        ConfigureDateView(eventType: $event, frequentType: $frequent, dateViewModel: _dateViewModel, weeklyDate: $weeklyDate, eventViewModel: _eventViewModel)
     }
 }

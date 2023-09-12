@@ -136,6 +136,14 @@ class Event: Object, ObjectKeyIdentifiable {
     @Persisted var displaySecond: Bool = false
     @Persisted var fontSize: Float
     @Persisted var displayLang: DisplayLang
+    var image: UIImage? {
+        if let imageData {
+            return UIImage(data: imageData)
+        } else {
+            return nil
+        }
+    }
+    
     let user = LinkingObjects(fromType: User.self, property: "events")
     
     override init() {

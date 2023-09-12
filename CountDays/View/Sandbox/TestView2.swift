@@ -16,11 +16,12 @@ struct TestView2: View {
     @State private var selectedImage: UIImage? = nil
     @State private var selectedPhoto: PhotosPickerItem? = nil
     @State var image: UIImage?
+    var model: TestViewModel
     
     var body: some View {
         VStack {
+            Text(model.textTitle)
             HStack {
-                
                 Text("\(dateViewModel.getMonthText(date: selectedDate))月")
                     .font(.system(size: 25))
                     .fontWeight(.bold)
@@ -104,6 +105,6 @@ struct TestView2: View {
 
 struct TestView2_Previews: PreviewProvider {
     static var previews: some View {
-        TestView2()
+        TestView2(model: TestViewModel(textTitle: "hoge"))
     }
 }
