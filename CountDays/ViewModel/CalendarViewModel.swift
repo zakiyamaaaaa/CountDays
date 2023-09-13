@@ -142,6 +142,43 @@ class CalendarViewModel: ObservableObject {
         return (calendar.dateComponents([.second], from: fromDate, to: toDate).second ?? 0)%60
     }
     
+    static func getRemainSecond(target: Date, updatedDate: Date? = nil, eventType: EventType, frequentType: FrequentType, dayOfweek: DayOfWeek = .sunday) -> Int? {
+        switch eventType {
+        case .countup:
+            return calendar.dateComponents([.second], from: target, to: Date()).second
+        case .countdown:
+            
+            switch frequentType {
+            case .never:
+                let date = updatedDate ?? Date()
+                return calendar.dateComponents([.second], from: date, to: target).second
+            case .annual:
+                let thisYear = calendar.dateComponents([.year], from: Date()).year
+                var component = calendar.dateComponents([.second], from: target)
+                
+                /// 日付が過去の場合
+                if isPastDate(target) {
+                    component.year = thisYear! + 1
+                }
+                let targetDate = DateComponents(calendar: calendar, year: component.year, month: component.month, day: component.day, hour: component.hour, minute: component.minute, second: component.second).date
+                return calendar.dateComponents([.second], from: Date(), to: targetDate!).second
+            case .monthly:
+                let day = calendar.dateComponents([.day], from: target).day!
+                let date = calendar.date(bySetting: .day, value: day, of: Date())
+                
+                return calendar.dateComponents([.second], from: Date(), to: date!).second
+            case .weekly:
+                var a = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: target)!
+                /// もし入力値がマイナスなら、1週間後にする
+                if a.timeIntervalSince(Date()) < 0 {
+                    a.addTimeInterval(60*60*24*7)
+                }
+                
+                return calendar.dateComponents([.second], from: Date(), to: a).second
+            }
+        }
+    }
+    
     /// 毎年観測する場合の日付データ
     static func getAnnualDate(target: Date) -> (days: Int, hours: Int, minutes: Int, seconds: Int) {
 //        var targetDate = target
@@ -178,5 +215,18 @@ class CalendarViewModel: ObservableObject {
     static func isPastDate(_ date: Date) -> Bool {
         let currentDate = Date()
         return date < currentDate
+    }
+    
+    /// 当月の月末の日付を取得する
+    static func getLastDayOfMonth() -> Int {
+        let comps = calendar.dateComponents([.year, .month], from: Date())
+        let firstDay = calendar.date(from: comps)!
+
+        let add = DateComponents(month: 1, day: -1)
+//        let lastDay = calendar.date(byAdding: add, to: firstDay)!
+        let range = calendar.range(of: .day, in: .month, for: Date())
+        let lastDay = range?.last ?? 1
+        print("今月の日数は\(lastDay)")
+        return lastDay
     }
 }

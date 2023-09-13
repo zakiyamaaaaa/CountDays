@@ -17,11 +17,6 @@ struct EventDetailConfigurationView: View {
     @State var showHourandMinute: Bool = true
     @Binding var showSecond: Bool
     @State private var isPurchased = false
-    @State private var displayLangEnglish: Bool = false {
-        willSet {
-            displayLang = newValue ? .en : .jp
-        }
-    }
     @State private var product: Product?
     @State private var isShowUpgradeAlert = false
     @State private var isShowUpgradeView = false
@@ -75,11 +70,6 @@ struct EventDetailConfigurationView: View {
                 })
                 .listRowBackground(Color.primary)
                 
-                Toggle(isOn: $displayLangEnglish) {
-                    Text("時刻表記を英語")
-                        .foregroundColor(.white)
-                }
-                .listRowBackground(Color.primary)
             }
             .task {
                 guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }

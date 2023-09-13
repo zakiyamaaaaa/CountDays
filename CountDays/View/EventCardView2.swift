@@ -24,6 +24,9 @@ class EventCardViewModel2: ObservableObject {
     @Published var fontSize: Float
     @Published var dayOfWeek: DayOfWeek
     @Published var dayOfMonth: Int
+    @Published var unitOfCircle: Int
+    @Published var createdDate: Date
+    @Published var updatedDate: Date
     
     init(event: Event) {
         self.text = event.title
@@ -39,6 +42,9 @@ class EventCardViewModel2: ObservableObject {
         self.fontSize = event.fontSize
         self.dayOfWeek = event.dayOfWeek
         self.dayOfMonth = event.dayAtMonthly
+        self.unitOfCircle = event.unitOfCircle
+        self.createdDate = event.createdDate
+        self.updatedDate = event.updatedDate
     }
 }
 
@@ -79,15 +85,6 @@ struct EventCardView2: View {
                         calendarView
                     }
                 }
-                    
-//                switch eventVM.style {
-//                case .standard:
-//                    standardView
-//                case .circle:
-//                    circleView
-//                case .calendar:
-//                    calendarView
-//                }
             }
         }
     }
@@ -153,17 +150,47 @@ struct EventCardView2: View {
         }
     }
     
+    /// MARK :- サークルビューに使用するバーの進捗率
+    /// 0.0 ~ 1.0
+    private func progressRatio(viewModel: EventCardViewModel2) -> CGFloat {
+        guard let remainSecond = CalendarViewModel.getRemainSecond(target: viewModel.selectedDate, eventType: viewModel.eventType, frequentType: viewModel.frequentType) else { return 0}
+        switch viewModel.eventType {
+        case .countup:
+            return CGFloat(remainSecond)/CGFloat(24*60*60*100)
+        case .countdown:
+            switch viewModel.frequentType {
+            case .never:
+                /// 今の残り秒数/当初の残り秒数
+                guard let initialSecond = CalendarViewModel.getRemainSecond(target: viewModel.selectedDate, updatedDate: viewModel.updatedDate, eventType: viewModel.eventType, frequentType: viewModel.frequentType) else { return 0 }
+                
+                return 1 - CGFloat(remainSecond)/CGFloat(initialSecond)
+            case .annual:
+                return 1 - (CGFloat(remainSecond)/CGFloat(24*60*60*365))
+            case .monthly:
+                /// １ヶ月を基準
+                let daysOfMonth = CalendarViewModel.getLastDayOfMonth()
+                
+                return 1 -  (CGFloat(remainSecond)/CGFloat(24*60*60*daysOfMonth))
+            case .weekly:
+                /// １週間を基準
+                return 1 - (CGFloat(remainSecond)/CGFloat(24*60*60*7))
+            }
+        }
+    }
+    
     private var circleView: some View {
-        VStack {
+        VStack(spacing: 0) {
             let date = eventVM.selectedDate
             let frequentType = eventVM.frequentType
             let eventType = eventVM.eventType
             let displayLang = eventVM.displayLang
             
+            
             let day = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).days
             let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
             let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
             let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
+            
             
             ZStack {
                 if eventVM.backgroundColor == .none, let image = eventVM.image {
@@ -178,14 +205,16 @@ struct EventCardView2: View {
                         .foregroundColor(eventVM.textColor.color)
                     ZStack {
                         
+                        let progress = progressRatio(viewModel: eventVM)
                         
+                        let _ = print("Progress:\(progress)")
                         Circle()
                             .stroke(
                                 Color.pink.opacity(0.5),
                                 lineWidth: 10
                             )
                         Circle()
-                            .trim(from: 0, to: 0.25)
+                            .trim(from: 0, to: progress)
                             .stroke(
                                 Color.pink,
                                 style: StrokeStyle(lineWidth: 10, lineCap: .round)
@@ -209,6 +238,7 @@ struct EventCardView2: View {
                     .frame(width: width/5)
                     .rotationEffect(.degrees(-90))
                 }
+                
             }
         }
     }
@@ -271,34 +301,16 @@ struct EventCardView2: View {
             .shadow(radius: 3, x:3, y:5)
         }
     }
-//    var body: some View {
-//        ZStack {
-////            Text(event?.title ?? "イベント名")
-//            Rectangle()
-//                .foregroundColor(.mint)
-//            Text(eventVM.text.isEmpty ? "イベント名" : eventVM.text)
-//        }
-//    }
 }
 
 struct EventCardView2_Previews: PreviewProvider {
 //    var event = EventCardViewModel.defaultStatus
     static var previews: some View {
-        var event = EventCardViewModel.defaultStatus
+        let event = EventCardViewModel.defaultStatus
         let vm = EventCardViewModel2(event: event)
         EventCardView2(eventVM: vm)
-//        event.displayStyle = .circle
         EventCardView2(eventVM: vm, displayStyle: .circle)
         EventCardView2(eventVM: vm, displayStyle: .calendar)
-//        event.displayStyle = .calendar
-//        EventCardView2(eventVM: vm)
-//        EventCardView2(event: event, viewModel: vm)
-//        let event = EventCardViewModel.defaultStatus
-//        EventCardView(event: event, title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .calendar, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
-        
-//        EventCardView(title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .standard, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
-//
-//        EventCardView(title: "sanoke1", date: EventCardViewModel.defaultStatus.date, style: .circle, backgroundColor: .primary, textColor: .white, showSecond: true, frequentType: .annual, eventType: .countdown)
         
     }
 }

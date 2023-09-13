@@ -40,7 +40,7 @@ import SwiftUI
 
 final class RealmModel: ObservableObject {
     /// TODO: スキーマバージョンを1になおす
-    private static var config = Realm.Configuration(schemaVersion: 7)
+    private static var config = Realm.Configuration(schemaVersion: 10)
     private static var realm = try! Realm(configuration: config)
     
     /// 保存されているuserを返す
@@ -136,6 +136,12 @@ class Event: Object, ObjectKeyIdentifiable {
     @Persisted var displaySecond: Bool = false
     @Persisted var fontSize: Float
     @Persisted var displayLang: DisplayLang
+    @Persisted var createdDate: Date = Date()
+    @Persisted var updatedDate: Date = Date()
+    /// サークルビューの１周辺りの単位
+    /// 初期値は100日= 60*60*24
+    @Persisted var unitOfCircle: Int = 60*60*24*100
+    
     var image: UIImage? {
         if let imageData {
             return UIImage(data: imageData)

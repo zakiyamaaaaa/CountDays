@@ -19,7 +19,6 @@ struct ConfigureEventView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var store: Store
     @State var isPurchased = false
-    @State private var eventName = ""
     @State private var isShowSheet = false
     @State private var isFirstButtonSelected = true
     @State private var isSecondButtonSelected = false
@@ -29,28 +28,16 @@ struct ConfigureEventView: View {
     @State var selectedStyleIndex = 0
     @State var selectingStyleIndex = 0
     @State private var selectedBackgroundStyle: BackgroundStyle = .simple
-//    @State private var selectedBackgroundImage: Image
-    @State var selectedTextColor: TextColor = .white
     @State private var isTrashAnimation = false
-    @State private var showDeleteAlert = false
+    
     @FocusState private var focusField: Bool
-    private let initialEventName = EventCardViewModel.defaultStatus.title
     @ObservedObject var realmMock: RealmMockStore
     @Binding var event: Event
     let isCreation: Bool
     
     /// Realmの配列を受け取ってそれを削除する方法
-//    @ObservedRealmObject var selectedEvent: Event
-    @State var eventTitle: String = ""
-    @State var showStyleDetailConfiguration = false
-//    @State var showHour = true
-//    @State var showMinute = true
-//    @State var showSecond = false
     
-    @State var showStyleAlert = false
-//    @StateObject var eventCardViewModel = EventCardViewModel2(event: EventCardViewModel.defaultStatus)
     
-//    @State var viewModel = EventCardViewModel2(, event: <#Event#>)
     let columns: [GridItem] = [
         GridItem(.flexible(minimum: 30)),
         GridItem(.flexible()),
@@ -60,20 +47,15 @@ struct ConfigureEventView: View {
     @State private var selectingBackgroundStyle: BackgroundStyle = .simple
     @State private var selectedImage: UIImage?
     @State private var selectingImage: UIImage?
-    @State var selectedBackgroundColor: BackgroundColor = .primary {
-        didSet {
-            HapticFeedbackManager.shared.play(.impact(.light))
-        }
-    }
-    
-    @State private var selectedPhoto: PhotosPickerItem? = nil
     @StateObject var dateViewModel = DateViewModel()
     @StateObject var imageViewModel = ImageModel()
     @StateObject var eventCardViewModel: EventCardViewModel2
-    @State var frequentType: FrequentType = .never
-    @State var eventType: EventType = .countup
-    @State var dayOfWeek: DayOfWeek = .sunday
-//    var selectedStyle: EventDisplayStyle = .standard
+    
+    /// シートのフラグ
+    @State var showStyleAlert = false
+    @State private var showDeleteAlert = false
+    @State var showStyleDetailConfiguration = false
+    
     private let bgColorList: [BackgroundColor] = BackgroundColor.allCases
     private let txtColorList: [TextColor] = TextColor.allCases
     
@@ -171,7 +153,7 @@ struct ConfigureEventView: View {
                 try await self.isPurchased = store.isPurchased(product)
                 
                 #if DEBUG
-                self.isPurchased = false
+                self.isPurchased = true
                 #endif
                 
             } catch(let error) {
@@ -179,12 +161,7 @@ struct ConfigureEventView: View {
             }
         }
         .onAppear{
-        
-            print(event.date)
-            eventTitle = event.title
             dateViewModel.selectedDate = event.date
-            selectedBackgroundColor = event.backgroundColor
-            selectedTextColor = event.textColor
         }
     }
     @State private var bounce = false
@@ -302,7 +279,7 @@ struct ConfigureEventView: View {
                 }
                 let style: EventDisplayStyle = isPurchased ? eventCardViewModel.style : .standard
                 
-                let event = Event(title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, dayOfWeek: dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image)
+                let event = Event(title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, dayOfWeek: eventCardViewModel.dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image)
                 HapticFeedbackManager.shared.play(.impact(.heavy))
                 switch isCreation {
                     /// 新規作成
@@ -321,10 +298,10 @@ struct ConfigureEventView: View {
             .tint(.white)
             .fontWeight(.bold)
             .font(.system(size: 20))
-            .disabled(eventTitle.isEmpty)
-            .background(RoundedRectangle(cornerRadius: 30).fill( eventTitle.isEmpty ? ColorUtility.disable : ColorUtility.preffered))
+            .disabled(eventCardViewModel.text.isEmpty)
+            .background(RoundedRectangle(cornerRadius: 30).fill( eventCardViewModel.text.isEmpty ? ColorUtility.disable : ColorUtility.preffered))
             .padding()
-            .animation(.default, value: eventTitle.isEmpty)
+            .animation(.default, value: eventCardViewModel.text.isEmpty)
         }
         .frame(height: 80)
         .background(ColorUtility.primary)
@@ -353,7 +330,7 @@ struct ConfigureEventView: View {
                     .padding(.vertical, 10)
                     .focused($focusField)
                     
-                    if eventTitle.isEmpty {
+                    if eventCardViewModel.text.isEmpty {
                         Text("イベント名を入力")
                             .foregroundColor(.gray)
                             .padding(.horizontal,30)
@@ -381,7 +358,7 @@ struct ConfigureEventView: View {
                 isShowSheet.toggle()
             } label: {
                 VStack(alignment: .leading) {
-                    Text(eventType.rawValue)
+                    Text(eventCardViewModel.eventType.rawValue)
                         .foregroundColor(.black)
                         .frame(width: 150, height: 30)
                         .background(.white)
@@ -398,7 +375,7 @@ struct ConfigureEventView: View {
                                 .frame(width: 30, height: 30)
                                 .padding(.horizontal)
                             
-                            if frequentType != .never {
+                            if eventCardViewModel.frequentType != .never {
                                 Text("リピート")
                                     .font(.system(size: 10))
                                     .foregroundColor(.white)
@@ -413,7 +390,7 @@ struct ConfigureEventView: View {
                                 let year = dateViewModel.getYearText(date: date)
                                 let month = dateViewModel.getMonthText(date: date)
                                 let day = dateViewModel.getDayText(date: date)
-                                switch frequentType {
+                                switch eventCardViewModel.frequentType {
                                 case .never:
                                     //                                Text(dateViewModel.dateText(date: date))
                                     Text(year + "/" + month + "/" + day)
@@ -425,7 +402,7 @@ struct ConfigureEventView: View {
                                     Text(day + "日")
                                 case .weekly:
                                     Text("毎週：")
-                                    Text(dayOfWeek.stringValue)
+                                    Text(eventCardViewModel.dayOfWeek.stringValue)
                                 }
                             }
                             Text("終日")
@@ -437,7 +414,7 @@ struct ConfigureEventView: View {
                     
                 }.sheet(isPresented: $isShowSheet) {
 //                    ConfigureDateView(eventType: $eventType, frequentType: eventCardViewModel.frequentType, dateViewModel: _dateViewModel, weeklyDate: $dayOfWeek, eventViewModel: _eventCardViewModel)
-                    ConfigureDateView(eventType: $eventCardViewModel.eventType, frequentType: $eventCardViewModel.frequentType, dateViewModel: _dateViewModel, weeklyDate: $dayOfWeek, eventViewModel: _eventCardViewModel)
+                    ConfigureDateView(eventType: $eventCardViewModel.eventType, frequentType: $eventCardViewModel.frequentType, dateViewModel: _dateViewModel, weeklyDate: $eventCardViewModel.dayOfWeek, eventViewModel: _eventCardViewModel)
                     
                 }.frame(height: 120.0)
                     .frame(alignment: .leading)
@@ -473,9 +450,34 @@ struct ConfigureEventView: View {
                 }
                 .tag(0)
                 ZStack {
-                    
-                    EventCardView2(eventVM: eventCardViewModel, displayStyle: .circle)
-                    
+                    VStack {
+                        Text(eventCardViewModel.eventType.rawValue)
+                            .foregroundColor(.white)
+                        EventCardView2(eventVM: eventCardViewModel, displayStyle: .circle)
+                        
+                        switch eventCardViewModel.eventType {
+                        case .countdown:
+                            switch eventCardViewModel.frequentType {
+                            case .never:
+                                Text("イベント作成日からゴールまでを１周")
+                                    .foregroundColor(.white)
+                            case .annual:
+                                Text("１年で１周")
+                                    .foregroundColor(.white)
+                            case .monthly:
+                                Text("１ヶ月で１周")
+                                    .foregroundColor(.white)
+                            case .weekly:
+                                Text("１週間で１周")
+                                    .foregroundColor(.white)
+                            }
+                            
+                        case .countup:
+                            Text("１００日で１周")
+                                .foregroundColor(.white)
+                        }
+                        
+                    }
                     if !isPurchased {
                         VStack {
                             Image(systemName: "lock.fill")
@@ -500,8 +502,12 @@ struct ConfigureEventView: View {
                 }.tag(1)
                 
                 ZStack {
-                    EventCardView2(eventVM: eventCardViewModel, displayStyle: .calendar)
-                    
+                    VStack {
+                        
+                        
+                        EventCardView2(eventVM: eventCardViewModel, displayStyle: .calendar)
+                        
+                    }
                     if !isPurchased {
                         VStack {
                             Image(systemName: "lock.fill")
@@ -810,7 +816,7 @@ struct ConfigureEventView_Previews: PreviewProvider {
     @State static var date = EventCardViewModel.defaultStatus.date
     @StateObject static var store = Store()
     static var previews: some View {
-        ConfigureEventView(realmMock: RealmMockStore(), event: $event, isCreation: true, eventTitle: eventTitle, eventCardViewModel: eventViewModel).environmentObject(store)
+        ConfigureEventView(realmMock: RealmMockStore(), event: $event, isCreation: true, eventCardViewModel: eventViewModel).environmentObject(store)
     }
 }
 
