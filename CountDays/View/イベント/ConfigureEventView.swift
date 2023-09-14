@@ -10,6 +10,7 @@ import StoreKit
 import RealmSwift
 import Photos
 import PhotosUI
+import FirebaseAnalytics
 
 struct ConfigureEventView: View {
     
@@ -262,6 +263,12 @@ struct ConfigureEventView: View {
         HStack {
             Button("✗") {
                 presentationMode.wrappedValue.dismiss()
+                
+                Analytics.logEvent(AnalyticsEventSelectItem, parameters: [
+                  AnalyticsParameterItemID: "id-1111111111111111",
+                  AnalyticsParameterItemName: "ConfigureView",
+                  AnalyticsParameterContentType: "cont",
+                ])
             }
             .frame(width: 50, height: 50)
             .foregroundColor(.white)
@@ -436,11 +443,9 @@ struct ConfigureEventView: View {
     ///他のところで使われていないので、ファンクションに切り出す方が良いかも
     private var styleView: some View {
         VStack {
-            let date = Date()
             TabView(selection: $selectedStyleIndex) {
                 VStack {
                     EventCardView2(event: event, eventVM: eventCardViewModel)
-                        
                         
                     Button {
                         showStyleDetailConfiguration.toggle()

@@ -9,6 +9,8 @@ import SwiftUI
 import Algorithms
 import RealmSwift
 import StoreKit
+import FirebaseAnalyticsSwift
+import FirebaseAnalytics
 
 struct MainView: View {
     @AppStorage(AppStorageKey.launchTimes.rawValue) var counter = 0
@@ -105,7 +107,11 @@ struct MainView: View {
                                                     withAnimation {
                                                         scale = false
                                                     }
-                                                    
+                                                    Analytics.logEvent(AnalyticsEventSelectItem, parameters: [
+                                                      AnalyticsParameterItemID: "id-\(self)",
+                                                      AnalyticsParameterItemName: "MainView",
+                                                      AnalyticsParameterContentType: "cont",
+                                                    ])
                                                     /// 課金ユーザーかどうかを判定し、課金してたら２個以上OK。無課金は１個まで
                                                     
                                                     #if DEBUG
@@ -193,6 +199,8 @@ struct MainView: View {
             #endif
         }
         .background(ColorUtility.backgroundary)
+        .analyticsScreen(name: "MainView analytics",
+                               class: String(describing: type(of: self)))
     }
     
     private var headerView: some View {
