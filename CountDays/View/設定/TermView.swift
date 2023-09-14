@@ -51,6 +51,8 @@ struct TermView: View {
         }
         .background(ColorUtility.backgroundary)
         .foregroundColor(.white)
+        .analyticsScreen(name: String(describing: Self.self),
+                                   class: String(describing: type(of: self)))
     }
 }
 

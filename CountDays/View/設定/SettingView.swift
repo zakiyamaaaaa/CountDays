@@ -39,6 +39,7 @@ struct SettingView: View {
                     }
                     .listRowBackground(ColorUtility.secondary)
                     .onTapGesture {
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapUpgrade)
                         showUpgradeView.toggle()
                     }
                 }
@@ -60,7 +61,10 @@ struct SettingView: View {
                     Spacer()
                     Toggle(isOn: $allowNotification) {
                         
+                    }.onChange(of: allowNotification) { newValue in
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewToggleNotificatioin, content: newValue.description)
                     }
+                    
                 }.listRowBackground(ColorUtility.secondary)
                 
                 Section {
@@ -76,6 +80,7 @@ struct SettingView: View {
                     .listRowBackground(ColorUtility.secondary)
                     .contentShape(Rectangle())
                     .onTapGesture {
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapMail)
                         #if targetEnvironment(simulator)
                         #else
                             isInquiry.toggle()
@@ -95,6 +100,7 @@ struct SettingView: View {
                     }
                     .listRowBackground(ColorUtility.secondary)
                     .onTapGesture {
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapShareView)
                         showShareDialog.toggle()
                     }
                     
@@ -109,6 +115,7 @@ struct SettingView: View {
                     .listRowBackground(ColorUtility.secondary)
                     .contentShape(Rectangle())
                     .onTapGesture {
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapPrivacyPolicy)
                         isPrivacyView.toggle()
                     }
                     
@@ -127,6 +134,7 @@ struct SettingView: View {
                     .listRowBackground(ColorUtility.secondary)
                     .ignoresSafeArea(.all)
                     .onTapGesture {
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapTerm)
                         isTermView.toggle()
                     }
                     
@@ -153,12 +161,13 @@ struct SettingView: View {
                     .listRowBackground(ColorUtility.secondary)
                     .contentShape(Rectangle())
                     .onTapGesture {
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapDeleteAllEvent)
                         isDeleteAllEvent.toggle()
                     }
                     
                 }.alert("すべてのイベントを\n削除しますか", isPresented: $isDeleteAllEvent) {
                     Button(role: .cancel) {
-                        
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewCancelAlertDeleteAllEvent)
                     } label: {
                         Text("キャンセル")
                     }
@@ -166,6 +175,7 @@ struct SettingView: View {
                     Button(role: .destructive) {
                         RealmViewModel().deleteAllEvents()
                         NotificationCenter.removeAllNotification()
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewExecuteAlertDeleteAllEvent)
                     } label: {
                         Text("OK")
                     }
@@ -205,6 +215,8 @@ struct SettingView: View {
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbarBackground( Color.black, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
+            .analyticsScreen(name: String(describing: Self.self),
+                                   class: String(describing: type(of: self)))
         }
         .onAppear {
             UNUserNotificationCenter.current().getNotificationSettings { settings in

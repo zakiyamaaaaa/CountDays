@@ -83,6 +83,8 @@ struct WelcomeView: View {
         }
         .interactiveDismissDisabled()
         .background(ColorUtility.primary)
+        .analyticsScreen(name: String(describing: Self.self),
+                               class: String(describing: type(of: self)))
         
     }
 }

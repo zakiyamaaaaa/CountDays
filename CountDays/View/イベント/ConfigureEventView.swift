@@ -88,6 +88,7 @@ struct ConfigureEventView: View {
                          }
                          Button {
                              self.showDeleteAlert.toggle()
+                             FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewDeleteEvent)
                          } label: {
                              Image(systemName: "trash.fill")
                          }
@@ -102,7 +103,7 @@ struct ConfigureEventView: View {
                          }
                          .alert("このイベントを消去しますか？", isPresented: $showDeleteAlert) {
                              Button("キャンセル", role: .cancel) {
-                                 
+                                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapDeleteEventAlertCancel)
                              }
                              Button("消去", role: .destructive) {
                                  
@@ -112,7 +113,7 @@ struct ConfigureEventView: View {
                                  
                                 /// 通知の登録削除処理
                                  NotificationCenter.removeNotification(id: event.id.stringValue)
-                                
+                                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapDeleteEventAlertExecution)
                                  // 画面閉じる
                                  presentationMode.wrappedValue.dismiss()
                              }
@@ -172,6 +173,7 @@ struct ConfigureEventView: View {
             Spacer()
             Button {
                 HapticFeedbackManager.shared.play(.impact(.medium))
+                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureContent)
                 if !isFirstButtonSelected {
                     isFirstButtonSelected = true
                     isSecondButtonSelected = false
@@ -195,6 +197,7 @@ struct ConfigureEventView: View {
             
             Button {
                 HapticFeedbackManager.shared.play(.impact(.medium))
+                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureStyle)
                 if !isSecondButtonSelected {
                     isFirstButtonSelected = false
                     isSecondButtonSelected = true
@@ -214,6 +217,7 @@ struct ConfigureEventView: View {
             Spacer()
             Button {
                 HapticFeedbackManager.shared.play(.impact(.medium))
+                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureBackground)
                 if !isThirdButtonSelected {
                     isFirstButtonSelected = false
                     isSecondButtonSelected = false
@@ -236,6 +240,7 @@ struct ConfigureEventView: View {
             
             Button {
                 HapticFeedbackManager.shared.play(.impact(.medium))
+                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureText)
                 if !isFourthButtonSelected {
                     isFirstButtonSelected = false
                     isSecondButtonSelected = false
@@ -256,6 +261,8 @@ struct ConfigureEventView: View {
         .frame(height: 80)
         .frame(maxWidth: .infinity)
         .background(ColorUtility.primary)
+        .analyticsScreen(name: String(describing: Self.self),
+                               class: String(describing: type(of: self)))
     }
     
     /// HeaderView
@@ -263,12 +270,8 @@ struct ConfigureEventView: View {
         HStack {
             Button("✗") {
                 presentationMode.wrappedValue.dismiss()
+                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapCloseButton)
                 
-                Analytics.logEvent(AnalyticsEventSelectItem, parameters: [
-                  AnalyticsParameterItemID: "id-1111111111111111",
-                  AnalyticsParameterItemName: "ConfigureView",
-                  AnalyticsParameterContentType: "cont",
-                ])
             }
             .frame(width: 50, height: 50)
             .foregroundColor(.white)
@@ -299,6 +302,7 @@ struct ConfigureEventView: View {
                 }
                 NotificationCenter.registerNotification(event: event)
                 presentationMode.wrappedValue.dismiss()
+                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapRegisterButton)
             }
             .buttonStyle(BounceButtonStyle())
             .frame(width: 100, height: 50)
@@ -348,6 +352,7 @@ struct ConfigureEventView: View {
                 
                 if focusField {
                     Button {
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapEventNameButton)
                         focusField = false
                         
                     } label: {
@@ -363,6 +368,7 @@ struct ConfigureEventView: View {
             
             Button {
                 isShowSheet.toggle()
+                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureDateButton)
             } label: {
                 VStack(alignment: .leading) {
                     Text(eventCardViewModel.eventType.rawValue)
@@ -491,6 +497,7 @@ struct ConfigureEventView: View {
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(.white)
                             Button {
+                                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapUpgradeFromCircleViewStyle)
                                 showStyleAlert.toggle()
                             } label: {
                                 Color.clear
@@ -521,6 +528,7 @@ struct ConfigureEventView: View {
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(.white)
                             Button {
+                                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapUpgradeFromCalendarViewStyle)
                                 showStyleAlert.toggle()
                             } label: {
                                 Color.clear
@@ -699,6 +707,7 @@ struct ConfigureEventView: View {
                             self.selectedImage = croppedImage
                             self.eventCardViewModel.image = croppedImage
                             self.eventCardViewModel.backgroundColor = .none
+                            FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewSelectBacgkroundImage)
                         } else {
                             /// 画像編集エラー
                         }

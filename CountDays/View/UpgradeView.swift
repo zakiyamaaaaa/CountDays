@@ -23,7 +23,7 @@ struct UpgradeView: View {
             HeaderView(title: "アップグレード")
             ScrollView {
                 VStack(alignment: .leading) {
-                    #if DEBUG
+#if DEBUG
                     Text("アップグレード")
                     
                     let price = product?.price ?? 0
@@ -31,7 +31,7 @@ struct UpgradeView: View {
                     let priceFormatStyle = product?.priceFormatStyle ?? Decimal.FormatStyle.Currency(code: "JPY")
                     Text(price, format: priceFormatStyle)
                     Text(displayPrice)
-                    #endif
+#endif
                     VStack(alignment: .leading) {
                         Text("アップグレードをすると次の機能が使えるようになります")
                             .font(.system(size: 30, weight: .bold))
@@ -53,7 +53,7 @@ struct UpgradeView: View {
                                 .padding()
                                 .padding(.bottom, 30)
                         }
-                            
+                        
                         Group {
                             Text("背景に画像を設定可能に！")
                                 .foregroundColor(.white)
@@ -125,12 +125,13 @@ struct UpgradeView: View {
             
             VStack {
                 Button {
-                    
+                    FirebaseAnalyticsManager.recordEvent(analyticsKey: .UpgradeViewTapRestoreButton)
                     if isPurchased {
                         /// 購入復元処理
                         Task {
                             try? await AppStore.sync()
                         }
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .UpgradeViewRestore)
                     } else {
                         isShowRestoreAlert.toggle()
                     }
@@ -138,8 +139,9 @@ struct UpgradeView: View {
                     Text("購入を復元")
                 }
                 .padding()
-
+                
                 Button {
+                    FirebaseAnalyticsManager.recordEvent(analyticsKey: .UpgradeViewTapPurchaseButton)
                     Task {
                         
                         /// 購入処理
@@ -161,8 +163,11 @@ struct UpgradeView: View {
                     
                 }
             }
+            .analyticsScreen(name: String(describing: Self.self),
+                             class: String(describing: type(of: self)))
         }
     }
+        
     
     func buy() async {
         do {
@@ -170,6 +175,7 @@ struct UpgradeView: View {
                 withAnimation {
                     isPurchased = true
                 }
+                FirebaseAnalyticsManager.recordEvent(analyticsKey: .UpgradeViewPurchase)
             }
         } catch StoreError.failedVerification {
             errorTitle = "Your purchase could not be verified by the App Store"

@@ -66,7 +66,7 @@ struct MainView: View {
                                     .onTapGesture {
                                         
                                         selectedEvent = realmCards[i - 1]
-                                        
+                                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .MainViewUpdateEvent)
                                         isShowConfigured.toggle()
                                         self.selectedIndex = i
                                         let _ = print(i)
@@ -107,11 +107,7 @@ struct MainView: View {
                                                     withAnimation {
                                                         scale = false
                                                     }
-                                                    Analytics.logEvent(AnalyticsEventSelectItem, parameters: [
-                                                      AnalyticsParameterItemID: "id-\(self)",
-                                                      AnalyticsParameterItemName: "MainView",
-                                                      AnalyticsParameterContentType: "cont",
-                                                    ])
+                                                    FirebaseAnalyticsManager.recordEvent(analyticsKey: .MainViewAddEvent)
                                                     /// 課金ユーザーかどうかを判定し、課金してたら２個以上OK。無課金は１個まで
                                                     
                                                     #if DEBUG
@@ -197,9 +193,10 @@ struct MainView: View {
                 Text("Notification")
             }
             #endif
+            let _ = print("selc: \(self)")
         }
         .background(ColorUtility.backgroundary)
-        .analyticsScreen(name: "MainView analytics",
+        .analyticsScreen(name: String(describing: Self.self),
                                class: String(describing: type(of: self)))
     }
     
@@ -212,6 +209,7 @@ struct MainView: View {
             
             Button {
                 isSettingButton.toggle()
+                FirebaseAnalyticsManager.recordEvent(analyticsKey: .MainViewTapSettingButton)
             } label: {
                 Image(systemName: "ellipsis.circle")
                     .resizable()

@@ -36,6 +36,7 @@ struct EventDetailConfigurationView: View {
                     Text("時間と分を表示")
                         .foregroundColor(.white)
                 }.onChange(of: showHourandMinute, perform: { newValue in
+                    FirebaseAnalyticsManager.recordEvent(analyticsKey: .EventDetailConfigurationToggleDisplayHourAndMinute, content: newValue.description)
                     showHour = newValue
                     showMinute = newValue
                     print(newValue)
@@ -60,6 +61,7 @@ struct EventDetailConfigurationView: View {
                     }
                 }
                 .onChange(of: showSecond, perform: { newValue in
+                    FirebaseAnalyticsManager.recordEvent(analyticsKey: .EventDetailConfigurationToggleDisplaySecond, content: newValue.description)
                     if newValue && isPurchased {
                         showSecond = true
                     } else if newValue && !isPurchased {
@@ -103,6 +105,8 @@ struct EventDetailConfigurationView: View {
         .onAppear{
             showHourandMinute = showHour && showMinute
         }
+        .analyticsScreen(name: String(describing: Self.self),
+                               class: String(describing: type(of: self)))
     }
 }
 

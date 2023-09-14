@@ -222,6 +222,8 @@ struct ConfigureDateView: View {
                 }
             }
         }
+        .analyticsScreen(name: String(describing: Self.self),
+                          class: String(describing: type(of: self)))
     }
     
     private var headerView: some View {
@@ -335,6 +337,7 @@ struct ConfigureDateView: View {
             /// 設定を保存するところ
             Button {
                 HapticFeedbackManager.shared.play(.impact(.medium))
+                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureDateViewTapOKButton)
                 if selectedFrequentType == .weekly {
                     selectingDate = CalendarViewModel.getDateAtWeekly(dayAtWeek: selectingWeeklyDate)
                     selectedWeeklyDate = selectingWeeklyDate

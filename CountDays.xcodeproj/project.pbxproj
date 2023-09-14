@@ -109,6 +109,7 @@
 		39FFFAE12AB1A754001AE0D7 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFAE02AB1A754001AE0D7 /* FirebaseRemoteConfigSwift */; };
 		39FFFAE32AB1A754001AE0D7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFAE22AB1A754001AE0D7 /* FirebaseStorage */; };
 		39FFFAE52AB1A754001AE0D7 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFAE42AB1A754001AE0D7 /* FirebaseStorageCombine-Community */; };
+		39FFFB462AB299C4001AE0D7 /* FirebaseAnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFB452AB299C4001AE0D7 /* FirebaseAnalyticsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -218,6 +219,7 @@
 		39FFFA7E2AA9C318001AE0D7 /* TestView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView3.swift; sourceTree = "<group>"; };
 		39FFFA812AAEB518001AE0D7 /* EventCardView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardView2.swift; sourceTree = "<group>"; };
 		39FFFA832AB19325001AE0D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		39FFFB452AB299C4001AE0D7 /* FirebaseAnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,6 +407,7 @@
 				39FFFA672AA5C0CB001AE0D7 /* Store.swift */,
 				39FFFA6B2AA7A783001AE0D7 /* VersionUpCheck.swift */,
 				39FFFA752AA8A7A2001AE0D7 /* BounceButtonStyle.swift */,
+				39FFFB452AB299C4001AE0D7 /* FirebaseAnalyticsManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				394A5C9E2A971349006A7232 /* ContentView.swift in Sources */,
 				394A5CA82A9713C3006A7232 /* EventCard.swift in Sources */,
 				39FFFA642AA07919001AE0D7 /* UpgradeView.swift in Sources */,
+				39FFFB462AB299C4001AE0D7 /* FirebaseAnalyticsManager.swift in Sources */,
 				39FFFA7B2AA9C093001AE0D7 /* CustomImagePicker.swift in Sources */,
 				39FFFA6F2AA84656001AE0D7 /* Extension.swift in Sources */,
 				39FFFA6C2AA7A783001AE0D7 /* VersionUpCheck.swift in Sources */,
