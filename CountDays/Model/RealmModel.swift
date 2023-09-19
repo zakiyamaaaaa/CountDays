@@ -35,20 +35,30 @@ import SwiftUI
 ///             textColor:テキストの色
 ///             backgroundColor:背景色
 ///             displayStyle: 表示スタイル
+///             displaySize: 表示するイベントのサイズ（まだ未実装）
+///             frequentType: 頻度のタイプ
+///             eventType: イベントのタイプ
 ///             fontSize:文字サイズ
+///             displayLang: イベントに表示する文字言語
 ///
 
 final class RealmModel: ObservableObject {
     /// TODO: スキーマバージョンを1になおす
-    private static var config = Realm.Configuration(schemaVersion: 10)
-    private static var realm = try! Realm(configuration: config)
+    private static var config = Realm.Configuration(schemaVersion: 0)
+    private static var realm: Realm {
+        config.fileURL = fileUrl
+        print("schema: \(config.schemaVersion)")
+        return try! Realm(configuration: config)
+    }
     
-    /// 保存されているuserを返す
+    static var fileUrl: URL {
+        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.zakiyamaaaaa.CountDays.widget")!
+        return url.appending(path: "db.realm")
+    }
+    
+    /// 保存されているuserを返す  
     static var user: User {
-        guard let a = realm.objects(User.self).first else {
-            return User()
-        }
-        return a
+        return realm.objects(User.self).first ?? User()
     }
     
     /// 保存されているeventを返す
@@ -64,6 +74,7 @@ final class RealmModel: ObservableObject {
         }
         
         let user = User()
+        user.createdDate = Date()
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         try! realm.write({
             realm.add(user)
@@ -104,6 +115,7 @@ final class RealmModel: ObservableObject {
 
 final class User: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var createdDate: Date
     @Persisted var events: RealmSwift.List<Event>
     
 //    init(id: String = UUID().uuidString, events: RealmSwift.List<Event>) {
@@ -123,6 +135,7 @@ class Event: Object, ObjectKeyIdentifiable {
     @Persisted var backgroundColor: BackgroundColor
 //    @Persisted(originProperty: "events") var user: LinkingObjects<User>
     @Persisted var displayStyle: EventDisplayStyle
+    @Persisted var displaySize: Int
     @Persisted var frequentType: FrequentType = .never
     @Persisted var eventType: EventType = .countup
     @Persisted var dayAtMonthly: Int = 1
@@ -156,11 +169,12 @@ class Event: Object, ObjectKeyIdentifiable {
         
     }
     
-    init(title: String, date: Date, textColor: TextColor, backgroundColor: BackgroundColor, displayStyle: EventDisplayStyle, fontSize: Float, frequentType: FrequentType = .never, eventType: EventType = .countup, dayAtMonthly: Int = 1, hour: Int = 0, minute: Int = 0, dayOfWeek: DayOfWeek = .sunday, displayHour: Bool = true, displayMinute: Bool = true, displaySecond: Bool = false, image: UIImage? = nil, displayLang: DisplayLang = .jp) {
+    init(title: String, date: Date, textColor: TextColor, backgroundColor: BackgroundColor, displayStyle: EventDisplayStyle, fontSize: Float, displaySize: Int = 0, frequentType: FrequentType = .never, eventType: EventType = .countup, dayAtMonthly: Int = 1, hour: Int = 0, minute: Int = 0, dayOfWeek: DayOfWeek = .sunday, displayHour: Bool = true, displayMinute: Bool = true, displaySecond: Bool = false, image: UIImage? = nil, displayLang: DisplayLang = .jp) {
         super.init()
         self.id = id
         self.title = title
         self.date = date
+        self.displaySize = displaySize
         self.frequentType = frequentType
         self.eventType = eventType
         self.textColor = textColor

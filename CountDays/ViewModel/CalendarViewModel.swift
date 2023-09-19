@@ -16,36 +16,71 @@ class CalendarViewModel: ObservableObject {
         return cal
     }()
     
-    static func getDates(target: Date, eventType: EventType, frequentType: FrequentType, dayOfWeek: DayOfWeek = .sunday) -> (days: Int, hours: Int, minutes: Int, seconds: Int) {
+    
+    static func getDates(target: Date, eventType: EventType, frequentType: FrequentType, dayOfWeek: DayOfWeek = .sunday) -> (fixedDate: Date, days: Int, hours: Int, minutes: Int, seconds: Int) {
         
         switch eventType {
         case .countup:
             let component = calendar.dateComponents([.day, .hour, .minute, .second], from: target, to: Date())
-            return (component.day ?? 1, component.hour ?? 0, component.minute ?? 0, component.second ?? 0)
+            return (target, component.day ?? 1, component.hour ?? 0, component.minute ?? 0, component.second ?? 0)
         case .countdown:
             
             switch frequentType {
             case .never:
                 let component = calendar.dateComponents([.day, .hour, .minute, .second], from: Date(), to: target)
-                return (component.day ?? 1, component.hour  ?? 0, component.minute ?? 0, component.second ?? 0)
+                return (target, component.day ?? 1, component.hour  ?? 0, component.minute ?? 0, component.second ?? 0)
             case .annual:
                 return getAnnualDate(target: target)
             case .monthly:
-                let day = calendar.dateComponents([.day], from: target).day!
-                let date = calendar.date(bySetting: .day, value: day, of: Date())
-                let component = calendar.dateComponents([.day, .hour, .minute, .second], from: Date(), to: date!)
+                /// 日にち、時間、分をDate()にセット
+                /// セットした日付が過去なら月に+1
+                let day = calendar.dateComponents([.day, .hour, .minute, .second], from: target).day!
+                let hour = calendar.dateComponents([.day, .hour, .minute, .second], from: target).hour!
+                let minute = calendar.dateComponents([.day, .hour, .minute, .second], from: target).minute!
+                let second = calendar.dateComponents([.day, .hour, .minute, .second], from: target).second!
+
+                var date = calendar.date(bySetting: .day, value: day, of: Date())!
+                date = calendar.date(bySettingHour: hour, minute: minute, second: second, of: date)!
                 
-                return (component.day ?? 1, component.hour ?? 0, component.minute ?? 0, component.second ?? 0)
+                if isPastDate(date) {
+                    date = calendar.date(byAdding: .month, value: 1, to: date)!
+                }
+                
+                let component = calendar.dateComponents([.month, .day, .hour, .minute, .second], from: Date(), to: date)
+//                if isPastDate(date) {
+//                    component.month! += 1
+//                }
+                
+                return (date, component.day ?? 1, component.hour ?? 0, component.minute ?? 0, component.second ?? 0)
             case .weekly:
 //                print("target")
 //                print(target)
-                var a = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: target)!
-                /// もし入力値がマイナスなら、1週間後にする
-                if a.timeIntervalSince(Date()) < 0 {
-                    a.addTimeInterval(60*60*24*7)
+//                let weekday = DayOfWeek(rawValue: dayOfWeek.rawValue)?.rawValue ?? 0
+//                let today = calendar.component(.weekday, from: Date())
+                let hour = calendar.dateComponents([.day, .hour, .minute, .second], from: target).hour!
+                let minute = calendar.dateComponents([.day, .hour, .minute, .second], from: target).minute!
+                let second = calendar.dateComponents([.day, .hour, .minute, .second], from: target).second!
+                let weekday = dayOfWeek.rawValue
+                let today = calendar.component(.weekday, from: Date()) - 1
+                let diff = abs(weekday - today)
+                
+                var updateDate = calendar.date(bySettingHour: hour, minute: minute, second: second, of: Date())!
+                updateDate = calendar.date(byAdding: .day, value: diff, to: updateDate)!
+                
+                if isPastDate(updateDate) {
+                    updateDate = calendar.date(byAdding: .day, value: 7, to: updateDate)!
                 }
                 
-                let component = calendar.dateComponents([.day, .hour, .minute, .second], from: Date(), to: a)
+//                return updateDate
+//                let diff = weekday - today < 0 ? weekday - today + 7 : weekday - today
+//                var a = calendar.date(bySettingHour: hour, minute: minute, second: second, of: Date())!
+//                a = calendar.date(byAdding: .day, value: -diff, to: a)!
+                /// もし入力値がマイナスなら、1週間後にする
+//                if a.timeIntervalSince(Date()) < 0 {
+//                    a.addTimeInterval(60*60*24*7)
+//                }
+                
+                let component = calendar.dateComponents([.day, .hour, .minute, .second], from: Date(), to: updateDate)
                 
 //                let today = calendar.component(.weekday, from: Date())
 //                let target = calendar.component(.weekday, from: target)
@@ -55,9 +90,16 @@ class CalendarViewModel: ObservableObject {
 //                let day = (target - today) < 0 ? target - today + 7 : target - today
 //                let date = calendar.date(bySetting: .day, value: day, of: Date())
 //                let component = calendar.dateComponents([.day, .hour, .minute, .second], from: Date(), to: date!)
-                return (component.day ?? 1, component.hour ?? 0, component.minute ?? 0, component.second ?? 0)
+                return (updateDate, component.day ?? 1, component.hour ?? 0, component.minute ?? 0, component.second ?? 0)
             }
         }
+    }
+    
+    /// フォーマットされた日付に変換
+    static func getFormattedDate(_ date: Date) -> String {
+        let format = DateFormatter()
+        format.dateFormat = DateFormatter.dateFormat(fromTemplate: "ydMMM\nHH:mm", options: 0, locale: Locale(identifier: "ja_JP"))
+        return format.string(from: date)
     }
     
     static func getDay(target: Date, eventType: EventType, frequentType: FrequentType) -> Int? {
@@ -180,19 +222,28 @@ class CalendarViewModel: ObservableObject {
     }
     
     /// 毎年観測する場合の日付データ
-    static func getAnnualDate(target: Date) -> (days: Int, hours: Int, minutes: Int, seconds: Int) {
+    static func getAnnualDate(target: Date) -> (fixedDate: Date, days: Int, hours: Int, minutes: Int, seconds: Int) {
 //        var targetDate = target
         let thisYear = calendar.dateComponents([.year], from: Date()).year
         var component = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: target)
+        component.year = thisYear
         
-        /// 日付が過去の場合
-        if isPastDate(target) {
-            component.year = thisYear! + 1
+        /// 年を今年にしたものを過去のものかどうか
+        /// 過去のものであれば、年を+1する
+        let date = calendar.date(from: component)!
+        if isPastDate(date) {
+            component.year! += 1
         }
+//        /// 日付が過去の場合
+//        if isPastDate(target) {
+//            component.year = thisYear! + 1
+//        } else {
+//            component.year = thisYear!
+//        }
         let targetDate = DateComponents(calendar: calendar, year: component.year, month: component.month, day: component.day, hour: component.hour, minute: component.minute, second: component.second).date
         let components = calendar.dateComponents([.day, .hour, .minute, .second], from: Date(), to: targetDate!)
         
-        return (components.day ?? 0, components.hour ?? 0, components.minute ?? 0, components.second ?? 0)
+        return (target, components.day ?? 0, components.hour ?? 0, components.minute ?? 0, components.second ?? 0)
     }
     
     /// 毎週観測する場合の日付データ

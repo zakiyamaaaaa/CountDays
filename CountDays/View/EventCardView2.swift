@@ -89,22 +89,70 @@ struct EventCardView2: View {
         }
     }
     
-    private var standardView: some View {
-        ZStack {
-            let date = eventVM.selectedDate
+    let calendar: Calendar = {
+        var calendar = Calendar(identifier: .gregorian)
+            calendar.locale = .init(identifier: "ja_JP")
+            return calendar
+        }()
+    
+    private var standardTimeView: some View {
+        VStack(alignment: .leading) {
+            
             let frequentType = eventVM.frequentType
             let eventType = eventVM.eventType
+            let date =  CalendarViewModel.getDates(target: eventVM.selectedDate, eventType: eventType, frequentType: frequentType , dayOfWeek: eventVM.dayOfWeek ).fixedDate
             let displayLang = eventVM.displayLang
+            let day = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType , dayOfWeek: eventVM.dayOfWeek ).days
+            let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType, dayOfWeek: eventVM.dayOfWeek).hours
+            let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType, dayOfWeek: eventVM.dayOfWeek).minutes
+            let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType, dayOfWeek: eventVM.dayOfWeek).seconds
             
-            let day = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).days
-            let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
-            let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
-            let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
-            let dayText = displayLang.dateText.day
-            let hourText = displayLang.dateText.hour
-            let minuteText = displayLang.dateText.minute
-            let secondText = displayLang.dateText.second
+            let dateComponent = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date, to: Date())
             
+            let relative1 = calendar.date(byAdding: .day, value: dateComponent.day!, to: date)!
+            let relative2 = calendar.date(byAdding: .month, value: dateComponent.month!, to: relative1)!
+            let relative3 = calendar.date(byAdding: .year, value: dateComponent.year!, to: relative2)!
+            
+            /// カウントダウンが終了した場合
+            if second <= 0 && eventType == .countdown && frequentType == .never {
+                
+                HStackLayout(alignment: .center) {
+                    Text(displayLang.finishText)
+                    Image(systemName: "checkmark.circle.fill")
+                }
+                
+                
+                Text(CalendarViewModel.getFormattedDate(eventVM.selectedDate))
+                    .padding(.top, 1)
+                
+                
+            } else if abs(day) > 0 {
+                Text(day.description + displayLang.dateText.day)
+                    .font(.system(.title))
+                    .fontWeight(.semibold)
+                
+                Text(relative3, style: .relative)
+                    .environment(\.calendar, calendar)
+            } else if abs(hour) > 0 {
+                let relative4 = calendar.date(byAdding: .hour, value: dateComponent.hour!, to: relative3)!
+                Text(hour.description + displayLang.dateText.hour)
+                    .font(.system(.title))
+                    .fontWeight(.semibold)
+                
+                Text(relative4, style: .relative)
+                    .environment(\.calendar, calendar)
+            } else if abs(minute) > 0 {
+                Text(relative3, style: .relative)
+                    .font(.system(.title2))
+                    .fontWeight(.semibold)
+                    .environment(\.calendar, calendar)
+            }
+        }
+        .foregroundColor(.white)
+    }
+    
+    private var standardView: some View {
+        ZStack {
             
             if eventVM.backgroundColor == .none, let image = eventVM.image {
                 Image(uiImage: image)
@@ -114,34 +162,13 @@ struct EventCardView2: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             
-
+            
             VStack(alignment: .leading) {
                 Text(eventVM.text.isEmpty ? "イベント名" : eventVM.text)
                     .padding(.vertical, 10)
                 Spacer()
 
-                if second < 0 && eventType == .countdown && frequentType == .never {
-                    HStackLayout(alignment: .center) {
-                        Text(displayLang.finishText)
-
-                        Image(systemName: "checkmark.circle.fill")
-                    }
-                    Spacer()
-                } else {
-                    Text(day.description + dayText)
-                        .font(.system(size: 30))
-                    HStack() {
-
-                        Text(hour.description + hourText)
-                            .isHidden(hidden: !eventVM.showHour)
-                        Text(minute.description + minuteText)
-                            .isHidden(hidden: !eventVM.showMinute)
-
-                    }
-
-                    Text(second.description + secondText)
-                        .isHidden(hidden: !eventVM.showSecond)
-                }
+                standardTimeView
 
             }
             .foregroundColor(eventVM.textColor.color)

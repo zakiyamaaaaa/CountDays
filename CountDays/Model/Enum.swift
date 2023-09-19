@@ -68,13 +68,13 @@ enum FrequentType: String, CaseIterable, Identifiable, PersistableEnum {
 }
 
 enum DayOfWeek: Int, CaseIterable, PersistableEnum {
-    case sunday
-    case monday
-    case tuesday
-    case wednesday
-    case thursday
-    case friday
-    case saturday
+    case sunday = 7
+    case monday = 1
+    case tuesday = 2
+    case wednesday = 3
+    case thursday = 4
+    case friday = 5
+    case saturday = 6
     
     var stringValue: String {
         switch self {
