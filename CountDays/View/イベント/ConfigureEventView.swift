@@ -25,6 +25,7 @@ struct ConfigureEventView: View {
     @State private var isSecondButtonSelected = false
     @State private var isThirdButtonSelected = false
     @State private var isFourthButtonSelected = false
+    @State private var trashButtonSelected = false
     @State private var focusButton = false
     @State var selectedStyleIndex = 0
     @State var selectingStyleIndex = 0
@@ -56,12 +57,11 @@ struct ConfigureEventView: View {
     @State var showStyleAlert = false
     @State private var showDeleteAlert = false
     @State var showStyleDetailConfiguration = false
-    
+    @State private var opacity: Double = 0
     private let bgColorList: [BackgroundColor] = BackgroundColor.allCases
     private let txtColorList: [TextColor] = TextColor.allCases
     
     var body: some View {
-        NavigationStack {
             
             VStack(spacing: 0) {
                 
@@ -79,34 +79,38 @@ struct ConfigureEventView: View {
                     }
                     .hidden()
                     
-//                    let date = dateViewModel.selectedDate
-//                    let style: EventDisplayStyle = isPurchased ? EventDisplayStyle(rawValue: selectedStyleIndex)! : .standard
-                     ZStack {
+                    VStack(alignment: .center) {
                          HStack {
-                             
+                             Spacer()
+                             Spacer()
                              EventCardView2(event: event,eventVM: eventCardViewModel)
-                         }
-                         Button {
-                             self.showDeleteAlert.toggle()
-                             FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewDeleteEvent)
-                         } label: {
-                             Image(systemName: "trash.fill")
-                         }
-                         .opacity(isCreation ? 0 : 1)
-                         .buttonStyle(EventConfigurationButtonStyle(active: $isSecondButtonSelected))
-                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                         .padding(.trailing, 10)
-                         .offset(x:0, y: isTrashAnimation ? 0 : 100)
-                         .animation(.easeIn.delay(0.3), value: isTrashAnimation)
-                         .onAppear {
-                             self.isTrashAnimation.toggle()
+                             
+                             if isCreation {
+                                 Spacer()
+                             } else {
+                                 Button {
+                                     self.showDeleteAlert.toggle()
+                                     trashButtonSelected.toggle()
+                                     FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewDeleteEvent)
+                                 } label: {
+                                     Image(systemName: "trash.fill")
+                                     
+                                 }
+                                 .buttonStyle(EventConfigurationButtonStyle(active: $trashButtonSelected))
+                                 .opacity(opacity)
+                                 .offset(y: opacity == 0 ? WidgetConfig.small.size.height/2 :  WidgetConfig.small.size.height/2 - 25)
+                                 .animation(.easeIn(duration: 0.7).delay(0.3), value: opacity)
+                             }
+                             Spacer()
                          }
                          .alert("このイベントを消去しますか？", isPresented: $showDeleteAlert) {
+                             
                              Button("キャンセル", role: .cancel) {
+                                 trashButtonSelected.toggle()
                                  FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapDeleteEventAlertCancel)
                              }
                              Button("消去", role: .destructive) {
-                                 
+                                 trashButtonSelected.toggle()
                                  $event.delete()
                                  // 削除処理
 //                                 RealmViewModel().deleteEvent(event: a)
@@ -147,25 +151,27 @@ struct ConfigureEventView: View {
                     }
                 }
             }
-        }
-        .task {
-            guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }
-            
-            do {
-                try await self.isPurchased = store.isPurchased(product)
+            .task {
+                guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }
                 
-                #if DEBUG
-                self.isPurchased = true
-                #endif
-                
-            } catch(let error) {
-                print(error.localizedDescription)
+                do {
+                    try await self.isPurchased = store.isPurchased(product)
+                    
+                    #if DEBUG
+                    self.isPurchased = true
+                    #endif
+                    
+                } catch(let error) {
+                    print(error.localizedDescription)
+                }
+            }.onAppear{
+                dateViewModel.selectedDate = event.date
+                opacity = 1.0
             }
         }
-        .onAppear{
-            dateViewModel.selectedDate = event.date
-        }
-    }
+        
+        
+//    }
     @State private var bounce = false
     /// 設定選択ビュー
     private var configurationSelectionView: some View {
@@ -323,7 +329,7 @@ struct ConfigureEventView: View {
         VStack {
             HStack {
                 ZStack(alignment: .leading) {
-                    
+//
                     TextField("", text: $eventCardViewModel.text,
                               onEditingChanged: { editing in
                     })
@@ -349,7 +355,7 @@ struct ConfigureEventView: View {
                             
                     }
                 }
-                
+//
                 if focusField {
                     Button {
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapEventNameButton)
@@ -364,8 +370,8 @@ struct ConfigureEventView: View {
                     .clipShape(Circle())
                 }
             }.animation(.spring(), value: focusField)
-            
-            
+//
+//
             Button {
                 isShowSheet.toggle()
                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureDateButton)
@@ -378,62 +384,16 @@ struct ConfigureEventView: View {
                         .cornerRadius(20)
                         .padding(.leading)
                         .padding(.bottom, 3)
-                    HStack {
-                        
-                        VStack {
-                            
-                            
-                            Image(systemName: "calendar")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .padding(.horizontal)
-                            
-                            if eventCardViewModel.frequentType != .never {
-                                Text("リピート")
-                                    .font(.system(size: 10))
-                                    .foregroundColor(.white)
-                                    .background(Color.red)
-                            }
-                        }
-                        
-                        VStack(alignment: .leading) {
-                            
-                            HStack {
-                                let date = dateViewModel.selectedDate
-                                let year = dateViewModel.getYearText(date: date)
-                                let month = dateViewModel.getMonthText(date: date)
-                                let day = dateViewModel.getDayText(date: date)
-                                switch eventCardViewModel.frequentType {
-                                case .never:
-                                    //                                Text(dateViewModel.dateText(date: date))
-                                    Text(year + "/" + month + "/" + day)
-                                case .annual:
-                                    Text("毎年：")
-                                    Text(month + "月" + day + "日")
-                                case .monthly:
-                                    Text("毎月：")
-                                    Text(day + "日")
-                                case .weekly:
-                                    Text("毎週：")
-                                    Text(eventCardViewModel.dayOfWeek.stringValue)
-                                }
-                            }
-                            Text("終日")
-                            
-                        }
-                        .foregroundColor(.white)
-                        Spacer()
-                    }
-                    
+                    dateView1
+//
                 }.sheet(isPresented: $isShowSheet) {
 //                    ConfigureDateView(eventType: $eventType, frequentType: eventCardViewModel.frequentType, dateViewModel: _dateViewModel, weeklyDate: $dayOfWeek, eventViewModel: _eventCardViewModel)
                     ConfigureDateView(eventType: $eventCardViewModel.eventType, frequentType: $eventCardViewModel.frequentType, dateViewModel: _dateViewModel, weeklyDate: $eventCardViewModel.dayOfWeek, eventViewModel: _eventCardViewModel)
-                    
                 }.frame(height: 120.0)
                     .frame(alignment: .leading)
                     .foregroundColor(.black)
                     .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.highlighted))
-                
+
             }
                 
                 Spacer()
@@ -445,6 +405,56 @@ struct ConfigureEventView: View {
     }
     
     @State var number = 0
+    
+    private var dateView1: some View {
+        HStack {
+//
+            VStack {
+                
+                
+                Image(systemName: "calendar")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .padding(.horizontal)
+                
+                if eventCardViewModel.frequentType != .never {
+                    Text("リピート")
+                        .font(.system(size: 10))
+                        .foregroundColor(.white)
+                        .background(Color.red)
+                }
+            }
+//
+            VStack(alignment: .leading) {
+                
+                HStack {
+                    let date = dateViewModel.selectedDate
+                    let year = dateViewModel.getYearText(date: date)
+                    let month = dateViewModel.getMonthText(date: date)
+                    let day = dateViewModel.getDayText(date: date)
+                    switch eventCardViewModel.frequentType {
+                    case .never:
+                        //                                Text(dateViewModel.dateText(date: date))
+                        Text(year + "/" + month + "/" + day)
+                    case .annual:
+                        Text("毎年：")
+                        Text(month + "月" + day + "日")
+                    case .monthly:
+                        Text("毎月：")
+                        Text(day + "日")
+                    case .weekly:
+                        Text("毎週：")
+                        Text(eventCardViewModel.dayOfWeek.stringValue)
+                    }
+                }
+                Text("終日")
+                
+            }
+            .foregroundColor(.white)
+            Spacer()
+        }
+    }
+    
     /// イベントの表示スタイルを編集するビュー
     ///他のところで使われていないので、ファンクションに切り出す方が良いかも
     private var styleView: some View {
@@ -830,7 +840,7 @@ struct ConfigureEventView_Previews: PreviewProvider {
     @State static var date = EventCardViewModel.defaultStatus.date
     @StateObject static var store = Store()
     static var previews: some View {
-        ConfigureEventView(realmMock: RealmMockStore(), event: $event, isCreation: true, eventCardViewModel: eventViewModel).environmentObject(store)
+        ConfigureEventView(realmMock: RealmMockStore(), event: $event, isCreation: false, eventCardViewModel: eventViewModel).environmentObject(store)
     }
 }
 

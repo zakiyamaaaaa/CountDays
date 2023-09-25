@@ -15,7 +15,7 @@ struct AddEventView: View {
         ZStack {
             Rectangle()
                 .foregroundColor(ColorUtility.secondary)
-                .frame(width: width*1/3 + 10, height: width*1/3 + 10)
+                .widgetFrame()
                 .cornerRadius(30)
             VStack {
                 Text("+")

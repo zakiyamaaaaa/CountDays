@@ -18,6 +18,12 @@ extension UIImage {
     }
 }
 
+extension View {
+    func widgetFrame() -> some View {
+        frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height)
+    }
+}
+
 /// スクリーンショット
 //extension View {
 //    func snapshot() -> UIImage {

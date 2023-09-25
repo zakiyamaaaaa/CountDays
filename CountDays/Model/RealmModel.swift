@@ -44,8 +44,8 @@ import SwiftUI
 
 final class RealmModel: ObservableObject {
     /// TODO: スキーマバージョンを1になおす
-    private static var config = Realm.Configuration(schemaVersion: 0)
-    private static var realm: Realm {
+    static var config = Realm.Configuration(schemaVersion: 3)
+    static var realm: Realm {
         config.fileURL = fileUrl
         print("schema: \(config.schemaVersion)")
         return try! Realm(configuration: config)
@@ -68,7 +68,10 @@ final class RealmModel: ObservableObject {
     
     /// Userデータを登録する
     static func registerUser() {
+//        let config = Realm.Configuration(schemaVersion: 1)
+//        Realm.Configuration.defaultConfiguration = config
         /// Userのデータがないかどうかチェック
+//        let realm = try! Realm()
         if realm.objects(User.self).first != nil {
             return
         }

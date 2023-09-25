@@ -61,8 +61,9 @@ struct EventCardView2: View {
             ZStack {
                 
                 Rectangle()
-                    .foregroundColor(eventVM.backgroundColor.color)
-                    .frame(width: 150, height: 150)
+                    .foregroundStyle(eventVM.backgroundColor.color ?? .white)
+//                    .foregroundColor(eventVM.backgroundColor.color)
+                    .widgetFrame()
                     .cornerRadius(30)
                 
                 if let displayStyle {
@@ -114,7 +115,7 @@ struct EventCardView2: View {
             let relative3 = calendar.date(byAdding: .year, value: dateComponent.year!, to: relative2)!
             
             /// カウントダウンが終了した場合
-            if second <= 0 && eventType == .countdown && frequentType == .never {
+            if second < 0 && eventType == .countdown && frequentType == .never {
                 
                 HStackLayout(alignment: .center) {
                     Text(displayLang.finishText)
@@ -148,7 +149,6 @@ struct EventCardView2: View {
                     .environment(\.calendar, calendar)
             }
         }
-        .foregroundColor(.white)
     }
     
     private var standardView: some View {
@@ -158,7 +158,7 @@ struct EventCardView2: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 150, height: 150)
+                    .widgetFrame()
                     .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             
@@ -172,8 +172,10 @@ struct EventCardView2: View {
 
             }
             .foregroundColor(eventVM.textColor.color)
-            .frame(width: width*1/3, height: width*1/3)
             .padding()
+            .widgetFrame()
+            .widgetBackground(eventVM.backgroundColor.color)
+            
         }
     }
     
@@ -224,7 +226,7 @@ struct EventCardView2: View {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 150, height: 150)
+                        .widgetFrame()
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
                 VStack {
@@ -299,7 +301,7 @@ struct EventCardView2: View {
                         Image(uiImage: image)
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 150, height: 150)
+                            .widgetFrame()
                         //                        .clipShape(RoundedRectangle(cornerRadius: 20))
                     } else {
                         Rectangle()

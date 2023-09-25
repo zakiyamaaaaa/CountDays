@@ -35,7 +35,7 @@ struct MainView: View {
     ]
     let itemPerRow: CGFloat = 5
     let horizontalSpacing: CGFloat = 15
-    @ObservedResults(Event.self, configuration: Realm.Configuration(fileURL: RealmModel.fileUrl)) var realmCards
+    @ObservedResults(Event.self, configuration: RealmModel.config) var realmCards
     @State var selectedEvent = Event()
     @State var selectedIndex = 0
     var selectedEventStyle: EventDisplayStyle = .standard

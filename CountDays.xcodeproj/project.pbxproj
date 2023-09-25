@@ -43,26 +43,31 @@
 		394A5CE02A971567006A7232 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CD82A971566006A7232 /* TestView.swift */; };
 		394A5CE12A971567006A7232 /* CalendarView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CD92A971567006A7232 /* CalendarView2.swift */; };
 		394A5CE32A9715DB006A7232 /* MockStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CE22A9715DA006A7232 /* MockStore.swift */; };
-		394A5CED2A971753006A7232 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394A5CEC2A971753006A7232 /* WidgetKit.framework */; };
-		394A5CEF2A971753006A7232 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394A5CEE2A971753006A7232 /* SwiftUI.framework */; };
-		394A5CF22A971753006A7232 /* CountDaysWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CF12A971753006A7232 /* CountDaysWidgetBundle.swift */; };
-		394A5CF42A971753006A7232 /* CountDaysWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CF32A971753006A7232 /* CountDaysWidgetLiveActivity.swift */; };
-		394A5CF62A971753006A7232 /* CountDaysWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CF52A971753006A7232 /* CountDaysWidget.swift */; };
-		394A5CF92A971754006A7232 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 394A5CF82A971754006A7232 /* Assets.xcassets */; };
-		394A5CFB2A971754006A7232 /* CountDaysWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CF72A971753006A7232 /* CountDaysWidget.intentdefinition */; };
-		394A5CFC2A971754006A7232 /* CountDaysWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CF72A971753006A7232 /* CountDaysWidget.intentdefinition */; };
-		394A5CFF2A971754006A7232 /* CountDaysWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 394A5CEA2A971753006A7232 /* CountDaysWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		394A5D062A97183D006A7232 /* CountDaysWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CF52A971753006A7232 /* CountDaysWidget.swift */; };
-		394A5D072A971857006A7232 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA42A9713C3006A7232 /* RealmModel.swift */; };
-		394A5D0C2A971995006A7232 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB92A97151A006A7232 /* CalendarViewModel.swift */; };
-		394A5D0D2A9719A2006A7232 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA62A9713C3006A7232 /* Color.swift */; };
-		394A5D0F2A9719AC006A7232 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA72A9713C3006A7232 /* Enum.swift */; };
+		39560F102ABF1DEE000A623D /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA42A9713C3006A7232 /* RealmModel.swift */; };
+		39560F112ABF1DF5000A623D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA62A9713C3006A7232 /* Color.swift */; };
+		39560F122ABF1DFC000A623D /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA72A9713C3006A7232 /* Enum.swift */; };
+		39560F132ABF1E10000A623D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA6E2AA84656001AE0D7 /* Extension.swift */; };
+		39560F142ABF1E24000A623D /* EventCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB62A97151A006A7232 /* EventCardViewModel.swift */; };
+		39560F152ABF1E5C000A623D /* WidgetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D342ABA9F6B0019CEFB /* WidgetConfig.swift */; };
+		39560F162ABF1EAA000A623D /* RealmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB72A97151A006A7232 /* RealmViewModel.swift */; };
+		39560F172ABF1FD0000A623D /* EventCardView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA812AAEB518001AE0D7 /* EventCardView2.swift */; };
+		39560F182ABF1FF5000A623D /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB92A97151A006A7232 /* CalendarViewModel.swift */; };
+		39905D352ABA9F6B0019CEFB /* WidgetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D342ABA9F6B0019CEFB /* WidgetConfig.swift */; };
+		39905D652ABAF6020019CEFB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394A5CEC2A971753006A7232 /* WidgetKit.framework */; };
+		39905D662ABAF6020019CEFB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394A5CEE2A971753006A7232 /* SwiftUI.framework */; };
+		39905D692ABAF6020019CEFB /* WidgetExtensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D682ABAF6020019CEFB /* WidgetExtensionBundle.swift */; };
+		39905D6B2ABAF6020019CEFB /* WidgetExtensionLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6A2ABAF6020019CEFB /* WidgetExtensionLiveActivity.swift */; };
+		39905D6D2ABAF6020019CEFB /* WidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6C2ABAF6020019CEFB /* WidgetExtension.swift */; };
+		39905D702ABAF6030019CEFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39905D6F2ABAF6030019CEFB /* Assets.xcassets */; };
+		39905D722ABAF6030019CEFB /* WidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6E2ABAF6020019CEFB /* WidgetExtension.intentdefinition */; };
+		39905D732ABAF6030019CEFB /* WidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6E2ABAF6020019CEFB /* WidgetExtension.intentdefinition */; };
+		39905D762ABAF6030019CEFB /* WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 39905D642ABAF6020019CEFB /* WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		39905D7B2ABAF61A0019CEFB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39905D7A2ABAF61A0019CEFB /* Realm */; };
+		39905D7D2ABAF61A0019CEFB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39905D7C2ABAF61A0019CEFB /* RealmSwift */; };
+		39905D7F2ABAFC3B0019CEFB /* WidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6C2ABAF6020019CEFB /* WidgetExtension.swift */; };
 		39FFFA532A973D6E001AE0D7 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA522A973D6E001AE0D7 /* Algorithms */; };
 		39FFFA562A973D7A001AE0D7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA552A973D7A001AE0D7 /* Realm */; };
 		39FFFA582A973D7A001AE0D7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA572A973D7A001AE0D7 /* RealmSwift */; };
-		39FFFA5A2A973D99001AE0D7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA592A973D99001AE0D7 /* Realm */; };
-		39FFFA5C2A973D99001AE0D7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA5B2A973D99001AE0D7 /* RealmSwift */; };
-		39FFFA5D2A975695001AE0D7 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CB82A97151A006A7232 /* DateViewModel.swift */; };
 		39FFFA5F2A9992C0001AE0D7 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */; };
 		39FFFA612AA04FFB001AE0D7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */; };
 		39FFFA642AA07919001AE0D7 /* UpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA632AA07919001AE0D7 /* UpgradeView.swift */; };
@@ -71,7 +76,6 @@
 		39FFFA6A2AA74BF1001AE0D7 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA692AA74BF1001AE0D7 /* ImageModel.swift */; };
 		39FFFA6C2AA7A783001AE0D7 /* VersionUpCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA6B2AA7A783001AE0D7 /* VersionUpCheck.swift */; };
 		39FFFA6F2AA84656001AE0D7 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA6E2AA84656001AE0D7 /* Extension.swift */; };
-		39FFFA702AA8479F001AE0D7 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA6E2AA84656001AE0D7 /* Extension.swift */; };
 		39FFFA722AA86667001AE0D7 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA712AA86667001AE0D7 /* WelcomeView.swift */; };
 		39FFFA742AA872B2001AE0D7 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA732AA872B2001AE0D7 /* AppStorage.swift */; };
 		39FFFA762AA8A7A2001AE0D7 /* BounceButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA752AA8A7A2001AE0D7 /* BounceButtonStyle.swift */; };
@@ -82,7 +86,6 @@
 		39FFFA842AB19325001AE0D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 39FFFA832AB19325001AE0D7 /* GoogleService-Info.plist */; };
 		39FFFA852AB19325001AE0D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 39FFFA832AB19325001AE0D7 /* GoogleService-Info.plist */; };
 		39FFFA862AB19325001AE0D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 39FFFA832AB19325001AE0D7 /* GoogleService-Info.plist */; };
-		39FFFA872AB19325001AE0D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 39FFFA832AB19325001AE0D7 /* GoogleService-Info.plist */; };
 		39FFFAB32AB1A751001AE0D7 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFAB22AB1A751001AE0D7 /* FirebaseAnalyticsOnDeviceConversion */; };
 		39FFFAB52AB1A751001AE0D7 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFAB42AB1A751001AE0D7 /* FirebaseAnalyticsSwift */; };
 		39FFFAB72AB1A751001AE0D7 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFAB62AB1A751001AE0D7 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -127,12 +130,12 @@
 			remoteGlobalIDString = 394A5C6F2A9712DF006A7232;
 			remoteInfo = CountDays;
 		};
-		394A5CFD2A971754006A7232 /* PBXContainerItemProxy */ = {
+		39905D742ABAF6030019CEFB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 394A5C682A9712DF006A7232 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 394A5CE92A971753006A7232;
-			remoteInfo = CountDaysWidgetExtension;
+			remoteGlobalIDString = 39905D632ABAF6020019CEFB;
+			remoteInfo = WidgetExtensionExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -143,7 +146,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				394A5CFF2A971754006A7232 /* CountDaysWidgetExtension.appex in Embed Foundation Extensions */,
+				39905D762ABAF6030019CEFB /* WidgetExtensionExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,17 +193,19 @@
 		394A5CD82A971566006A7232 /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		394A5CD92A971567006A7232 /* CalendarView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView2.swift; sourceTree = "<group>"; };
 		394A5CE22A9715DA006A7232 /* MockStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockStore.swift; sourceTree = "<group>"; };
-		394A5CEA2A971753006A7232 /* CountDaysWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CountDaysWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		394A5CEC2A971753006A7232 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		394A5CEE2A971753006A7232 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		394A5CF12A971753006A7232 /* CountDaysWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDaysWidgetBundle.swift; sourceTree = "<group>"; };
-		394A5CF32A971753006A7232 /* CountDaysWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDaysWidgetLiveActivity.swift; sourceTree = "<group>"; };
-		394A5CF52A971753006A7232 /* CountDaysWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDaysWidget.swift; sourceTree = "<group>"; };
-		394A5CF72A971753006A7232 /* CountDaysWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = CountDaysWidget.intentdefinition; sourceTree = "<group>"; };
-		394A5CF82A971754006A7232 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		394A5CFA2A971754006A7232 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		394A5D042A97178B006A7232 /* CountDays.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CountDays.entitlements; sourceTree = "<group>"; };
 		394A5D052A9717D3006A7232 /* CountDaysWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CountDaysWidgetExtension.entitlements; sourceTree = "<group>"; };
+		39905D342ABA9F6B0019CEFB /* WidgetConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConfig.swift; sourceTree = "<group>"; };
+		39905D552ABAF38B0019CEFB /* WidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
+		39905D642ABAF6020019CEFB /* WidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		39905D682ABAF6020019CEFB /* WidgetExtensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtensionBundle.swift; sourceTree = "<group>"; };
+		39905D6A2ABAF6020019CEFB /* WidgetExtensionLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtensionLiveActivity.swift; sourceTree = "<group>"; };
+		39905D6C2ABAF6020019CEFB /* WidgetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtension.swift; sourceTree = "<group>"; };
+		39905D6E2ABAF6020019CEFB /* WidgetExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WidgetExtension.intentdefinition; sourceTree = "<group>"; };
+		39905D6F2ABAF6030019CEFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		39905D712ABAF6030019CEFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
 		39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		39FFFA622AA07366001AE0D7 /* StorekitTest.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StorekitTest.storekit; sourceTree = "<group>"; };
@@ -273,14 +278,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		394A5CE72A971753006A7232 /* Frameworks */ = {
+		39905D612ABAF6020019CEFB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39FFFA5C2A973D99001AE0D7 /* RealmSwift in Frameworks */,
-				39FFFA5A2A973D99001AE0D7 /* Realm in Frameworks */,
-				394A5CEF2A971753006A7232 /* SwiftUI.framework in Frameworks */,
-				394A5CED2A971753006A7232 /* WidgetKit.framework in Frameworks */,
+				39905D7D2ABAF61A0019CEFB /* RealmSwift in Frameworks */,
+				39905D7B2ABAF61A0019CEFB /* Realm in Frameworks */,
+				39905D662ABAF6020019CEFB /* SwiftUI.framework in Frameworks */,
+				39905D652ABAF6020019CEFB /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +295,7 @@
 		394A5C672A9712DF006A7232 = {
 			isa = PBXGroup;
 			children = (
+				39905D552ABAF38B0019CEFB /* WidgetExtensionExtension.entitlements */,
 				39FFFA622AA07366001AE0D7 /* StorekitTest.storekit */,
 				394A5D052A9717D3006A7232 /* CountDaysWidgetExtension.entitlements */,
 				394A5C722A9712DF006A7232 /* CountDays */,
@@ -302,7 +308,7 @@
 				39FFFA832AB19325001AE0D7 /* GoogleService-Info.plist */,
 				394A5C832A9712E0006A7232 /* CountDaysTests */,
 				394A5C8D2A9712E0006A7232 /* CountDaysUITests */,
-				394A5CF02A971753006A7232 /* CountDaysWidget */,
+				39905D672ABAF6020019CEFB /* WidgetExtension */,
 				394A5CEB2A971753006A7232 /* Frameworks */,
 				394A5C712A9712DF006A7232 /* Products */,
 			);
@@ -314,7 +320,7 @@
 				394A5C702A9712DF006A7232 /* CountDays.app */,
 				394A5C802A9712E0006A7232 /* CountDaysTests.xctest */,
 				394A5C8A2A9712E0006A7232 /* CountDaysUITests.xctest */,
-				394A5CEA2A971753006A7232 /* CountDaysWidgetExtension.appex */,
+				39905D642ABAF6020019CEFB /* WidgetExtensionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -327,7 +333,6 @@
 				394A5C9F2A9713A6006A7232 /* View */,
 				394A5CA02A9713AD006A7232 /* ViewModel */,
 				394A5CA12A9713B4006A7232 /* Model */,
-				394A5C732A9712DF006A7232 /* CountDaysApp.swift */,
 				394A5C9D2A971349006A7232 /* ContentView.swift */,
 				394A5C772A9712E0006A7232 /* Assets.xcassets */,
 				394A5C792A9712E0006A7232 /* Preview Content */,
@@ -364,6 +369,7 @@
 		394A5C9F2A9713A6006A7232 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				394A5C732A9712DF006A7232 /* CountDaysApp.swift */,
 				394A5CD62A971566006A7232 /* MainView.swift */,
 				394A5CE52A9716B2006A7232 /* イベント設定 */,
 				394A5CE42A9716A1006A7232 /* 設定 */,
@@ -408,6 +414,7 @@
 				39FFFA6B2AA7A783001AE0D7 /* VersionUpCheck.swift */,
 				39FFFA752AA8A7A2001AE0D7 /* BounceButtonStyle.swift */,
 				39FFFB452AB299C4001AE0D7 /* FirebaseAnalyticsManager.swift */,
+				39905D342ABA9F6B0019CEFB /* WidgetConfig.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -444,17 +451,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		394A5CF02A971753006A7232 /* CountDaysWidget */ = {
+		39905D672ABAF6020019CEFB /* WidgetExtension */ = {
 			isa = PBXGroup;
 			children = (
-				394A5CF12A971753006A7232 /* CountDaysWidgetBundle.swift */,
-				394A5CF32A971753006A7232 /* CountDaysWidgetLiveActivity.swift */,
-				394A5CF52A971753006A7232 /* CountDaysWidget.swift */,
-				394A5CF72A971753006A7232 /* CountDaysWidget.intentdefinition */,
-				394A5CF82A971754006A7232 /* Assets.xcassets */,
-				394A5CFA2A971754006A7232 /* Info.plist */,
+				39905D682ABAF6020019CEFB /* WidgetExtensionBundle.swift */,
+				39905D6A2ABAF6020019CEFB /* WidgetExtensionLiveActivity.swift */,
+				39905D6C2ABAF6020019CEFB /* WidgetExtension.swift */,
+				39905D6E2ABAF6020019CEFB /* WidgetExtension.intentdefinition */,
+				39905D6F2ABAF6030019CEFB /* Assets.xcassets */,
+				39905D712ABAF6030019CEFB /* Info.plist */,
 			);
-			path = CountDaysWidget;
+			path = WidgetExtension;
 			sourceTree = "<group>";
 		};
 		39FFFA802AAC3DC5001AE0D7 /* Sandbox */ = {
@@ -482,7 +489,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				394A5CFE2A971754006A7232 /* PBXTargetDependency */,
+				39905D752ABAF6030019CEFB /* PBXTargetDependency */,
 			);
 			name = CountDays;
 			packageProductDependencies = (
@@ -556,25 +563,25 @@
 			productReference = 394A5C8A2A9712E0006A7232 /* CountDaysUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		394A5CE92A971753006A7232 /* CountDaysWidgetExtension */ = {
+		39905D632ABAF6020019CEFB /* WidgetExtensionExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 394A5D002A971754006A7232 /* Build configuration list for PBXNativeTarget "CountDaysWidgetExtension" */;
+			buildConfigurationList = 39905D772ABAF6030019CEFB /* Build configuration list for PBXNativeTarget "WidgetExtensionExtension" */;
 			buildPhases = (
-				394A5CE62A971753006A7232 /* Sources */,
-				394A5CE72A971753006A7232 /* Frameworks */,
-				394A5CE82A971753006A7232 /* Resources */,
+				39905D602ABAF6020019CEFB /* Sources */,
+				39905D612ABAF6020019CEFB /* Frameworks */,
+				39905D622ABAF6020019CEFB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = CountDaysWidgetExtension;
+			name = WidgetExtensionExtension;
 			packageProductDependencies = (
-				39FFFA592A973D99001AE0D7 /* Realm */,
-				39FFFA5B2A973D99001AE0D7 /* RealmSwift */,
+				39905D7A2ABAF61A0019CEFB /* Realm */,
+				39905D7C2ABAF61A0019CEFB /* RealmSwift */,
 			);
-			productName = CountDaysWidgetExtension;
-			productReference = 394A5CEA2A971753006A7232 /* CountDaysWidgetExtension.appex */;
+			productName = WidgetExtensionExtension;
+			productReference = 39905D642ABAF6020019CEFB /* WidgetExtensionExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -598,7 +605,7 @@
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 394A5C6F2A9712DF006A7232;
 					};
-					394A5CE92A971753006A7232 = {
+					39905D632ABAF6020019CEFB = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
@@ -624,7 +631,7 @@
 				394A5C6F2A9712DF006A7232 /* CountDays */,
 				394A5C7F2A9712E0006A7232 /* CountDaysTests */,
 				394A5C892A9712E0006A7232 /* CountDaysUITests */,
-				394A5CE92A971753006A7232 /* CountDaysWidgetExtension */,
+				39905D632ABAF6020019CEFB /* WidgetExtensionExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -656,12 +663,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		394A5CE82A971753006A7232 /* Resources */ = {
+		39905D622ABAF6020019CEFB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				394A5CF92A971754006A7232 /* Assets.xcassets in Resources */,
-				39FFFA872AB19325001AE0D7 /* GoogleService-Info.plist in Resources */,
+				39905D702ABAF6030019CEFB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,7 +686,6 @@
 				394A5CE02A971567006A7232 /* TestView.swift in Sources */,
 				394A5CBA2A97151A006A7232 /* EventCardViewModel.swift in Sources */,
 				394A5CDC2A971567006A7232 /* ViewExtension.swift in Sources */,
-				394A5D062A97183D006A7232 /* CountDaysWidget.swift in Sources */,
 				39FFFA5F2A9992C0001AE0D7 /* TimePicker.swift in Sources */,
 				394A5CC92A971535006A7232 /* PrivacyPolicyView.swift in Sources */,
 				394A5CA92A9713C3006A7232 /* ColorUtility.swift in Sources */,
@@ -690,7 +695,6 @@
 				394A5CC62A971535006A7232 /* SettingView.swift in Sources */,
 				394A5CC72A971535006A7232 /* MailView.swift in Sources */,
 				394A5CC82A971535006A7232 /* TermView.swift in Sources */,
-				394A5CFC2A971754006A7232 /* CountDaysWidget.intentdefinition in Sources */,
 				394A5CCF2A97153D006A7232 /* CalendarView.swift in Sources */,
 				394A5CAB2A9713C3006A7232 /* NotificationCenter.swift in Sources */,
 				394A5CE12A971567006A7232 /* CalendarView2.swift in Sources */,
@@ -707,16 +711,19 @@
 				394A5CDD2A971567006A7232 /* EventConfigurationButtonStyle.swift in Sources */,
 				39FFFA782AA8AAE3001AE0D7 /* HapticFeedback.swift in Sources */,
 				394A5C9E2A971349006A7232 /* ContentView.swift in Sources */,
+				39905D732ABAF6030019CEFB /* WidgetExtension.intentdefinition in Sources */,
 				394A5CA82A9713C3006A7232 /* EventCard.swift in Sources */,
 				39FFFA642AA07919001AE0D7 /* UpgradeView.swift in Sources */,
 				39FFFB462AB299C4001AE0D7 /* FirebaseAnalyticsManager.swift in Sources */,
 				39FFFA7B2AA9C093001AE0D7 /* CustomImagePicker.swift in Sources */,
 				39FFFA6F2AA84656001AE0D7 /* Extension.swift in Sources */,
+				39905D352ABA9F6B0019CEFB /* WidgetConfig.swift in Sources */,
 				39FFFA6C2AA7A783001AE0D7 /* VersionUpCheck.swift in Sources */,
 				39FFFA7F2AA9C318001AE0D7 /* TestView3.swift in Sources */,
 				394A5CAA2A9713C3006A7232 /* RealmModel.swift in Sources */,
 				39FFFA682AA5C0CB001AE0D7 /* Store.swift in Sources */,
 				394A5CD12A97153D006A7232 /* ConfigureEventView.swift in Sources */,
+				39905D7F2ABAFC3B0019CEFB /* WidgetExtension.swift in Sources */,
 				394A5C742A9712DF006A7232 /* CountDaysApp.swift in Sources */,
 				394A5CDB2A971567006A7232 /* TestView2.swift in Sources */,
 				39FFFA6A2AA74BF1001AE0D7 /* ImageModel.swift in Sources */,
@@ -741,20 +748,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		394A5CE62A971753006A7232 /* Sources */ = {
+		39905D602ABAF6020019CEFB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				394A5D0C2A971995006A7232 /* CalendarViewModel.swift in Sources */,
-				394A5CF22A971753006A7232 /* CountDaysWidgetBundle.swift in Sources */,
-				394A5D0F2A9719AC006A7232 /* Enum.swift in Sources */,
-				394A5D0D2A9719A2006A7232 /* Color.swift in Sources */,
-				394A5CF62A971753006A7232 /* CountDaysWidget.swift in Sources */,
-				39FFFA702AA8479F001AE0D7 /* Extension.swift in Sources */,
-				394A5CFB2A971754006A7232 /* CountDaysWidget.intentdefinition in Sources */,
-				39FFFA5D2A975695001AE0D7 /* DateViewModel.swift in Sources */,
-				394A5D072A971857006A7232 /* RealmModel.swift in Sources */,
-				394A5CF42A971753006A7232 /* CountDaysWidgetLiveActivity.swift in Sources */,
+				39560F172ABF1FD0000A623D /* EventCardView2.swift in Sources */,
+				39560F142ABF1E24000A623D /* EventCardViewModel.swift in Sources */,
+				39905D722ABAF6030019CEFB /* WidgetExtension.intentdefinition in Sources */,
+				39560F182ABF1FF5000A623D /* CalendarViewModel.swift in Sources */,
+				39905D6B2ABAF6020019CEFB /* WidgetExtensionLiveActivity.swift in Sources */,
+				39905D692ABAF6020019CEFB /* WidgetExtensionBundle.swift in Sources */,
+				39560F162ABF1EAA000A623D /* RealmViewModel.swift in Sources */,
+				39560F102ABF1DEE000A623D /* RealmModel.swift in Sources */,
+				39560F122ABF1DFC000A623D /* Enum.swift in Sources */,
+				39905D6D2ABAF6020019CEFB /* WidgetExtension.swift in Sources */,
+				39560F112ABF1DF5000A623D /* Color.swift in Sources */,
+				39560F132ABF1E10000A623D /* Extension.swift in Sources */,
+				39560F152ABF1E5C000A623D /* WidgetConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,10 +781,10 @@
 			target = 394A5C6F2A9712DF006A7232 /* CountDays */;
 			targetProxy = 394A5C8B2A9712E0006A7232 /* PBXContainerItemProxy */;
 		};
-		394A5CFE2A971754006A7232 /* PBXTargetDependency */ = {
+		39905D752ABAF6030019CEFB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 394A5CE92A971753006A7232 /* CountDaysWidgetExtension */;
-			targetProxy = 394A5CFD2A971754006A7232 /* PBXContainerItemProxy */;
+			target = 39905D632ABAF6020019CEFB /* WidgetExtensionExtension */;
+			targetProxy = 39905D742ABAF6030019CEFB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1032,18 +1042,18 @@
 			};
 			name = Release;
 		};
-		394A5D012A971754006A7232 /* Debug */ = {
+		39905D782ABAF6030019CEFB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = CountDaysWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WidgetExtensionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q5HUKBE6ZQ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CountDaysWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CountDaysWidget;
+				INFOPLIST_FILE = WidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1051,7 +1061,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDays.CountDaysWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDays.WidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1060,18 +1070,18 @@
 			};
 			name = Debug;
 		};
-		394A5D022A971754006A7232 /* Release */ = {
+		39905D792ABAF6030019CEFB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = CountDaysWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WidgetExtensionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q5HUKBE6ZQ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CountDaysWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CountDaysWidget;
+				INFOPLIST_FILE = WidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1079,7 +1089,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDays.CountDaysWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = zakiyamaaaaa.CountDays.WidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1127,11 +1137,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		394A5D002A971754006A7232 /* Build configuration list for PBXNativeTarget "CountDaysWidgetExtension" */ = {
+		39905D772ABAF6030019CEFB /* Build configuration list for PBXNativeTarget "WidgetExtensionExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				394A5D012A971754006A7232 /* Debug */,
-				394A5D022A971754006A7232 /* Release */,
+				39905D782ABAF6030019CEFB /* Debug */,
+				39905D792ABAF6030019CEFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1166,6 +1176,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		39905D7A2ABAF61A0019CEFB /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 39FFFA542A973D7A001AE0D7 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		39905D7C2ABAF61A0019CEFB /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 39FFFA542A973D7A001AE0D7 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		39FFFA522A973D6E001AE0D7 /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 39FFFA512A973D6E001AE0D7 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
@@ -1177,16 +1197,6 @@
 			productName = Realm;
 		};
 		39FFFA572A973D7A001AE0D7 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 39FFFA542A973D7A001AE0D7 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
-		39FFFA592A973D99001AE0D7 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 39FFFA542A973D7A001AE0D7 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		39FFFA5B2A973D99001AE0D7 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 39FFFA542A973D7A001AE0D7 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
