@@ -43,34 +43,34 @@ struct EventDetailConfigurationView: View {
                 })
                 .listRowBackground(Color.primary)
                 
-                Toggle(isOn: $showSecond) {
-                    HStack {
-                        
-                        Image(systemName: "lock.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25, height: 30)
-                            .foregroundColor(.blue)
-                        Text("秒数を表示")
-                            .foregroundColor(.white)
-                    }
-                }
-                .onTapGesture {
-                    if !isPurchased {
-                        showSecond = false
-                    }
-                }
-                .onChange(of: showSecond, perform: { newValue in
-                    FirebaseAnalyticsManager.recordEvent(analyticsKey: .EventDetailConfigurationToggleDisplaySecond, content: newValue.description)
-                    if newValue && isPurchased {
-                        showSecond = true
-                    } else if newValue && !isPurchased {
-                        isShowUpgradeAlert.toggle()
-                    } else if !newValue && isPurchased {
-                        showSecond = false
-                    }
-                })
-                .listRowBackground(Color.primary)
+//                Toggle(isOn: $showSecond) {
+//                    HStack {
+//                        
+//                        Image(systemName: "lock.fill")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 25, height: 30)
+//                            .foregroundColor(.blue)
+//                        Text("秒数を表示")
+//                            .foregroundColor(.white)
+//                    }
+//                }
+//                .onTapGesture {
+//                    if !isPurchased {
+//                        showSecond = false
+//                    }
+//                }
+//                .onChange(of: showSecond, perform: { newValue in
+//                    FirebaseAnalyticsManager.recordEvent(analyticsKey: .EventDetailConfigurationToggleDisplaySecond, content: newValue.description)
+//                    if newValue && isPurchased {
+//                        showSecond = true
+//                    } else if newValue && !isPurchased {
+//                        isShowUpgradeAlert.toggle()
+//                    } else if !newValue && isPurchased {
+//                        showSecond = false
+//                    }
+//                })
+//                .listRowBackground(Color.primary)
                 
             }
             .task {

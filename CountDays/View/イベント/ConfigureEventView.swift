@@ -57,122 +57,121 @@ struct ConfigureEventView: View {
     @State var showStyleAlert = false
     @State private var showDeleteAlert = false
     @State var showStyleDetailConfiguration = false
+    
     @State private var opacity: Double = 0
+    
     private let bgColorList: [BackgroundColor] = BackgroundColor.allCases
     private let txtColorList: [TextColor] = TextColor.allCases
     
     var body: some View {
             
-            VStack(spacing: 0) {
+        VStack(spacing: 0) {
+            
+            headerView
+            
+            VStack {
                 
-                headerView
-                
-                VStack {
-                    
-                    HStack {
-                        Button("Sサイズ") {
-                            
-                        }
-                        Button("Mサイズ") {
-                            
-                        }
+                HStack {
+                    Button("Sサイズ") {
+                        
                     }
-                    .hidden()
-                    
-                    VStack(alignment: .center) {
-                         HStack {
-                             Spacer()
-                             Spacer()
-                             EventCardView2(event: event,eventVM: eventCardViewModel)
-                             
-                             if isCreation {
-                                 Spacer()
-                             } else {
-                                 Button {
-                                     self.showDeleteAlert.toggle()
-                                     trashButtonSelected.toggle()
-                                     FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewDeleteEvent)
-                                 } label: {
-                                     Image(systemName: "trash.fill")
-                                     
-                                 }
-                                 .buttonStyle(EventConfigurationButtonStyle(active: $trashButtonSelected))
-                                 .opacity(opacity)
-                                 .offset(y: opacity == 0 ? WidgetConfig.small.size.height/2 :  WidgetConfig.small.size.height/2 - 25)
-                                 .animation(.easeIn(duration: 0.7).delay(0.3), value: opacity)
-                             }
-                             Spacer()
-                         }
-                         .alert("このイベントを消去しますか？", isPresented: $showDeleteAlert) {
-                             
-                             Button("キャンセル", role: .cancel) {
-                                 trashButtonSelected.toggle()
-                                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapDeleteEventAlertCancel)
-                             }
-                             Button("消去", role: .destructive) {
-                                 trashButtonSelected.toggle()
-                                 $event.delete()
-                                 // 削除処理
-//                                 RealmViewModel().deleteEvent(event: a)
-                                 
-                                /// 通知の登録削除処理
-                                 NotificationCenter.removeNotification(id: event.id.stringValue)
-                                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapDeleteEventAlertExecution)
-                                 // 画面閉じる
-                                 presentationMode.wrappedValue.dismiss()
-                             }
-                         } message: {
-                             Text("一度消去すると元に戻せません")
-                         }
+                    Button("Mサイズ") {
+                        
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .frame(height: 200)
-                .padding(.vertical, 20)
-                .background(ColorUtility.secondary)
+                .hidden()
                 
-                configurationSelectionView
-                
-                ZStack {
-                    if isFirstButtonSelected {
-                        eventTitleView
-                    }
-                    
-                    if isSecondButtonSelected {
-                        styleView
-                    }
-                    
-                    if isThirdButtonSelected {
-                        backgroundColorView
-                    }
-                    
-                    if isFourthButtonSelected {
-                        textColorView
-                    }
+                VStack(alignment: .center) {
+                     HStack {
+                         Spacer()
+                         Spacer()
+                         EventCardView2(event: event,eventVM: eventCardViewModel)
+                         
+                         if isCreation {
+                             Spacer()
+                         } else {
+                             Button {
+                                 self.showDeleteAlert.toggle()
+                                 trashButtonSelected.toggle()
+                                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewDeleteEvent)
+                             } label: {
+                                 Image(systemName: "trash.fill")
+                                 
+                             }
+                             .buttonStyle(EventConfigurationButtonStyle(active: $trashButtonSelected))
+                             .opacity(opacity)
+                             .offset(y: opacity == 0 ? WidgetConfig.small.size.height/2 :  WidgetConfig.small.size.height/2 - 25)
+                             .animation(.easeIn(duration: 0.7).delay(0.3), value: opacity)
+                         }
+                         Spacer()
+                     }
+                     .alert("このイベントを消去しますか？", isPresented: $showDeleteAlert) {
+                         
+                         Button("キャンセル", role: .cancel) {
+                             trashButtonSelected.toggle()
+                             FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapDeleteEventAlertCancel)
+                         }
+                         Button("消去", role: .destructive) {
+                             trashButtonSelected.toggle()
+                             $event.delete()
+                             // 削除処理
+//                                 RealmViewModel().deleteEvent(event: a)
+                             
+                            /// 通知の登録削除処理
+                             NotificationCenter.removeNotification(id: event.id.stringValue)
+                             FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapDeleteEventAlertExecution)
+                             // 画面閉じる
+                             presentationMode.wrappedValue.dismiss()
+                         }
+                     } message: {
+                         Text("一度消去すると元に戻せません")
+                     }
                 }
             }
-            .task {
-                guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }
-                
-                do {
-                    try await self.isPurchased = store.isPurchased(product)
-                    
-                    #if DEBUG
-                    self.isPurchased = true
-                    #endif
-                    
-                } catch(let error) {
-                    print(error.localizedDescription)
+            .frame(maxWidth: .infinity)
+            .frame(height: 200)
+            .padding(.vertical, 20)
+            .background(ColorUtility.secondary)
+            
+            configurationSelectionView
+            
+            ZStack {
+                if isFirstButtonSelected {
+                    eventTitleView
                 }
-            }.onAppear{
-                dateViewModel.selectedDate = event.date
-                opacity = 1.0
+                
+                if isSecondButtonSelected {
+                    styleView
+                }
+                
+                if isThirdButtonSelected {
+                    backgroundColorView
+                }
+                
+                if isFourthButtonSelected {
+                    textColorView
+                }
             }
         }
-        
-        
-//    }
-    @State private var bounce = false
+        .task {
+            guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }
+            
+            do {
+                try await self.isPurchased = store.isPurchased(product)
+                
+                #if DEBUG
+                self.isPurchased = true
+                #endif
+                
+            } catch(let error) {
+                print(error.localizedDescription)
+            }
+        }.onAppear{
+            dateViewModel.selectedDate = event.date
+            opacity = 1.0
+        }
+    }
+    
     /// 設定選択ビュー
     private var configurationSelectionView: some View {
         HStack {
@@ -289,13 +288,13 @@ struct ConfigureEventView: View {
             Spacer()
             Button(isCreation ? "登録" : "更新") {
                 
-                if eventCardViewModel.text.isEmpty {
-                    /// TODO: イベント名を入力してくださいエラーメッセージ表示
-                    return
-                }
+//                if eventCardViewModel.text.isEmpty {
+//                    ///  イベント名を入力してくださいエラーメッセージ表示
+//                    return
+//                }
                 let style: EventDisplayStyle = isPurchased ? eventCardViewModel.style : .standard
                 
-                let event = Event(title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, dayOfWeek: eventCardViewModel.dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image)
+                let event = Event(title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, frequentType: eventCardViewModel.frequentType, eventType: eventCardViewModel.eventType, dayOfWeek: eventCardViewModel.dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image, displayLang: eventCardViewModel.displayLang)
                 HapticFeedbackManager.shared.play(.impact(.heavy))
                 switch isCreation {
                     /// 新規作成

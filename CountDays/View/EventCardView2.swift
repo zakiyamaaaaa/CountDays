@@ -90,15 +90,21 @@ struct EventCardView2: View {
         }
     }
     
-    let calendar: Calendar = {
-        var calendar = Calendar(identifier: .gregorian)
-            calendar.locale = .init(identifier: "ja_JP")
+    private func getCalendar()-> Calendar {
+        switch eventVM.displayLang {
+        case .en:
+            var calendar = Calendar(identifier: .gregorian)
+                calendar.locale = .init(identifier: "en_US")
             return calendar
-        }()
+        case .jp:
+            var calendar = Calendar(identifier: .gregorian)
+                calendar.locale = .init(identifier: "ja_JP")
+            return calendar
+        }
+    }
     
     private var standardTimeView: some View {
         VStack(alignment: .leading) {
-            
             let frequentType = eventVM.frequentType
             let eventType = eventVM.eventType
             let date =  CalendarViewModel.getDates(target: eventVM.selectedDate, eventType: eventType, frequentType: frequentType , dayOfWeek: eventVM.dayOfWeek ).fixedDate
@@ -107,7 +113,7 @@ struct EventCardView2: View {
             let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType, dayOfWeek: eventVM.dayOfWeek).hours
             let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType, dayOfWeek: eventVM.dayOfWeek).minutes
             let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType, dayOfWeek: eventVM.dayOfWeek).seconds
-            
+            let calendar = getCalendar()
             let dateComponent = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date, to: Date())
             
             let relative1 = calendar.date(byAdding: .day, value: dateComponent.day!, to: date)!
