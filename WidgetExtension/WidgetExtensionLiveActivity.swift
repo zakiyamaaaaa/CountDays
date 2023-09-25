@@ -1,15 +1,15 @@
 //
-//  CountDaysWidgetLiveActivity.swift
-//  CountDaysWidget
+//  WidgetExtensionLiveActivity.swift
+//  WidgetExtension
 //
-//  Created by shoichiyamazaki on 2023/08/24.
+//  Created by shoichiyamazaki on 2023/09/20.
 //
 
 import ActivityKit
 import WidgetKit
 import SwiftUI
 
-struct CountDaysWidgetAttributes: ActivityAttributes {
+struct WidgetExtensionAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
         var value: Int
@@ -19,9 +19,9 @@ struct CountDaysWidgetAttributes: ActivityAttributes {
     var name: String
 }
 
-struct CountDaysWidgetLiveActivity: Widget {
+struct WidgetExtensionLiveActivity: Widget {
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: CountDaysWidgetAttributes.self) { context in
+        ActivityConfiguration(for: WidgetExtensionAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
                 Text("Hello")
@@ -56,9 +56,9 @@ struct CountDaysWidgetLiveActivity: Widget {
     }
 }
 
-struct CountDaysWidgetLiveActivity_Previews: PreviewProvider {
-    static let attributes = CountDaysWidgetAttributes(name: "Me")
-    static let contentState = CountDaysWidgetAttributes.ContentState(value: 3)
+struct WidgetExtensionLiveActivity_Previews: PreviewProvider {
+    static let attributes = WidgetExtensionAttributes(name: "Me")
+    static let contentState = WidgetExtensionAttributes.ContentState(value: 3)
 
     static var previews: some View {
         attributes
