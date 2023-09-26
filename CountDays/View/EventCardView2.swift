@@ -62,7 +62,6 @@ struct EventCardView2: View {
                 
                 Rectangle()
                     .foregroundStyle(eventVM.backgroundColor.color ?? .white)
-//                    .foregroundColor(eventVM.backgroundColor.color)
                     .widgetFrame()
                     .cornerRadius(30)
                 
@@ -135,8 +134,8 @@ struct EventCardView2: View {
                 
             } else if abs(day) > 0 {
                 Text(day.description + displayLang.dateText.day)
-                    .font(.system(.title))
-                    .fontWeight(.semibold)
+                    .font(.system(.largeTitle))
+                    .fontWeight(.bold)
                 
                 Text(relative3, style: .relative)
                     .environment(\.calendar, calendar)
@@ -171,17 +170,17 @@ struct EventCardView2: View {
             
             VStack(alignment: .leading) {
                 Text(eventVM.text.isEmpty ? "イベント名" : eventVM.text)
-                    .padding(.vertical, 10)
+                    .fontWeight(.semibold)
+                    .font(.system(size: 13))
+                    .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                 Spacer()
-
                 standardTimeView
 
             }
             .foregroundColor(eventVM.textColor.color)
             .padding()
-            .widgetFrame()
+            .widgetFrame(alignment: .leading)
             .widgetBackground(eventVM.backgroundColor.color)
-            
         }
     }
     
@@ -238,6 +237,11 @@ struct EventCardView2: View {
                 VStack {
                     Text(eventVM.text.isEmpty ? "イベント名" : eventVM.text)
                         .foregroundColor(eventVM.textColor.color)
+                        .fontWeight(.semibold)
+                        .font(.system(size: 13))
+                        .frame(width: WidgetConfig.small.size.width)
+                        .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                        
                     ZStack {
                         
                         let progress = progressRatio(viewModel: eventVM)
@@ -273,6 +277,7 @@ struct EventCardView2: View {
                     .frame(width: width/5)
                     .rotationEffect(.degrees(-90))
                 }
+                .widgetFrame()
                 
             }
         }
@@ -297,9 +302,14 @@ struct EventCardView2: View {
                 ZStack {
                     Rectangle()
                         .foregroundColor(.red)
-                        .frame(width: 152, height: 25)
+                        .frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height/4)
                     Text(eventVM.text.isEmpty ? "イベント名" : eventVM.text)
                         .foregroundColor(eventVM.textColor.color)
+                        .fontWeight(.bold)
+                        .font(.system(size: 15))
+                        .padding(.horizontal)
+                        .frame(width: WidgetConfig.small.size.width)
+                        .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                 }
                 
                 ZStack {
@@ -308,11 +318,11 @@ struct EventCardView2: View {
                             .resizable()
                             .scaledToFill()
                             .widgetFrame()
-                        //                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        
                     } else {
                         Rectangle()
                             .foregroundColor(eventVM.backgroundColor.color)
-                            .frame(width: 150, height: 130)
+                            .frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height*3/4)
                     }
                         
                     VStack {

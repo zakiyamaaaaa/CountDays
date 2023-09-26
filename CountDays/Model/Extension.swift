@@ -19,8 +19,8 @@ extension UIImage {
 }
 
 extension View {
-    func widgetFrame() -> some View {
-        frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height)
+    func widgetFrame(alignment: Alignment = .center) -> some View {
+        frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height, alignment: alignment)
     }
 }
 
