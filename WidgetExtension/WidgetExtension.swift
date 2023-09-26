@@ -30,10 +30,13 @@ struct Provider: IntentTimelineProvider {
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
-        if let event = RealmViewModel().events.first {
+        
+        if let indexText = configuration.eventPara?.identifier, let index = Int(indexText) {
+            let event = RealmViewModel().events[index]
             for hourOffset in 0 ..< 5 {
                 let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
                 let entry = SimpleEntry(date: entryDate, event: event, configuration: configuration)
+                
                 entries.append(entry)
             }
         }

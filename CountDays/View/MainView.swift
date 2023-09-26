@@ -62,7 +62,7 @@ struct MainView: View {
                                 let card = realmCards[i - 1]
                                 
                                 let image = createImage(cardImage: card)
-                                EventCardView(title: card.title, date: card.date, style: card.displayStyle, backgroundColor: card.backgroundColor, image: image, textColor: card.textColor, frequentType: card.frequentType)
+                                EventCardView2(eventVM: EventCardViewModel2(event: card))
                                     .onTapGesture {
                                         
                                         selectedEvent = realmCards[i - 1]
@@ -73,7 +73,7 @@ struct MainView: View {
                                         let _ = print(selectedEvent.title)
                                     }
                                     .contextMenu {
-                                        let cardView = EventCardView(title: card.title, date: card.date, style: card.displayStyle, backgroundColor: card.backgroundColor, image: image, textColor: card.textColor, frequentType: card.frequentType)
+                                        let cardView = EventCardView2(eventVM: EventCardViewModel2(event: card))
                                         let render = ImageRenderer(content: cardView)
                                         if let imageSnap = render.uiImage {
                                             ShareLink(item: Image(uiImage: imageSnap),
