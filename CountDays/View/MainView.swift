@@ -23,18 +23,13 @@ struct MainView: View {
     @State private var isShowWelcomeView = false
     @State private var product: Product?
     @State private var isPurchased = false
-//    @StateObject var mock = MockStore()
+//    @StateObject var realmMock = MockStore()
     @StateObject var realmMock = RealmMockStore()
 //    @StateObject var defaultEvent = EventCardViewModel.defaultStatus
     @EnvironmentObject var viewModel: RealmViewModel
     @State private var scale = false
     let dateViewModel = DateViewModel()
-    let columns: [GridItem] = [
-        GridItem(.flexible(minimum: 30)),
-        GridItem(.flexible()),
-    ]
-    let itemPerRow: CGFloat = 5
-    let horizontalSpacing: CGFloat = 15
+    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     @ObservedResults(Event.self, configuration: RealmModel.config) var realmCards
     @State var selectedEvent = Event()
     @State var selectedIndex = 0
@@ -51,18 +46,19 @@ struct MainView: View {
     var body: some View {
         VStack {
             headerView
+                .padding(.bottom)
             
             ScrollView(showsIndicators: false) {
-                LazyVGrid(columns: columns, spacing: 10) {
+                LazyVGrid(columns: columns, spacing: 20) {
                     
                     
-                    ForEach(0 ..< realmCards.count + 1, id: \.self) { i in
+                    ForEach(0 ..< realmMock.cards.count + 1, id: \.self) { i in
                         VStack {
                             if i >= 1 {
-                                let card = realmCards[i - 1]
+                                let card = realmMock.cards[i - 1]
                                 
-                                let image = createImage(cardImage: card)
                                 EventCardView2(eventVM: EventCardViewModel2(event: card))
+//                                    .padding()
                                     .onTapGesture {
                                         
                                         selectedEvent = realmCards[i - 1]
@@ -91,7 +87,6 @@ struct MainView: View {
 
                             } else if i == 0 {
                                 AddEventView()
-                                    .padding()
                                     .scaleEffect(scale ? 1.1: 1.0)
                                     .simultaneousGesture(
                                             DragGesture(minimumDistance: 0)

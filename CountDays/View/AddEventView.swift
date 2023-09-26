@@ -21,9 +21,11 @@ struct AddEventView: View {
                 Text("+")
                     .foregroundColor(.white)
                     .font(.system(size:100))
-                Spacer()
+                
+//                Spacer()
             }
-            .frame(width: width*2/5, height: width*1/3)
+            
+//            .frame(width: width*2/5, height: width*1/3)
         }
         
     }
