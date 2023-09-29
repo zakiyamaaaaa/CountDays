@@ -17,15 +17,10 @@ struct AddEventView: View {
                 .foregroundColor(ColorUtility.secondary)
                 .widgetFrame()
                 .cornerRadius(30)
-            VStack {
-                Text("+")
-                    .foregroundColor(.white)
-                    .font(.system(size:100))
-                
-//                Spacer()
-            }
             
-//            .frame(width: width*2/5, height: width*1/3)
+            Text("+")
+                .foregroundColor(.white)
+                .font(.system(size:100))
         }
         
     }

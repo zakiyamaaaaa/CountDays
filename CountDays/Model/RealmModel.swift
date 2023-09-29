@@ -52,7 +52,7 @@ final class RealmModel: ObservableObject {
     }
     
     static var fileUrl: URL {
-        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.zakiyamaaaaa.CountDays.widget")!
+        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.countdays.dev")!
         return url.appending(path: "db.realm")
     }
     

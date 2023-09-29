@@ -52,10 +52,10 @@ struct MainView: View {
                 LazyVGrid(columns: columns, spacing: 20) {
                     
                     
-                    ForEach(0 ..< realmMock.cards.count + 1, id: \.self) { i in
+                    ForEach(0 ..< realmCards.count + 1, id: \.self) { i in
                         VStack {
                             if i >= 1 {
-                                let card = realmMock.cards[i - 1]
+                                let card = realmCards[i - 1]
                                 
                                 EventCardView2(eventVM: EventCardViewModel2(event: card))
 //                                    .padding()
