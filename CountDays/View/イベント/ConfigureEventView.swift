@@ -11,6 +11,7 @@ import RealmSwift
 import Photos
 import PhotosUI
 import FirebaseAnalytics
+import WidgetKit
 
 struct ConfigureEventView: View {
     
@@ -195,7 +196,7 @@ struct ConfigureEventView: View {
             .buttonStyle(EventConfigurationButtonStyle(active: $isFirstButtonSelected))
             .overlay(
                 RoundedRectangle(cornerRadius: 30)
-                    .stroke(isFirstButtonSelected ? Color.red : .clear, lineWidth: 2)
+                    .stroke(isFirstButtonSelected ? Color.accentColor : .clear, lineWidth: 2)
             )
             
             Spacer()
@@ -272,54 +273,77 @@ struct ConfigureEventView: View {
     
     /// HeaderView
     private var headerView: some View {
-        HStack {
-            Button("✗") {
-                presentationMode.wrappedValue.dismiss()
-                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapCloseButton)
+        VStack(spacing: 0) {
+            
+            closableMark
+                .padding(.top)
+            
+            HStack {
+                Button("✗") {
+                    presentationMode.wrappedValue.dismiss()
+                    FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapCloseButton)
+                    
+                }
+                .frame(width: 50, height: 50)
+                .foregroundColor(.white)
+                .font(.system(size: 30))
+                .background(ColorUtility.secondary)
+                .clipShape(Circle())
+                .padding()
                 
-            }
-            .frame(width: 50, height: 50)
-            .foregroundColor(.white)
-            .font(.system(size: 30))
-            .background(ColorUtility.secondary)
-            .clipShape(Circle())
-            .padding()
-
-            Spacer()
-            Button(isCreation ? "登録" : "更新") {
-                
-//                if eventCardViewModel.text.isEmpty {
-//                    ///  イベント名を入力してくださいエラーメッセージ表示
-//                    return
-//                }
-                let style: EventDisplayStyle = isPurchased ? eventCardViewModel.style : .standard
-                
-                let event = Event(title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, frequentType: eventCardViewModel.frequentType, eventType: eventCardViewModel.eventType, dayOfWeek: eventCardViewModel.dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image, displayLang: eventCardViewModel.displayLang)
-                HapticFeedbackManager.shared.play(.impact(.heavy))
-                switch isCreation {
-                    /// 新規作成
+                Spacer()
+                Button(isCreation ? "登録" : "更新") {
+                    
+                    //                if eventCardViewModel.text.isEmpty {
+                    //                    ///  イベント名を入力してくださいエラーメッセージ表示
+                    //                    return
+                    //                }
+                    let style: EventDisplayStyle = isPurchased ? eventCardViewModel.style : .standard
+                    
+                    let event = Event(title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, frequentType: eventCardViewModel.frequentType, eventType: eventCardViewModel.eventType, dayOfWeek: eventCardViewModel.dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image, displayLang: eventCardViewModel.displayLang)
+                    HapticFeedbackManager.shared.play(.impact(.heavy))
+                    switch isCreation {
+                        /// 新規作成
                     case true:
                         RealmViewModel().registerEvent(event: event)
                         realmMock.cards.insert(event, at: 0)
-                    /// 更新
+                        /// 更新
                     case false:
                         RealmViewModel().updateEvent(event: event)
+                        /// Widget側のデータ更新
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
+                    
+                    
+                    Task {
+                        if eventCardViewModel.eventType == .countdown {
+                            /// 許可についてまだ決めてない場合はリクエストする
+                            if await NotificationCenter.checkNotificationStatus() == .notDetermined {
+                                NotificationCenter.requestNotificationPermission()
+                            }
+                            
+                            /// 許可されている場合は、通知を設定
+                            if await NotificationCenter.checkNotificationStatus() == .authorized {
+                                NotificationCenter.registerNotification(event: event)
+                            }
+                        }
+                    }
+                    
+                    presentationMode.wrappedValue.dismiss()
+                    FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapRegisterButton)
                 }
-                NotificationCenter.registerNotification(event: event)
-                presentationMode.wrappedValue.dismiss()
-                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapRegisterButton)
+                .buttonStyle(BounceButtonStyle())
+                .frame(width: 100, height: 50)
+                .tint(.white)
+                .fontWeight(.bold)
+                .font(.system(size: 20))
+                .disabled(eventCardViewModel.text.isEmpty)
+                .background(RoundedRectangle(cornerRadius: 30).fill( eventCardViewModel.text.isEmpty ? ColorUtility.disable : ColorUtility.preffered))
+                .padding()
+                .animation(.default, value: eventCardViewModel.text.isEmpty)
             }
-            .buttonStyle(BounceButtonStyle())
-            .frame(width: 100, height: 50)
-            .tint(.white)
-            .fontWeight(.bold)
-            .font(.system(size: 20))
-            .disabled(eventCardViewModel.text.isEmpty)
-            .background(RoundedRectangle(cornerRadius: 30).fill( eventCardViewModel.text.isEmpty ? ColorUtility.disable : ColorUtility.preffered))
-            .padding()
-            .animation(.default, value: eventCardViewModel.text.isEmpty)
         }
-        .frame(height: 80)
+        .frame(height: 90)
         .background(ColorUtility.primary)
     }
     @State private var showCropView = false
@@ -459,17 +483,42 @@ struct ConfigureEventView: View {
     private var styleView: some View {
         VStack {
             TabView(selection: $selectedStyleIndex) {
-                VStack {
-                    EventCardView2(event: event, eventVM: eventCardViewModel)
+                ZStack {
+                    VStack {
+                        ZStack {
+                            Text("👍スタンダード")
+                                .font(.system(size: 40, weight: .bold))
+                        }
+                        Divider()
+                        Spacer()
+                    }
+                    
+                    VStack {
+                        EventCardView2(event: event, eventVM: eventCardViewModel)
                         
-                    Button {
-                        showStyleDetailConfiguration.toggle()
-                    } label: {
-                        Text("詳細設定")
+                        Button {
+                            showStyleDetailConfiguration.toggle()
+                        } label: {
+                            Text("詳細設定")
+                                .font(.system(size: 15))
+                            
+                        }
+                        .buttonStyle(BounceButtonStyle())
+                        .padding(8)
+                        .background(.white).opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(.black)
+                        .cornerRadius(20)
                     }
                 }
                 .tag(0)
                 ZStack {
+                    
+                    VStack {
+                        Text("🍩リング")
+                            .font(.system(size: 40, weight: .bold))
+                        Spacer()
+                    }
+                    
                     VStack {
                         Text(eventCardViewModel.eventType.rawValue)
                             .foregroundColor(.white)
@@ -523,6 +572,13 @@ struct ConfigureEventView: View {
                 }.tag(1)
                 
                 ZStack {
+                    
+                    VStack {
+                        Text("📅カレンダー")
+                            .font(.system(size: 40, weight: .bold))
+                        Spacer()
+                    }
+                    
                     VStack {
                         
                         

@@ -19,6 +19,13 @@ extension UIImage {
 }
 
 extension View {
+    
+    var closableMark: some View {
+        RoundedRectangle(cornerSize: CGSize(width: 20, height: 10), style: .continuous)
+            .frame(width: 50, height: 10)
+            .foregroundStyle(.gray)
+    }
+    
     func widgetFrame(alignment: Alignment = .center) -> some View {
         frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height, alignment: alignment)
     }

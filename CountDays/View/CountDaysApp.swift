@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RealmSwift
+import Combine
 import FirebaseCore
 import FirebaseAnalytics
 import FirebaseAnalyticsSwift
@@ -57,15 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 通知許可
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         RealmViewModel().registerViewModel()
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: .alert) { granted, error in
-            if granted {
-                print("Allowed")
-            } else {
-                print("Denied")
-            }
-        }
-        
+            
         FirebaseApp.configure()
         return true
     }

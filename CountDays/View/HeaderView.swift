@@ -11,14 +11,18 @@ struct HeaderView: View {
     var title: String
     
     var body: some View {
-        HStack {
-            Text(title)
-                .font(.system(size: 35,weight: .bold))
-                .padding()
-            Spacer()
+        VStack(spacing: 0) {
+            closableMark
+                .padding(.top)
+            HStack {
+                Text(title)
+                    .font(.system(size: 35,weight: .bold))
+                    .padding()
+                Spacer()
+            }
         }
         .foregroundColor(.white)
-        .frame(height: 80)
+        .frame(height: 90)
         .frame(maxWidth: .infinity)
         .background(ColorUtility.primary)
     }

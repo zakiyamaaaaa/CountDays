@@ -45,7 +45,7 @@ struct UpgradeView: View {
                                 .fontWeight(.bold)
                                 .padding(.bottom,3)
                             
-                            Text("作成できるイベント数が１個までだったのが無制限になります")
+                            Text("作成できるイベント数の上限が１個から無制限になります")
                                 .font(.system(size: 20))
                                 .foregroundColor(.white)
                             
@@ -61,7 +61,7 @@ struct UpgradeView: View {
                                 .fontWeight(.bold)
                                 .padding(.bottom,3)
                             
-                            Text("あなただけのオリジナルイベントを設定できます")
+                            Text("あなただけのオリジナル背景を設定できます")
                                 .font(.system(size: 20))
                                 .foregroundColor(.white)
                             
@@ -79,7 +79,7 @@ struct UpgradeView: View {
                                 .fontWeight(.bold)
                                 .padding(.bottom,3)
                             
-                            Text("あなたの好きなデザイナを選ぶことができます")
+                            Text("あなたの好きなデザインを選ぶことができます")
                                 .font(.system(size: 20))
                                 .foregroundColor(.white)
                             
@@ -152,7 +152,8 @@ struct UpgradeView: View {
                 }
                 .disabled(isPurchased)
                 .frame(width: 200, height: 60)
-                .background(.mint)
+                .foregroundStyle(.black)
+                .background(Color.accentColor)
                 .cornerRadius(30)
             }
             .frame(height: 100)

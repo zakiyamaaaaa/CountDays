@@ -36,8 +36,11 @@ struct SettingView: View {
                             .frame(width: 40, height: 40)
                         Text("アップグレード")
                             .font(.system(size: 20))
+                        Spacer()
                     }
+                    .contentShape(Rectangle())
                     .listRowBackground(ColorUtility.secondary)
+                    
                     .onTapGesture {
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapUpgrade)
                         showUpgradeView.toggle()
@@ -65,7 +68,8 @@ struct SettingView: View {
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewToggleNotificatioin, content: newValue.description)
                     }
                     
-                }.listRowBackground(ColorUtility.secondary)
+                }
+                .listRowBackground(ColorUtility.secondary)
                 
                 Section {
                     HStack {
@@ -99,6 +103,7 @@ struct SettingView: View {
                         Spacer()
                     }
                     .listRowBackground(ColorUtility.secondary)
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapShareView)
                         showShareDialog.toggle()
@@ -132,6 +137,7 @@ struct SettingView: View {
                     
                     .foregroundColor(.white)
                     .listRowBackground(ColorUtility.secondary)
+                    .contentShape(Rectangle())
                     .ignoresSafeArea(.all)
                     .onTapGesture {
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapTerm)

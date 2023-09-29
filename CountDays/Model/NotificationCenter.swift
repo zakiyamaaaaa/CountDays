@@ -6,9 +6,33 @@
 //
 
 import Foundation
+import Combine
 import UserNotifications
 
 class NotificationCenter {
+    
+    /// 通知許可の状態を取得    
+    static func checkNotificationStatus() async -> UNAuthorizationStatus {
+        let center = UNUserNotificationCenter.current()
+        return await withCheckedContinuation { continuation in
+            center.getNotificationSettings { setting in
+                continuation.resume(returning: setting.authorizationStatus)
+            }
+        }
+    }
+    
+    /// 通知許可をリクエスト
+    static func requestNotificationPermission() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: .alert) { granted, error in
+            if granted {
+                print("Allowed")
+            } else {
+                print("Denied")
+            }
+        }
+        /// TODO:- 通知の切り替えは設定画面からもできますよページ表示
+    }
     
     /// 通知の登録処理
     static func registerNotification(event: Event) {

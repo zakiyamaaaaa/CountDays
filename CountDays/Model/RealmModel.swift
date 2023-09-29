@@ -44,7 +44,7 @@ import SwiftUI
 
 final class RealmModel: ObservableObject {
     /// TODO: スキーマバージョンを1になおす
-    static var config = Realm.Configuration(schemaVersion: 3)
+    static var config = Realm.Configuration(schemaVersion: 4)
     static var realm: Realm {
         config.fileURL = fileUrl
         print("schema: \(config.schemaVersion)")
@@ -84,6 +84,13 @@ final class RealmModel: ObservableObject {
         })
     }
     
+    /// 通知の許可変数を更新
+    static func updateNotificationStatus(status: Bool) {
+        try! realm.write({
+            user.allowNotification = status
+        })
+    }
+    
     
     /// Eventデータを登録
     static func registerEvent(event: Event) {
@@ -119,6 +126,7 @@ final class RealmModel: ObservableObject {
 final class User: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var createdDate: Date
+    @Persisted var allowNotification: Bool = false
     @Persisted var events: RealmSwift.List<Event>
     
 //    init(id: String = UUID().uuidString, events: RealmSwift.List<Event>) {

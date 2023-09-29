@@ -13,7 +13,7 @@ struct EventConfigurationButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: 50, height: 50)
-            .foregroundColor(.white)
+            .foregroundColor(active ? .accentColor : .white)
             .font(.system(size: 30))
             .background(active ? ColorUtility.active : ColorUtility.inActive)
             .clipShape(Circle())
@@ -21,7 +21,7 @@ struct EventConfigurationButtonStyle: ButtonStyle {
             .animation(.easeOut, value: 0.2)
             .overlay(
                     RoundedRectangle(cornerRadius: 30)
-                        .stroke(active ? Color.red : .clear, lineWidth: 2)
+                        .stroke(active ? Color.accentColor : .clear, lineWidth: 2)
             )
     }
 }

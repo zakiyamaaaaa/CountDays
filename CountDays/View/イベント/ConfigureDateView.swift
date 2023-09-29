@@ -53,6 +53,9 @@ struct ConfigureDateView: View {
         
         let day = dateViewModel.wrappedValue.getDayNumber(date: eventViewModel.wrappedValue.selectedDate)
         
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.accentColor)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 17, weight: .heavy)], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.gray, .font : UIFont.systemFont(ofSize: 17)], for: .normal)
         _selectingMonthlyDay = State(initialValue: day)
         _selectingWeeklyDate = State(initialValue: weeklyDate.wrappedValue)
         _selectedWeeklyDate = weeklyDate
@@ -82,6 +85,7 @@ struct ConfigureDateView: View {
                                     event in
                                     
                                     Text(event.rawValue)
+                                        .foregroundStyle(.red)
                                         .tag(event)
                                     
                                     
@@ -227,27 +231,81 @@ struct ConfigureDateView: View {
     }
     
     private var headerView: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text("イベント")
-                    .foregroundColor(.white)
-                let selectedDate = selectingDate
-//                let selectedDate = eventViewModel.selectedDate
-                switch selectedEventType {
-                case .countdown:
-                    Text("カウントダウン")
+        VStack(spacing: 0) {
+                closableMark
+                    .padding(.top)
+        
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("イベント")
                         .foregroundColor(.white)
-                        .fontWeight(.bold)
-                    
-                    HStack {
-                        switch selectedFrequentType {
-                        case .never:
-                            if CalendarViewModel.isPastDate(selectedDate) && selectedEventType == .countdown{
-                                Text("終了")
+                    let selectedDate = selectingDate
+                    //                let selectedDate = eventViewModel.selectedDate
+                    switch selectedEventType {
+                    case .countdown:
+                        Text("カウントダウン")
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                        
+                        HStack {
+                            switch selectedFrequentType {
+                            case .never:
+                                if CalendarViewModel.isPastDate(selectedDate) && selectedEventType == .countdown{
+                                    Text("終了")
+                                        .font(.system(size: 25))
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color.red)
+                                }
+                                Text(dateViewModel.getYearText(date: selectedDate) + "年")
                                     .font(.system(size: 25))
                                     .fontWeight(.bold)
-                                    .foregroundColor(Color.red)
+                                    .foregroundColor(.white)
+                                Text("\(dateViewModel.getMonthText(date: selectedDate))月")
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                Text("\(dateViewModel.getDayText(date: selectedDate))日")
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            case .annual:
+                                Text("毎年")
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                Text("\(dateViewModel.getMonthText(date: selectedDate))月")
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                Text("\(dateViewModel.getDayText(date: selectedDate))日")
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            case .monthly:
+                                Text("毎月")
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                Text("\(selectingMonthlyDay)日")
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            case .weekly:
+                                Text("毎週")
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                Text(selectingWeeklyDate.stringValue)
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
                             }
+                        }
+                    case .countup:
+                        Text("カウントアップ")
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                        HStack {
                             Text(dateViewModel.getYearText(date: selectedDate) + "年")
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
@@ -260,113 +318,71 @@ struct ConfigureDateView: View {
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
-                        case .annual:
-                            Text("毎年")
-                                .font(.system(size: 25))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                            Text("\(dateViewModel.getMonthText(date: selectedDate))月")
-                                .font(.system(size: 25))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                            Text("\(dateViewModel.getDayText(date: selectedDate))日")
-                                .font(.system(size: 25))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                        case .monthly:
-                            Text("毎月")
-                                .font(.system(size: 25))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                            Text("\(selectingMonthlyDay)日")
-                                .font(.system(size: 25))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                        case .weekly:
-                            Text("毎週")
-                                .font(.system(size: 25))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                            Text(selectingWeeklyDate.stringValue)
-                                .font(.system(size: 25))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                        }
-                    }
-                case .countup:
-                    Text("カウントアップ")
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                    HStack {
-                        Text(dateViewModel.getYearText(date: selectedDate) + "年")
-                            .font(.system(size: 25))
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                        Text("\(dateViewModel.getMonthText(date: selectedDate))月")
-                            .font(.system(size: 25))
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                        Text("\(dateViewModel.getDayText(date: selectedDate))日")
-                            .font(.system(size: 25))
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                        
-                        
-                        if !CalendarViewModel.isPastDate(selectedDate) {
-                            Button {
-                                withAnimation(.spring()) {
-                                    /// ポップアップ表示
-                                    selectedPopup.toggle()
+                            
+                            
+                            if !CalendarViewModel.isPastDate(selectedDate) {
+                                Button {
+                                    withAnimation(.spring()) {
+                                        /// ポップアップ表示
+                                        selectedPopup.toggle()
+                                    }
+                                    
+                                } label: {
+                                    Image(systemName: "exclamationmark.circle.fill")
+                                        .foregroundColor(.orange)
+                                        .tint(.orange)
                                 }
-                                
-                            } label: {
-                                Image(systemName: "exclamationmark.circle.fill")
-                                    .foregroundColor(.orange)
-                                    .tint(.orange)
                             }
                         }
                     }
-                }
-                
-                
-            }
-            .padding()
-            
-            Spacer()
-            
-            /// 設定を保存するところ
-            Button {
-                HapticFeedbackManager.shared.play(.impact(.medium))
-                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureDateViewTapOKButton)
-                if selectedFrequentType == .weekly {
-                    selectingDate = CalendarViewModel.getDateAtWeekly(dayAtWeek: selectingWeeklyDate)
-                    selectedWeeklyDate = selectingWeeklyDate
-//                    dateViewModel.selectedDate = selectingDate
-                    eventViewModel.selectedDate = selectingDate
-                } else {
-//                    dateViewModel.selectedDate = selectingDate
-//                    eventViewModel.selectedDate = selectingDate
-                    dateViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
-                    eventViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
-                }
-                
-                dismiss()
-            } label: {
-                Image(systemName: "checkmark")
-                    .tint(.white)
-                    .bold(buttonPressd)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 20).fill(ColorUtility.highlighted))
                     
-                    .padding()
-                    .animation(.easeIn, value: buttonPressd)
-            }
-            .buttonStyle(BounceButtonStyle())
-            .onLongPressGesture {
-                print("Long pressed")
-            } onPressingChanged: { value in
-                print(value)
-                buttonPressd = value
+                    
+                }
+                .padding()
+                
+                Spacer()
+                
+                /// 設定を保存するところ
+                Button {
+                    HapticFeedbackManager.shared.play(.impact(.heavy))
+                    FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureDateViewTapOKButton)
+                    if selectedFrequentType == .weekly {
+                        selectingDate = CalendarViewModel.getDateAtWeekly(dayAtWeek: selectingWeeklyDate)
+                        selectedWeeklyDate = selectingWeeklyDate
+                        //                    dateViewModel.selectedDate = selectingDate
+                        eventViewModel.selectedDate = selectingDate
+                    } else {
+                        //                    dateViewModel.selectedDate = selectingDate
+                        //                    eventViewModel.selectedDate = selectingDate
+                        dateViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
+                        eventViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
+                    }
+                    
+                    dismiss()
+                } label: {
+                    Image(systemName: "checkmark")
+                        .foregroundStyle(buttonPressd ? Color.black : Color.white)
+                        .bold(buttonPressd)
+                        
+                        
+                }
+                
+                .padding()
+                .overlay {
+                    Circle()
+                        .stroke(Color.accentColor)
+                }
+                .background(RoundedRectangle(cornerRadius: 20).fill( buttonPressd ? Color.accentColor : ColorUtility.highlighted))
+                .animation(.easeIn, value: buttonPressd)
+                .frame(width: 50, height: 50)
+                .buttonStyle(BounceButtonStyle())
+                .padding()
+                .onLongPressGesture {
+                    print("Long pressed")
+                } onPressingChanged: { value in
+                    print(value)
+                    buttonPressd = value
+                }
             }
         }
         .background(ColorUtility.primary)

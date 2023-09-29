@@ -33,15 +33,6 @@ class IntentHandler: INExtension, INSendMessageIntentHandling, INSearchForMessag
         
     }
     
-    
-//    func provideEventPOptionsCollection(for intent: ConfigurationIntent, with completion: @escaping (INObjectCollection<NSString>?, Error?) -> Void) {
-//        
-//        let eventsTitle: [NSString] = RealmViewModel().events.map { NSString(string:  $0.title) }
-//        let allName = INObjectCollection(items: eventsTitle)
-//        completion(allName, nil)
-//    }
-    
-    
 //    func provideEventOptionsCollection(for intent: ConfigurationIntent, searchTerm: String?, with completion: @escaping (INObjectCollection<NSString>?, Error?) -> Void) {
 //        let names: [NSString] = [
 //            "aaa",
