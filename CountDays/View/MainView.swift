@@ -46,7 +46,6 @@ struct MainView: View {
     var body: some View {
         VStack {
             headerView
-                .padding(.bottom)
             
             ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: columns, spacing: 20) {
@@ -83,10 +82,20 @@ struct MainView: View {
                                         }
 
                                     }
+//                                    .contextMenu {
+//                                        ShareLink(item: "イベント名",
+//                                                  preview: SharePreview("CountDays", image: Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())),
+//                                                  label: {
+//                                            HStack {
+//                                                Image(systemName: "square.and.arrow.up")
+//                                                Text("共有する")
+//                                            }
+//                                        })
+//                                    }
                                     
-
                             } else if i == 0 {
                                 AddEventView()
+                                    .padding(.top)
                                     .scaleEffect(scale ? 1.1: 1.0)
                                     .simultaneousGesture(
                                             DragGesture(minimumDistance: 0)
@@ -121,16 +130,7 @@ struct MainView: View {
                                                     #endif
                                                 }
                                         )
-                                    .contextMenu {
-                                        ShareLink(item: "Hello",
-                                                  preview: SharePreview("CountDays", image: Image(systemName: "square.and.arrow.up")),
-                                                  label: {
-                                            HStack {
-                                                Image(systemName: "square.and.arrow.up")
-                                                Text("MyShareLabel")
-                                            }
-                                        })
-                                    }
+                                    
                             }
                             
                         }

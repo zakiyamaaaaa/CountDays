@@ -408,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				394A5C732A9712DF006A7232 /* CountDaysApp.swift */,
+				39FFFA712AA86667001AE0D7 /* WelcomeView.swift */,
 				394A5CD62A971566006A7232 /* MainView.swift */,
 				394A5CE52A9716B2006A7232 /* イベント設定 */,
 				394A5CE42A9716A1006A7232 /* 設定 */,
@@ -417,7 +418,6 @@
 				39FFFA812AAEB518001AE0D7 /* EventCardView2.swift */,
 				39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */,
 				39FFFA632AA07919001AE0D7 /* UpgradeView.swift */,
-				39FFFA712AA86667001AE0D7 /* WelcomeView.swift */,
 				39FFFA7A2AA9C093001AE0D7 /* CustomImagePicker.swift */,
 			);
 			path = View;

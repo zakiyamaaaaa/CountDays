@@ -45,7 +45,7 @@ struct WelcomeView: View {
                             
                     }.overlay {
                         RoundedRectangle(cornerRadius: 30)
-                            .stroke(.white , lineWidth: 1)
+                            .stroke(Color.accentColor , lineWidth: 1)
                             .scaleEffect(1.0)
                             .opacity(scaleFlag ? 0 : 1)
                             .scaleEffect(scaleFlag ? 1.3 : 1.0)
@@ -63,8 +63,8 @@ struct WelcomeView: View {
                         Text("Get started")
                         
                             .frame(width: 200, height: 60)
-                            .foregroundColor(.white)
-                            .background(ColorUtility.highlighted)
+                            .foregroundColor(.black)
+                            .background(Color.accentColor)
                             .cornerRadius(30)
                             
                         
