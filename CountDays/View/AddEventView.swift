@@ -21,6 +21,7 @@ struct AddEventView: View {
             Text("+")
                 .foregroundColor(.white)
                 .font(.system(size:100))
+                .baselineOffset(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
         }
         
     }

@@ -97,7 +97,7 @@ struct ConfigureEventView: View {
                                  FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewDeleteEvent)
                              } label: {
                                  Image(systemName: "trash.fill")
-                                 
+                                     .foregroundStyle(ColorUtility.highlighted2)
                              }
                              .buttonStyle(EventConfigurationButtonStyle(active: $trashButtonSelected))
                              .opacity(opacity)
@@ -393,17 +393,15 @@ struct ConfigureEventView: View {
                     .clipShape(Circle())
                 }
             }.animation(.spring(), value: focusField)
-//
-//
             Button {
                 isShowSheet.toggle()
                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureDateButton)
             } label: {
                 VStack(alignment: .leading) {
                     Text(eventCardViewModel.eventType.rawValue)
-                        .foregroundColor(.black)
+                        .foregroundColor(eventCardViewModel.eventType == .countdown ? .black : .white)
                         .frame(width: 150, height: 30)
-                        .background(.white)
+                        .background(eventCardViewModel.eventType == .countdown ? .white : .black)
                         .cornerRadius(20)
                         .padding(.leading)
                         .padding(.bottom, 3)
@@ -414,8 +412,8 @@ struct ConfigureEventView: View {
                     ConfigureDateView(eventType: $eventCardViewModel.eventType, frequentType: $eventCardViewModel.frequentType, dateViewModel: _dateViewModel, weeklyDate: $eventCardViewModel.dayOfWeek, eventViewModel: _eventCardViewModel)
                 }.frame(height: 120.0)
                     .frame(alignment: .leading)
-                    .foregroundColor(.black)
-                    .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.highlighted))
+                    .foregroundColor(eventCardViewModel.eventType == .countdown ? .black : .white)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(eventCardViewModel.eventType == .countdown ? ColorUtility.highlighted : ColorUtility.highlighted2))
 
             }
                 
@@ -433,47 +431,55 @@ struct ConfigureEventView: View {
         HStack {
 //
             VStack {
-                
-                
-                Image(systemName: "calendar")
+                Image(systemName: eventCardViewModel.eventType == .countdown ? "calendar.badge.clock" : "clock.arrow.circlepath")
                     .resizable()
-                    .frame(width: 30, height: 30)
+                    .scaledToFit()
+                    .frame(width: 40, height: 30)
                     .padding(.horizontal)
+                    .foregroundStyle(eventCardViewModel.eventType == .countdown ? .white : .black)
                 
-                if eventCardViewModel.frequentType != .never {
+                if eventCardViewModel.eventType == .countdown && eventCardViewModel.frequentType != .never {
                     Text("リピート")
                         .font(.system(size: 10))
-                        .foregroundColor(.white)
+                        .foregroundColor(eventCardViewModel.eventType == .countdown ? .white : .black)
                         .background(Color.red)
                 }
             }
 //
             VStack(alignment: .leading) {
+                let date = dateViewModel.selectedDate
+                let year = dateViewModel.getYearText(date: date)
+                let month = dateViewModel.getMonthText(date: date)
+                let day = dateViewModel.getDayText(date: date)
+                let hour = dateViewModel.getHourText(date: date)
+                let minute = dateViewModel.getMinuteText(date: date)
                 
                 HStack {
-                    let date = dateViewModel.selectedDate
-                    let year = dateViewModel.getYearText(date: date)
-                    let month = dateViewModel.getMonthText(date: date)
-                    let day = dateViewModel.getDayText(date: date)
-                    switch eventCardViewModel.frequentType {
-                    case .never:
-                        //                                Text(dateViewModel.dateText(date: date))
+                    switch eventCardViewModel.eventType {
+                    case .countup:
                         Text(year + "/" + month + "/" + day)
-                    case .annual:
-                        Text("毎年：")
-                        Text(month + "月" + day + "日")
-                    case .monthly:
-                        Text("毎月：")
-                        Text(day + "日")
-                    case .weekly:
-                        Text("毎週：")
-                        Text(eventCardViewModel.dayOfWeek.stringValue)
+                    case .countdown:
+                        switch eventCardViewModel.frequentType {
+                        case .never:
+                            Text(year + "/" + month + "/" + day)
+                        case .annual:
+                            Text("毎年：")
+                            Text(month + "月" + day + "日")
+                        case .monthly:
+                            Text("毎月：")
+                            Text(day + "日")
+                        case .weekly:
+                            Text("毎週：")
+                            Text(eventCardViewModel.dayOfWeek.stringValue)
+                        }
                     }
+                    
                 }
-                Text("終日")
+                /// TODO:- hh:mm表記
+                Text(hour + ":" + minute)
                 
             }
-            .foregroundColor(.white)
+            .foregroundColor(eventCardViewModel.eventType == .countdown ? .white : .black)
             Spacer()
         }
     }
@@ -487,6 +493,7 @@ struct ConfigureEventView: View {
                     VStack {
                         ZStack {
                             Text("👍スタンダード")
+                                .foregroundStyle(.white)
                                 .font(.system(size: 40, weight: .bold))
                         }
                         Divider()
@@ -515,13 +522,14 @@ struct ConfigureEventView: View {
                     
                     VStack {
                         Text("🍩リング")
+                            .foregroundStyle(.white)
                             .font(.system(size: 40, weight: .bold))
                         Spacer()
                     }
                     
                     VStack {
                         Text(eventCardViewModel.eventType.rawValue)
-                            .foregroundColor(.white)
+                            .foregroundColor(ColorUtility.highlightedText)
                         EventCardView2(eventVM: eventCardViewModel, displayStyle: .circle)
                         
                         switch eventCardViewModel.eventType {
@@ -529,21 +537,21 @@ struct ConfigureEventView: View {
                             switch eventCardViewModel.frequentType {
                             case .never:
                                 Text("イベント作成日からゴールまでを１周")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(ColorUtility.highlightedText)
                             case .annual:
                                 Text("１年で１周")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(ColorUtility.highlightedText)
                             case .monthly:
                                 Text("１ヶ月で１周")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(ColorUtility.highlightedText)
                             case .weekly:
                                 Text("１週間で１周")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(ColorUtility.highlightedText)
                             }
                             
                         case .countup:
                             Text("１００日で１周")
-                                .foregroundColor(.white)
+                                .foregroundColor(ColorUtility.highlightedText)
                         }
                         
                     }
@@ -575,6 +583,7 @@ struct ConfigureEventView: View {
                     
                     VStack {
                         Text("📅カレンダー")
+                            .foregroundStyle(.white)
                             .font(.system(size: 40, weight: .bold))
                         Spacer()
                     }
@@ -620,6 +629,7 @@ struct ConfigureEventView: View {
                 
                 EventDetailConfigurationView(showHour: $eventCardViewModel.showHour, showMinute: $eventCardViewModel.showMinute, displayLang: $eventCardViewModel.displayLang, showSecond: $eventCardViewModel.showSecond)
                     .presentationDetents([.medium])
+                    
             }
             .alert("このスタイルを利用するにはアップグレードが必要です", isPresented: $showStyleAlert) {
                 Button("OK") {

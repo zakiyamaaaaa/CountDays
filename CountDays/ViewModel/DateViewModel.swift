@@ -16,6 +16,13 @@ class DateViewModel: ObservableObject {
         return cal
     }()
     
+    var formatter: DateFormatter = {
+        var formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        return formatter
+    }()
+    
     func dateText(date: Date)-> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ja")
@@ -40,9 +47,7 @@ class DateViewModel: ObservableObject {
         guard let date else {
             return "no data"
         }
-        let formatter = DateFormatter()
-        formatter.locale = Locale.current
-        formatter.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        
         formatter.dateFormat = "yyyy'年'M'月'd'日"
 //        guard let component,
 //              let year = component.year?.description,
@@ -68,12 +73,17 @@ class DateViewModel: ObservableObject {
     
     func getHourText(date: Date?) -> String {
         guard let date else { return "" }
-        return DateViewModel.calendar.component(.hour, from: date).description
+        formatter.dateFormat = "HH"
+        
+        return formatter.string(from: date)
+//        return DateViewModel.calendar.component(.hour, from: date).description
     }
     
     func getMinuteText(date: Date?) -> String {
         guard let date else { return "" }
-        return DateViewModel.calendar.component(.minute, from: date).description
+        formatter.dateFormat = "mm"
+        
+        return formatter.string(from: date)
     }
     
     

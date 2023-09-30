@@ -85,9 +85,7 @@ struct ConfigureDateView: View {
                                     event in
                                     
                                     Text(event.rawValue)
-                                        .foregroundStyle(.red)
                                         .tag(event)
-                                    
                                     
                                 }
                             }
@@ -100,55 +98,55 @@ struct ConfigureDateView: View {
                         }
                         
                             
-                            HStack {
-                                Menu(selectedFrequentType.rawValue) {
-                                    ForEach(FrequentType.allCases) {
-                                        frequent in
+                        HStack {
+                            Menu(selectedFrequentType.rawValue) {
+                                ForEach(FrequentType.allCases) {
+                                    frequent in
+                                    
+                                    Button(role: .none) {
+                                        selectedFrequentType = frequent
+                                    } label: {
+                                        Label(frequent.rawValue, systemImage:  selectedFrequentType == frequent ? "checkmark" : "none")
                                         
-                                        Button(role: .none) {
-                                            selectedFrequentType = frequent
-                                        } label: {
-                                            Label(frequent.rawValue, systemImage:  selectedFrequentType == frequent ? "checkmark" : "none")
-                                            
-                                        }
                                     }
                                 }
-                                .foregroundColor(.white)
-                                .tint(.white)
-                                .padding()
                             }
-                            
-                            .border(selectedFrequentType == .never ? .clear : selectedFrequentType.color, width: 5)
-                            .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.primary))
-                            .isHidden(hidden: selectedEventType == .countup)
+                            .foregroundColor(.white)
+                            .tint(.white)
                             .padding()
+                        }
+                        
+                        .border(selectedFrequentType == .never ? .clear : selectedFrequentType.color, width: 5)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.primary))
+                        .isHidden(hidden: selectedEventType == .countup)
+                        .padding()
                 
-                            switch selectedEventType {
-                            case .countdown:
+                        switch selectedEventType {
+                        case .countdown:
+                            
+                            switch selectedFrequentType {
+                            case .never, .annual:
                                 
-                                switch selectedFrequentType {
-                                case .never, .annual:
-                                    
-                                    CalendarView(dateSelected: $selectingDate)
-                                        .cornerRadius(20)
-                                        .preferredColorScheme(.dark)
-                                        .tint(selectedFrequentType.color)
-                                    
-                                case .monthly:
-                                    monthlyView
-                                        .preferredColorScheme(.dark)
-                                        .padding()
-                                case .weekly:
-                                    weeklyView
-                                        .preferredColorScheme(.dark)
-                                        .padding()
-                                }
-                            case .countup:
                                 CalendarView(dateSelected: $selectingDate)
                                     .cornerRadius(20)
                                     .preferredColorScheme(.dark)
                                     .tint(selectedFrequentType.color)
+                                
+                            case .monthly:
+                                monthlyView
+                                    .preferredColorScheme(.dark)
+                                    .padding()
+                            case .weekly:
+                                weeklyView
+                                    .preferredColorScheme(.dark)
+                                    .padding()
                             }
+                        case .countup:
+                            CalendarView(dateSelected: $selectingDate)
+                                .cornerRadius(20)
+                                .preferredColorScheme(.dark)
+                                .tint(selectedFrequentType.color)
+                        }
                             
                         
                         if !isAllDayEvent {
@@ -166,8 +164,11 @@ struct ConfigureDateView: View {
                                 } label: {
                                     Text("\(text)")
                                 }
+                                
                                 .frame(width: 100, height: 50)
-                                .border(editingHour ? .red : .clear)
+                                .foregroundStyle(.white)
+                                .border(editingHour ? Color.accentColor : .clear)
+                                .border(editingHour ? Color.accentColor : .clear)
                                 .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.primary))
                                 
                                 if editingHour {
@@ -346,6 +347,10 @@ struct ConfigureDateView: View {
                 Button {
                     HapticFeedbackManager.shared.play(.impact(.heavy))
                     FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureDateViewTapOKButton)
+                    
+                    selectingHour = isAllDayEvent ? 0 : selectingHour
+                    selectingMinute = isAllDayEvent ? 0 : selectingMinute
+                    
                     if selectedFrequentType == .weekly {
                         selectingDate = CalendarViewModel.getDateAtWeekly(dayAtWeek: selectingWeeklyDate)
                         selectedWeeklyDate = selectingWeeklyDate
@@ -411,6 +416,7 @@ struct ConfigureDateView: View {
                 }
             }
             .tint(.white)
+            .foregroundStyle(.white)
             .font(.system(size: 24))
             .frame(width: 150, height: 70)
             .background(RoundedRectangle(cornerRadius: 20).fill(ColorUtility.primary))
@@ -446,6 +452,7 @@ struct ConfigureDateView: View {
                 }
             }
             .tint(.white)
+            .foregroundStyle(.white)
             .font(.system(size: 24))
             .frame(width: 150, height: 70)
             .background(RoundedRectangle(cornerRadius: 20).fill(ColorUtility.primary))
