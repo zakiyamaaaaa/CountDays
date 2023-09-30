@@ -149,34 +149,7 @@ struct CropView: View {
                         .frame(width: 150, height: 150)
                         
                     
-                    Button {
-                        
-                        if isPurchased {
-                            let render = ImageRenderer(content: ImageView())
-                            render.proposedSize = .init(cropSize)
-                            
-                            if let image = render.uiImage {
-                                onCrop(image, true)
-                            } else {
-                                onCrop(nil, false)
-                            }
-                            dismiss()
-                        } else {
-                            showUpgradeAlert.toggle()
-                        }
-                        
-                        
-                    } label: {
-                        Text("OK")
-                            .foregroundColor(.white)
-                            .frame(width:100, height: 40)
-                            .background(.mint)
-                            .cornerRadius(20)
-                    }
-                    .disabled(pressed)
-                    .opacity(pressed ? 0.5 : 1.0)
-                    .offset(y:40)
-                    .animation(.easeIn(duration: 0.2), value: pressed)
+                    
                     
 
                     
@@ -291,38 +264,52 @@ struct CropView: View {
     /// HeaderView
     private var headerView: some View {
         
-        
-        HStack {
-            if opacity > 0{
+        VStack(spacing: 0) {
+            closableMark
+                .padding(.top)
+            HStack {
+                Text("画像編集")
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(.largeTitle))
+                
+                Spacer()
+                
                 Button {
-                    dismiss()
+                    
+                    if isPurchased {
+                        let render = ImageRenderer(content: ImageView())
+                        render.proposedSize = .init(cropSize)
+                        
+                        if let image = render.uiImage {
+                            onCrop(image, true)
+                        } else {
+                            onCrop(nil, false)
+                        }
+                        dismiss()
+                    } else {
+                        showUpgradeAlert.toggle()
+                    }
+                    
+                    
                 } label: {
-                    Image(systemName: "xmark")
+                    Text("OK")
+                        .foregroundColor(.black)
+                        .fontWeight(.bold)
                         
                 }
-                .frame(width: 50, height: 50)
-                .foregroundColor(.white)
-                .font(.system(size: 30))
-                .background(ColorUtility.secondary)
-                .clipShape(Circle())
-                .padding()
-                
-                .transition(.opacity)
-                .opacity(opacity)
-//                .opacity(opacity ? 1 : 0)
-                .animation(.easeIn(duration: 1.0).delay(1.7), value: opacity)
+                .frame(width:100, height: 40)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.accentColor, lineWidth: 3)
+                }
+                .background(RoundedRectangle(cornerRadius: 20).fill( Color.accentColor))
+                .disabled(pressed)
+                .opacity(pressed ? 0.5 : 1.0)
+                .animation(.easeIn(duration: 0.2), value: pressed)
             }
-            
-            
-            
-            Text("画像編集")
-                .foregroundColor(.white)
-                .fontWeight(.bold)
-                .font(.system(.largeTitle))
-            
-            Spacer()
+            .padding()
         }
-        .animation(.easeOut(duration: 0.4).delay(0.5), value: opacity)
         .frame(height: 80)
         .background(ColorUtility.primary)
     }
@@ -430,11 +417,6 @@ struct CropView: View {
         }, onPressingChanged: { state in
             pressed = state
         })
-//        .onAppear(
-//            if let image {
-//                image
-//            }
-//        )
         
     }
     

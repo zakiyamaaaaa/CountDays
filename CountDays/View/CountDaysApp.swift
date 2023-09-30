@@ -30,6 +30,7 @@ struct CountDaysApp: SwiftUI.App {
                 .environmentObject(viewModel)
                 .environmentObject(store)
 //            TestView()
+//            TestView2(model: TestViewModel(textTitle: "hoge"))
         }
     }
 }

@@ -418,7 +418,6 @@
 				39FFFA812AAEB518001AE0D7 /* EventCardView2.swift */,
 				39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */,
 				39FFFA632AA07919001AE0D7 /* UpgradeView.swift */,
-				39FFFA7A2AA9C093001AE0D7 /* CustomImagePicker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -475,6 +474,7 @@
 				394A5CCA2A97153D006A7232 /* ConfigureDateView.swift */,
 				394A5CCB2A97153D006A7232 /* CalendarView.swift */,
 				394A5CCC2A97153D006A7232 /* EventDetailConfigurationView.swift */,
+				39FFFA7A2AA9C093001AE0D7 /* CustomImagePicker.swift */,
 			);
 			name = "イベント設定";
 			path = "イベント";

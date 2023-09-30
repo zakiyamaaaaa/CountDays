@@ -16,6 +16,7 @@ struct TestView2: View {
     @State private var selectedImage: UIImage? = nil
     @State private var selectedPhoto: PhotosPickerItem? = nil
     @State var image: UIImage?
+    @State var sheet = false
     var model: TestViewModel
     
     var body: some View {
@@ -30,34 +31,34 @@ struct TestView2: View {
                     .fontWeight(.bold)
             }
             
-            if let image = selectedImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .frame(width: 150, height: 150)
-                    .overlay(content: {
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(lineWidth: 5)
-                            .fill(.red)
-                    })
-                    .cornerRadius(20)
-                    .overlay(alignment: .center) {
-                        PhotosPicker(selection: $selectedPhoto, label: {
-                            Rectangle()
-                                .frame(width: 150, height: 150)
-                            .foregroundColor(.clear)})
-                        .onChange(of: selectedPhoto) { pickedItem in
-                            Task {
-                                if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
-                                    selectedImage = uiImage
-                                }
-                                
-                            }
-                        }
-                    }
-               
-                }  else {
+//            if let image = selectedImage {
+//                Image(uiImage: image)
+//                    .resizable()
+//                    .scaledToFill()
+//                    .clipShape(RoundedRectangle(cornerRadius: 20))
+//                    .frame(width: 150, height: 150)
+//                    .overlay(content: {
+//                        RoundedRectangle(cornerRadius: 20)
+//                            .stroke(lineWidth: 5)
+//                            .fill(.red)
+//                    })
+//                    .cornerRadius(20)
+//                    .overlay(alignment: .center) {
+//                        PhotosPicker(selection: $selectedPhoto, label: {
+//                            Rectangle()
+//                                .frame(width: 150, height: 150)
+//                            .foregroundColor(.clear)})
+//                        .onChange(of: selectedPhoto) { pickedItem in
+//                            Task {
+//                                if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
+//                                    selectedImage = uiImage
+//                                }
+//                                
+//                            }
+//                        }
+//                    }
+//               
+//                }  else {
                     Rectangle()
                         .foregroundColor(.gray)
                         .frame(width: 150, height: 150)
@@ -67,14 +68,16 @@ struct TestView2: View {
                                                 .frame(width: 150, height: 150)
                                                 .foregroundColor(.clear)})
                         .onChange(of: selectedPhoto) { pickedItem in
+                            
                             Task {
                                 if let data = try? await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
                                     selectedImage = uiImage
+                                    sheet.toggle()
                                 }
                             }
                         }
                     }
-                }
+//                }
             Button {
                 let render = ImageRenderer(content: imageSampleView)
                 if let image = render.uiImage {
@@ -84,9 +87,17 @@ struct TestView2: View {
             } label: {
                 Text("複製")
             }
+            .sheet(isPresented: $sheet) {
+                if let selectedImage {
+//                    NewImageView(image: selectedImage)
+                        
+//                    NewImageView(image: $selectedImage)
+                }
+            }
             
             if let image {
                 Image(uiImage: image)
+                    .renderingMode(.original)
             }
         }
     }
@@ -101,6 +112,26 @@ struct TestView2: View {
                 .frame(width: 100, height: 100)
         }.cornerRadius(20)
     }
+}
+
+struct NewImageView: View {
+    
+    var image: UIImage?
+    
+    var body: some View {
+        if let image {
+        Image(uiImage: image)
+            .renderingMode(.original)
+            .resizable()
+            .frame(width:100, height: 100)
+//        if let image {
+//            image
+        } else {
+            Text("No Image")
+        }
+        
+    }
+    
 }
 
 struct TestView2_Previews: PreviewProvider {

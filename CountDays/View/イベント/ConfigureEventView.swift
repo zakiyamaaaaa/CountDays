@@ -10,6 +10,7 @@ import StoreKit
 import RealmSwift
 import Photos
 import PhotosUI
+import Foundation
 import FirebaseAnalytics
 import WidgetKit
 
@@ -49,7 +50,7 @@ struct ConfigureEventView: View {
     /// 選択しているスタイル
     @State private var selectingBackgroundStyle: BackgroundStyle = .simple
     @State private var selectedImage: UIImage?
-    @State private var selectingImage: UIImage?
+    @State private var selectingImage: UIImage? = nil
     @StateObject var dateViewModel = DateViewModel()
     @StateObject var imageViewModel = ImageModel()
     @StateObject var eventCardViewModel: EventCardViewModel2
@@ -649,7 +650,7 @@ struct ConfigureEventView: View {
         case simple = "シンプル"
         case image = "画像"
     }
-    @State private var photosItem: PhotosPickerItem?
+    @State private var photosItem: PhotosPickerItem? = nil
     /// MARK: - 背景色を編集するビュー
     private var backgroundColorView: some View {
         VStack {
@@ -707,16 +708,16 @@ struct ConfigureEventView: View {
                                     }
                                     .photosPicker(isPresented: $show, selection: $photosItem)
                                     .onChange(of: photosItem) { newValue in
-                                        if let newValue {
+                                        
                                             Task {
-                                                if let imageData = try? await newValue.loadTransferable(type: Data.self), let image = UIImage(data: imageData) {
+                                                if let imageData = try? await newValue?.loadTransferable(type: Data.self), let image = UIImage(data: imageData) {
                                                     await MainActor.run(body: {
                                                         selectingImage = image
                                                         showCropView.toggle()
                                                     })
                                                 }
                                             }
-                                        }
+                                        
                                     }
                                 
                                 Button {
@@ -776,7 +777,7 @@ struct ConfigureEventView: View {
                 .sheet(isPresented: $isShowUpgradeView) {
                     UpgradeView()
                 }
-                .sheet(isPresented: $showCropView, content: {
+                .sheet(isPresented: $showCropView) { [ selectingImage] in
                     CropView(image: selectingImage) { croppedImage, status in
                         if let croppedImage {
                             self.selectedImage = croppedImage
@@ -787,7 +788,7 @@ struct ConfigureEventView: View {
                             /// 画像編集エラー
                         }
                     }
-                })
+                }
             }
             
         }
