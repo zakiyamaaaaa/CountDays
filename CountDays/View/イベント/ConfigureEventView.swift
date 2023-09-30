@@ -311,10 +311,10 @@ struct ConfigureEventView: View {
                         /// 更新
                     case false:
                         RealmViewModel().updateEvent(event: event)
-                        /// Widget側のデータ更新
-                        WidgetCenter.shared.reloadAllTimelines()
+                        
                     }
-                    
+                    /// Widget側のデータ更新
+                    WidgetCenter.shared.reloadAllTimelines()
                     
                     Task {
                         if eventCardViewModel.eventType == .countdown {

@@ -62,12 +62,12 @@ struct EventCardView2: View {
                 
                 Rectangle()
                     .foregroundStyle(
-                        eventVM.backgroundColor.gradient!
+                        eventVM.backgroundColor.gradient ?? LinearGradient(colors: [], startPoint: UnitPoint(), endPoint: UnitPoint())
                         )
                     .widgetFrame()
-                    .cornerRadius(30)
+                    .cornerRadius(20)
                     .overlay(content: {
-                        RoundedRectangle(cornerRadius: 30)
+                        RoundedRectangle(cornerRadius: 20)
                             .stroke(ColorUtility.highlighted, lineWidth: 0.3)
 
                     })
