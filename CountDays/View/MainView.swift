@@ -240,5 +240,7 @@ class Todo: Object, ObjectKeyIdentifiable {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+        Rectangle()
+            .foregroundStyle(.black.gradient)
     }
 }

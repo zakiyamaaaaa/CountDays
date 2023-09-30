@@ -668,8 +668,12 @@ struct ConfigureEventView: View {
                 ScrollView(showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 5) {
                         ForEach(bgColorList, id: \.self) { item in
-                            if let color = item.color {
-                                RoundedRectangle(cornerRadius: 10).fill(LinearGradient(colors: [color, color], startPoint: .topLeading, endPoint: .bottomTrailing))
+                            if let gradient = item.gradient {
+                                
+                                RoundedRectangle(cornerRadius: 10).fill(
+                                    gradient
+//                                    LinearGradient(colors: [start, end], startPoint: .topLeading, endPoint: .bottomTrailing)
+                                )
                                     .frame(width: 80, height: 80)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 10)
@@ -678,7 +682,7 @@ struct ConfigureEventView: View {
                                     .onTapGesture(perform: {
                                         eventCardViewModel.backgroundColor = item
                                         selectingBackgroundStyle = .simple
-                                        print(color)
+//                                        print(color)
                                     })
                                     .padding()
                             }
@@ -907,21 +911,5 @@ struct ConfigureEventView_Previews: PreviewProvider {
     @StateObject static var store = Store()
     static var previews: some View {
         ConfigureEventView(realmMock: RealmMockStore(), event: $event, isCreation: false, eventCardViewModel: eventViewModel).environmentObject(store)
-    }
-}
-
-extension Color {
-    
-    func dark(brightnessRatio: CGFloat = 1.6) -> Color {
-        var hue: CGFloat = 0
-        var saturation: CGFloat = 0
-        var brightness: CGFloat = 0
-        var alpha: CGFloat = 0
-        let color = UIColor(self)
-    
-        if color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
-            return Color(hue: hue, saturation: saturation*brightnessRatio, brightness: brightness, opacity: alpha)
-        }
-        return self
     }
 }

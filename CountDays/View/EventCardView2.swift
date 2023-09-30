@@ -61,9 +61,17 @@ struct EventCardView2: View {
             ZStack {
                 
                 Rectangle()
-                    .foregroundStyle(eventVM.backgroundColor.color ?? .white)
+                    .foregroundStyle(
+                        eventVM.backgroundColor.gradient!
+                        )
                     .widgetFrame()
                     .cornerRadius(30)
+                    .overlay(content: {
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(ColorUtility.highlighted, lineWidth: 0.3)
+
+                    })
+                    
                 
                 if let displayStyle {
                     switch displayStyle {
@@ -180,7 +188,7 @@ struct EventCardView2: View {
             .foregroundColor(eventVM.textColor.color)
             .padding()
             .widgetFrame(alignment: .leading)
-            .widgetBackground(eventVM.backgroundColor.color)
+//            .widgetBackground(eventVM.backgroundColor.color)
         }
     }
     
@@ -321,7 +329,7 @@ struct EventCardView2: View {
                         
                     } else {
                         Rectangle()
-                            .foregroundColor(eventVM.backgroundColor.color)
+                            .foregroundStyle(eventVM.backgroundColor.color ?? .white)
                             .frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height*3/4)
                     }
                         
@@ -351,11 +359,13 @@ struct EventCardView2: View {
 struct EventCardView2_Previews: PreviewProvider {
 //    var event = EventCardViewModel.defaultStatus
     static var previews: some View {
+        
         let event = EventCardViewModel.defaultStatus
         let vm = EventCardViewModel2(event: event)
         EventCardView2(eventVM: vm)
         EventCardView2(eventVM: vm, displayStyle: .circle)
         EventCardView2(eventVM: vm, displayStyle: .calendar)
+        
         
     }
 }

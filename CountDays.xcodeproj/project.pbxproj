@@ -78,6 +78,8 @@
 		39905D7B2ABAF61A0019CEFB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39905D7A2ABAF61A0019CEFB /* Realm */; };
 		39905D7D2ABAF61A0019CEFB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39905D7C2ABAF61A0019CEFB /* RealmSwift */; };
 		39905D7F2ABAFC3B0019CEFB /* WidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6C2ABAF6020019CEFB /* WidgetExtension.swift */; };
+		39EC20B92AC8199800BD081D /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA32A9713C3006A7232 /* ColorUtility.swift */; };
+		39EC20BA2AC8199800BD081D /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA32A9713C3006A7232 /* ColorUtility.swift */; };
 		39FFFA532A973D6E001AE0D7 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA522A973D6E001AE0D7 /* Algorithms */; };
 		39FFFA562A973D7A001AE0D7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA552A973D7A001AE0D7 /* Realm */; };
 		39FFFA582A973D7A001AE0D7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA572A973D7A001AE0D7 /* RealmSwift */; };
@@ -836,6 +838,7 @@
 			files = (
 				39560F2A2AC17C9D000A623D /* WidgetExtension.intentdefinition in Sources */,
 				39560F462AC19E00000A623D /* RealmModel.swift in Sources */,
+				39EC20BA2AC8199800BD081D /* ColorUtility.swift in Sources */,
 				39560F492AC19E2D000A623D /* Extension.swift in Sources */,
 				39560F482AC19E1C000A623D /* Enum.swift in Sources */,
 				39560F222AC17B91000A623D /* IntentHandler.swift in Sources */,
@@ -857,6 +860,7 @@
 				39905D6B2ABAF6020019CEFB /* WidgetExtensionLiveActivity.swift in Sources */,
 				39905D692ABAF6020019CEFB /* WidgetExtensionBundle.swift in Sources */,
 				39560F162ABF1EAA000A623D /* RealmViewModel.swift in Sources */,
+				39EC20B92AC8199800BD081D /* ColorUtility.swift in Sources */,
 				39560F102ABF1DEE000A623D /* RealmModel.swift in Sources */,
 				39560F122ABF1DFC000A623D /* Enum.swift in Sources */,
 				39905D6D2ABAF6020019CEFB /* WidgetExtension.swift in Sources */,

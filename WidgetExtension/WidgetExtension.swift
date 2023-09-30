@@ -58,6 +58,8 @@ struct WidgetExtensionEntryView : View {
         let eventVM = EventCardViewModel2(event: entry.event)
         
         EventCardView2(eventVM: eventVM)
+            .widgetBackground(eventVM.backgroundColor.gradient)
+        
     }
 }
 
