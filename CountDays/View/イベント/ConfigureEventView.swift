@@ -36,7 +36,9 @@ struct ConfigureEventView: View {
     
     @FocusState private var focusField: Bool
     @ObservedObject var realmMock: RealmMockStore
-    @Binding var event: Event
+//    @Binding var event: Event
+    @ObservedRealmObject var event: Event
+//    @ObservedResults(Event.self) var event
     let isCreation: Bool
     
     /// Realmの配列を受け取ってそれを削除する方法
@@ -115,12 +117,13 @@ struct ConfigureEventView: View {
                          }
                          Button("消去", role: .destructive) {
                              trashButtonSelected.toggle()
-                             $event.delete()
+//                             $event.delete()
+                             
                              // 削除処理
-//                                 RealmViewModel().deleteEvent(event: a)
+                                 RealmViewModel().deleteEvent(event: event)
                              
                             /// 通知の登録削除処理
-                             NotificationCenter.removeNotification(id: event.id.stringValue)
+                             NotificationCenter.removeNotification(id: event._id.uuidString)
                              FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapDeleteEventAlertExecution)
                              // 画面閉じる
                              presentationMode.wrappedValue.dismiss()
@@ -310,7 +313,13 @@ struct ConfigureEventView: View {
                         realmMock.cards.insert(event, at: 0)
                         /// 更新
                     case false:
+                        let event = Event(id: self.event._id, title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, frequentType: eventCardViewModel.frequentType, eventType: eventCardViewModel.eventType, dayOfWeek: eventCardViewModel.dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image, displayLang: eventCardViewModel.displayLang)
+//                        self.event.thaw()?.date = eventCardViewModel.date
                         RealmViewModel().updateEvent(event: event)
+//                        self.event.thaw()?.title = "hogehoge"
+//                        try! self.event.thaw()?.realm?.write{
+//                            self.event.thaw()?.title = "hogehoge2"
+//                        }
                         
                     }
                     /// Widget側のデータ更新
@@ -531,7 +540,7 @@ struct ConfigureEventView: View {
                     VStack {
                         Text(eventCardViewModel.eventType.rawValue)
                             .foregroundColor(ColorUtility.highlightedText)
-                        EventCardView2(eventVM: eventCardViewModel, displayStyle: .circle)
+                        EventCardView2(event: Event(), eventVM: eventCardViewModel, displayStyle: .circle)
                         
                         switch eventCardViewModel.eventType {
                         case .countdown:
@@ -592,7 +601,7 @@ struct ConfigureEventView: View {
                     VStack {
                         
                         
-                        EventCardView2(eventVM: eventCardViewModel, displayStyle: .calendar)
+                        EventCardView2(event: Event(), eventVM: eventCardViewModel, displayStyle: .calendar)
                         
                     }
                     if !isPurchased {
@@ -910,6 +919,6 @@ struct ConfigureEventView_Previews: PreviewProvider {
     @State static var date = EventCardViewModel.defaultStatus.date
     @StateObject static var store = Store()
     static var previews: some View {
-        ConfigureEventView(realmMock: RealmMockStore(), event: $event, isCreation: false, eventCardViewModel: eventViewModel).environmentObject(store)
+        ConfigureEventView(realmMock: RealmMockStore(), event: event, isCreation: false, eventCardViewModel: eventViewModel).environmentObject(store)
     }
 }

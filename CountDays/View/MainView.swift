@@ -48,16 +48,15 @@ struct MainView: View {
             headerView
             
             ScrollView(showsIndicators: false) {
-                LazyVGrid(columns: columns, spacing: 20) {
+                LazyVGrid(columns: columns, spacing: 10) {
                     
                     
                     ForEach(0 ..< realmCards.count + 1, id: \.self) { i in
                         VStack {
                             if i >= 1 {
                                 let card = realmCards[i - 1]
-                                
-                                EventCardView2(eventVM: EventCardViewModel2(event: card))
-//                                    .padding()
+                                EventCardView2(event: card, eventVM: EventCardViewModel2(event: card))
+                                    .padding(.top)
                                     .onTapGesture {
                                         
                                         selectedEvent = realmCards[i - 1]
@@ -68,7 +67,7 @@ struct MainView: View {
                                         let _ = print(selectedEvent.title)
                                     }
                                     .contextMenu {
-                                        let cardView = EventCardView2(eventVM: EventCardViewModel2(event: card))
+                                        let cardView = EventCardView2(event: card, eventVM: EventCardViewModel2(event: card))
                                         let render = ImageRenderer(content: cardView)
                                         if let imageSnap = render.uiImage {
                                             ShareLink(item: Image(uiImage: imageSnap),
@@ -82,16 +81,6 @@ struct MainView: View {
                                         }
 
                                     }
-//                                    .contextMenu {
-//                                        ShareLink(item: "イベント名",
-//                                                  preview: SharePreview("CountDays", image: Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())),
-//                                                  label: {
-//                                            HStack {
-//                                                Image(systemName: "square.and.arrow.up")
-//                                                Text("共有する")
-//                                            }
-//                                        })
-//                                    }
                                     
                             } else if i == 0 {
                                 AddEventView()
@@ -136,11 +125,11 @@ struct MainView: View {
                         }
                     }.sheet(isPresented: $isShowConfigured) {[selectedEvent] in
                         
-                        ConfigureEventView(realmMock: realmMock, event: $selectedEvent, isCreation: false, eventCardViewModel: EventCardViewModel2(event: selectedEvent))
+                        ConfigureEventView(realmMock: realmMock, event: selectedEvent, isCreation: false, eventCardViewModel: EventCardViewModel2(event: selectedEvent))
                             .environmentObject(store)
                         
                     }.sheet(isPresented: $isShow) {
-                        ConfigureEventView(realmMock: realmMock, event: $selectedEvent, isCreation: true, eventCardViewModel: EventCardViewModel2(event: EventCardViewModel.defaultStatus))
+                        ConfigureEventView(realmMock: realmMock, event: selectedEvent, isCreation: true, eventCardViewModel: EventCardViewModel2(event: EventCardViewModel.defaultStatus))
                             .environmentObject(store)
                     }.sheet(isPresented: $isSettingButton) {
                         SettingView()

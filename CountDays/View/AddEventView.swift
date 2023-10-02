@@ -16,7 +16,7 @@ struct AddEventView: View {
             Rectangle()
                 .foregroundColor(ColorUtility.secondary)
                 .widgetFrame()
-                .cornerRadius(30)
+                .cornerRadius(20)
             
             Text("+")
                 .foregroundColor(.white)

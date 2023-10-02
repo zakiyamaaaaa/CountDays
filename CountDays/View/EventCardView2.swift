@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 class EventCardViewModel2: ObservableObject {
+    @Published var event: Event
     @Published var text: String
     @Published var style: EventDisplayStyle
     @Published var date: Date
@@ -29,6 +31,7 @@ class EventCardViewModel2: ObservableObject {
     @Published var updatedDate: Date
     
     init(event: Event) {
+        self.event = event
         self.text = event.title
         self.style = event.displayStyle
         self.date = event.date
@@ -48,9 +51,20 @@ class EventCardViewModel2: ObservableObject {
     }
 }
 
+struct EventCardView3: View {
+    @ObservedRealmObject var event: Event
+    
+    var body: some View {
+        VStack {
+            Text($event.title.wrappedValue)
+        }
+    }
+}
+
 struct EventCardView2: View {
-    var event: Event? = nil
-    @StateObject var eventVM: EventCardViewModel2
+
+    @ObservedRealmObject var event: Event
+    let eventVM: EventCardViewModel2
     var displayStyle: EventDisplayStyle? = nil
     
     let width = UIScreen.main.bounds.width
@@ -362,9 +376,9 @@ struct EventCardView2_Previews: PreviewProvider {
         
         let event = EventCardViewModel.defaultStatus
         let vm = EventCardViewModel2(event: event)
-        EventCardView2(eventVM: vm)
-        EventCardView2(eventVM: vm, displayStyle: .circle)
-        EventCardView2(eventVM: vm, displayStyle: .calendar)
+        EventCardView2(event: event, eventVM: vm)
+        EventCardView2(event: event, eventVM: vm, displayStyle: .circle)
+        EventCardView2(event: event, eventVM: vm, displayStyle: .calendar)
         
         
     }

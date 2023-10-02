@@ -63,17 +63,16 @@ struct SimpleEntry: TimelineEntry {
 
 struct WidgetExtensionEntryView : View {
     var entry: Provider.Entry
-
     var body: some View {
         
         if RealmViewModel().events.count > 1 {
             let eventVM = EventCardViewModel2(event: entry.event)
             
-            EventCardView2(eventVM: eventVM)
+            EventCardView2(event: entry.event, eventVM: eventVM)
                 .widgetBackground(eventVM.backgroundColor.gradient)
         } else if let event = RealmViewModel().events.first {
             let eventVM = EventCardViewModel2(event: event)
-            EventCardView2(eventVM: eventVM)
+            EventCardView2(event: event, eventVM: eventVM)
                 .widgetBackground(eventVM.backgroundColor.gradient)
         } else {
             WidgetNoEvent()
