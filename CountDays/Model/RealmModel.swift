@@ -115,8 +115,11 @@ final class RealmModel: ObservableObject {
     
     /// Event データを削除
     static func deleteEvent(event: Event) {
-        try! realm.write {
-            realm.delete(event)
+        
+        if let thawedEvent = event.thaw(), !thawedEvent.isInvalidated {
+            try! thawedEvent.realm?.write {
+                thawedEvent.realm?.delete(thawedEvent)
+            }
         }
     }
     

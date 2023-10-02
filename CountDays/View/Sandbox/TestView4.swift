@@ -80,6 +80,14 @@ struct TestView4Sub: View {
         }, label: {
             Text("変更する")
         })
+        
+        Button(action: {
+            dismiss()
+            TestRealmModel.deleteDog(dog: dog)
+        }, label: {
+            Text("削除する")
+                .foregroundStyle(.red)
+        })
     }
 }
 
@@ -138,6 +146,20 @@ final class TestRealmModel: ObservableObject {
 //            dog.thaw()?.name = "hoge"
             realm.add(dog, update: .modified)
         }
+    }
+    
+    static func deleteDog(dog: Dog) {
+        
+        
+        
+        if let thawDog = dog.thaw(), thawDog.isInvalidated == false {
+            try! thawDog.realm?.write {
+                thawDog.realm?.delete(thawDog)
+            }
+        }
+//        try! realm.write {
+//            realm.delete(dog)
+//        }
     }
 }
 
