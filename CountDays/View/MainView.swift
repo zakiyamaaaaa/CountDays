@@ -75,9 +75,39 @@ struct MainView: View {
                                                       label: {
                                                 HStack {
                                                     Image(systemName: "square.and.arrow.up")
-                                                    Text("MyShareLabel")
+                                                    Text("イベントを共有")
                                                 }
                                             })
+                                            Button {
+                                                selectedEvent = card
+                                                FirebaseAnalyticsManager.recordEvent(analyticsKey: .MainViewUpdateEvent)
+                                                isShowConfigured.toggle()
+                                                self.selectedIndex = i
+                                                let _ = print(i)
+                                                let _ = print(selectedEvent.title)
+                                            } label: {
+                                                HStack {
+                                                    Image(systemName: "square.and.pencil")
+                                                    Text("編集")
+                                                }
+                                                
+                                            }
+                                            
+                                            Menu {
+                                                Button {
+                                                    RealmViewModel().deleteEvent(event: card)
+                                                } label: {
+                                                    
+                                                    Text("削除を確定")
+                                                    
+                                                }
+                                            } label: {
+                                                HStack {
+                                                    Image(systemName: "trash")
+                                                    Text("削除")
+                                                }
+                                            }
+
                                         }
 
                                     }
