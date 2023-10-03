@@ -62,6 +62,7 @@ struct ConfigureEventView: View {
     @State private var showDeleteAlert = false
     @State var showStyleDetailConfiguration = false
     
+    @State private var shadowRadius: Double = 5
     @State private var opacity: Double = 0
     
     private let bgColorList: [BackgroundColor] = BackgroundColor.allCases
@@ -314,14 +315,11 @@ struct ConfigureEventView: View {
                         /// 更新
                     case false:
                         let event = Event(id: self.event._id, title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, frequentType: eventCardViewModel.frequentType, eventType: eventCardViewModel.eventType, dayOfWeek: eventCardViewModel.dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image, displayLang: eventCardViewModel.displayLang)
-//                        self.event.thaw()?.date = eventCardViewModel.date
+
                         RealmViewModel().updateEvent(event: event)
-//                        self.event.thaw()?.title = "hogehoge"
-//                        try! self.event.thaw()?.realm?.write{
-//                            self.event.thaw()?.title = "hogehoge2"
-//                        }
                         
                     }
+                    
                     /// Widget側のデータ更新
                     WidgetCenter.shared.reloadAllTimelines()
                     
@@ -342,15 +340,20 @@ struct ConfigureEventView: View {
                     presentationMode.wrappedValue.dismiss()
                     FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapRegisterButton)
                 }
+                .onChange(of: eventCardViewModel.text.isEmpty) { newValue in
+                    shadowRadius = newValue ? 5 : 10
+                }
                 .buttonStyle(BounceButtonStyle())
                 .frame(width: 100, height: 50)
                 .tint(.white)
                 .fontWeight(.bold)
                 .font(.system(size: 20))
                 .disabled(eventCardViewModel.text.isEmpty)
-                .background(RoundedRectangle(cornerRadius: 30).fill( eventCardViewModel.text.isEmpty ? ColorUtility.disable : ColorUtility.preffered))
+                .background(RoundedRectangle(cornerRadius: 30).fill( eventCardViewModel.text.isEmpty ? ColorUtility.disable : ColorUtility.accentColor))
                 .padding()
                 .animation(.default, value: eventCardViewModel.text.isEmpty)
+                .shadow(color: .accentColor, radius: shadowRadius, x: 0.0, y: 0.0)
+                .animation(.easeIn(duration: 1.5).repeat(while: !eventCardViewModel.text.isEmpty), value: shadowRadius)
             }
         }
         .frame(height: 90)
@@ -375,7 +378,7 @@ struct ConfigureEventView: View {
                         .fill(ColorUtility.secondary))
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
-                            .stroke(focusField ? .mint : .clear, lineWidth: 5)
+                            .stroke(focusField ? .accentColorHeavy : .clear, lineWidth: 5)
                     )
                     .padding(.vertical, 10)
                     .focused($focusField)
@@ -398,7 +401,7 @@ struct ConfigureEventView: View {
                         Image(systemName: "checkmark")
                     }
                     .padding()
-                    .background(focusField ? .mint : .gray)
+                    .background(focusField ? .accentColorHeavy : .gray)
                     .tint(.white)
                     .clipShape(Circle())
                 }
@@ -681,7 +684,6 @@ struct ConfigureEventView: View {
                                 
                                 RoundedRectangle(cornerRadius: 10).fill(
                                     gradient
-//                                    LinearGradient(colors: [start, end], startPoint: .topLeading, endPoint: .bottomTrailing)
                                 )
                                     .frame(width: 80, height: 80)
                                     .overlay(

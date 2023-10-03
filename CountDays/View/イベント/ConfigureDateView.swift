@@ -369,17 +369,11 @@ struct ConfigureDateView: View {
                         dismiss()
                     } label: {
                         Image(systemName: "checkmark")
-                            .foregroundStyle(shadowRadius == 5 ? ColorUtility.highlightedText : ColorUtility.highlighted)
+                            .foregroundStyle(shadowRadius == 5 ? ColorUtility.highlighted : ColorUtility.backgroundary)
                             .bold()
-                            .scaleEffect(shadowRadius == 5 ? 1.0 : 1.1)
                     }
                     
                     .padding()
-                    .overlay {
-                        Circle()
-                            .stroke(Color.accentColor)
-                            
-                    }
                     .background(RoundedRectangle(cornerRadius: 20).fill(Color.accentColor))
                     .animation(.easeIn, value: buttonPressd)
                     .frame(width: 50, height: 50)

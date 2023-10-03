@@ -82,7 +82,7 @@ struct EventCardView2: View {
                     .cornerRadius(20)
                     .overlay(content: {
                         RoundedRectangle(cornerRadius: 20)
-                            .stroke(ColorUtility.highlighted, lineWidth: 0.3)
+                            .stroke(ColorUtility.highlighted, lineWidth: 0.5)
 
                     })
                     
