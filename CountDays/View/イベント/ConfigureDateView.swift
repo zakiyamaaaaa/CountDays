@@ -27,6 +27,7 @@ struct ConfigureDateView: View {
     @State var selectingMinute: Int = 0
     @State var selectedPopup = false
     @State private var buttonPressd = false
+    @State private var shadowRadius: Double = 5
     
     init(eventType: Binding<EventType>, frequentType: Binding<FrequentType>, dateViewModel: StateObject<DateViewModel>, weeklyDate: Binding<DayOfWeek>, eventViewModel: StateObject<EventCardViewModel2>) {
         let font = UIFont.systemFont(ofSize: 20)
@@ -158,16 +159,17 @@ struct ConfigureDateView: View {
                                 Button {
                                     withAnimation {
                                         editingHour.toggle()
-                                        scrollValue.scrollTo("toggle")
+                                        /// TODO: 指定してるけどスクロールしない
+                                        scrollValue
+                                            .scrollTo("toggle", anchor: .bottom)
                                     }
                                     
                                 } label: {
                                     Text("\(text)")
                                 }
-                                
                                 .frame(width: 100, height: 50)
                                 .foregroundStyle(.white)
-                                .border(editingHour ? Color.accentColor : .clear)
+                                
                                 .border(editingHour ? Color.accentColor : .clear)
                                 .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.primary))
                                 
@@ -343,50 +345,57 @@ struct ConfigureDateView: View {
                 
                 Spacer()
                 
-                /// 設定を保存するところ
-                Button {
-                    HapticFeedbackManager.shared.play(.impact(.heavy))
-                    FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureDateViewTapOKButton)
-                    
-                    selectingHour = isAllDayEvent ? 0 : selectingHour
-                    selectingMinute = isAllDayEvent ? 0 : selectingMinute
-                    
-                    if selectedFrequentType == .weekly {
-                        selectingDate = CalendarViewModel.getDateAtWeekly(dayAtWeek: selectingWeeklyDate)
-                        selectedWeeklyDate = selectingWeeklyDate
-                        //                    dateViewModel.selectedDate = selectingDate
-                        eventViewModel.selectedDate = selectingDate
-                    } else {
-                        //                    dateViewModel.selectedDate = selectingDate
-                        //                    eventViewModel.selectedDate = selectingDate
-                        dateViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
-                        eventViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
+                
+                ZStack {
+                    /// 設定を保存するところ
+                    Button {
+                        HapticFeedbackManager.shared.play(.impact(.heavy))
+                        FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureDateViewTapOKButton)
+                        
+                        selectingHour = isAllDayEvent ? 0 : selectingHour
+                        selectingMinute = isAllDayEvent ? 0 : selectingMinute
+                        
+                        if selectedFrequentType == .weekly {
+                            selectingDate = CalendarViewModel.getDateAtWeekly(dayAtWeek: selectingWeeklyDate)
+                            selectedWeeklyDate = selectingWeeklyDate
+                            
+                            eventViewModel.selectedDate = selectingDate
+                        } else {
+                            
+                            dateViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
+                            eventViewModel.selectedDate = Calendar.current.date(bySettingHour: selectingHour, minute: selectingMinute, second: 0, of: selectingDate)!
+                        }
+                        
+                        dismiss()
+                    } label: {
+                        Image(systemName: "checkmark")
+                            .foregroundStyle(shadowRadius == 5 ? ColorUtility.highlightedText : ColorUtility.highlighted)
+                            .bold()
+                            .scaleEffect(shadowRadius == 5 ? 1.0 : 1.1)
                     }
                     
-                    dismiss()
-                } label: {
-                    Image(systemName: "checkmark")
-                        .foregroundStyle(buttonPressd ? Color.black : Color.white)
-                        .bold(buttonPressd)
-                        
-                        
-                }
-                
-                .padding()
-                .overlay {
-                    Circle()
-                        .stroke(Color.accentColor)
-                }
-                .background(RoundedRectangle(cornerRadius: 20).fill( buttonPressd ? Color.accentColor : ColorUtility.highlighted))
-                .animation(.easeIn, value: buttonPressd)
-                .frame(width: 50, height: 50)
-                .buttonStyle(BounceButtonStyle())
-                .padding()
-                .onLongPressGesture {
-                    print("Long pressed")
-                } onPressingChanged: { value in
-                    print(value)
-                    buttonPressd = value
+                    .padding()
+                    .overlay {
+                        Circle()
+                            .stroke(Color.accentColor)
+                            
+                    }
+                    .background(RoundedRectangle(cornerRadius: 20).fill(Color.accentColor))
+                    .animation(.easeIn, value: buttonPressd)
+                    .frame(width: 50, height: 50)
+                    .buttonStyle(BounceButtonStyle())
+                    .padding()
+                    .onLongPressGesture {
+                        print("Long pressed")
+                    } onPressingChanged: { value in
+                        print(value)
+                        buttonPressd = value
+                    }
+                    .shadow(color: .accentColor, radius: shadowRadius, x: 0.0, y: 0.0)
+                    .animation(.easeIn(duration: 1.5).repeatForever(autoreverses: true), value: shadowRadius)
+                    .onAppear {
+                        shadowRadius = 10
+                    }
                 }
             }
         }

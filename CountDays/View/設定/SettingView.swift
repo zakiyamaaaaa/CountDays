@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingView: View {
     @EnvironmentObject var store: Store
+    @Environment(\.dismiss) var dismiss
     @State var allowNotification = true
     @State private var isTermView = false
     @State private var isPrivacyView = false
@@ -180,6 +181,7 @@ struct SettingView: View {
                     
                     Button(role: .destructive) {
                         RealmViewModel().deleteAllEvents()
+                        dismiss()
                         NotificationCenter.removeAllNotification()
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewExecuteAlertDeleteAllEvent)
                     } label: {

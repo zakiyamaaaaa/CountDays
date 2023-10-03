@@ -126,7 +126,7 @@ final class RealmModel: ObservableObject {
     /// Event データすべて削除
     static func deleteAllEvents() {
         try! realm.write {
-            realm.deleteAll()
+            events.realm?.thaw().deleteAll()
         }
     }
 }
