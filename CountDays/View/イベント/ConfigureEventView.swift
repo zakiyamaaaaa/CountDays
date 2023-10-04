@@ -73,7 +73,9 @@ struct ConfigureEventView: View {
         VStack(spacing: 0) {
             
             headerView
-            
+                .onChange(of: eventCardViewModel.text.isEmpty) { newValue in
+                    shadowRadius = newValue ? 5 : 10
+                }
             VStack {
                 
                 HStack {
@@ -339,9 +341,6 @@ struct ConfigureEventView: View {
                     
                     presentationMode.wrappedValue.dismiss()
                     FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapRegisterButton)
-                }
-                .onChange(of: eventCardViewModel.text.isEmpty) { newValue in
-                    shadowRadius = newValue ? 5 : 10
                 }
                 .buttonStyle(BounceButtonStyle())
                 .frame(width: 100, height: 50)
