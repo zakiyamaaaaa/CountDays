@@ -65,8 +65,10 @@ struct ConfigureDateView: View {
         _dateViewModel = dateViewModel
         _eventViewModel = eventViewModel
         _selectingDate = State(initialValue: eventViewModel.wrappedValue.selectedDate)
-//        _selectingDate = State(initialValue: dateViewModel.wrappedValue.selectedDate)
-//        _selectedDate = selectedDate
+        _selectingHour = State(initialValue: dateViewModel.wrappedValue.getHourNumber(date: eventViewModel.wrappedValue.selectedDate))
+        _selectingMinute = State(initialValue: dateViewModel.wrappedValue.getMinuteNumber(date: eventViewModel.wrappedValue.selectedDate))
+        
+        _isAllDayEvent =  State(initialValue: (selectingHour == 0 && selectingMinute == 0))
     }
     
     

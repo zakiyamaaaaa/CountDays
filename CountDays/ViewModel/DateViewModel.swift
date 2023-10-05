@@ -108,6 +108,16 @@ class DateViewModel: ObservableObject {
         return DateViewModel.calendar.component(.day, from: date)
     }
     
+    func getHourNumber(date: Date?) -> Int {
+        guard let date else { return 1 }
+        return DateViewModel.calendar.component(.hour, from: date)
+    }
+    
+    func getMinuteNumber(date: Date?) -> Int {
+        guard let date else { return 1 }
+        return DateViewModel.calendar.component(.minute, from: date)
+    }
+    
     func getSecondNumber(date: Date?) -> Int {
         guard let date else { return 1 }
         return DateViewModel.calendar.component(.second, from: date)
