@@ -13,14 +13,15 @@ import RealmSwift
 struct Provider: IntentTimelineProvider {
     /// 初めてWidgetを表示するときの設定
     func placeholder(in context: Context) -> SimpleEntry {
-        let event = EventCardViewModel.defaultStatus
+        let event = RealmViewModel().events.first ?? EventCardViewModel.defaultStatus
         return SimpleEntry(date: Date(), event: event, configuration: ConfigurationIntent())
     }
 
     ///タイムラインを取得する前の初期状態。placeholderとあまり違いがわからない
     /// widget galleryに表示される
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let event = EventCardViewModel.defaultStatus
+        
+        let event = RealmViewModel().events.first ?? EventCardViewModel.defaultStatus
         let entry = SimpleEntry(date: Date(), event: event, configuration: configuration)
             
         completion(entry)
@@ -37,6 +38,8 @@ struct Provider: IntentTimelineProvider {
         if let indexText = configuration.eventPara?.identifier, let index = Int(indexText) {
             event = RealmViewModel().events[index]
             
+        } else if RealmViewModel().events.first != nil {
+            event = RealmViewModel().events.first!
         } else {
             event = EventCardViewModel.defaultStatus
         }
