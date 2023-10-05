@@ -83,7 +83,7 @@ enum BackgroundColor: String, RawRepresentable, CaseIterable, PersistableEnum {
     var gradient: LinearGradient? {
         switch self {
         case .primary:
-            return LinearGradient(colors: [.primary, ColorUtility.secondary], startPoint: UnitPoint(x: 0.5, y: 1), endPoint: UnitPoint(x: 0.5, y: 0))
+            return LinearGradient(colors: [ColorUtility.primary, ColorUtility.secondary], startPoint: UnitPoint(x: 0.5, y: 1), endPoint: UnitPoint(x: 0.5, y: 0))
         case .white:
             return LinearGradient(colors: [.white, .white], startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
         case .mint:

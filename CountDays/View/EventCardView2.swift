@@ -69,6 +69,7 @@ struct EventCardView2: View {
     
     let width = UIScreen.main.bounds.width
     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    private let cornerRadius: CGFloat = 22
 
     var body: some View {
         TimelineView(.periodic(from: eventVM.selectedDate, by: 1)) { timeline in
@@ -79,9 +80,9 @@ struct EventCardView2: View {
                         eventVM.backgroundColor.gradient ?? LinearGradient(colors: [], startPoint: UnitPoint(), endPoint: UnitPoint())
                         )
                     .widgetFrame()
-                    .cornerRadius(20)
+                    .cornerRadius(cornerRadius)
                     .overlay(content: {
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: cornerRadius)
                             .stroke(ColorUtility.highlighted, lineWidth: 0.5)
 
                     })
@@ -186,7 +187,7 @@ struct EventCardView2: View {
                     .resizable()
                     .scaledToFill()
                     .widgetFrame()
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             }
             
             

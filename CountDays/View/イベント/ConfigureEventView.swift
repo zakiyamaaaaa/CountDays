@@ -126,7 +126,7 @@ struct ConfigureEventView: View {
                                  RealmViewModel().deleteEvent(event: event)
                              
                             /// 通知の登録削除処理
-                             NotificationCenter.removeNotification(id: event._id.uuidString)
+                             NotificationCenter.removeNotification(id: event.id.uuidString)
                              FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapDeleteEventAlertExecution)
                              // 画面閉じる
                              presentationMode.wrappedValue.dismiss()
@@ -300,7 +300,7 @@ struct ConfigureEventView: View {
                 
                 Spacer()
                 Button(isCreation ? "登録" : "更新") {
-                    
+                    WidgetCenter.shared.reloadAllTimelines()
                     //                if eventCardViewModel.text.isEmpty {
                     //                    ///  イベント名を入力してくださいエラーメッセージ表示
                     //                    return
@@ -316,14 +316,13 @@ struct ConfigureEventView: View {
                         realmMock.cards.insert(event, at: 0)
                         /// 更新
                     case false:
-                        let event = Event(id: self.event._id, title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, frequentType: eventCardViewModel.frequentType, eventType: eventCardViewModel.eventType, dayOfWeek: eventCardViewModel.dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image, displayLang: eventCardViewModel.displayLang)
+                        let event = Event(id: self.event.id, title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, frequentType: eventCardViewModel.frequentType, eventType: eventCardViewModel.eventType, dayOfWeek: eventCardViewModel.dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image, displayLang: eventCardViewModel.displayLang)
 
                         RealmViewModel().updateEvent(event: event)
                         
                     }
                     
-                    /// Widget側のデータ更新
-                    WidgetCenter.shared.reloadAllTimelines()
+                    
                     
                     Task {
                         if eventCardViewModel.eventType == .countdown {
@@ -354,6 +353,8 @@ struct ConfigureEventView: View {
                 .shadow(color: .accentColor, radius: shadowRadius, x: 0.0, y: 0.0)
                 .animation(.easeIn(duration: 1.5).repeat(while: !eventCardViewModel.text.isEmpty), value: shadowRadius)
             }
+            /// Widget側のデータ更新
+            
         }
         .frame(height: 90)
         .background(ColorUtility.primary)
@@ -390,7 +391,7 @@ struct ConfigureEventView: View {
                             
                     }
                 }
-//
+                
                 if focusField {
                     Button {
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapEventNameButton)

@@ -11,6 +11,7 @@ import Combine
 import FirebaseCore
 import FirebaseAnalytics
 import FirebaseAnalyticsSwift
+import WidgetKit
 
 @main
 struct CountDaysApp: SwiftUI.App {
@@ -62,6 +63,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RealmViewModel().registerViewModel()
             
         FirebaseApp.configure()
+        return true
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if userActivity.activityType == "WidgetExtension" {
+            print("Launch from Widget Kit")
+            WidgetCenter.shared.reloadAllTimelines()
+        }
         return true
     }
 }

@@ -44,7 +44,7 @@ import SwiftUI
 
 final class RealmModel: ObservableObject {
     /// TODO: スキーマバージョンを1になおす
-    static var config = Realm.Configuration(schemaVersion: 5)
+    static var config = Realm.Configuration(schemaVersion: 0)
     static var realm: Realm {
         config.fileURL = fileUrl
         print("schema: \(config.schemaVersion)")
@@ -144,7 +144,7 @@ final class User: Object, ObjectKeyIdentifiable {
 }
 
 class Event: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true) var _id: UUID
+    @Persisted(primaryKey: true) var id: UUID
     
     @Persisted var title: String
     @Persisted var date: Date
@@ -190,7 +190,7 @@ class Event: Object, ObjectKeyIdentifiable {
     
     init(id:UUID = UUID(), title: String, date: Date, textColor: TextColor, backgroundColor: BackgroundColor, displayStyle: EventDisplayStyle, fontSize: Float, displaySize: Int = 0, frequentType: FrequentType = .never, eventType: EventType = .countup, dayAtMonthly: Int = 1, hour: Int = 0, minute: Int = 0, dayOfWeek: DayOfWeek = .sunday, displayHour: Bool = true, displayMinute: Bool = true, displaySecond: Bool = false, image: UIImage? = nil, displayLang: DisplayLang = .jp) {
         super.init()
-        self._id = id
+        self.id = id
         self.title = title
         self.date = date
         self.displaySize = displaySize

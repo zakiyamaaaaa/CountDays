@@ -81,6 +81,7 @@
 		39EC20B92AC8199800BD081D /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA32A9713C3006A7232 /* ColorUtility.swift */; };
 		39EC20BA2AC8199800BD081D /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA32A9713C3006A7232 /* ColorUtility.swift */; };
 		39EC20BE2ACA77C300BD081D /* TestView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EC20BD2ACA77C300BD081D /* TestView4.swift */; };
+		39EC20C02ACD3D0100BD081D /* TestView5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EC20BF2ACD3D0100BD081D /* TestView5.swift */; };
 		39FFFA532A973D6E001AE0D7 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA522A973D6E001AE0D7 /* Algorithms */; };
 		39FFFA562A973D7A001AE0D7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA552A973D7A001AE0D7 /* Realm */; };
 		39FFFA582A973D7A001AE0D7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39FFFA572A973D7A001AE0D7 /* RealmSwift */; };
@@ -236,6 +237,7 @@
 		39905D6F2ABAF6030019CEFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39905D712ABAF6030019CEFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39EC20BD2ACA77C300BD081D /* TestView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView4.swift; sourceTree = "<group>"; };
+		39EC20BF2ACD3D0100BD081D /* TestView5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView5.swift; sourceTree = "<group>"; };
 		39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
 		39FFFA602AA04FFB001AE0D7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		39FFFA622AA07366001AE0D7 /* StorekitTest.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StorekitTest.storekit; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				394A5CD32A971566006A7232 /* TestView2.swift */,
 				39FFFA7E2AA9C318001AE0D7 /* TestView3.swift */,
 				39EC20BD2ACA77C300BD081D /* TestView4.swift */,
+				39EC20BF2ACD3D0100BD081D /* TestView5.swift */,
 			);
 			path = Sandbox;
 			sourceTree = "<group>";
@@ -767,6 +770,7 @@
 			files = (
 				394A5CBD2A97151A006A7232 /* CalendarViewModel.swift in Sources */,
 				394A5CE32A9715DB006A7232 /* MockStore.swift in Sources */,
+				39EC20C02ACD3D0100BD081D /* TestView5.swift in Sources */,
 				394A5CC12A971528006A7232 /* AddEventView.swift in Sources */,
 				39FFFA762AA8A7A2001AE0D7 /* BounceButtonStyle.swift in Sources */,
 				394A5CDA2A971567006A7232 /* aaa.swift in Sources */,

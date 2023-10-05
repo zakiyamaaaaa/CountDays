@@ -32,26 +32,31 @@ struct Provider: IntentTimelineProvider {
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         
+        let event: Event
+        
         if let indexText = configuration.eventPara?.identifier, let index = Int(indexText) {
-            let event = RealmViewModel().events[index]
+            event = RealmViewModel().events[index]
             
-            for hourOffset in 0 ..< 5 {
-                let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-                let entry = SimpleEntry(date: entryDate, event: event, configuration: configuration)
-                
-                entries.append(entry)
-            }
         } else {
-            let event = EventCardViewModel.defaultStatus
-            for hourOffset in 0 ..< 5 {
-                let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-                let entry = SimpleEntry(date: entryDate, event: event, configuration: configuration)
-                
-                entries.append(entry)
-            }
+            event = EventCardViewModel.defaultStatus
         }
+        
+        let nextDate = Calendar.current.nextDate(after: currentDate, matching: .init(minute: 0), matchingPolicy: .nextTime, repeatedTimePolicy: .first, direction: .forward) ?? Date()
+        
+        entries.append(SimpleEntry(date: currentDate, event: event, configuration: configuration))
+        
+        for i in 0..<23 {
+            let nextHour = (Calendar.current.dateComponents([.hour], from: nextDate).hour! + i)%24
+            
+            let updateDate = Calendar.current.date(bySettingHour: nextHour, minute: 0, second: 1, of: currentDate) ?? Date()
+            let entry = SimpleEntry(date: updateDate, event: event, configuration: configuration)
+            entries.append(entry)
+        }
+        
         let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+        
+       completion(timeline)
+        
     }
 }
 
@@ -67,13 +72,18 @@ struct WidgetExtensionEntryView : View {
         
         if RealmViewModel().events.count > 1 {
             let eventVM = EventCardViewModel2(event: entry.event)
-            
-            EventCardView2(event: entry.event, eventVM: eventVM)
-                .widgetBackground(eventVM.backgroundColor.gradient)
+            ZStack {
+                EventCardView2(event: entry.event, eventVM: eventVM)
+                    .widgetBackground(eventVM.backgroundColor.gradient)
+                    
+            }
         } else if let event = RealmViewModel().events.first {
             let eventVM = EventCardViewModel2(event: event)
-            EventCardView2(event: event, eventVM: eventVM)
-                .widgetBackground(eventVM.backgroundColor.gradient)
+            ZStack {
+                EventCardView2(event: event, eventVM: eventVM)
+                    .widgetBackground(eventVM.backgroundColor.gradient)
+                    
+            }
         } else {
             WidgetNoEvent()
         }

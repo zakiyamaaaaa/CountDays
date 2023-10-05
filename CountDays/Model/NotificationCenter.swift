@@ -44,7 +44,7 @@ class NotificationCenter {
 //        var components = Calendar.current.dateComponents(in: TimeZone.current, from: event.date)
         let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: event.date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-        let request = UNNotificationRequest(identifier: event._id.uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: event.id.uuidString, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
         
         print("次の内容で通知登録しました")
