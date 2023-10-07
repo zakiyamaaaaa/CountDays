@@ -37,13 +37,23 @@ class NotificationCenter {
     /// 通知の登録処理
     static func registerNotification(event: Event) {
         let content = UNMutableNotificationContent()
-        content.title = event.title
-        content.body = event.date.description
+        content.title = "CountDays"
+        content.body = event.title + "を完了しました"
         
-        // こっちではなぜかうまくいかない
-//        var components = Calendar.current.dateComponents(in: TimeZone.current, from: event.date)
-        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: event.date)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        let components: DateComponents
+        switch event.frequentType {
+        case .never:
+            components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: event.date)
+        case .annual:
+            components = Calendar.current.dateComponents([.month, .day, .hour, .minute], from: event.date)
+        case .monthly:
+            components = Calendar.current.dateComponents([.day, .hour, .minute], from: event.date)
+        case .weekly:
+            components = Calendar.current.dateComponents([.hour, .minute, .weekday], from: event.date)
+        }
+        
+        let repeatFlag = event.frequentType == .never ? false : true
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeatFlag)
         let request = UNNotificationRequest(identifier: event.id.uuidString, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
         

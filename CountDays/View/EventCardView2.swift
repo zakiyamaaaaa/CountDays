@@ -66,10 +66,12 @@ struct EventCardView2: View {
     @ObservedRealmObject var event: Event
     let eventVM: EventCardViewModel2
     var displayStyle: EventDisplayStyle? = nil
+    var isWidget = false
     
     let width = UIScreen.main.bounds.width
     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     private let cornerRadius: CGFloat = 22
+    var currentDate = Date()
 
     var body: some View {
         TimelineView(.periodic(from: eventVM.selectedDate, by: 1)) { timeline in
@@ -124,6 +126,95 @@ struct EventCardView2: View {
             return calendar
         }
     }
+    private let secondsOfDay = 60*60*24
+    private let secondsOfHour = 60*60
+    private let secondsOfMinute = 60
+    
+    /// countdownでしか使えない
+    private var standardTimeView2: some View {
+        VStack(alignment: .leading, content: {
+            
+            let target = getTargetDate(type: eventVM.frequentType)
+            let calendar = getCalendar()
+            let relativeInterval = target.timeIntervalSince(currentDate)
+            
+            var day = Double(Int(relativeInterval)/secondsOfDay)
+            let hour = Double(Int(Int(relativeInterval)%secondsOfDay)/secondsOfHour)
+            let minute = Double(Int(Int(relativeInterval)%secondsOfHour)/secondsOfMinute)
+            let second = Int(relativeInterval)%secondsOfMinute
+
+            let relativeDate2 = Date(timeInterval: relativeInterval - day*Double(secondsOfDay), since: currentDate)
+            let displayLang = eventVM.displayLang
+            let c: Double = eventVM.eventType == .countup ? -1 : 1
+            /// カウントダウンが終了した場合
+            if eventVM.eventType == .countdown && eventVM.frequentType == .never && relativeInterval < 0 {
+                
+                
+                HStackLayout(alignment: .center) {
+                    Text(displayLang.finishText)
+                        .fontWeight(.bold)
+                    Image(systemName: "checkmark.circle.fill")
+                }
+                
+                
+                Text(CalendarViewModel.getFormattedDate(eventVM.selectedDate))
+                    .padding(.top, 1)
+                
+            } else if abs(day) > 0 {
+                
+                Text((day*c).formatted() + displayLang.dateText.day)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                Text(relativeDate2, style: .relative)
+                    .environment(\.calendar, calendar)
+            } else if abs(hour) > 0 {
+                
+                Text((hour*c).formatted() + displayLang.dateText.hour)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+
+                let relativeDate2 = Date(timeInterval: relativeInterval - day*Double(secondsOfDay) - hour*Double(secondsOfHour), since: currentDate)
+                Text(relativeDate2, style: .relative)
+                    .environment(\.calendar, calendar)
+            } else if abs(minute) > 0 {
+                
+                Text(relativeDate2, style: .relative)
+                    .font(.largeTitle)
+                    .environment(\.calendar, calendar)
+                    .fontWeight(.semibold)
+            } else if abs(second) >= 0 {
+                Text(relativeDate2, style: .timer)
+                    .font(.largeTitle)
+                    .environment(\.calendar, calendar)
+                    .fontWeight(.semibold)
+            } 
+//            else if second < 0 {
+//                Text("0...")
+//                    .font(.largeTitle)
+//                    .fontWeight(.semibold)
+//            }
+        })
+    }
+    
+    private func getTargetDate(type: FrequentType) -> Date {
+        let target = eventVM.selectedDate
+        let calendar = getCalendar()
+        let month = calendar.component(.month, from: target)
+        let day = calendar.component(.day, from: target)
+        let hour = calendar.component(.hour, from: target)
+        let minute = calendar.component(.minute, from: target)
+        let weekday = calendar.component(.weekday, from: target)
+        switch type {
+        case .never:
+            return target
+        case .annual:
+            return calendar.nextDate(after: currentDate, matching: .init(month: month, day: day ,hour: hour, minute: minute), matchingPolicy: .nextTime) ?? Date()
+        case .monthly:
+            return calendar.nextDate(after: currentDate, matching: .init(day: day ,hour: hour, minute: minute), matchingPolicy: .nextTime) ?? Date()
+        case .weekly:
+            return calendar.nextDate(after: currentDate, matching: .init(hour: hour, minute: minute, weekday: weekday), matchingPolicy: .nextTime) ?? Date()
+        }
+    }
     
     private var standardTimeView: some View {
         VStack(alignment: .leading) {
@@ -147,6 +238,7 @@ struct EventCardView2: View {
                 
                 HStackLayout(alignment: .center) {
                     Text(displayLang.finishText)
+                        .fontWeight(.bold)
                     Image(systemName: "checkmark.circle.fill")
                 }
                 
@@ -156,6 +248,7 @@ struct EventCardView2: View {
                 
                 
             } else if abs(day) > 0 {
+                
                 Text(day.description + displayLang.dateText.day)
                     .font(.system(.largeTitle))
                     .fontWeight(.bold)
@@ -175,6 +268,12 @@ struct EventCardView2: View {
                     .font(.system(.title2))
                     .fontWeight(.semibold)
                     .environment(\.calendar, calendar)
+            } else if second >= 0 {
+                Text(relative3, style: .timer)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+            } else if second < 0 {
+                Text("0...")
             }
         }
     }
@@ -197,12 +296,20 @@ struct EventCardView2: View {
                     .font(.system(size: 13))
                     .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                 Spacer()
-                standardTimeView
+                standardTimeView2
 
             }
             .foregroundColor(eventVM.textColor.color)
             .padding()
             .widgetFrame(alignment: .leading)
+            
+            if isWidget {
+                Image(.iconForWidget)
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .padding(5)
+                    .widgetFrame(alignment: .bottomTrailing)
+            }
 //            .widgetBackground(eventVM.backgroundColor.color)
         }
     }

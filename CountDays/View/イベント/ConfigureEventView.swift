@@ -333,6 +333,9 @@ struct ConfigureEventView: View {
                             
                             /// 許可されている場合は、通知を設定
                             if await NotificationCenter.checkNotificationStatus() == .authorized {
+                                /// 通知の登録削除処理
+                                 NotificationCenter.removeNotification(id: event.id.uuidString)
+                                
                                 NotificationCenter.registerNotification(event: event)
                             }
                         }

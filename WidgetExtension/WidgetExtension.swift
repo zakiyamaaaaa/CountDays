@@ -44,16 +44,31 @@ struct Provider: IntentTimelineProvider {
             event = EventCardViewModel.defaultStatus
         }
         
-        let nextDate = Calendar.current.nextDate(after: currentDate, matching: .init(minute: 0), matchingPolicy: .nextTime, repeatedTimePolicy: .first, direction: .forward) ?? Date()
+        let nextDate = Calendar.current.nextDate(after: currentDate, matching: .init(minute: 0, second: 1), matchingPolicy: .nextTime, repeatedTimePolicy: .first, direction: .forward) ?? Date()
         
         entries.append(SimpleEntry(date: currentDate, event: event, configuration: configuration))
         
-        for i in 0..<23 {
-            let nextHour = (Calendar.current.dateComponents([.hour], from: nextDate).hour! + i)%24
+//        for i in 0..<24 {
+//            let a = Calendar.current.date(byAdding: .hour, value: i, to: nextDate)!
+//            let nextHour = (Calendar.current.dateComponents([.hour], from: nextDate).hour! + i)%24
+//            let updateDate = Calendar.current.date(bySettingHour: nextHour, minute: 0, second: 1, of: currentDate) ?? Date()
+//            let entry = SimpleEntry(date: updateDate, event: event, configuration: configuration)
+//            entries.append(entry)
+//        }
+        
+        for i in 0..<64 {
+            //                let a = Calendar.current.date(byAdding: .hour, value: i, to: nextDate)!
+            let nextHour = Calendar.current.dateComponents([.hour], from: nextDate).hour!
+            let updateDate = Calendar.current.date(bySettingHour: nextHour, minute: 0, second: 5, of: currentDate) ?? Date()
             
-            let updateDate = Calendar.current.date(bySettingHour: nextHour, minute: 0, second: 1, of: currentDate) ?? Date()
-            let entry = SimpleEntry(date: updateDate, event: event, configuration: configuration)
+            //                Text(updateDate.description)
+            
+            let updateDate2 = Calendar.current.date(byAdding: .hour, value: i, to: updateDate, wrappingComponents: false)!
+            
+            let entry = SimpleEntry(date: updateDate2, event: event, configuration: configuration)
             entries.append(entry)
+            
+            
         }
         
         let timeline = Timeline(entries: entries, policy: .atEnd)
@@ -73,33 +88,46 @@ struct WidgetExtensionEntryView : View {
     var entry: Provider.Entry
     var body: some View {
         
-        if RealmViewModel().events.count > 1 {
-            let eventVM = EventCardViewModel2(event: entry.event)
-            ZStack {
-                EventCardView2(event: entry.event, eventVM: eventVM)
-                    .widgetBackground(eventVM.backgroundColor.gradient)
+        ZStack(alignment: .bottomTrailing, content: {
+            
+            if RealmViewModel().events.count > 1 {
+                let eventVM = EventCardViewModel2(event: entry.event)
+                ZStack {
+                    EventCardView2(event: entry.event, eventVM:eventVM, isWidget: true, currentDate: entry.date)
+                        .widgetBackground(eventVM.backgroundColor.gradient)
+                        
+                }
+            } else if let event = RealmViewModel().events.first {
+                let eventVM = EventCardViewModel2(event: event)
+                ZStack {
+                    EventCardView2(event: event, eventVM:eventVM, isWidget: true, currentDate: entry.date)
                     
+                        
+                }
+            } else {
+                WidgetNoEvent()
             }
-        } else if let event = RealmViewModel().events.first {
-            let eventVM = EventCardViewModel2(event: event)
-            ZStack {
-                EventCardView2(event: event, eventVM: eventVM)
-                    .widgetBackground(eventVM.backgroundColor.gradient)
-                    
-            }
-        } else {
-            WidgetNoEvent()
-        }
+            
+        })
+        
     }
 }
 
 struct WidgetNoEvent: View {
     var body: some View {
-        VStack {
-            Text("CountDays")
-                .padding(.bottom,3)
-                .fontWeight(.bold)
+        VStack(alignment: .center, spacing: 0) {
+            HStack(spacing: 0) {
+                Text("CountDays")
+                    .font(.system(size: 16))
+                    .padding(.bottom,3)
+                    .fontWeight(.bold)
+                Image(.iconForWidget)
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                
+            }
             Text("アプリでイベントを設定するとウィジェットに反映されます")
+                .font(.system(size: 15))
         }
         .widgetBackground(Color.mint)
     }

@@ -68,7 +68,7 @@ enum FrequentType: String, CaseIterable, Identifiable, PersistableEnum {
 }
 
 enum DayOfWeek: Int, CaseIterable, PersistableEnum {
-    case sunday = 7
+    case sunday = 0
     case monday = 1
     case tuesday = 2
     case wednesday = 3

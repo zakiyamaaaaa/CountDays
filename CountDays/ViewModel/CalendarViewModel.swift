@@ -17,17 +17,17 @@ class CalendarViewModel: ObservableObject {
     }()
     
     
-    static func getDates(target: Date, eventType: EventType, frequentType: FrequentType, dayOfWeek: DayOfWeek = .sunday) -> (fixedDate: Date, days: Int, hours: Int, minutes: Int, seconds: Int) {
+    static func getDates(target: Date, eventType: EventType, frequentType: FrequentType, dayOfWeek: DayOfWeek = .sunday, current: Date = Date()) -> (fixedDate: Date, days: Int, hours: Int, minutes: Int, seconds: Int) {
         
         switch eventType {
         case .countup:
-            let component = calendar.dateComponents([.day, .hour, .minute, .second], from: target, to: Date())
+            let component = calendar.dateComponents([.day, .hour, .minute, .second], from: target, to: current)
             return (target, component.day ?? 1, component.hour ?? 0, component.minute ?? 0, component.second ?? 0)
         case .countdown:
             
             switch frequentType {
             case .never:
-                let component = calendar.dateComponents([.day, .hour, .minute, .second], from: Date(), to: target)
+                let component = calendar.dateComponents([.day, .hour, .minute, .second], from: current, to: target)
                 return (target, component.day ?? 1, component.hour  ?? 0, component.minute ?? 0, component.second ?? 0)
             case .annual:
                 return getAnnualDate(target: target)
@@ -39,14 +39,14 @@ class CalendarViewModel: ObservableObject {
                 let minute = calendar.dateComponents([.day, .hour, .minute, .second], from: target).minute!
                 let second = calendar.dateComponents([.day, .hour, .minute, .second], from: target).second!
 
-                var date = calendar.date(bySetting: .day, value: day, of: Date())!
+                var date = calendar.date(bySetting: .day, value: day, of: current)!
                 date = calendar.date(bySettingHour: hour, minute: minute, second: second, of: date)!
                 
                 if isPastDate(date) {
                     date = calendar.date(byAdding: .month, value: 1, to: date)!
                 }
                 
-                let component = calendar.dateComponents([.month, .day, .hour, .minute, .second], from: Date(), to: date)
+                let component = calendar.dateComponents([.month, .day, .hour, .minute, .second], from: current, to: date)
 //                if isPastDate(date) {
 //                    component.month! += 1
 //                }
@@ -61,10 +61,10 @@ class CalendarViewModel: ObservableObject {
                 let minute = calendar.dateComponents([.day, .hour, .minute, .second], from: target).minute!
                 let second = calendar.dateComponents([.day, .hour, .minute, .second], from: target).second!
                 let weekday = dayOfWeek.rawValue
-                let today = calendar.component(.weekday, from: Date()) - 1
+                let today = calendar.component(.weekday, from: current) - 1
                 let diff = abs(weekday - today)
                 
-                var updateDate = calendar.date(bySettingHour: hour, minute: minute, second: second, of: Date())!
+                var updateDate = calendar.date(bySettingHour: hour, minute: minute, second: second, of: current)!
                 updateDate = calendar.date(byAdding: .day, value: diff, to: updateDate)!
                 
                 if isPastDate(updateDate) {
@@ -80,7 +80,7 @@ class CalendarViewModel: ObservableObject {
 //                    a.addTimeInterval(60*60*24*7)
 //                }
                 
-                let component = calendar.dateComponents([.day, .hour, .minute, .second], from: Date(), to: updateDate)
+                let component = calendar.dateComponents([.day, .hour, .minute, .second], from: current, to: updateDate)
                 
 //                let today = calendar.component(.weekday, from: Date())
 //                let target = calendar.component(.weekday, from: target)

@@ -19,6 +19,7 @@ struct CountDaysApp: SwiftUI.App {
     
     @StateObject var viewModel = RealmViewModel()
     @StateObject var store = Store()
+    @Environment(\.scenePhase) private var scenePhase
     
     
     var body: some Scene {
@@ -31,8 +32,19 @@ struct CountDaysApp: SwiftUI.App {
             MainView()
                 .environmentObject(viewModel)
                 .environmentObject(store)
+                
 //            TestView()
 //            TestView2(model: TestViewModel(textTitle: "hoge"))
+        }
+        .onChange(of: scenePhase) { phase in
+            switch phase {
+            case .active:
+                WidgetCenter.shared.reloadAllTimelines()
+            case .background, .inactive:
+                WidgetCenter.shared.reloadAllTimelines()
+            @unknown default:
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
     }
 }
