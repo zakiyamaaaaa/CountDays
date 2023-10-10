@@ -39,10 +39,12 @@ struct SettingView: View {
                             .font(.system(size: 20))
                         Spacer()
                     }
+                    .foregroundStyle(.yellow.gradient)
                     .contentShape(Rectangle())
                     .listRowBackground(ColorUtility.secondary)
                     
                     .onTapGesture {
+                        HapticFeedbackManager.play(.notification(.success))
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapUpgrade)
                         showUpgradeView.toggle()
                     }
@@ -86,6 +88,7 @@ struct SettingView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapMail)
+                        HapticFeedbackManager.play(.notification(.success))
                         #if targetEnvironment(simulator)
                         #else
                             isInquiry.toggle()
@@ -106,6 +109,7 @@ struct SettingView: View {
                     .listRowBackground(ColorUtility.secondary)
                     .contentShape(Rectangle())
                     .onTapGesture {
+                        HapticFeedbackManager.play(.notification(.success))
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapShareView)
                         showShareDialog.toggle()
                     }
@@ -121,6 +125,7 @@ struct SettingView: View {
                     .listRowBackground(ColorUtility.secondary)
                     .contentShape(Rectangle())
                     .onTapGesture {
+                        HapticFeedbackManager.play(.notification(.success))
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapPrivacyPolicy)
                         isPrivacyView.toggle()
                     }
@@ -141,6 +146,7 @@ struct SettingView: View {
                     .contentShape(Rectangle())
                     .ignoresSafeArea(.all)
                     .onTapGesture {
+                        HapticFeedbackManager.play(.notification(.success))
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapTerm)
                         isTermView.toggle()
                     }
@@ -169,6 +175,7 @@ struct SettingView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .SettingViewTapDeleteAllEvent)
+                        HapticFeedbackManager.play(.notification(.success))
                         isDeleteAllEvent.toggle()
                     }
                     
@@ -204,15 +211,17 @@ struct SettingView: View {
                 
             }
             .sheet(isPresented: $showShareText, content: {
-                let text = "ほげほげ"
+                /// TODO:- ストアのURLができたら入れ替え
+                let text = "カウントアプリ：CountDays"
 //                let image = UIImage(named: "QRCodeSample")!
                 let url = "https://www.hogehoge.com"
                 ShareSheet(photo: nil, text: text, urlString: url)
             })
             .sheet(isPresented: $showQRCodeShare, content: {
+                /// TODO:- ストアのURLができたら入れ替え
                 let image = UIImage(named: "QRCodeSample")!
                 let url = "https://www.hogehoge.com"
-                ShareSheet(photo: image, text: "QRCODW Share", urlString: url)
+                ShareSheet(photo: image, text: "QRCODE Share", urlString: url)
             })
             .padding(.top, 10)
             .foregroundColor(.white)

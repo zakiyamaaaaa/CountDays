@@ -288,6 +288,7 @@ struct CropView: View {
                         }
                         dismiss()
                     } else {
+                        HapticFeedbackManager.play(.notification(.error))
                         showUpgradeAlert.toggle()
                     }
                     

@@ -399,7 +399,7 @@ struct ConfigureEventView: View {
                     Button {
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapEventNameButton)
                         focusField = false
-                        
+                        HapticFeedbackManager.play(.impact(.medium))
                     } label: {
                         Image(systemName: "checkmark")
                     }
@@ -411,6 +411,7 @@ struct ConfigureEventView: View {
             }.animation(.spring(), value: focusField)
             Button {
                 isShowSheet.toggle()
+                HapticFeedbackManager.play(.impact(.medium))
                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureDateButton)
             } label: {
                 VStack(alignment: .leading) {
@@ -521,6 +522,7 @@ struct ConfigureEventView: View {
                         
                         Button {
                             showStyleDetailConfiguration.toggle()
+                            HapticFeedbackManager.play(.impact(.medium))
                         } label: {
                             Text("詳細設定")
                                 .font(.system(size: 15))
@@ -572,26 +574,7 @@ struct ConfigureEventView: View {
                         
                     }
                     if !isPurchased {
-                        VStack {
-                            Image(systemName: "lock.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.white)
-                            Button {
-                                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapUpgradeFromCircleViewStyle)
-                                showStyleAlert.toggle()
-                            } label: {
-                                Color.clear
-                                    .frame(width: 200, height: 200)
-                            }
-                            .frame(width: 200, height: 200)
-                            .background(.black)
-                            .opacity(0.5)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                            Text("このスタイルはロックされています")
-                                .foregroundColor(.white)
-                        }
+                        lockView
                     }
                 }.tag(1)
                 
@@ -611,32 +594,14 @@ struct ConfigureEventView: View {
                         
                     }
                     if !isPurchased {
-                        VStack {
-                            Image(systemName: "lock.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.white)
-                            Button {
-                                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapUpgradeFromCalendarViewStyle)
-                                showStyleAlert.toggle()
-                            } label: {
-                                Color.clear
-                                    .frame(width: 200, height: 200)
-                            }
-                            .frame(width: 200, height: 200)
-                            .background(.black)
-                            .opacity(0.5)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                            Text("このスタイルはロックされています")
-                                .foregroundColor(.white)
-                        }
+                        lockView
                     }
                 }.tag(2)
                 
             }
             .onChange(of: selectedStyleIndex, perform: { newValue in
 //                eventCardViewModel.style = EventDisplayStyle(rawValue: selectedStyleIndex)!
+                HapticFeedbackManager.play(.notification(.success))
                 eventCardViewModel.style = isPurchased ? EventDisplayStyle(rawValue: selectedStyleIndex)! : .standard
             })
             .tabViewStyle(.page)
@@ -666,6 +631,37 @@ struct ConfigureEventView: View {
         case image = "画像"
     }
     @State private var photosItem: PhotosPickerItem? = nil
+    
+    private var lockView: some View {
+        ZStack {
+            Button {
+                FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapUpgradeFromCircleViewStyle)
+                showStyleAlert.toggle()
+                HapticFeedbackManager.play(.notification(.error))
+            } label: {
+                ZStack(alignment: .top) {
+                    Color.black
+                        .frame(width: 220, height: 220)
+                        .opacity(0.5)
+                    VStack {
+                        Image(systemName: "lock.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.white)
+                        Text("このスタイルはロック\nされています")
+                            .foregroundColor(.white)
+                    }
+                    .padding()
+                    
+                }
+            }
+            .frame(width: 220, height: 220)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            
+        }
+    }
+    
     /// MARK: - 背景色を編集するビュー
     private var backgroundColorView: some View {
         VStack {
@@ -843,7 +839,7 @@ struct ConfigureEventView: View {
                     withAnimation {
                         eventCardViewModel.displayLang = eventCardViewModel.displayLang.rawValue == 0 ? .en : .jp
                     }
-                    
+                    HapticFeedbackManager.play(.impact(.medium))
                 } label: {
                     let text = eventCardViewModel.displayLang == .jp ? "日" : "Day"
                     Text(text)

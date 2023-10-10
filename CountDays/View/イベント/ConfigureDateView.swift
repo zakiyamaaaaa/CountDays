@@ -97,6 +97,9 @@ struct ConfigureDateView: View {
                             .padding()
                             .scaledToFill()
                             .pickerStyle(.segmented)
+                            .onChange(of: selectedEventType) { v in
+                                HapticFeedbackManager.play(.impact(.medium))
+                            }
                             
                         }
                         
@@ -118,7 +121,9 @@ struct ConfigureDateView: View {
                             .tint(.white)
                             .padding()
                         }
-                        
+                        .onChange(of: selectedFrequentType) { v in
+                            HapticFeedbackManager.play(.impact(.medium))
+                        }
                         .border(selectedFrequentType == .never ? .clear : selectedFrequentType.color, width: 5)
                         .background(RoundedRectangle(cornerRadius: 10).fill(ColorUtility.primary))
                         .isHidden(hidden: selectedEventType == .countup)
@@ -159,6 +164,8 @@ struct ConfigureDateView: View {
                                 let text = selectingHour.description + ":" + String(format: "%02d", selectingMinute)
                                 
                                 Button {
+                                    HapticFeedbackManager.play(.impact(.medium))
+                                    
                                     withAnimation {
                                         editingHour.toggle()
                                         /// TODO: 指定してるけどスクロールしない

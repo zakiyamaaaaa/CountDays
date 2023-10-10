@@ -137,6 +137,11 @@ struct MainView: View {
 //                                                    isShow.toggle()
 //                                                    selectedEvent = EventCardViewModel.defaultStatus
 //                                                    #else
+                                                    
+                                                    #if DEBUG
+                                                    self.isPurchased = true
+                                                    #endif
+                                                    
                                                     if self.isPurchased || RealmViewModel().events.count == 0 {
                                                         HapticFeedbackManager.play(.impact(.medium))
                                                         /// 課金ユーザー
@@ -198,6 +203,7 @@ struct MainView: View {
             Spacer()
             
             #if DEBUG
+            Text("デバッグモード")
 //            Text("Launch Time:\(counter)")
 //            Button {
 //                
@@ -224,6 +230,7 @@ struct MainView: View {
             
             Button {
                 isSettingButton.toggle()
+                HapticFeedbackManager.play(.notification(.success))
                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .MainViewTapSettingButton)
             } label: {
                 Image(systemName: "ellipsis.circle")
