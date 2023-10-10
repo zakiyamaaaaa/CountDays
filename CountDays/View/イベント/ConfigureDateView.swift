@@ -351,7 +351,7 @@ struct ConfigureDateView: View {
                 ZStack {
                     /// 設定を保存するところ
                     Button {
-                        HapticFeedbackManager.shared.play(.impact(.heavy))
+                        HapticFeedbackManager.play(.impact(.heavy))
                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureDateViewTapOKButton)
                         
                         selectingHour = isAllDayEvent ? 0 : selectingHour

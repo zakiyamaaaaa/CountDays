@@ -167,9 +167,9 @@ struct ConfigureEventView: View {
             do {
                 try await self.isPurchased = store.isPurchased(product)
                 
-                #if DEBUG
-                self.isPurchased = true
-                #endif
+//                #if DEBUG
+//                self.isPurchased = true
+//                #endif
                 
             } catch(let error) {
                 print(error.localizedDescription)
@@ -185,7 +185,7 @@ struct ConfigureEventView: View {
         HStack {
             Spacer()
             Button {
-                HapticFeedbackManager.shared.play(.impact(.medium))
+                HapticFeedbackManager.play(.impact(.medium))
                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureContent)
                 if !isFirstButtonSelected {
                     isFirstButtonSelected = true
@@ -209,7 +209,7 @@ struct ConfigureEventView: View {
             Spacer()
             
             Button {
-                HapticFeedbackManager.shared.play(.impact(.medium))
+                HapticFeedbackManager.play(.impact(.medium))
                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureStyle)
                 if !isSecondButtonSelected {
                     isFirstButtonSelected = false
@@ -229,7 +229,7 @@ struct ConfigureEventView: View {
             
             Spacer()
             Button {
-                HapticFeedbackManager.shared.play(.impact(.medium))
+                HapticFeedbackManager.play(.impact(.medium))
                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureBackground)
                 if !isThirdButtonSelected {
                     isFirstButtonSelected = false
@@ -252,7 +252,7 @@ struct ConfigureEventView: View {
             Spacer()
             
             Button {
-                HapticFeedbackManager.shared.play(.impact(.medium))
+                HapticFeedbackManager.play(.impact(.medium))
                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureText)
                 if !isFourthButtonSelected {
                     isFirstButtonSelected = false
@@ -308,7 +308,7 @@ struct ConfigureEventView: View {
                     let style: EventDisplayStyle = isPurchased ? eventCardViewModel.style : .standard
                     
                     let event = Event(title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, frequentType: eventCardViewModel.frequentType, eventType: eventCardViewModel.eventType, dayOfWeek: eventCardViewModel.dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image, displayLang: eventCardViewModel.displayLang)
-                    HapticFeedbackManager.shared.play(.impact(.heavy))
+                    HapticFeedbackManager.play(.impact(.heavy))
                     switch isCreation {
                         /// 新規作成
                     case true:

@@ -57,7 +57,7 @@ struct WelcomeView: View {
                     .animation(.easeIn(duration: 1).delay(8), value: opacity)
                     
                     Button {
-                        HapticFeedbackManager.shared.play(.impact(.medium))
+                        HapticFeedbackManager.play(.impact(.medium))
                         dismiss()
                     } label: {
                         Text("Get started")

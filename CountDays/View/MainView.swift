@@ -126,27 +126,28 @@ struct MainView: View {
                                                 }
                                                 
                                                 .onEnded { _ in
-                                                    HapticFeedbackManager.shared.play(.impact(.medium))
+                                                    
                                                     withAnimation {
                                                         scale = false
                                                     }
                                                     FirebaseAnalyticsManager.recordEvent(analyticsKey: .MainViewAddEvent)
                                                     /// 課金ユーザーかどうかを判定し、課金してたら２個以上OK。無課金は１個まで
                                                     
-                                                    #if DEBUG
-                                                    isShow.toggle()
-                                                    selectedEvent = EventCardViewModel.defaultStatus
-                                                    #else
-                                                    if self.isPurchased {
+//                                                    #if DEBUG
+//                                                    isShow.toggle()
+//                                                    selectedEvent = EventCardViewModel.defaultStatus
+//                                                    #else
+                                                    if self.isPurchased || RealmViewModel().events.count == 0 {
+                                                        HapticFeedbackManager.play(.impact(.medium))
                                                         /// 課金ユーザー
                                                         isShow.toggle()
                                                         selectedEvent = EventCardViewModel.defaultStatus
                                                     } else {
-                                                        
+                                                        HapticFeedbackManager.play(.notification(.error))
                                                         ///　無課金
                                                         isShowUpgradeAlert.toggle()
                                                     }
-                                                    #endif
+//                                                    #endif
                                                 }
                                         )
                                     
@@ -197,17 +198,17 @@ struct MainView: View {
             Spacer()
             
             #if DEBUG
-            Text("Launch Time:\(counter)")
-            Button {
-                
-                print("notification request")
-                NotificationCenter.sendNotificationRequest()
-                
-            } label: {
-                Text("Notification")
-            }
+//            Text("Launch Time:\(counter)")
+//            Button {
+//                
+//                print("notification request")
+//                NotificationCenter.sendNotificationRequest()
+//                
+//            } label: {
+//                Text("Notification")
+//            }
             #endif
-            let _ = print("selc: \(self)")
+            let _ = print("self: \(self)")
         }
         .background(ColorUtility.backgroundary)
         .analyticsScreen(name: String(describing: Self.self),
