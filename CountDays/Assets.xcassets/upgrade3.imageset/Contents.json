@@ -1,15 +1,21 @@
 {
   "images" : [
     {
-      "filename" : "upgrade3.svg",
-      "idiom" : "universal"
+      "filename" : "upgrade3.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
   }
 }

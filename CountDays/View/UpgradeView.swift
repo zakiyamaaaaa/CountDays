@@ -17,10 +17,27 @@ struct UpgradeView: View {
     @State private var errorTitle = ""
     @State private var isShowingError = false
     @State private var isShowRestoreAlert = false
+    @State private var shadowRadius: CGFloat = 5
+    
+    func decorateText() -> some View {
+        let str = "アップグレードをすると次の機能が使えるようになります"
+        var attributedString = AttributedString(str)
+        attributedString.font = .system(size: 30, weight: .bold)
+        attributedString.foregroundColor = .white
+        
+       if let range = attributedString.range(of: "アップグレード") {
+           attributedString[range].foregroundColor = .yellow
+           attributedString[range].font = .system(size: 30, weight: .bold)
+       }
+       return Text(attributedString)
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             HeaderView(title: "アップグレード")
+            
+            
+            
             ScrollView {
                 VStack(alignment: .leading) {
 //#if DEBUG
@@ -33,13 +50,11 @@ struct UpgradeView: View {
 //                    Text(displayPrice)
 //#endif
                     VStack(alignment: .leading) {
-                        Text("アップグレードをすると次の機能が使えるようになります")
-                            .font(.system(size: 30, weight: .bold))
-                            .foregroundColor(.white)
-                            .padding(.vertical)
+                        decorateText()
+                            .padding(.bottom)
                         
                         Group {
-                            Text("イベント数の上限解除！")
+                            Text("好きなだけイベントを作成可能に！")
                                 .foregroundColor(.white)
                                 .font(.title)
                                 .fontWeight(.bold)
@@ -84,6 +99,8 @@ struct UpgradeView: View {
                                 .foregroundColor(.white)
                             
                             Image("upgrade3")
+                                .resizable()
+                                .scaledToFit()
                                 .padding()
                                 .padding(.bottom, 30)
                         }
@@ -98,12 +115,15 @@ struct UpgradeView: View {
                             Text("アップデートによる追加機能を先行して利用することができます")
                                 .font(.system(size: 20))
                                 .foregroundColor(.white)
-                            
-                            Image("upgrade4")
-                                .resizable()
-                                .scaledToFit()
-                                .padding()
-                                .padding(.bottom, 30)
+                            ZStack(alignment: .center) {
+                                Image("upgrade4")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width:300)
+                                    .padding()
+                            }
+                            .frame(width: UIScreen.main.bounds.width)
+                                
                         }
                         
                     }
@@ -121,7 +141,7 @@ struct UpgradeView: View {
                 
             }
             .frame(maxWidth: .infinity)
-            .background(ColorUtility.backgroundary)
+            .background(Color.black.gradient)
             
             VStack {
                 Button {
@@ -137,6 +157,7 @@ struct UpgradeView: View {
                     }
                 } label: {
                     Text("購入を復元")
+                        .foregroundStyle(.blue)
                 }
                 .padding()
                 
@@ -148,13 +169,19 @@ struct UpgradeView: View {
                         await buy()
                     }
                 } label: {
-                    Text("購入ボタン")
+                    Text("購入")
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
                 }
                 .disabled(isPurchased)
                 .frame(width: 200, height: 60)
                 .foregroundStyle(.black)
                 .background(Color.accentColor)
                 .cornerRadius(30)
+                .shadow(color: .accentColor, radius: shadowRadius, x: 0.0, y: 0.0)
+                .animation(.easeIn(duration: 1.5).repeatForever(autoreverses: true), value: shadowRadius)
+                .onAppear {
+                    shadowRadius = 10
+                }
             }
             .frame(height: 100)
             .frame(maxWidth: .infinity)
