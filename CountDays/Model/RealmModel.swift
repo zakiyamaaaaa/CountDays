@@ -44,7 +44,7 @@ import SwiftUI
 
 final class RealmModel: ObservableObject {
     /// TODO: スキーマバージョンを1になおす
-    static var config = Realm.Configuration(schemaVersion: 6)
+    static var config = Realm.Configuration(schemaVersion: 7)
     static var realm: Realm {
         config.fileURL = fileUrl
         print("schema: \(config.schemaVersion)")
@@ -88,6 +88,13 @@ final class RealmModel: ObservableObject {
     static func updateNotificationStatus(status: Bool) {
         try! realm.write({
             user.allowNotification = status
+        })
+    }
+    
+    /// ユーザーに紐づくグレードを更新
+    static func updateGrade(grade: Int) {
+        try! realm.write({
+            user.grade = grade
         })
     }
     
@@ -135,8 +142,15 @@ final class User: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var createdDate: Date
     @Persisted var allowNotification: Bool = false
+    /// grade
+    /// 無課金→0
+    /// 課金→1
+    @Persisted var grade: Int = 0
     @Persisted var events: RealmSwift.List<Event>
     
+    var gradeText: String {
+        return SubscriptionTier(rawValue: grade)?.string ?? "ノーマル"
+    }
 //    init(id: String = UUID().uuidString, events: RealmSwift.List<Event>) {
 //        self.id = id
 //        self.events = events

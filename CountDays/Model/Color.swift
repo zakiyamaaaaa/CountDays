@@ -48,11 +48,14 @@ enum BackgroundColor: String, RawRepresentable, CaseIterable, PersistableEnum {
     case white
     case yellow
     case blue
-    case red
     case mint
+    case red
     case indigo
-    case pink
     case teal
+    case pink
+    case green
+    case purple
+    case brown
     case none
     
     var color: Color? {
@@ -75,6 +78,12 @@ enum BackgroundColor: String, RawRepresentable, CaseIterable, PersistableEnum {
             return .teal
         case .yellow:
             return .yellow
+        case .green:
+            return .green
+        case .brown:
+            return .brown
+        case .purple:
+            return .purple
         case .none:
             return nil
         }
@@ -101,6 +110,12 @@ enum BackgroundColor: String, RawRepresentable, CaseIterable, PersistableEnum {
             return LinearGradient(colors: [.yellow, .yellow.dark()], startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
         case .teal:
             return LinearGradient(colors: [Color(red: 0.19, green: 0.69, blue: 0.78), Color(red: 0.25, green: 0.78, blue: 0.88, opacity: 1.0)], startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+        case .green:
+            return LinearGradient(colors: [.green, .green.dark()], startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+        case .brown:
+            return LinearGradient(colors: [.brown, .brown.dark()], startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+        case .purple:
+            return LinearGradient(colors: [.purple, .purple.dark()], startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
         case .none:
             return nil
         }

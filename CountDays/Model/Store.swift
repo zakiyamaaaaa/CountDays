@@ -21,9 +21,20 @@ public enum SubscriptionTier: Int, Comparable {
         return lhs.rawValue < rhs.rawValue
     }
     
-    case none = 0
+    case normal = 0
     case `super` = 1
     case premium = 2
+    
+    var string: String {
+        switch self {
+        case .normal:
+            return "ノーマル"
+        case .super:
+            return "Super"
+        case .premium:
+            return "Premium"
+        }
+    }
 }
 
 class Store: ObservableObject {
@@ -118,13 +129,27 @@ class Store: ObservableObject {
         }
     }
     
-    func isPurchased(_ product: Product) async throws -> Bool {
-        switch product.type {
-        case .autoRenewable:
-            return purchasedSubscriptions.contains(product)
-        default:
+    /// こっちなぜかうまく動作しない
+//    func isPurchased(_ product: Product) async throws -> Bool {
+//        switch product.type {
+//        case .autoRenewable:
+//            return purchasedSubscriptions.contains(product)
+//        default:
+//            return false
+//        }
+//    }
+    
+    func isPurchased(_ identifier: String) async throws -> Bool {
+        guard let result = await Transaction.latest(for: identifier) else {
             return false
         }
+        let transaction = try checkVerified(result)
+        
+        /// ここでRealmのUserモデルのグレードプロパティを更新
+        /// ここで更新するのがいいのかは要検討
+        RealmModel.updateGrade(grade: self.tier(for: identifier).rawValue)
+        
+        return transaction.revocationDate == nil && !transaction.isUpgraded
     }
     
     @MainActor
@@ -161,7 +186,7 @@ class Store: ObservableObject {
         case "subscription.premium":
             return .premium
         default:
-            return .none
+            return .normal
         }
     }
     

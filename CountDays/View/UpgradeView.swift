@@ -19,7 +19,7 @@ struct UpgradeView: View {
     @State private var isShowRestoreAlert = false
     @State private var shadowRadius: CGFloat = 5
     
-    func decorateText() -> some View {
+    private var decorateText: some View {
         let str = "アップグレードをすると次の機能が使えるようになります"
         var attributedString = AttributedString(str)
         attributedString.font = .system(size: 30, weight: .bold)
@@ -40,101 +40,98 @@ struct UpgradeView: View {
             
             ScrollView {
                 VStack(alignment: .leading) {
-//#if DEBUG
-//                    Text("アップグレード")
-//                    
-//                    let price = product?.price ?? 0
-//                    let displayPrice = product?.displayPrice ?? ""
-//                    let priceFormatStyle = product?.priceFormatStyle ?? Decimal.FormatStyle.Currency(code: "JPY")
-//                    Text(price, format: priceFormatStyle)
-//                    Text(displayPrice)
-//#endif
-                    VStack(alignment: .leading) {
-                        decorateText()
-                            .padding(.bottom)
+                    //#if DEBUG
+                    //                    Text("アップグレード")
+                    //
+                    //                    let price = product?.price ?? 0
+                    //                    let displayPrice = product?.displayPrice ?? ""
+                    //                    let priceFormatStyle = product?.priceFormatStyle ?? Decimal.FormatStyle.Currency(code: "JPY")
+                    //                    Text(price, format: priceFormatStyle)
+                    //                    Text(displayPrice)
+                    //#endif
+                    
+                    decorateText
+                        .padding(.bottom, 40)
+                        .padding(.top, 20)
+                    Group {
+                        Text("好きなだけイベントを作成可能に！")
+                            .foregroundColor(.pink)
+                            .font(.title)
+                            .fontWeight(.bold)
                         
-                        Group {
-                            Text("好きなだけイベントを作成可能に！")
-                                .foregroundColor(.white)
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .padding(.bottom,3)
-                            
-                            Text("作成できるイベント数の上限が１個から無制限になります")
-                                .font(.system(size: 20))
-                                .foregroundColor(.white)
-                            
-                            Image("upgrade1")
-                                .padding()
-                                .padding(.bottom, 30)
-                        }
+                        Text("作成できるイベント数の上限が１個から無制限になります")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
                         
-                        Group {
-                            Text("背景に画像を設定可能に！")
-                                .foregroundColor(.white)
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .padding(.bottom,3)
+                        Image("upgrade1")
+                            .padding(.vertical, 30)
+                    }
+                    .padding(.bottom, 10)
+                    
+                    Group {
+                        Text("背景に画像を設定可能に！")
+                            .foregroundColor(.pink)
+                            .font(.title)
+                            .fontWeight(.bold)
+                        
+                        Text("あなただけのオリジナル背景を設定できます")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
                             
-                            Text("あなただけのオリジナル背景を設定できます")
-                                .font(.system(size: 20))
-                                .foregroundColor(.white)
+                        
+                        Image("upgrade2")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.vertical, 30)
+                    }
+                    .padding(.bottom, 10)
+                    
+                    Group {
+                        Text("様々な表示スタイルが選択可能に！")
+                            .foregroundColor(.pink)
+                            .font(.title)
+                            .fontWeight(.bold)
                             
-                            Image("upgrade2")
+                        
+                        Text("あなたの好きなデザインを選ぶことができます")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                        
+                        Image("upgrade3")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.vertical, 30)
+                    }
+                    .padding(.bottom, 10)
+                    
+                    
+                    Group {
+                        Text("追加機能を先行招待！")
+                            .foregroundColor(.pink)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .padding(.bottom,3)
+                        
+                        Text("アップデートによる追加機能を先行して利用することができます")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                        VStack(alignment: .center) {
+                            Image("upgrade4")
                                 .resizable()
                                 .scaledToFit()
-                                .padding()
-                                .padding(.bottom, 30)
-                        }
-                        
-                        Group {
-                            Text("様々な表示スタイルが選択可能に！")
-                                .foregroundColor(.white)
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .padding(.bottom,3)
-                            
-                            Text("あなたの好きなデザインを選ぶことができます")
-                                .font(.system(size: 20))
-                                .foregroundColor(.white)
-                            
-                            Image("upgrade3")
-                                .resizable()
-                                .scaledToFit()
-                                .padding()
-                                .padding(.bottom, 30)
-                        }
-                        
-                        Group {
-                            Text("追加機能を先行招待！")
-                                .foregroundColor(.white)
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .padding(.bottom,3)
-                            
-                            Text("アップデートによる追加機能を先行して利用することができます")
-                                .font(.system(size: 20))
-                                .foregroundColor(.white)
-                            ZStack(alignment: .center) {
-                                Image("upgrade4")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width:300)
-                                    .padding()
-                            }
-                            .frame(width: UIScreen.main.bounds.width)
                                 
                         }
-                        
                     }
-                    .padding()
                 }
+                .padding(.horizontal)
+                .padding(.bottom, 10)
+                
             }
             .task {
                 guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }
                 self.product = product
                 do {
-                    try await self.isPurchased = store.isPurchased(product)
+                    try await self.isPurchased = store.isPurchased(ProductId.super.rawValue)
                 } catch(let error) {
                     print(error.localizedDescription)
                 }
@@ -169,15 +166,22 @@ struct UpgradeView: View {
                         await buy()
                     }
                 } label: {
-                    Text("購入")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                    let displayPrice = product?.displayPrice ?? ""
+                    VStack {
+                        Text("購入")
+                            .font(.system(size: 20, weight: .bold, design: .rounded))
+                        Text("（" + displayPrice + "/月）")
+                            .font(.system(size: 13, weight: .bold, design: .rounded))
+                            
+                    }
+                    .frame(width: 200, height: 60)
+                    
                 }
                 .disabled(isPurchased)
-                .frame(width: 200, height: 60)
                 .foregroundStyle(.black)
-                .background(Color.accentColor)
+                .background(isPurchased ? .gray : Color.accentColor)
                 .cornerRadius(30)
-                .shadow(color: .accentColor, radius: shadowRadius, x: 0.0, y: 0.0)
+                .shadow(color: isPurchased ? .gray : .accentColor, radius: shadowRadius, x: 0.0, y: 0.0)
                 .animation(.easeIn(duration: 1.5).repeatForever(autoreverses: true), value: shadowRadius)
                 .onAppear {
                     shadowRadius = 10

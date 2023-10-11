@@ -78,6 +78,8 @@
 		39905D7B2ABAF61A0019CEFB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39905D7A2ABAF61A0019CEFB /* Realm */; };
 		39905D7D2ABAF61A0019CEFB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39905D7C2ABAF61A0019CEFB /* RealmSwift */; };
 		39905D7F2ABAFC3B0019CEFB /* WidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6C2ABAF6020019CEFB /* WidgetExtension.swift */; };
+		39B665B12AD68ECD009E6A5D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA672AA5C0CB001AE0D7 /* Store.swift */; };
+		39B665B22AD68ECE009E6A5D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA672AA5C0CB001AE0D7 /* Store.swift */; };
 		39EC20B92AC8199800BD081D /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA32A9713C3006A7232 /* ColorUtility.swift */; };
 		39EC20BA2AC8199800BD081D /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA32A9713C3006A7232 /* ColorUtility.swift */; };
 		39EC20BE2ACA77C300BD081D /* TestView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EC20BD2ACA77C300BD081D /* TestView4.swift */; };
@@ -849,6 +851,7 @@
 				39EC20BA2AC8199800BD081D /* ColorUtility.swift in Sources */,
 				39560F492AC19E2D000A623D /* Extension.swift in Sources */,
 				39560F482AC19E1C000A623D /* Enum.swift in Sources */,
+				39B665B22AD68ECE009E6A5D /* Store.swift in Sources */,
 				39560F222AC17B91000A623D /* IntentHandler.swift in Sources */,
 				39560F472AC19E13000A623D /* Color.swift in Sources */,
 				39560F452AC19DF9000A623D /* RealmViewModel.swift in Sources */,
@@ -863,6 +866,7 @@
 				39560F172ABF1FD0000A623D /* EventCardView2.swift in Sources */,
 				39560F142ABF1E24000A623D /* EventCardViewModel.swift in Sources */,
 				39905D722ABAF6030019CEFB /* WidgetExtension.intentdefinition in Sources */,
+				39B665B12AD68ECD009E6A5D /* Store.swift in Sources */,
 				39560F182ABF1FF5000A623D /* CalendarViewModel.swift in Sources */,
 				39560F2B2AC18E87000A623D /* IntentHandler.swift in Sources */,
 				39905D6B2ABAF6020019CEFB /* WidgetExtensionLiveActivity.swift in Sources */,

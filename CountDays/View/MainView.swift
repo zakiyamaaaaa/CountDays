@@ -23,6 +23,7 @@ struct MainView: View {
     @State private var isShowWelcomeView = false
     @State private var product: Product?
     @State private var isPurchased = false
+//    @State private var isPurchased2 = false
 //    @StateObject var realmMock = MockStore()
     @StateObject var realmMock = RealmMockStore()
 //    @StateObject var defaultEvent = EventCardViewModel.defaultStatus
@@ -44,7 +45,7 @@ struct MainView: View {
         return image
     }
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             headerView
             
             ScrollView(showsIndicators: false) {
@@ -58,7 +59,7 @@ struct MainView: View {
                                 EventCardView2(event: card, eventVM: EventCardViewModel2(event: card))
                                     .padding(.top)
                                     .onTapGesture {
-                                        
+                                        HapticFeedbackManager.play(.impact(.medium))
                                         selectedEvent = realmCards[i - 1]
                                         FirebaseAnalyticsManager.recordEvent(analyticsKey: .MainViewUpdateEvent)
                                         isShowConfigured.toggle()
@@ -139,7 +140,7 @@ struct MainView: View {
 //                                                    #else
                                                     
                                                     #if DEBUG
-                                                    self.isPurchased = true
+//                                                    self.isPurchased = true
                                                     #endif
                                                     
                                                     if self.isPurchased || RealmViewModel().events.count == 0 {
@@ -181,7 +182,7 @@ struct MainView: View {
                         guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }
                         self.product = product
                         do {
-                            try await self.isPurchased = store.isPurchased(product)
+                            try await self.isPurchased = store.isPurchased(ProductId.super.rawValue)
                         } catch(let error) {
                             print(error.localizedDescription)
                         }
@@ -198,12 +199,14 @@ struct MainView: View {
             .sheet(isPresented: $isShowWelcomeView, content: {
                 WelcomeView()
             })
-            .background(ColorUtility.backgroundary)
+            .background(ColorUtility.primary.gradient)
             
             Spacer()
             
             #if DEBUG
             Text("デバッグモード")
+            Text(isPurchased.description)
+
 //            Text("Launch Time:\(counter)")
 //            Button {
 //                
@@ -223,9 +226,20 @@ struct MainView: View {
     
     private var headerView: some View {
         HStack {
-            Text(greetingString())
-                .font(.system(size: 35,weight: .bold))
-                .padding()
+            VStack(alignment: .listRowSeparatorLeading) {
+                Text(greetingString())
+                    .font(.system(size: 35,weight: .bold))
+                    
+                Spacer()
+                HStack {
+                    let grade = RealmModel.user.gradeText
+                    Text("Status:" + grade)
+                        .foregroundStyle(.gray)
+                        .font(.system(size: 12, weight: .bold))
+                }
+            }
+            .padding()
+            
             Spacer()
             
             Button {

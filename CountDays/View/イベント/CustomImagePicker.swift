@@ -237,7 +237,7 @@ struct CropView: View {
                     guard let product = try? await store.fetchProducts(ProductId.super.rawValue).first else { return }
                     
                     do {
-                        try await self.isPurchased = store.isPurchased(product)
+                        try await self.isPurchased = store.isPurchased(ProductId.super.rawValue)
                         
 //                        #if DEBUG
 //                        self.isPurchased = true

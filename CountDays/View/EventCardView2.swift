@@ -362,7 +362,7 @@ struct EventCardView2: View {
                         .resizable()
                         .scaledToFill()
                         .widgetFrame()
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                 }
                 VStack {
                     Text(eventVM.text.isEmpty ? "イベント名" : eventVM.text)
@@ -415,7 +415,18 @@ struct EventCardView2: View {
     
     private var calendarView: some View {
         ZStack {
-            
+            if eventVM.backgroundColor == .none, let image = eventVM.image {
+                Image(uiImage: image)
+                    .resizable()
+                    .frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height)
+                    .scaledToFill()
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+                
+            } else {
+                Rectangle()
+                    .foregroundStyle(eventVM.backgroundColor.color ?? .white)
+                    .frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height*3/4)
+            }
             
             VStack(spacing: 0) {
                 let date = eventVM.selectedDate
@@ -441,37 +452,29 @@ struct EventCardView2: View {
                         .frame(width: WidgetConfig.small.size.width)
                         .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                 }
+                Spacer()
                 
-                ZStack {
-                    if eventVM.backgroundColor == .none, let image = eventVM.image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFill()
-                            .widgetFrame()
+                
+                    
                         
+                VStack {
+                    if second < 0 && eventType == .countdown && frequentType == .never {
+                        Text(displayLang.finishText)
+                        
+                        Image(systemName: "checkmark.circle.fill")
                     } else {
-                        Rectangle()
-                            .foregroundStyle(eventVM.backgroundColor.color ?? .white)
-                            .frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height*3/4)
-                    }
-                        
-                    VStack {
-                        if second < 0 && eventType == .countdown && frequentType == .never {
-                            Text(displayLang.finishText)
-                            
-                            Image(systemName: "checkmark.circle.fill")
-                        } else {
-                            Text("\(day)")
-                                .font(.system(size: 50))
-                                .fontWeight(.bold)
-                            Text(displayLang.dateText.day)
-                                .font(.system(size: 20))
-                        }
+                        Text("\(day)")
+                            .font(.system(size: 50))
+                            .fontWeight(.bold)
+                        Text(displayLang.dateText.day)
+                            .font(.system(size: 20))
                     }
                 }
+                Spacer()
             }
+            .widgetFrame()
             .foregroundColor(eventVM.textColor.color)
-            .cornerRadius(30)
+            .cornerRadius(cornerRadius)
             .compositingGroup()
             .shadow(radius: 3, x:3, y:5)
         }
