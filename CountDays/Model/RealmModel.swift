@@ -43,8 +43,9 @@ import SwiftUI
 ///
 
 final class RealmModel: ObservableObject {
-    /// TODO: スキーマバージョンを1になおす
-    static var config = Realm.Configuration(schemaVersion: 7)
+    
+    /// Realm Version Number 0: 初版
+    static var config = Realm.Configuration(schemaVersion: 0)
     static var realm: Realm {
         config.fileURL = fileUrl
         print("schema: \(config.schemaVersion)")

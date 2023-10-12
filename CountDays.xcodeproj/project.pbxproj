@@ -80,6 +80,7 @@
 		39905D7F2ABAFC3B0019CEFB /* WidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6C2ABAF6020019CEFB /* WidgetExtension.swift */; };
 		39B665B12AD68ECD009E6A5D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA672AA5C0CB001AE0D7 /* Store.swift */; };
 		39B665B22AD68ECE009E6A5D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA672AA5C0CB001AE0D7 /* Store.swift */; };
+		39B665B42AD7E073009E6A5D /* Grobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B665B32AD7E073009E6A5D /* Grobal.swift */; };
 		39EC20B92AC8199800BD081D /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA32A9713C3006A7232 /* ColorUtility.swift */; };
 		39EC20BA2AC8199800BD081D /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394A5CA32A9713C3006A7232 /* ColorUtility.swift */; };
 		39EC20BE2ACA77C300BD081D /* TestView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EC20BD2ACA77C300BD081D /* TestView4.swift */; };
@@ -238,6 +239,7 @@
 		39905D6E2ABAF6020019CEFB /* WidgetExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WidgetExtension.intentdefinition; sourceTree = "<group>"; };
 		39905D6F2ABAF6030019CEFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39905D712ABAF6030019CEFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39B665B32AD7E073009E6A5D /* Grobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grobal.swift; sourceTree = "<group>"; };
 		39EC20BD2ACA77C300BD081D /* TestView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView4.swift; sourceTree = "<group>"; };
 		39EC20BF2ACD3D0100BD081D /* TestView5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView5.swift; sourceTree = "<group>"; };
 		39FFFA5E2A9992C0001AE0D7 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				39FFFA752AA8A7A2001AE0D7 /* BounceButtonStyle.swift */,
 				39FFFB452AB299C4001AE0D7 /* FirebaseAnalyticsManager.swift */,
 				39905D342ABA9F6B0019CEFB /* WidgetConfig.swift */,
+				39B665B32AD7E073009E6A5D /* Grobal.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -782,6 +785,7 @@
 				39FFFA5F2A9992C0001AE0D7 /* TimePicker.swift in Sources */,
 				394A5CC92A971535006A7232 /* PrivacyPolicyView.swift in Sources */,
 				394A5CA92A9713C3006A7232 /* ColorUtility.swift in Sources */,
+				39B665B42AD7E073009E6A5D /* Grobal.swift in Sources */,
 				394A5CBB2A97151A006A7232 /* RealmViewModel.swift in Sources */,
 				394A5CC02A971528006A7232 /* EventCardView.swift in Sources */,
 				39FFFA722AA86667001AE0D7 /* WelcomeView.swift in Sources */,

@@ -168,7 +168,7 @@ struct ConfigureDateView: View {
                                     
                                     withAnimation {
                                         editingHour.toggle()
-                                        /// TODO: 指定してるけどスクロールしない
+                                        /// FIXME: 指定してるけどスクロールしない
                                         scrollValue
                                             .scrollTo("toggle", anchor: .bottom)
                                     }

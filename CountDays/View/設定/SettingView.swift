@@ -19,7 +19,6 @@ struct SettingView: View {
     @State private var showShareDialog = false
     @State private var showShareText = false
     @State private var showQRCodeShare = false
-    
     var body: some View {
         settingView
             
@@ -213,15 +212,12 @@ struct SettingView: View {
             .sheet(isPresented: $showShareText, content: {
                 /// TODO:- ストアのURLができたら入れ替え
                 let text = "カウントアプリ：CountDays"
-//                let image = UIImage(named: "QRCodeSample")!
-                let url = "https://www.hogehoge.com"
-                ShareSheet(photo: nil, text: text, urlString: url)
+                
+                ShareSheet(photo: nil, text: text, urlString: Grobal.appUrl)
             })
             .sheet(isPresented: $showQRCodeShare, content: {
-                /// TODO:- ストアのURLができたら入れ替え
                 let image = UIImage(named: "QRCodeSample")!
-                let url = "https://www.hogehoge.com"
-                ShareSheet(photo: image, text: "QRCODE Share", urlString: url)
+                ShareSheet(photo: image, text: "QRCODE Share", urlString: Grobal.appUrl)
             })
             .padding(.top, 10)
             .foregroundColor(.white)
