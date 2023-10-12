@@ -26,7 +26,7 @@ struct SettingView: View {
     }
     
     private var settingView: some View {
-        VStack {
+        VStack(spacing: 0) {
         NavigationStack {
             
             List {
