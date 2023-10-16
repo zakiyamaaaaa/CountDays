@@ -227,6 +227,6 @@ struct UpgradeView_Previews: PreviewProvider {
 }
 
 enum ProductId: String {
-    case `super` = "com.temporary.id"
+    case `super` = "zakiyamaaaaa.CountDays.subscription.super"
     case premium = "premium"
 }

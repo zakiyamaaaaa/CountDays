@@ -131,6 +131,7 @@ struct EventCardView2: View {
     private let secondsOfMinute = 60
     
     /// countdownでしか使えない
+    /// 改善点、currentDateから最新のDateを引っ張ってくるので、Widgetが更新される
     private var standardTimeView2: some View {
         VStack(alignment: .leading, content: {
             
