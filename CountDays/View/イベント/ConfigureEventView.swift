@@ -599,6 +599,9 @@ struct ConfigureEventView: View {
                 }.tag(2)
                 
             }
+            .onAppear {
+                selectedStyleIndex = eventCardViewModel.style.rawValue
+            }
             .onChange(of: selectedStyleIndex, perform: { newValue in
 //                eventCardViewModel.style = EventDisplayStyle(rawValue: selectedStyleIndex)!
                 HapticFeedbackManager.play(.notification(.success))

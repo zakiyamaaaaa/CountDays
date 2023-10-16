@@ -132,7 +132,7 @@ struct EventCardView2: View {
     
     /// countdownでしか使えない
     /// 改善点、currentDateから最新のDateを引っ張ってくるので、Widgetが更新される
-    private var standardTimeView2: some View {
+    private var TimeView2: some View {
         VStack(alignment: .leading, content: {
             
             let target = getTargetDate(type: eventVM.frequentType)
@@ -163,26 +163,53 @@ struct EventCardView2: View {
                 
             } else if abs(day) > 0 {
                 
-                Text((day*c).formatted() + displayLang.dateText.day)
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-                Text(relativeDate2, style: .relative)
-                    .environment(\.calendar, calendar)
+                switch eventVM.style {
+                case .standard:
+                    Text((day*c).formatted() + displayLang.dateText.day)
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
+                    Text(relativeDate2, style: .relative)
+                        .environment(\.calendar, calendar)
+                case .circle, .calendar:
+                    VStack(alignment: .center) {
+                        Text((day*c).formatted())
+                            .font(.largeTitle)
+                            .fontWeight(.semibold)
+                        Text(displayLang.dateText.day)
+                            .fontWeight(.semibold)
+                            .environment(\.calendar, calendar)
+                    }
+                }
+                
+                    
             } else if abs(hour) > 0 {
-                
-                Text((hour*c).formatted() + displayLang.dateText.hour)
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
+                switch eventVM.style {
+                case .standard:
+                    Text((hour*c).formatted() + displayLang.dateText.hour)
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
 
-                let relativeDate2 = Date(timeInterval: relativeInterval - day*Double(secondsOfDay) - hour*Double(secondsOfHour), since: currentDate)
-                Text(relativeDate2, style: .relative)
-                    .environment(\.calendar, calendar)
-            } else if abs(minute) > 0 {
+                    let relativeDate2 = Date(timeInterval: relativeInterval - day*Double(secondsOfDay) - hour*Double(secondsOfHour), since: currentDate)
+                    Text(relativeDate2, style: .relative)
+                        .environment(\.calendar, calendar)
+                case .circle, .calendar:
+                    VStack(alignment: .center) {
+                        Text((hour*c).formatted())
+                            .font(.largeTitle)
+                            .fontWeight(.semibold)
+                        Text(displayLang.dateText.hour)
+                            .fontWeight(.semibold)
+                            .environment(\.calendar, calendar)
+                    }
+                }
                 
-                Text(relativeDate2, style: .relative)
-                    .font(.largeTitle)
-                    .environment(\.calendar, calendar)
-                    .fontWeight(.semibold)
+            } else if abs(minute) > 0 {
+                    Text(relativeDate2, style: .relative)
+                        .font(.largeTitle)
+                        .environment(\.calendar, calendar)
+                        .fontWeight(.semibold)
+                    
+                
             } else if abs(second) >= 0 {
                 Text(relativeDate2, style: .timer)
                     .font(.largeTitle)
@@ -217,68 +244,6 @@ struct EventCardView2: View {
         }
     }
     
-    private var standardTimeView: some View {
-        VStack(alignment: .leading) {
-            let frequentType = eventVM.frequentType
-            let eventType = eventVM.eventType
-            let date =  CalendarViewModel.getDates(target: eventVM.selectedDate, eventType: eventType, frequentType: frequentType , dayOfWeek: eventVM.dayOfWeek ).fixedDate
-            let displayLang = eventVM.displayLang
-            let day = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType , dayOfWeek: eventVM.dayOfWeek ).days
-            let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType, dayOfWeek: eventVM.dayOfWeek).hours
-            let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType, dayOfWeek: eventVM.dayOfWeek).minutes
-            let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType, dayOfWeek: eventVM.dayOfWeek).seconds
-            let calendar = getCalendar()
-            let dateComponent = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date, to: Date())
-            
-            let relative1 = calendar.date(byAdding: .day, value: dateComponent.day!, to: date)!
-            let relative2 = calendar.date(byAdding: .month, value: dateComponent.month!, to: relative1)!
-            let relative3 = calendar.date(byAdding: .year, value: dateComponent.year!, to: relative2)!
-            
-            /// カウントダウンが終了した場合
-            if second < 0 && eventType == .countdown && frequentType == .never {
-                
-                HStackLayout(alignment: .center) {
-                    Text(displayLang.finishText)
-                        .fontWeight(.bold)
-                    Image(systemName: "checkmark.circle.fill")
-                }
-                
-                
-                Text(CalendarViewModel.getFormattedDate(eventVM.selectedDate))
-                    .padding(.top, 1)
-                
-                
-            } else if abs(day) > 0 {
-                
-                Text(day.description + displayLang.dateText.day)
-                    .font(.system(.largeTitle))
-                    .fontWeight(.bold)
-                
-                Text(relative3, style: .relative)
-                    .environment(\.calendar, calendar)
-            } else if abs(hour) > 0 {
-                let relative4 = calendar.date(byAdding: .hour, value: dateComponent.hour!, to: relative3)!
-                Text(hour.description + displayLang.dateText.hour)
-                    .font(.system(.title))
-                    .fontWeight(.semibold)
-                
-                Text(relative4, style: .relative)
-                    .environment(\.calendar, calendar)
-            } else if abs(minute) > 0 {
-                Text(relative3, style: .relative)
-                    .font(.system(.title2))
-                    .fontWeight(.semibold)
-                    .environment(\.calendar, calendar)
-            } else if second >= 0 {
-                Text(relative3, style: .timer)
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-            } else if second < 0 {
-                Text("0...")
-            }
-        }
-    }
-    
     private var standardView: some View {
         ZStack {
             
@@ -297,7 +262,7 @@ struct EventCardView2: View {
                     .font(.system(size: 13))
                     .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                 Spacer()
-                standardTimeView2
+                TimeView2
 
             }
             .foregroundColor(eventVM.textColor.color)
@@ -350,13 +315,6 @@ struct EventCardView2: View {
             let eventType = eventVM.eventType
             let displayLang = eventVM.displayLang
             
-            
-            let day = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).days
-            let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
-            let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
-            let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
-            
-            
             ZStack {
                 if eventVM.backgroundColor == .none, let image = eventVM.image {
                     Image(uiImage: image)
@@ -380,7 +338,12 @@ struct EventCardView2: View {
                         let _ = print("Progress:\(progress)")
                         Circle()
                             .stroke(
-                                Color.pink.opacity(0.5),
+                                Color.white.opacity(0.5),
+                                lineWidth: 10
+                            )
+                        Circle()
+                            .stroke(
+                                Color.pink.opacity(0.3),
                                 lineWidth: 10
                             )
                         Circle()
@@ -391,23 +354,28 @@ struct EventCardView2: View {
                             )
                         
                         VStack {
-                            if second < 0 && eventType == .countdown && frequentType == .never {
+                            if currentDate > eventVM.selectedDate && eventType == .countdown && frequentType == .never {
                                 Text(displayLang.finishText)
-                                
+                                    .fontWeight(.semibold)
                                 Image(systemName: "checkmark.circle.fill")
                             } else {
-                                Text("\(day)")
-                                    .font(.system(size: 30))
-                                    .fontWeight(.bold)
-                                Text(displayLang.dateText.day)
+                                TimeView2
                             }
                         }
                         .rotationEffect(.degrees(90))
-                        .foregroundColor(eventVM.textColor.color)
                     }
                     .frame(width: width/5)
                     .rotationEffect(.degrees(-90))
+                    
+                    if currentDate > eventVM.selectedDate && eventType == .countdown && frequentType == .never {
+                        Text(CalendarViewModel.getFormattedDate(eventVM.selectedDate))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .padding(.horizontal)
+                            
+                    }
                 }
+                .foregroundStyle(eventVM.textColor.color)
                 .widgetFrame()
                 
             }
@@ -426,7 +394,8 @@ struct EventCardView2: View {
             } else {
                 Rectangle()
                     .foregroundStyle(eventVM.backgroundColor.color ?? .white)
-                    .frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height*3/4)
+                    .widgetFrame()
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             }
             
             VStack(spacing: 0) {
@@ -435,9 +404,6 @@ struct EventCardView2: View {
                 let eventType = eventVM.eventType
                 let displayLang = eventVM.displayLang
                 
-                let day = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).days
-                let hour = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).hours
-                let minute = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).minutes
                 let second = CalendarViewModel.getDates(target: date, eventType: eventType, frequentType: frequentType).seconds
                 
                 
@@ -455,42 +421,46 @@ struct EventCardView2: View {
                 }
                 Spacer()
                 
+                TimeView2
                 
-                    
-                        
-                VStack {
-                    if second < 0 && eventType == .countdown && frequentType == .never {
-                        Text(displayLang.finishText)
-                        
-                        Image(systemName: "checkmark.circle.fill")
-                    } else {
-                        Text("\(day)")
-                            .font(.system(size: 50))
-                            .fontWeight(.bold)
-                        Text(displayLang.dateText.day)
-                            .font(.system(size: 20))
-                    }
-                }
                 Spacer()
             }
             .widgetFrame()
             .foregroundColor(eventVM.textColor.color)
             .cornerRadius(cornerRadius)
             .compositingGroup()
-            .shadow(radius: 3, x:3, y:5)
         }
     }
 }
 
 struct EventCardView2_Previews: PreviewProvider {
 //    var event = EventCardViewModel.defaultStatus
-    static var previews: some View {
-        
+    
+    private static func getviewmodel(style: EventDisplayStyle)-> EventCardViewModel2{
         let event = EventCardViewModel.defaultStatus
         let vm = EventCardViewModel2(event: event)
-        EventCardView2(event: event, eventVM: vm)
-        EventCardView2(event: event, eventVM: vm, displayStyle: .circle)
-        EventCardView2(event: event, eventVM: vm, displayStyle: .calendar)
+        switch style {
+        case .standard:
+            vm.style = .standard
+        case .circle:
+            vm.style = .circle
+            
+        case .calendar:
+            vm.style = .calendar
+            
+        }
+        return vm
+    }
+    
+    static var previews: some View {
+        
+        let event1 = EventCardViewModel.defaultStatus
+        let vm = getviewmodel(style: .standard)
+        EventCardView2(event: event1, eventVM: vm)
+        let vm2 = getviewmodel(style: .circle)
+        EventCardView2(event: event1, eventVM: vm2)
+        let vm3 = getviewmodel(style: .calendar)
+        EventCardView2(event: event1, eventVM: vm3)
         
         
     }

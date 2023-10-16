@@ -232,9 +232,11 @@ struct MainView: View {
                     
                 Spacer()
                 HStack {
-                    let grade = RealmModel.user.gradeText
+                    /// FIXME
+                    let grade = isPurchased ? "Super" : "ノーマル"
+//                    let grade = RealmModel.user.gradeText
                     Text("Status:" + grade)
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(isPurchased ? .yellow : .gray)
                         .font(.system(size: 12, weight: .bold))
                 }
             }
