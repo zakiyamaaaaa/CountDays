@@ -319,7 +319,12 @@ class ShareActivityItemSource: NSObject, UIActivityItemSource {
 struct SettingView_Previews: PreviewProvider {
     @StateObject static var store = Store()
     static var previews: some View {
-        SettingView()
-            .environmentObject(store)
+        ForEach(Global.localizationIds, id: \.self) { id in
+            SettingView()
+                .environmentObject(store)
+                .previewDisplayName("Locale- \(id)")
+                .environment(\.locale, .init(identifier: id))
+        }
+        
     }
 }
