@@ -205,7 +205,7 @@ struct MainView: View {
             
             #if DEBUG
             Text("デバッグモード")
-            Text(isPurchased.description)
+            Text("課金状態：" + isPurchased.description)
 
 //            Text("Launch Time:\(counter)")
 //            Button {
@@ -227,18 +227,20 @@ struct MainView: View {
     private var headerView: some View {
         HStack {
             VStack(alignment: .listRowSeparatorLeading) {
-                Text(greetingString())
+                Text(greetingText)
                     .font(.system(size: 35,weight: .bold))
                     
                 Spacer()
                 HStack {
                     /// FIXME
-                    let grade = isPurchased ? "Super" : "ノーマル"
-//                    let grade = RealmModel.user.gradeText
-                    Text("Status:" + grade)
+                    let grade: LocalizedStringKey = isPurchased ? "Super" : "ノーマル"
+                    Text("Status:")
+                        .foregroundStyle(isPurchased ? .yellow : .white)
+                    Text(grade)
                         .foregroundStyle(isPurchased ? .yellow : .gray)
-                        .font(.system(size: 12, weight: .bold))
+                        
                 }
+                .font(.system(size: 12, weight: .bold))
             }
             .padding()
             
@@ -260,12 +262,12 @@ struct MainView: View {
         .background(ColorUtility.primary)
     }
     
-    private func greetingString() -> String {
+    private var greetingText: LocalizedStringKey {
         if counter == 1 {
             return "はじめまして"
         }
         
-        let greetingList = ["ようこそ", "こんにちは", "調子どう？", "Thanks", "🫶"]
+        let greetingList: [LocalizedStringKey] = ["ようこそ", "こんにちは", "調子どう？", "Thanks", "🫶"]
         return greetingList.shuffled().first!
     }
 }
@@ -282,8 +284,12 @@ class Todo: Object, ObjectKeyIdentifiable {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
-        Rectangle()
-            .foregroundStyle(.black.gradient)
+        
+        ForEach(Global.localizationIds, id: \.self) { id in
+            MainView()
+                .previewDisplayName("Locale- \(id)")
+                .environment(\.locale, .init(identifier: id))
+        }
+        
     }
 }

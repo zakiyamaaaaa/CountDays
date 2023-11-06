@@ -20,15 +20,28 @@ struct UpgradeView: View {
     @State private var shadowRadius: CGFloat = 5
     
     private var decorateText: some View {
+        /// :- FIXME
         let str = "アップグレードをすると次の機能が使えるようになります"
-        var attributedString = AttributedString(str)
+        let strl = LocalizedStringResource(stringLiteral: str)
+        var attributedString = AttributedString(localized: strl)
+        
         attributedString.font = .system(size: 30, weight: .bold)
         attributedString.foregroundColor = .white
         
-       if let range = attributedString.range(of: "アップグレード") {
-           attributedString[range].foregroundColor = .yellow
-           attributedString[range].font = .system(size: 30, weight: .bold)
-       }
+        let upgradeText: [(word: String, locale: String)] = [
+            (word: "Upgrading", locale:"en"),
+            (word: "アップグレード", locale:"ja"),
+            (word: "La actualización", locale:"es"),
+            (word: "升级后", locale:"zh"),
+        ]
+        
+        upgradeText.forEach { w,l in
+            if let range = attributedString.range(of: w, locale: Locale(identifier: l)) {
+                attributedString[range].foregroundColor = .yellow
+                attributedString[range].font = .system(size: 30, weight: .bold)
+            }
+        }
+        
        return Text(attributedString)
     }
     
@@ -221,8 +234,12 @@ struct UpgradeView: View {
 struct UpgradeView_Previews: PreviewProvider {
     @StateObject static var store = Store()
     static var previews: some View {
-        UpgradeView()
-            .environmentObject(store)
+        ForEach(Global.localizationIds, id: \.self) { id in
+            UpgradeView()
+                .environmentObject(store)
+                .previewDisplayName("Locale- \(id)")
+                .environment(\.locale, .init(identifier: id))
+        }
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HeaderView: View {
-    var title: String
+    var title: LocalizedStringKey
     
     var body: some View {
         VStack(spacing: 0) {

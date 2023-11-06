@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct Grobal {
+struct Global {
     static let appUrl = "https://itunes.apple.com/jp/app/id6469093293?mt=8"
+    static let localizationIds = ["ja", "en", "zh", "es"]
 }

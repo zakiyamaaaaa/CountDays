@@ -213,11 +213,11 @@ struct SettingView: View {
                 /// TODO:- ストアのURLができたら入れ替え
                 let text = "カウントアプリ：CountDays"
                 
-                ShareSheet(photo: nil, text: text, urlString: Grobal.appUrl)
+                ShareSheet(photo: nil, text: text, urlString: Global.appUrl)
             })
             .sheet(isPresented: $showQRCodeShare, content: {
                 let image = UIImage(named: "QRCodeSample")!
-                ShareSheet(photo: image, text: "QRCODE Share", urlString: Grobal.appUrl)
+                ShareSheet(photo: image, text: "QRCODE Share", urlString: Global.appUrl)
             })
             .padding(.top, 10)
             .foregroundColor(.white)
