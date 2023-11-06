@@ -1,0 +1,2146 @@
+{
+  "sourceLanguage" : "ja",
+  "strings" : {
+    "" : {
+
+    },
+    "%@" : {
+
+    },
+    "%@日" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@day"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Día"
+          }
+        }
+      }
+    },
+    "%@月" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@month"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Mes"
+          }
+        }
+      }
+    },
+    "%lld" : {
+
+    },
+    "%lld日" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lldday"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lldDía"
+          }
+        }
+      }
+    },
+    "+" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+"
+          }
+        }
+      }
+    },
+    "✗" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "✗"
+          }
+        }
+      }
+    },
+    "🍩リング" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🍩Ring"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🍩ring"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🍩环"
+          }
+        }
+      }
+    },
+    "👍スタンダード" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "👍Standard"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "👍Estándar."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "👍标准"
+          }
+        }
+      }
+    },
+    "📅カレンダー" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "📅Calendar"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "📅Calendario."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "📅日历"
+          }
+        }
+      }
+    },
+    "🫶" : {
+
+    },
+    "１ヶ月で１周" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 lap in 1 month"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 ronda en 1 mes"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 个月 1 轮"
+          }
+        }
+      }
+    },
+    "１年で１周" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 lap in 1 year"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un año, una ronda."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1年1轮"
+          }
+        }
+      }
+    },
+    "１週間で１周" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 lap in 1 week"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 vuelta en 1 semana"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 周 1 圈"
+          }
+        }
+      }
+    },
+    "２個以上のイベントを作成するにはアップグレードが必要です" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upgrade is required to create more than 2 events"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La actualización es necesaria para crear más de dos eventos"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要升级才能创建两个以上的事件"
+          }
+        }
+      }
+    },
+    "１００日で１周" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 lap in 100days"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 ronda en 100 días"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "100 天 1 轮"
+          }
+        }
+      }
+    },
+    "Aa" : {
+
+    },
+    "App created by Shoichi Yamzaki" : {
+
+    },
+    "CountDays" : {
+
+    },
+    "Crop Image Picker" : {
+
+    },
+    "Dog Name" : {
+
+    },
+    "Get started" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "hoge" : {
+
+    },
+    "Mサイズ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "M size"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tamaño medio"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "M尺寸"
+          }
+        }
+      }
+    },
+    "No Image" : {
+
+    },
+    "OK" : {
+
+    },
+    "Owner Name" : {
+
+    },
+    "QRコード" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QR code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código QR"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QR 码"
+          }
+        }
+      }
+    },
+    "Status:" : {
+
+    },
+    "Super" : {
+
+    },
+    "Sサイズ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S size"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Talla S"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S 尺寸"
+          }
+        }
+      }
+    },
+    "Thanks" : {
+
+    },
+    "the text below" : {
+
+    },
+    "アップグレード" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upgrade"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "actualizar"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "升级"
+          }
+        }
+      }
+    },
+    "アップグレードが必要です" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upgrade required"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualización necesaria"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要升级"
+          }
+        }
+      }
+    },
+    "アップデートによる追加機能を先行して利用することができます" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advance access to additional features through updates"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las funciones adicionales a través de actualizaciones se pueden utilizar con antelación"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可通过更新提前使用附加功能"
+          }
+        }
+      }
+    },
+    "あなただけのオリジナル背景を設定できます" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can set your own original background."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puedes establecer tu propio fondo original."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您可以设置自己的原始背景"
+          }
+        }
+      }
+    },
+    "あなたの好きなデザインを選ぶことができます" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can choose any design you like"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puedes elegir el diseño que quieras"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您可以选择任何喜欢的设计"
+          }
+        }
+      }
+    },
+    "アプリでイベントを設定するとウィジェットに反映されます" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When an event is set in the application, it is reflected in the widget"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando se establece un evento en la aplicación, se refleja en el widget"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在应用程序中设置事件时，该事件会反映在 widget 中"
+          }
+        }
+      }
+    },
+    "アプリを共有する" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sharing the app"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir la aplicación"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分享应用程序"
+          }
+        }
+      }
+    },
+    "イベント" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Event"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Evento"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "事件"
+          }
+        }
+      }
+    },
+    "イベントタイプ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Event type"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tipo de evento"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "事件类型"
+          }
+        }
+      }
+    },
+    "イベントを共有" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sharing the event"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comparte el evento"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分享事件"
+          }
+        }
+      }
+    },
+    "イベント作成日からゴールまでを１周" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One lap from the date of event creation to the goal"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una vuelta desde la fecha de creación del evento hasta la línea de meta"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从赛事设立之日起至终点线止的一圈"
+          }
+        }
+      }
+    },
+    "イベント名を入力" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter event name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduzca el nombre del evento"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "输入事件名称"
+          }
+        }
+      }
+    },
+    "イベント表示設定" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Event Display Settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración de la visualización de eventos"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "事件显示设置"
+          }
+        }
+      }
+    },
+    "ウィジェット" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widget"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "widget"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "小装饰"
+          }
+        }
+      }
+    },
+    "お問い合わせ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact Us"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "consulta"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "询问"
+          }
+        }
+      }
+    },
+    "カウントアップ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Count up"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cuenta atrás"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "计数"
+          }
+        }
+      }
+    },
+    "カウントダウン" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Count down"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cuenta regresiva"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "倒数"
+          }
+        }
+      }
+    },
+    "キャンセル" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cancelar"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
+    "このイベントを消去しますか？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to erase this event?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Quieres borrar este evento?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您想删除此事件吗？"
+          }
+        }
+      }
+    },
+    "このスタイルはロック\nされています" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This style is locked"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este estilo está bloqueado"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此样式已锁定"
+          }
+        }
+      }
+    },
+    "このスタイルを利用するにはアップグレードが必要です" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upgrade is required to use this style"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se requiere una actualización para utilizar este estilo"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用此样式需要升级"
+          }
+        }
+      }
+    },
+    "このプライバシーポリシー（以下、「本ポリシー」といいます。）は、zwork（以下、「当社」といいます。）が提供するアプリケーション（以下、「アプリ」といいます。）におけるユーザーの個人情報の収集、使用、共有に関する方針を定めるものです。アプリをご利用いただく際には、本ポリシーに同意いただいたものとみなします。\n\n1. 収集する情報\nアプリを利用する際、当社は以下の情報を収集することがあります。\n       - ユーザーのアプリ利用時間\n\n2. 情報の使用\n収集した情報は、以下の目的で使用されることがあります。\n       - アプリの改善、お知らせなど\n\n3. 情報の共有\n収集した情報は、法的要件に従った場合や以下のケースを除いて、第三者と共有されることはありません。\n・人の生命，身体または財産の保護のために必要がある場合であって，本人の同意を得ることが困難であるとき\n・公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合であって，本人の同意を得ることが困難であるとき\n・国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって，本人の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがあるとき\n\n4. ユーザーの権利\nユーザーは、自身の個人情報へのアクセス、修正、削除を要求する権利を有します。詳細はアプリ内の設定で確認してください。\n\n5. セキュリティ\n当社は、適切なセキュリティ対策を講じ、ユーザーの個人情報の保護に努めます。\n\n6. クッキーとトラッキング技術\nアプリ内でクッキーなどのトラッキング技術を使用する場合、その詳細についてはアプリ内でご確認ください。\n\n7. 変更通知\n本ポリシーは変更される場合があり、変更後のポリシーはアプリ内で通知されます。\n\n8. 連絡先\nプライバシーポリシーに関するお問い合わせは、以下の連絡先までご連絡ください。\n           zwork.official.app@gmail.com\n\n以上\n" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This privacy policy (hereinafter referred to as the \"Policy\") is published by zwork (hereinafter referred to as the \"Company\"). This privacy policy (\"Policy\") applies to applications (\"Apps\") provided by zwork (\"Company\"). This Privacy Policy (\"Policy\") sets forth the policy regarding the collection, use, and sharing of users' personal information in applications (\"Apps\") This Privacy Policy (\"Policy\") sets forth the policy regarding the collection, use, and sharing of users' personal information in the applications (\"Apps\") provided by zwork (\"Company\"). By using the Application, you are deemed to have agreed to this policy.\n\n1. information to be collected\nWhen using the App, we may collect the following information.\n       - Time the user spends using the app\n\n2. use of information\nWe may use the collected information for the following purposes\n       - App improvements, notifications, etc. 3.\n\n3. information sharing\nInformation collected will not be shared with third parties except in accordance with legal requirements or in the following cases: - When it is necessary for the protection of the life, body, or property of an individual.\nWhen it is necessary to protect the life, body, or property of an individual and it is difficult to obtain the consent of the individual.\nCases in which the provision of personal information is especially necessary for improving public health or promoting the sound growth of children, and in which it is difficult to obtain the consent of the person concerned\nWhen it is necessary to cooperate with a national agency, a local government, or an individual or entity entrusted by either a national agency or local government to execute affairs prescribed by law, and obtaining the consent of the individual is likely to impede the execution of such affairs.\n\n4. user's rights\nThe user has the right to request access to, correction of, or deletion of his/her personal information. For details, please check the settings in the application.\n\n5. security\nWe will take appropriate security measures to protect the user's personal information.\n\n6. cookies and tracking technology\nIf we use cookies or other tracking technologies within the app, please review the details within the app.\n\n7. notification of changes\nThis policy is subject to change, and you will be notified of any changes within the app.\n\n8. contact information\nIf you have any questions regarding our privacy policy, please contact us at\n           zwork.official.app@gmail.com\n\nRegards"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta política de privacidad (en lo sucesivo, la \"Política\") es publicada por zwork (en lo sucesivo, la \"Compañía\"). Esta política de privacidad (\"Política\") se aplica a las aplicaciones (\"Apps\") proporcionadas por zwork (\"Compañía\"). Esta Política de Privacidad (\"Política\") establece la política relativa a la recogida, uso y compartición de la información personal de los usuarios en las aplicaciones (\"Apps\") Esta Política de Privacidad (\"Política\") establece la política relativa a la recogida, uso y compartición de la información personal de los usuarios en las aplicaciones (\"Apps\") proporcionadas por zwork (\"Empresa\"). Al utilizar la Aplicación, se considera que usted está de acuerdo con esta política.\n\n1. información que se recogerá\nAl utilizar la App, podemos recopilar la siguiente información.\n       - Tiempo que el usuario pasa utilizando la aplicación\n\n2. uso de la información\nPodemos utilizar la información recopilada para los siguientes fines\n       - Mejoras de la App, notificaciones, etc.\n\n3. intercambio de información\nLa información recopilada no se compartirá con terceros, excepto de conformidad con los requisitos legales o en los siguientes casos: - Cuando sea necesario para proteger la vida, el cuerpo o la propiedad de una persona.\nCuando sea necesario proteger la vida, la integridad física o los bienes de una persona y sea difícil obtener su consentimiento.\nCasos en los que el suministro de información personal es especialmente necesario para mejorar la salud pública o promover el crecimiento sano de los niños, y en los que es difícil obtener el consentimiento de la persona afectada.\nCuando sea necesario cooperar con un organismo nacional, un gobierno local o una persona o entidad a la que un organismo nacional o un gobierno local haya encomendado la ejecución de asuntos prescritos por la ley, y sea probable que obtener el consentimiento de la persona impida la ejecución de dichos asuntos.\n\n4. derechos del usuario\nEl usuario tiene derecho a solicitar el acceso, la rectificación o la supresión de sus datos personales. Para más detalles, consulte la configuración de la aplicación.\n\n5. seguridad\nTomaremos las medidas de seguridad adecuadas para proteger la información personal del usuario.\n\n6. cookies y tecnologías de seguimiento\nSi utilizamos cookies u otras tecnologías de seguimiento dentro de la aplicación, por favor revise los detalles dentro de la aplicación.\n\n7. notificación de cambios\nEsta política está sujeta a cambios, y se le notificará cualquier cambio dentro de la aplicación.\n\n8. información de contacto\nSi tiene alguna pregunta rega\n\nTraducción realizada con la versión gratuita del traductor www.DeepL.com/Translator"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本隐私权政策（以下简称 \"本政策） 本隐私政策（以下简称 \"政策\"）适用于zwork（以下简称 \"公司\"）提供的应用程序（以下简称 \"应用程序\"）。 本隐私政策（以下简称 \"政策\"）规定了在zwork提供的应用程序（以下简称 \"应用程序\"）中收集、使用和共享用户个人信息的政策。 本隐私政策（以下简称 \"政策\"）规定了zwork（以下简称 \"公司\"）在其提供的应用程序（以下简称 \"应用程序\"）中收集、使用和共享用户个人信息的政策。 使用应用程序即视为您已同意本政策。\n\n1.收集的信息\n使用App时，我们可能会收集以下信息\n       - 用户使用App的时间\n\n2. 信息的使用\n收集的信息可能用于以下目的。\n       - 应用程序的改进、通知等。\n\n3. 共享信息\n除法律规定或以下情况外，不会与第三方共享所收集的信息\n为保护个人生命、身体或财产所必需，且难以获得当事人同意时。\n为改善公共卫生或促进儿童健康成长而特别需要，但难以征得当事人同意时。\n有必要与国家机关、地方机关或受其委托的人员合作执行法律规定的事务，而征得当事人同意有可能妨碍执行有关事务时。\n\n4. 用户的权利\n用户有权要求查阅、修改和删除其个人资料。 有关详细信息，请参阅应用程序中的设置。\n\n5. 安全\n我们采取适当的安全措施保护用户的个人数据。\n\n6. Cookie 和跟踪技术\n如果我们在应用程序中使用 cookie 或其他跟踪技术，请在应用程序中查看详情。\n\n7. 变更通知\n本政策可能会发生变更，您将在App中收到任何政策变更通知。\n\n8. 联系信息\n如果您对本隐私政策有任何疑问，请通过以下方式联系我们。\n           zwork.official.app@gmail.com\n\n以上。\n"
+          }
+        }
+      }
+    },
+    "この利用規約（以下、「本規約」といいます。）は、zwork（以下、「当社」といいます。）が提供するアプリケーション（以下、「アプリ」といいます。）の利用に関する条件を定めるものです。アプリをご利用いただく際には、本規約に同意いただいたものとみなします。\n\n\n1. サービスの提供\n当社は、アプリを通じてユーザー体験を提供します。ユーザーは、本規約に従い、アプリを利用できます。\n\n2. 利用規約の変更\n    当社は、必要に応じて本規約を変更することがあります。変更後の利用規約は、アプリ内での表示をもって通知された時点で効力を生じるものとします。\n\n3. ユーザーの責任\n    ユーザーは、正確かつ適切な情報を提供し、アプリの利用に際して法律および規制に遵守する責任があります。\n\n4. プライバシー\n    ユーザーの個人情報の収集、使用、共有については、当社のプライバシーポリシーに従います。\n\n5. 知的財産権\n    アプリに関連する知的財産権は、当社またはライセンサーに帰属します。ユーザーは、無断でこれらの知的財産権を使用、複製、変更することはできません。\n\n6. 免責事項\n    アプリの利用に関する一切のリスクは、ユーザーが負うものとし、当社はそれに関連する損害に対して責任を負いません。\n\n7. 法的権限\n    本規約に関する紛争については、当社の所在地を管轄する裁判所を専属的合意管轄とします。\n\n以上" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These terms of use (hereinafter referred to as \"Terms of Use\") shall apply to all users of zwork (hereinafter referred to as \"zwork\"). This Terms of Use (hereinafter referred to as the \"Terms\") applies to applications (hereinafter referred to as \"Apps\") provided by zwork (hereinafter referred to as \"Company\"). (hereinafter referred to as \"the Company\"), sets forth the terms and conditions for the use of applications (hereinafter referred to as \"apps\") provided by zwork (hereinafter referred to as the \"Company\") provides the terms and conditions for the use of applications (hereinafter referred to as the \"Application\"). By using the Application, you are deemed to have agreed to these Terms of Use.\n\n\n1. provision of services\nWe will provide a user experience through the Application. Users may use the Application in accordance with these Terms of Use.\n\nChanges to the Terms of Use\n    MUTOH HOLDINGS reserves the right to change the Terms of Service as necessary. The revised Terms of Use shall become effective upon notification by displaying the revised Terms of Use in the application. 3.\n\n3. user's responsibility\n    Users are responsible for providing accurate and appropriate information and for complying with laws and regulations when using the application.\n\n4. privacy\n    The collection, use, and sharing of User's personal information is governed by our Privacy Policy.\n\n5. intellectual property rights\n    Intellectual property rights related to the App belong to us or our licensors. Users may not use, reproduce, or modify these intellectual property rights without permission.\n\n6. disclaimer\n    The user assumes all risks related to the use of the application, and we are not responsible for any damages related to it.\n\n7. legal authority\n    Any disputes related to this agreement shall be subject to the exclusive jurisdiction of the court having jurisdiction over the location of the Company.\n\nRegards."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estas condiciones de uso (en lo sucesivo, \"Condiciones de Uso\") se aplicarán a todos los usuarios de zwork (en lo sucesivo, \"zwork\"). Estas Condiciones de Uso (en lo sucesivo, las \"Condiciones\") se aplican a las aplicaciones (en lo sucesivo, las \"Apps\") proporcionadas por zwork (en lo sucesivo, la \"Compañía\"). (en lo sucesivo, \"la Empresa\"), establece los términos y condiciones para el uso de aplicaciones (en lo sucesivo, \"Apps\") proporcionadas por zwork (en lo sucesivo, \"la Empresa\") establece los términos y condiciones para el uso de aplicaciones (en lo sucesivo, \"la Aplicación\"). Al utilizar la Aplicación, se considera que usted está de acuerdo con estas Condiciones de Uso.\n\n\n1. prestación de servicios\nProporcionaremos una experiencia de usuario a través de la Aplicación. Los usuarios podrán utilizar la Aplicación de conformidad con las presentes Condiciones de Uso.\n\n2. Modificaciones de las Condiciones de Uso\n    MUTOH HOLDINGS se reserva el derecho de modificar las Condiciones de Uso según sea necesario. Las Condiciones de Uso revisadas entrarán en vigor en el momento de su notificación mediante la visualización de las Condiciones de Uso revisadas en la aplicación. 3.\n\n3. responsabilidad del usuario\n    Los usuarios son responsables de proporcionar información precisa y adecuada y de cumplir con las leyes y reglamentos al utilizar la aplicación.\n\n4. derechos del usuario\nEl usuario tiene derecho a solicitar el acceso, la rectificación o la supresión de sus datos personales. Para más detalles, consulte la configuración de la aplicación.\n\n5. seguridad\nTomaremos las medidas de seguridad adecuadas para proteger la información personal del usuario.\n\n6. cookies y tecnologías de seguimiento\nSi utilizamos cookies u otras tecnologías de seguimiento dentro de la aplicación, por favor revise los detalles dentro de la aplicación.\n\n7. notificación de cambios\nEsta política está sujeta a cambios, y se le notificará cualquier cambio dentro de la aplicación.\n\n8. información de contacto\nSi tiene alguna pregunta sobre nuestra política de privacidad, póngase en contacto con nosotros en\n           zwork.official.app@gmail.com\n\nSaludos"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本使用条款和条件（以下简称 \"条款和条件） 本使用条款（以下简称 \"条款\"）适用于使用 zwork（以下简称 \"公司\"）提供的应用程序（以下简称 \"应用程序\"）。 (以下简称 \"公司\"）提供的应用程序（以下简称 \"应用程序\"）的使用条款和条件。 使用条款（以下简称 \"条款\"）规定了使用zwork（以下简称 \"公司\"）提供的应用程序的条件。 当您使用应用程序时，即视为您已同意本条款。\n\n\n1. 服务的提供\n公司通过App提供用户体验。 用户可根据本条款与条件使用App。\n\n2.使用条款的变更\n    公司可在必要时变更使用条款。 修改后的使用条款应在App中显示通知时生效。\n\n3. 用户的责任\n    用户有责任提供准确、适当的信息，并在使用App时遵守法律法规。\n\n4. 隐私\n    用户个人信息的收集、使用和共享应遵守我们的隐私政策。\n\n5. 知识产权\n    与App有关的知识产权属于我们或我们的许可人。 未经许可，用户不得使用、复制或修改这些知识产权。\n\n6.免责声明。\n    用户承担与使用应用程序相关的所有风险，本公司不承担与此相关的任何损害赔偿责任。\n\n7. 法律依据\n    与本条款和条件相关的任何争议均受对本公司所在地有管辖权的法院的专属管辖。\n\n以上。\n\n通过www.DeepL.com/Translator（免费版）翻译"
+          }
+        }
+      }
+    },
+    "こんにちは" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hello"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hola!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你好"
+          }
+        }
+      }
+    },
+    "シェア方法" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to share"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cómo compartir"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如何分享"
+          }
+        }
+      }
+    },
+    "すべてのイベントを\n削除しますか" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to delete all events"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Quieres borrar todos los eventos?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您想删除所有事件吗？"
+          }
+        }
+      }
+    },
+    "すべてのイベントを削除" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete all events"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar todos los eventos"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除所有事件"
+          }
+        }
+      }
+    },
+    "テキスト" : {
+
+    },
+    "デバッグモード" : {
+
+    },
+    "ノーマル" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "普通"
+          }
+        }
+      }
+    },
+    "はじめまして" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nice to see you!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encantado de conocerte"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "幸会"
+          }
+        }
+      }
+    },
+    "プライバシーポリシー" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy policy"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de privacidad"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隐私政策"
+          }
+        }
+      }
+    },
+    "ホーム画面にウィジェットを追加できます" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widgets can be added to the home screen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se pueden añadir widgets a la pantalla de inicio"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可在主屏幕上添加小工具"
+          }
+        }
+      }
+    },
+    "ぼかし🌫️" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blur 🌫️"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blurred🌫️"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模糊🌫️"
+          }
+        }
+      }
+    },
+    "ようこそ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Bienvenido!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "欢迎！"
+          }
+        }
+      }
+    },
+    "リピート" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repeat"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "repita"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复"
+          }
+        }
+      }
+    },
+    "一度消去すると元に戻せません" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Once erased, it cannot be restored."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una vez borrado, no se puede deshacer."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一旦擦除，就无法挽回"
+          }
+        }
+      }
+    },
+    "作成できるイベント数の上限が１個から無制限になります" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The maximum number of events that can be created will be unlimited instead of one."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El número máximo de eventos que se pueden crear va de uno a ilimitado."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可创建事件的最大数量从一个到无限多个不等"
+          }
+        }
+      }
+    },
+    "共有+プライバシー" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share + Privacy"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir y privacidad"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "共享+隐私"
+          }
+        }
+      }
+    },
+    "利用規約" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Term of use"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "términos y condiciones (por ejemplo, de uso)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "条款和条件"
+          }
+        }
+      }
+    },
+    "削除" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "supresión"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除"
+          }
+        }
+      }
+    },
+    "削除する" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除"
+          }
+        }
+      }
+    },
+    "削除を確定" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm to delete"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirme la eliminación"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认删除"
+          }
+        }
+      }
+    },
+    "変更する" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambia"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "変更"
+          }
+        }
+      }
+    },
+    "好きなだけイベントを作成可能に！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allows creation of as many events as desired!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Permite crear tantos eventos como se desee!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "允许创建任意数量的事件！"
+          }
+        }
+      }
+    },
+    "明るさ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brightness"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brillo"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "亮度 "
+          }
+        }
+      }
+    },
+    "明るさ💡" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brightness"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brillo 💡"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "亮度 💡"
+          }
+        }
+      }
+    },
+    "時刻" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tiempo"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "时间"
+          }
+        }
+      }
+    },
+    "時間と分を表示" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Display hours and minutes"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visualización de horas y minutos"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示小时和分钟"
+          }
+        }
+      }
+    },
+    "更新" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "actualización"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "更新"
+          }
+        }
+      }
+    },
+    "未来の日付を基準にカウントする場合、カウント日数がマイナスになっちゃうよ！！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you count based on a future date, the number of days counted will be negative!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si cuenta basándose en una fecha futura, el número de días contados será negativo."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果根据未来日期计算，则计算的天数将为负数！"
+          }
+        }
+      }
+    },
+    "様々な表示スタイルが選択可能に！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Various display styles can be selected!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se pueden seleccionar varios estilos de visualización."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可选择各种显示风格！"
+          }
+        }
+      }
+    },
+    "次へ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siguiente"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下一个"
+          }
+        }
+      }
+    },
+    "毎年" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every year"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos los años"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每年"
+          }
+        }
+      }
+    },
+    "毎年：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every year:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos los años:"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每年："
+          }
+        }
+      }
+    },
+    "毎月" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every month"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mensual"
+          }
+        }
+      }
+    },
+    "毎月：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every month:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mensual:"
+          }
+        }
+      }
+    },
+    "毎月のカウント日づけ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dates to be counted each month"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fechas a contar cada mes"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每月计数日期"
+          }
+        }
+      }
+    },
+    "毎週" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every week"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Semanal"
+          }
+        }
+      }
+    },
+    "毎週：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every week:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Semanal:"
+          }
+        }
+      }
+    },
+    "毎週のカウント曜日" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Days of the week to be counted each week"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Días de la semana que deben contarse cada semana"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每周计算星期"
+          }
+        }
+      }
+    },
+    "消去" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eliminación"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "消除"
+          }
+        }
+      }
+    },
+    "画像を使用するにはアップグレードが必要です🙇‍♂️" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upgrade is required to use the image: 🙇‍♂️"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se requiere una actualización para utilizar las imágenes: 🙇‍♂️"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用图片需要升级： 🙇‍♂️"
+          }
+        }
+      }
+    },
+    "画像を変更" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change image"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar imagen"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "更换图像"
+          }
+        }
+      }
+    },
+    "画像編集" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image Editing"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "edición de imágenes"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "图像编辑"
+          }
+        }
+      }
+    },
+    "画像設定にはアップグレードが必要です" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upgrade is required for image setup"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los ajustes de imagen requieren una actualización"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "图像设置需要升级。"
+          }
+        }
+      }
+    },
+    "登録" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Register"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inscripción"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "注册"
+          }
+        }
+      }
+    },
+    "終了" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finish"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "fin"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最后"
+          }
+        }
+      }
+    },
+    "終日イベント" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "all-day event"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "evento de un día de duración"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全天活动"
+          }
+        }
+      }
+    },
+    "編集" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "edición"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑"
+          }
+        }
+      }
+    },
+    "背景スタイル" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Background Style"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "estilo de fondo"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背景样式"
+          }
+        }
+      }
+    },
+    "背景に画像を設定可能に！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Images can be set as background!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permite establecer imágenes como fondo"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "允许将图像设置为背景！"
+          }
+        }
+      }
+    },
+    "複製" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplication"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "reproducción"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "複製"
+          }
+        }
+      }
+    },
+    "要素1" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Element 1"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elemento 1."
+          }
+        }
+      }
+    },
+    "要素2" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Element 2"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elemento 2."
+          }
+        }
+      }
+    },
+    "要素3" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Element 3"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elemento 3."
+          }
+        }
+      }
+    },
+    "設定" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setting"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "configuración"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置"
+          }
+        }
+      }
+    },
+    "詳細設定" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advance setting"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes detallados"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "详细设置"
+          }
+        }
+      }
+    },
+    "調子どう？" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How are you ?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cómo va todo?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "怎么样了？"
+          }
+        }
+      }
+    },
+    "購入" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchase"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "comprar"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "购买"
+          }
+        }
+      }
+    },
+    "購入を復元" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Purchase"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restaurar compra"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "恢复购买"
+          }
+        }
+      }
+    },
+    "購入記録がありません" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No record of purchase"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay registro de compra."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有购买记录"
+          }
+        }
+      }
+    },
+    "追加機能を先行招待！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Additional features are invited in advance!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se invita a participar en otras funciones con antelación."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "提前邀请其他活动！"
+          }
+        }
+      }
+    },
+    "通知" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notification"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "aviso"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

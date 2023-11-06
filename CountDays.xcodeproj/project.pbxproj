@@ -78,6 +78,7 @@
 		39905D7B2ABAF61A0019CEFB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39905D7A2ABAF61A0019CEFB /* Realm */; };
 		39905D7D2ABAF61A0019CEFB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39905D7C2ABAF61A0019CEFB /* RealmSwift */; };
 		39905D7F2ABAFC3B0019CEFB /* WidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6C2ABAF6020019CEFB /* WidgetExtension.swift */; };
+		39B02CF32AF8D3C200E99D05 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 39B02CF22AF8D3C200E99D05 /* Localizable.xcstrings */; };
 		39B665B12AD68ECD009E6A5D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA672AA5C0CB001AE0D7 /* Store.swift */; };
 		39B665B22AD68ECE009E6A5D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA672AA5C0CB001AE0D7 /* Store.swift */; };
 		39B665B42AD7E073009E6A5D /* Grobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B665B32AD7E073009E6A5D /* Grobal.swift */; };
@@ -239,6 +240,7 @@
 		39905D6E2ABAF6020019CEFB /* WidgetExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WidgetExtension.intentdefinition; sourceTree = "<group>"; };
 		39905D6F2ABAF6030019CEFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39905D712ABAF6030019CEFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39B02CF22AF8D3C200E99D05 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		39B665B32AD7E073009E6A5D /* Grobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grobal.swift; sourceTree = "<group>"; };
 		39EC20BD2ACA77C300BD081D /* TestView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView4.swift; sourceTree = "<group>"; };
 		39EC20BF2ACD3D0100BD081D /* TestView5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView5.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 		394A5C672A9712DF006A7232 = {
 			isa = PBXGroup;
 			children = (
+				39B02CF22AF8D3C200E99D05 /* Localizable.xcstrings */,
 				39905D552ABAF38B0019CEFB /* WidgetExtensionExtension.entitlements */,
 				39FFFA622AA07366001AE0D7 /* StorekitTest.storekit */,
 				394A5D052A9717D3006A7232 /* CountDaysWidgetExtension.entitlements */,
@@ -699,11 +702,14 @@
 			};
 			buildConfigurationList = 394A5C6B2A9712DF006A7232 /* Build configuration list for PBXProject "CountDays" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ja,
+				es,
+				"zh-Hans",
 			);
 			mainGroup = 394A5C672A9712DF006A7232;
 			packageReferences = (
@@ -731,6 +737,7 @@
 			files = (
 				394A5C7B2A9712E0006A7232 /* Preview Assets.xcassets in Resources */,
 				394A5C782A9712E0006A7232 /* Assets.xcassets in Resources */,
+				39B02CF32AF8D3C200E99D05 /* Localizable.xcstrings in Resources */,
 				39FFFA842AB19325001AE0D7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1257,6 +1264,7 @@
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1285,6 +1293,7 @@
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
