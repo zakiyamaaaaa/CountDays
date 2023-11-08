@@ -199,14 +199,16 @@ struct MainView: View {
             .sheet(isPresented: $isShowWelcomeView, content: {
                 WelcomeView()
             })
-            .background(ColorUtility.primary.gradient)
+            
             
             Spacer()
             
             #if DEBUG
-            Text("デバッグモード")
-            Text("課金状態：" + isPurchased.description)
-
+            VStack {
+                Text("デバッグモード")
+                Text("課金状態：" + isPurchased.description)
+            }
+            .background(ColorUtility.backgroundary)
 //            Text("Launch Time:\(counter)")
 //            Button {
 //                
@@ -219,7 +221,7 @@ struct MainView: View {
             #endif
             let _ = print("self: \(self)")
         }
-        .background(ColorUtility.backgroundary)
+        .background(ColorUtility.primary.gradient)
         .analyticsScreen(name: String(describing: Self.self),
                                class: String(describing: type(of: self)))
     }
