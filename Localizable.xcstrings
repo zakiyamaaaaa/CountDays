@@ -1230,6 +1230,9 @@
         }
       }
     },
+    "デバッグモード" : {
+
+    },
     "ノーマル" : {
       "extractionState" : "manual",
       "localizations" : {

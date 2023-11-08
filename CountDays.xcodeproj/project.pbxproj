@@ -74,11 +74,12 @@
 		39905D702ABAF6030019CEFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39905D6F2ABAF6030019CEFB /* Assets.xcassets */; };
 		39905D722ABAF6030019CEFB /* WidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6E2ABAF6020019CEFB /* WidgetExtension.intentdefinition */; };
 		39905D732ABAF6030019CEFB /* WidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6E2ABAF6020019CEFB /* WidgetExtension.intentdefinition */; };
-		39905D762ABAF6030019CEFB /* WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 39905D642ABAF6020019CEFB /* WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		39905D762ABAF6030019CEFB /* WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 39905D642ABAF6020019CEFB /* WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		39905D7B2ABAF61A0019CEFB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 39905D7A2ABAF61A0019CEFB /* Realm */; };
 		39905D7D2ABAF61A0019CEFB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39905D7C2ABAF61A0019CEFB /* RealmSwift */; };
 		39905D7F2ABAFC3B0019CEFB /* WidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6C2ABAF6020019CEFB /* WidgetExtension.swift */; };
 		39B02CF32AF8D3C200E99D05 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 39B02CF22AF8D3C200E99D05 /* Localizable.xcstrings */; };
+		39B02CF42AFBFA3700E99D05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39905D6F2ABAF6030019CEFB /* Assets.xcassets */; };
 		39B665B12AD68ECD009E6A5D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA672AA5C0CB001AE0D7 /* Store.swift */; };
 		39B665B22AD68ECE009E6A5D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA672AA5C0CB001AE0D7 /* Store.swift */; };
 		39B665B42AD7E073009E6A5D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B665B32AD7E073009E6A5D /* Global.swift */; };
@@ -174,7 +175,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				39905D762ABAF6030019CEFB /* WidgetExtensionExtension.appex in Embed Foundation Extensions */,
+				39905D762ABAF6030019CEFB /* WidgetExtension.appex in Embed Foundation Extensions */,
 				39560F262AC17B91000A623D /* CountDays-Intent.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -233,7 +234,7 @@
 		39560F4B2AC19FE5000A623D /* CountDays-Intent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CountDays-Intent.entitlements"; sourceTree = "<group>"; };
 		39905D342ABA9F6B0019CEFB /* WidgetConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConfig.swift; sourceTree = "<group>"; };
 		39905D552ABAF38B0019CEFB /* WidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
-		39905D642ABAF6020019CEFB /* WidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		39905D642ABAF6020019CEFB /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		39905D682ABAF6020019CEFB /* WidgetExtensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtensionBundle.swift; sourceTree = "<group>"; };
 		39905D6A2ABAF6020019CEFB /* WidgetExtensionLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtensionLiveActivity.swift; sourceTree = "<group>"; };
 		39905D6C2ABAF6020019CEFB /* WidgetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtension.swift; sourceTree = "<group>"; };
@@ -370,7 +371,7 @@
 				394A5C702A9712DF006A7232 /* CountDays.app */,
 				394A5C802A9712E0006A7232 /* CountDaysTests.xctest */,
 				394A5C8A2A9712E0006A7232 /* CountDaysUITests.xctest */,
-				39905D642ABAF6020019CEFB /* WidgetExtensionExtension.appex */,
+				39905D642ABAF6020019CEFB /* WidgetExtension.appex */,
 				39560F1D2AC17B91000A623D /* CountDays-Intent.appex */,
 			);
 			name = Products;
@@ -650,9 +651,9 @@
 			productReference = 39560F1D2AC17B91000A623D /* CountDays-Intent.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		39905D632ABAF6020019CEFB /* WidgetExtensionExtension */ = {
+		39905D632ABAF6020019CEFB /* WidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 39905D772ABAF6030019CEFB /* Build configuration list for PBXNativeTarget "WidgetExtensionExtension" */;
+			buildConfigurationList = 39905D772ABAF6030019CEFB /* Build configuration list for PBXNativeTarget "WidgetExtension" */;
 			buildPhases = (
 				39905D602ABAF6020019CEFB /* Sources */,
 				39905D612ABAF6020019CEFB /* Frameworks */,
@@ -662,13 +663,13 @@
 			);
 			dependencies = (
 			);
-			name = WidgetExtensionExtension;
+			name = WidgetExtension;
 			packageProductDependencies = (
 				39905D7A2ABAF61A0019CEFB /* Realm */,
 				39905D7C2ABAF61A0019CEFB /* RealmSwift */,
 			);
 			productName = WidgetExtensionExtension;
-			productReference = 39905D642ABAF6020019CEFB /* WidgetExtensionExtension.appex */;
+			productReference = 39905D642ABAF6020019CEFB /* WidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -724,7 +725,7 @@
 				394A5C6F2A9712DF006A7232 /* CountDays */,
 				394A5C7F2A9712E0006A7232 /* CountDaysTests */,
 				394A5C892A9712E0006A7232 /* CountDaysUITests */,
-				39905D632ABAF6020019CEFB /* WidgetExtensionExtension */,
+				39905D632ABAF6020019CEFB /* WidgetExtension */,
 				39560F1C2AC17B91000A623D /* CountDays-Intent */,
 			);
 		};
@@ -739,6 +740,7 @@
 				394A5C782A9712E0006A7232 /* Assets.xcassets in Resources */,
 				39B02CF32AF8D3C200E99D05 /* Localizable.xcstrings in Resources */,
 				39FFFA842AB19325001AE0D7 /* GoogleService-Info.plist in Resources */,
+				39B02CF42AFBFA3700E99D05 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -913,7 +915,7 @@
 		};
 		39905D752ABAF6030019CEFB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 39905D632ABAF6020019CEFB /* WidgetExtensionExtension */;
+			target = 39905D632ABAF6020019CEFB /* WidgetExtension */;
 			targetProxy = 39905D742ABAF6030019CEFB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1043,7 +1045,7 @@
 				CODE_SIGN_ENTITLEMENTS = CountDays/CountDays.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"CountDays/Preview Content\"";
 				DEVELOPMENT_TEAM = PNV979YSS5;
 				ENABLE_PREVIEWS = YES;
@@ -1083,7 +1085,7 @@
 				CODE_SIGN_ENTITLEMENTS = CountDays/CountDays.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"CountDays/Preview Content\"";
 				DEVELOPMENT_TEAM = PNV979YSS5;
 				ENABLE_PREVIEWS = YES;
@@ -1202,7 +1204,7 @@
 				INFOPLIST_FILE = "CountDays-Intent/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "CountDays-Intent";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1234,7 +1236,7 @@
 				INFOPLIST_FILE = "CountDays-Intent/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "CountDays-Intent";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1357,7 +1359,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		39905D772ABAF6030019CEFB /* Build configuration list for PBXNativeTarget "WidgetExtensionExtension" */ = {
+		39905D772ABAF6030019CEFB /* Build configuration list for PBXNativeTarget "WidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				39905D782ABAF6030019CEFB /* Debug */,
