@@ -11,8 +11,7 @@ class CalendarViewModel: ObservableObject {
     
     static var calendar: Calendar = {
         var cal = Calendar(identifier: .gregorian)
-        cal.locale = Locale(identifier: "ja_JP")
-//        cal.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        cal.locale = Locale.current
         return cal
     }()
     
@@ -96,10 +95,10 @@ class CalendarViewModel: ObservableObject {
     }
     
     /// フォーマットされた日付に変換
-    static func getFormattedDate(_ date: Date) -> String {
+    static func getFormattedDate(_ eventVM: EventCardViewModel2, locale: Locale) -> String {
         let format = DateFormatter()
-        format.dateFormat = DateFormatter.dateFormat(fromTemplate: "ydMMM\nHH:mm", options: 0, locale: Locale(identifier: "ja_JP"))
-        return format.string(from: date)
+        format.dateFormat = DateFormatter.dateFormat(fromTemplate: "ydMMM\nHH:mm", options: 0, locale: Locale(identifier: locale.identifier))
+        return format.string(from: eventVM.selectedDate)
     }
     
     static func getDay(target: Date, eventType: EventType, frequentType: FrequentType) -> Int? {

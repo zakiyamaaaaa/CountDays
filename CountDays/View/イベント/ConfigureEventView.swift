@@ -278,10 +278,9 @@ struct ConfigureEventView: View {
                                class: String(describing: type(of: self)))
     }
     
-    /// HeaderView
+    //MARK: - HeaderView
     private var headerView: some View {
         VStack(spacing: 0) {
-            
             closableMark
                 .padding(.top)
             
@@ -301,10 +300,6 @@ struct ConfigureEventView: View {
                 Spacer()
                 Button(isCreation ? "登録" : "更新") {
                     WidgetCenter.shared.reloadAllTimelines()
-                    //                if eventCardViewModel.text.isEmpty {
-                    //                    ///  イベント名を入力してくださいエラーメッセージ表示
-                    //                    return
-                    //                }
                     let style: EventDisplayStyle = isPurchased ? eventCardViewModel.style : .standard
                     
                     let event = Event(title: eventCardViewModel.text, date: eventCardViewModel.selectedDate, textColor: eventCardViewModel.textColor, backgroundColor: eventCardViewModel.backgroundColor, displayStyle: style, fontSize: 1.0, frequentType: eventCardViewModel.frequentType, eventType: eventCardViewModel.eventType, dayOfWeek: eventCardViewModel.dayOfWeek, displayHour: eventCardViewModel.showHour, displayMinute: eventCardViewModel.showMinute, displaySecond: eventCardViewModel.showSecond, image: eventCardViewModel.image, displayLang: eventCardViewModel.displayLang)
@@ -348,7 +343,7 @@ struct ConfigureEventView: View {
                 .frame(width: 100, height: 50)
                 .tint(.white)
                 .fontWeight(.bold)
-                .font(.system(size: 20))
+                .font(.system(size: Global.language == "es" ? 15 : 20))
                 .disabled(eventCardViewModel.text.isEmpty)
                 .background(RoundedRectangle(cornerRadius: 30).fill( eventCardViewModel.text.isEmpty ? ColorUtility.disable : ColorUtility.accentColor))
                 .padding()
@@ -415,7 +410,8 @@ struct ConfigureEventView: View {
                 FirebaseAnalyticsManager.recordEvent(analyticsKey: .ConfigureViewTapConfigureDateButton)
             } label: {
                 VStack(alignment: .leading) {
-                    Text(eventCardViewModel.eventType.rawValue)
+                    let text = LocalizedStringKey(eventCardViewModel.eventType.rawValue)
+                    Text(text)
                         .foregroundColor(eventCardViewModel.eventType == .countdown ? .black : .white)
                         .frame(width: 150, height: 30)
                         .background(eventCardViewModel.eventType == .countdown ? .white : .black)
@@ -444,9 +440,9 @@ struct ConfigureEventView: View {
     
     @State var number = 0
     
+    //MARK: - メニュー１
     private var dateView1: some View {
         HStack {
-//
             VStack {
                 Image(systemName: eventCardViewModel.eventType == .countdown ? "calendar.badge.clock" : "clock.arrow.circlepath")
                     .resizable()
@@ -465,35 +461,33 @@ struct ConfigureEventView: View {
 //
             VStack(alignment: .leading) {
                 let date = dateViewModel.selectedDate
-                let year = dateViewModel.getYearText(date: date)
                 let month = dateViewModel.getMonthText(date: date)
-                let day = dateViewModel.getDayText(date: date)
-                let hour = dateViewModel.getHourText(date: date)
-                let minute = dateViewModel.getMinuteText(date: date)
+                let day = dateViewModel.getDayNumber(date: date)
+                let hourminute = dateViewModel.getHourAndMinuteText(date: date)
                 
                 HStack {
                     switch eventCardViewModel.eventType {
                     case .countup:
-                        Text(year + "/" + month + "/" + day)
+                        Text(dateViewModel.dateText(date: date))
                     case .countdown:
                         switch eventCardViewModel.frequentType {
                         case .never:
-                            Text(year + "/" + month + "/" + day)
+                            Text(dateViewModel.dateText(date: date))
                         case .annual:
                             Text("毎年：")
-                            Text(month + "月" + day + "日")
+                            Text("\(month)月\(day)日")
                         case .monthly:
                             Text("毎月：")
-                            Text(day + "日")
+                            Text("\(day)TH")
                         case .weekly:
                             Text("毎週：")
-                            Text(eventCardViewModel.dayOfWeek.stringValue)
+                            
+                            Text(LocalizedStringKey(eventCardViewModel.dayOfWeek.stringValue))
                         }
                     }
                     
                 }
-                /// TODO:- hh:mm表記
-                Text(hour + ":" + minute)
+                Text(hourminute)
                 
             }
             .foregroundColor(eventCardViewModel.eventType == .countdown ? .white : .black)
@@ -501,7 +495,7 @@ struct ConfigureEventView: View {
         }
     }
     
-    /// イベントの表示スタイルを編集するビュー
+    //MARK: - イベントの表示スタイルを編集するビュー
     ///他のところで使われていないので、ファンクションに切り出す方が良いかも
     private var styleView: some View {
         VStack {
@@ -546,7 +540,8 @@ struct ConfigureEventView: View {
                     }
                     
                     VStack {
-                        Text(eventCardViewModel.eventType.rawValue)
+                        
+                        Text(LocalizedStringKey(eventCardViewModel.eventType.rawValue))
                             .foregroundColor(ColorUtility.highlightedText)
                         EventCardView2(event: Event(), eventVM: eventCardViewModel, displayStyle: .circle)
                         
@@ -611,7 +606,7 @@ struct ConfigureEventView: View {
             .indexViewStyle(.page(backgroundDisplayMode: .always))
             .sheet(isPresented: $showStyleDetailConfiguration) {
                 
-                EventDetailConfigurationView(showHour: $eventCardViewModel.showHour, showMinute: $eventCardViewModel.showMinute, displayLang: $eventCardViewModel.displayLang, showSecond: $eventCardViewModel.showSecond)
+                EventDetailConfigurationView(showHour: $eventCardViewModel.showHour, showMinute: $eventCardViewModel.showMinute, showSecond: $eventCardViewModel.showSecond)
                     .presentationDetents([.medium])
                     
             }
@@ -665,13 +660,14 @@ struct ConfigureEventView: View {
         }
     }
     
-    /// MARK: - 背景色を編集するビュー
+    // MARK: - 背景色を編集するビュー
     private var backgroundColorView: some View {
         VStack {
             
             Picker("背景スタイル", selection: $selectedBackgroundStyle) {
                 ForEach(BackgroundStyle.allCases, id: \.self) { id in
-                    Text(id.rawValue)
+                    
+                    Text(LocalizedStringKey(id.rawValue))
                 }
             }
             .pickerStyle(.segmented)
@@ -815,7 +811,8 @@ struct ConfigureEventView: View {
     @State private var isShowUpgradeView = false
     @State private var isShowUpgradeAlert = false
     @State private var show = false
-    /// テキストの色を編集するビュー
+    
+    //MARK: - テキストの色を編集するビュー
     private var textColorView: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
@@ -836,25 +833,26 @@ struct ConfigureEventView: View {
             }
             .padding()
             
-            VStack {
-                Spacer()
-                Button {
-                    withAnimation {
-                        eventCardViewModel.displayLang = eventCardViewModel.displayLang.rawValue == 0 ? .en : .jp
-                    }
-                    HapticFeedbackManager.play(.impact(.medium))
-                } label: {
-                    let text = eventCardViewModel.displayLang == .jp ? "日" : "Day"
-                    Text(text)
-                        .foregroundColor(.black)
-                    
-                }
-                .frame(width: 50, height: 50)
-                .background(.white)
-                .clipShape(Circle())
-                .buttonStyle(BounceButtonStyle())
-                .padding()
-            }
+            /// 言語切替。不要っぽいので一旦コメントアウト
+//            VStack {
+//                Spacer()
+//                Button {
+//                    withAnimation {
+//                        eventCardViewModel.displayLang = eventCardViewModel.displayLang.rawValue == 0 ? .en : .jp
+//                    }
+//                    HapticFeedbackManager.play(.impact(.medium))
+//                } label: {
+//                    let text = eventCardViewModel.displayLang == .jp ? "日" : "Day"
+//                    Text(text)
+//                        .foregroundColor(.black)
+//                    
+//                }
+//                .frame(width: 50, height: 50)
+//                .background(.white)
+//                .clipShape(Circle())
+//                .buttonStyle(BounceButtonStyle())
+//                .padding()
+//            }
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -923,6 +921,10 @@ struct ConfigureEventView_Previews: PreviewProvider {
     @State static var date = EventCardViewModel.defaultStatus.date
     @StateObject static var store = Store()
     static var previews: some View {
-        ConfigureEventView(realmMock: RealmMockStore(), event: event, isCreation: false, eventCardViewModel: eventViewModel).environmentObject(store)
+        ForEach(Global.localizationIds, id: \.self) { id in
+            ConfigureEventView(realmMock: RealmMockStore(), event: event, isCreation: false, eventCardViewModel: eventViewModel).environmentObject(store)
+                .previewDisplayName("Locale- \(id)")
+                .environment(\.locale, .init(identifier: id))
+        }
     }
 }

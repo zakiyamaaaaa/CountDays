@@ -109,15 +109,9 @@ final class RealmModel: ObservableObject {
     
     /// Event データを更新
     static func updateEvent(event: Event) {
-//        if let eventThaw = event.thaw() {
-            try! realm.write {
-                realm.add(event, update: .modified)
-                
-                //            event.title = event.title
-                //            event.title = "update"
-                //            event.date = event.date
-            }
-//        }
+        try! realm.write {
+            realm.add(event, update: .modified)
+        }
     }
     
     
@@ -152,10 +146,6 @@ final class User: Object, ObjectKeyIdentifiable {
     var gradeText: String {
         return SubscriptionTier(rawValue: grade)?.string ?? "ノーマル"
     }
-//    init(id: String = UUID().uuidString, events: RealmSwift.List<Event>) {
-//        self.id = id
-//        self.events = events
-//    }
 }
 
 class Event: Object, ObjectKeyIdentifiable {
@@ -163,8 +153,6 @@ class Event: Object, ObjectKeyIdentifiable {
     
     @Persisted var title: String
     @Persisted var date: Date
-//    @Persisted var textColor: RealmSwift.List<Double>
-//    @Persisted var backgroundColor: RealmSwift.List<Double>
     @Persisted var textColor: TextColor
     @Persisted var backgroundColor: BackgroundColor
 //    @Persisted(originProperty: "events") var user: LinkingObjects<User>
@@ -173,7 +161,6 @@ class Event: Object, ObjectKeyIdentifiable {
     @Persisted var frequentType: FrequentType = .never
     @Persisted var eventType: EventType = .countup
     @Persisted var dayAtMonthly: Int = 1
-//    @objc dynamic var imageData: NSData?
     @Persisted var imageData: Data?
     @Persisted var hour: Int = 0
     @Persisted var minute: Int = 0
@@ -203,7 +190,7 @@ class Event: Object, ObjectKeyIdentifiable {
         
     }
     
-    init(id:UUID = UUID(), title: String, date: Date, textColor: TextColor, backgroundColor: BackgroundColor, displayStyle: EventDisplayStyle, fontSize: Float, displaySize: Int = 0, frequentType: FrequentType = .never, eventType: EventType = .countup, dayAtMonthly: Int = 1, hour: Int = 0, minute: Int = 0, dayOfWeek: DayOfWeek = .sunday, displayHour: Bool = true, displayMinute: Bool = true, displaySecond: Bool = false, image: UIImage? = nil, displayLang: DisplayLang = .jp) {
+    init(id:UUID = UUID(), title: String, date: Date, textColor: TextColor, backgroundColor: BackgroundColor, displayStyle: EventDisplayStyle, fontSize: Float, displaySize: Int = 0, frequentType: FrequentType = .never, eventType: EventType = .countup, dayAtMonthly: Int = 1, hour: Int = 0, minute: Int = 0, dayOfWeek: DayOfWeek = .sunday, displayHour: Bool = true, displayMinute: Bool = true, displaySecond: Bool = false, image: UIImage? = nil, displayLang: DisplayLang = .en) {
         super.init()
         self.id = id
         self.title = title
@@ -222,7 +209,10 @@ class Event: Object, ObjectKeyIdentifiable {
         self.displayHour = displayHour
         self.displayMinute = displayMinute
         self.displaySecond = displaySecond
-        self.displayLang = displayLang
+//        if Locale.preferredLanguages.first == "ja" || Locale.preferredLanguages.first == "zh" {
+//            self.displayLang = .jp
+//        }
+        
         /// 画像の変換処理。ファイルサイズをリサイズ
         if let image, let pngData = image.pngData(), let jpegData = image.resize().jpegData(compressionQuality: 0.8)  {
             

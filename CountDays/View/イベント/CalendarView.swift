@@ -30,7 +30,7 @@ struct CalendarView: UIViewRepresentable {
             )
         view.selectionBehavior = selection
         view.backgroundColor = UIColor(ColorUtility.secondary)
-        view.locale = Locale(identifier: "ja")
+        view.locale = Locale(identifier: Global.localeID)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.visibleDateComponents = dateComponents
         selection.selectedDate = dateComponents

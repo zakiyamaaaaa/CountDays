@@ -12,24 +12,29 @@ class DateViewModel: ObservableObject {
     
     static var calendar: Calendar = {
         var cal = Calendar(identifier: .gregorian)
-        cal.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+//        cal.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        cal.locale = Locale.current
         return cal
     }()
     
     var formatter: DateFormatter = {
         var formatter = DateFormatter()
         formatter.locale = Locale.current
+        #if DEBUG
         formatter.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        #else
+        formatter.timeZone = TimeZone.current
+        #endif
         return formatter
     }()
     
-    func dateText(date: Date)-> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ja")
-        dateFormatter.dateStyle = .medium
-        let text = dateFormatter.string(from: date)
-        return text
-    }
+//    func dateText(date: Date)-> String {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.locale = Locale(identifier: "ja")
+//        dateFormatter.dateStyle = .medium
+//        let text = dateFormatter.string(from: date)
+//        return text
+//    }
     
     func dateText(component: DateComponents?) -> String {
         guard let component,
@@ -40,7 +45,7 @@ class DateViewModel: ObservableObject {
             let date = Date()
             return dateText(date: date)
         }
-        return "\(year)年\(month)月\(day)日"
+        return "\(year)/\(month)/\(day)"
     }
     
     func dateText(date: Date?) -> String {
@@ -48,15 +53,7 @@ class DateViewModel: ObservableObject {
             return "no data"
         }
         
-        formatter.dateFormat = "yyyy'年'M'月'd'日"
-//        guard let component,
-//              let year = component.year?.description,
-//              let month = component.month?.description,
-//              let day = component.day?.description
-//        else {
-//            let date = Date()
-//            return dateText(date: date)
-//        }
+        formatter.dateFormat = "yyyy'/'M'/'d'"
         let str = formatter.string(from: date)
         return str
     }
@@ -86,6 +83,12 @@ class DateViewModel: ObservableObject {
         return formatter.string(from: date)
     }
     
+    func getHourAndMinuteText(date: Date?) -> String {
+        guard let date else { return "" }
+        formatter.dateFormat = "H:mm"
+        
+        return formatter.string(from: date)
+    }
     
     
     func getYearText(date: Date?) -> String {

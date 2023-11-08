@@ -13,7 +13,6 @@ struct EventDetailConfigurationView: View {
     @EnvironmentObject var store: Store
     @Binding var showHour: Bool
     @Binding var showMinute: Bool
-    @Binding var displayLang: DisplayLang
     @State var showHourandMinute: Bool = true
     @Binding var showSecond: Bool
     @State private var isPurchased = false
@@ -112,9 +111,8 @@ struct EventDetailConfigurationView: View {
 
 struct EventDetailConfigurationView_Previews: PreviewProvider {
     @State static var a = true
-    @State static var b: DisplayLang = .jp
     @StateObject static var store = Store()
     static var previews: some View {
-        EventDetailConfigurationView(showHour: $a, showMinute: $a, displayLang: $b, showHourandMinute: a, showSecond: $a).environmentObject(store)
+        EventDetailConfigurationView(showHour: $a, showMinute: $a, showHourandMinute: a, showSecond: $a).environmentObject(store)
     }
 }

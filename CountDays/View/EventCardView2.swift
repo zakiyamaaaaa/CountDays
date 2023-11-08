@@ -18,7 +18,7 @@ class EventCardViewModel2: ObservableObject {
     @Published var frequentType: FrequentType
     @Published var eventType: EventType = .countup
     @Published var textColor: TextColor
-    @Published var displayLang: DisplayLang = .jp
+    @Published var displayLang: DisplayLang
     @Published var showHour = true
     @Published var showMinute = true
     @Published var showSecond = false
@@ -62,7 +62,7 @@ struct EventCardView3: View {
 }
 
 struct EventCardView2: View {
-
+    @Environment(\.locale) var locale
     @ObservedRealmObject var event: Event
     let eventVM: EventCardViewModel2
     var displayStyle: EventDisplayStyle? = nil
@@ -115,16 +115,9 @@ struct EventCardView2: View {
     }
     
     private func getCalendar()-> Calendar {
-        switch eventVM.displayLang {
-        case .en:
-            var calendar = Calendar(identifier: .gregorian)
-                calendar.locale = .init(identifier: "en_US")
-            return calendar
-        case .jp:
-            var calendar = Calendar(identifier: .gregorian)
-                calendar.locale = .init(identifier: "ja_JP")
-            return calendar
-        }
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.locale = .init(identifier: locale.identifier)
+        return calendar
     }
     private let secondsOfDay = 60*60*24
     private let secondsOfHour = 60*60
@@ -145,37 +138,40 @@ struct EventCardView2: View {
             let second = Int(relativeInterval)%secondsOfMinute
 
             let relativeDate2 = Date(timeInterval: relativeInterval - day*Double(secondsOfDay), since: currentDate)
-            let displayLang = eventVM.displayLang
             let c: Double = eventVM.eventType == .countup ? -1 : 1
             /// カウントダウンが終了した場合
             if eventVM.eventType == .countdown && eventVM.frequentType == .never && relativeInterval < 0 {
                 
                 
                 HStackLayout(alignment: .center) {
-                    Text(displayLang.finishText)
+                    Text("終了")
+//                    Text(LocalizedStringKey(displayLang.finishText))
                         .fontWeight(.bold)
                     Image(systemName: "checkmark.circle.fill")
                 }
                 
                 
-                Text(CalendarViewModel.getFormattedDate(eventVM.selectedDate))
+                Text(CalendarViewModel.getFormattedDate(eventVM, locale: locale))
                     .padding(.top, 1)
                 
             } else if abs(day) > 0 {
                 
                 switch eventVM.style {
                 case .standard:
-                    Text((day*c).formatted() + displayLang.dateText.day)
+                    let iDay = Int(day*c)
+                    Text("\(iDay)日")
                         .font(.largeTitle)
                         .fontWeight(.semibold)
                     Text(relativeDate2, style: .relative)
                         .environment(\.calendar, calendar)
                 case .circle, .calendar:
                     VStack(alignment: .center) {
+                        
+                        //FIXME: - 複数形対応
                         Text((day*c).formatted())
                             .font(.largeTitle)
                             .fontWeight(.semibold)
-                        Text(displayLang.dateText.day)
+                        Text("日")
                             .fontWeight(.semibold)
                             .environment(\.calendar, calendar)
                     }
@@ -185,7 +181,8 @@ struct EventCardView2: View {
             } else if abs(hour) > 0 {
                 switch eventVM.style {
                 case .standard:
-                    Text((hour*c).formatted() + displayLang.dateText.hour)
+                    let iHour = Int(hour*c)
+                    Text("\(iHour)時間")
                         .font(.largeTitle)
                         .fontWeight(.semibold)
 
@@ -194,10 +191,11 @@ struct EventCardView2: View {
                         .environment(\.calendar, calendar)
                 case .circle, .calendar:
                     VStack(alignment: .center) {
+                        //FIXME: - 複数形対応
                         Text((hour*c).formatted())
                             .font(.largeTitle)
                             .fontWeight(.semibold)
-                        Text(displayLang.dateText.hour)
+                        Text("時間")
                             .fontWeight(.semibold)
                             .environment(\.calendar, calendar)
                     }
@@ -257,7 +255,8 @@ struct EventCardView2: View {
             
             
             VStack(alignment: .leading) {
-                Text(eventVM.text.isEmpty ? "イベント名" : eventVM.text)
+                let eventName = eventVM.text.isEmpty ? "イベント名" : eventVM.text
+                Text(LocalizedStringKey(eventName))
                     .fontWeight(.semibold)
                     .font(.system(size: 13))
                     .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
@@ -324,7 +323,8 @@ struct EventCardView2: View {
                         .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                 }
                 VStack {
-                    Text(eventVM.text.isEmpty ? "イベント名" : eventVM.text)
+                    let eventName = eventVM.text.isEmpty ? "イベント名" : eventVM.text
+                    Text(LocalizedStringKey(eventName))
                         .foregroundColor(eventVM.textColor.color)
                         .fontWeight(.semibold)
                         .font(.system(size: 13))
@@ -368,7 +368,7 @@ struct EventCardView2: View {
                     .rotationEffect(.degrees(-90))
                     
                     if currentDate > eventVM.selectedDate && eventType == .countdown && frequentType == .never {
-                        Text(CalendarViewModel.getFormattedDate(eventVM.selectedDate))
+                        Text(CalendarViewModel.getFormattedDate(eventVM, locale: locale))
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                             .padding(.horizontal)
@@ -411,7 +411,8 @@ struct EventCardView2: View {
                     Rectangle()
                         .foregroundColor(.red)
                         .frame(width: WidgetConfig.small.size.width, height: WidgetConfig.small.size.height/4)
-                    Text(eventVM.text.isEmpty ? "イベント名" : eventVM.text)
+                    let eventName = eventVM.text.isEmpty ? "イベント名" : eventVM.text
+                    Text(LocalizedStringKey(eventName))
                         .foregroundColor(eventVM.textColor.color)
                         .fontWeight(.bold)
                         .font(.system(size: 15))

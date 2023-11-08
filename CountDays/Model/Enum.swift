@@ -28,6 +28,16 @@ enum DisplayLang: Int, PersistableEnum {
         }
     }
     
+    /// カレンダーの表記用
+    var identifier: String {
+        switch self {
+        case .jp:
+            return "ja_JP"
+        case .en:
+            return "en_US"
+        }
+    }
+    
     var finishText: String {
         switch self {
         case .jp:
@@ -46,9 +56,9 @@ enum EventType: String, CaseIterable, Identifiable, PersistableEnum {
 
 enum FrequentType: String, CaseIterable, Identifiable, PersistableEnum {
     case never = "繰り返さない"
-    case annual = "年に一度繰り返す"
+    case annual = "毎年繰り返す"
     case monthly = "毎月繰り返す"
-    case weekly = "週に一度繰り返す"
+    case weekly = "毎週繰り返す"
 //    case daily = "毎日繰り返す"
     
     var id: String { rawValue }

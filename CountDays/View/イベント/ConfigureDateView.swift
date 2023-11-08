@@ -87,7 +87,7 @@ struct ConfigureDateView: View {
                                 ForEach(EventType.allCases) {
                                     event in
                                     
-                                    Text(event.rawValue)
+                                    Text(LocalizedStringKey(event.rawValue))
                                         .tag(event)
                                     
                                 }
@@ -105,14 +105,16 @@ struct ConfigureDateView: View {
                         
                             
                         HStack {
-                            Menu(selectedFrequentType.rawValue) {
+                            
+                            Menu(LocalizedStringKey(selectedFrequentType.rawValue)) {
                                 ForEach(FrequentType.allCases) {
                                     frequent in
                                     
                                     Button(role: .none) {
                                         selectedFrequentType = frequent
                                     } label: {
-                                        Label(frequent.rawValue, systemImage:  selectedFrequentType == frequent ? "checkmark" : "none")
+                                        
+                                        Label(LocalizedStringKey(frequent.rawValue), systemImage:  selectedFrequentType == frequent ? "checkmark" : "none")
                                         
                                     }
                                 }
@@ -258,78 +260,36 @@ struct ConfigureDateView: View {
                         Text("カウントダウン")
                             .foregroundColor(.white)
                             .fontWeight(.bold)
-                        
                         HStack {
                             switch selectedFrequentType {
                             case .never:
                                 if CalendarViewModel.isPastDate(selectedDate) && selectedEventType == .countdown{
                                     Text("終了")
-                                        .font(.system(size: 25))
-                                        .fontWeight(.bold)
                                         .foregroundColor(Color.red)
                                 }
-                                Text(dateViewModel.getYearText(date: selectedDate) + "年")
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                Text("\(dateViewModel.getMonthText(date: selectedDate))月")
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                Text("\(dateViewModel.getDayText(date: selectedDate))日")
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                Text(dateViewModel.dateText(date: selectedDate))
                             case .annual:
                                 Text("毎年")
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
                                 Text("\(dateViewModel.getMonthText(date: selectedDate))月")
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
                                 Text("\(dateViewModel.getDayText(date: selectedDate))日")
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
                             case .monthly:
                                 Text("毎月")
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                Text("\(selectingMonthlyDay)日")
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                Text("\(selectingMonthlyDay) TH")
                             case .weekly:
                                 Text("毎週")
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                Text(selectingWeeklyDate.stringValue)
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                Text(LocalizedStringKey(selectingWeeklyDate.stringValue))
                             }
+                            
                         }
+                        .font(.system(size: 25))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
                     case .countup:
                         Text("カウントアップ")
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                         HStack {
-                            Text(dateViewModel.getYearText(date: selectedDate) + "年")
-                                .font(.system(size: 25))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                            Text("\(dateViewModel.getMonthText(date: selectedDate))月")
-                                .font(.system(size: 25))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                            Text("\(dateViewModel.getDayText(date: selectedDate))日")
-                                .font(.system(size: 25))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
+                            Text(dateViewModel.dateText(date: selectedDate))
                             
                             
                             if !CalendarViewModel.isPastDate(selectedDate) {
@@ -346,6 +306,9 @@ struct ConfigureDateView: View {
                                 }
                             }
                         }
+                        .font(.system(size: 25))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
                     }
                     
                     
@@ -416,7 +379,7 @@ struct ConfigureDateView: View {
                 Spacer()
             }
             
-            Menu(selectingMonthlyDay.description + " 日") {
+            Menu("\(selectingMonthlyDay) TH") {
                 ForEach(daysList, id: \.self) { day in
                     Button {
                         selectingMonthlyDay = day
@@ -450,14 +413,15 @@ struct ConfigureDateView: View {
                 Spacer()
             }
             
-            Menu(selectingWeeklyDate.stringValue) {
+            Menu(LocalizedStringKey(selectingWeeklyDate.stringValue)) {
                 ForEach(DayOfWeek.allCases.reversed(), id: \.self) { date in
                     Button {
                         selectingWeeklyDate = date
                         
                         
                     } label: {
-                        Text(date.stringValue)
+                        
+                        Text(LocalizedStringKey(date.stringValue))
                             .foregroundColor(.white)
                     }
                     
@@ -485,6 +449,11 @@ struct ConfigureDateView_Previews: PreviewProvider {
     static var previews: some View {
         let event = EventCardViewModel.defaultStatus
         let vm = EventCardViewModel2(event: event)
-        ConfigureDateView(eventType: $event, frequentType: $frequent, dateViewModel: _dateViewModel, weeklyDate: $weeklyDate, eventViewModel: _eventViewModel)
+        
+        ForEach(Global.localizationIds, id: \.self) { id in
+            ConfigureDateView(eventType: $event, frequentType: $frequent, dateViewModel: _dateViewModel, weeklyDate: $weeklyDate, eventViewModel: _eventViewModel)
+                .previewDisplayName("Locale- \(id)")
+                .environment(\.locale, .init(identifier: id))
+        }
     }
 }

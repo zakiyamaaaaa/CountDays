@@ -17,7 +17,7 @@ struct EventCardView: View {
     var showHour: Bool = true
     var showMinute: Bool = true
     var showSecond: Bool = false
-    var displayLang: DisplayLang = .jp
+    var displayLang: DisplayLang
     var frequentType: FrequentType
     var eventType: EventType = .countup
     let width = UIScreen.main.bounds.width
