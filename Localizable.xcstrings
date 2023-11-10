@@ -35,7 +35,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@Día"
+            "value" : "%@Días"
           }
         }
       }
@@ -58,6 +58,18 @@
     },
     "%@月%lld日" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ mo. %2$lld th "
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@Mes%2$lld Días"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "new",
@@ -229,7 +241,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld Mes %lld Día"
+            "value" : "%lld Mes %lld Días"
           }
         }
       }
@@ -439,6 +451,9 @@
     "App created by Shoichi Yamzaki" : {
 
     },
+    "Bottom" : {
+
+    },
     "CountDays" : {
 
     },
@@ -451,10 +466,22 @@
     "Get started" : {
 
     },
+    "Hello" : {
+
+    },
     "Hello, World!" : {
 
     },
     "hoge" : {
+
+    },
+    "L" : {
+
+    },
+    "Leading" : {
+
+    },
+    "Min" : {
 
     },
     "Mサイズ" : {
@@ -538,10 +565,16 @@
         }
       }
     },
+    "T" : {
+
+    },
     "Thanks" : {
 
     },
     "the text below" : {
+
+    },
+    "Trailing" : {
 
     },
     "アップグレード" : {
@@ -1626,7 +1659,20 @@
       }
     },
     "日" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "days"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "días"
+          }
+        }
+      }
     },
     "日曜日" : {
       "extractionState" : "manual",

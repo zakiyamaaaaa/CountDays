@@ -159,9 +159,12 @@ struct EventCardView2: View {
                 switch eventVM.style {
                 case .standard:
                     let iDay = Int(day*c)
+                    //FIXME: - 数字だけ大きくする
                     Text("\(iDay)日")
                         .font(.largeTitle)
                         .fontWeight(.semibold)
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
                     Text(relativeDate2, style: .relative)
                         .environment(\.calendar, calendar)
                 case .circle, .calendar:
@@ -173,6 +176,7 @@ struct EventCardView2: View {
                             .fontWeight(.semibold)
                         Text("日")
                             .fontWeight(.semibold)
+                            .minimumScaleFactor(0.7)
                             .environment(\.calendar, calendar)
                     }
                 }

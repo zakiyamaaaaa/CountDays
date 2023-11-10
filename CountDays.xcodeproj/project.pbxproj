@@ -80,6 +80,7 @@
 		39905D7F2ABAFC3B0019CEFB /* WidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39905D6C2ABAF6020019CEFB /* WidgetExtension.swift */; };
 		39B02CF32AF8D3C200E99D05 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 39B02CF22AF8D3C200E99D05 /* Localizable.xcstrings */; };
 		39B02CF42AFBFA3700E99D05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39905D6F2ABAF6030019CEFB /* Assets.xcassets */; };
+		39B02CF52AFDB2AE00E99D05 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 39B02CF22AF8D3C200E99D05 /* Localizable.xcstrings */; };
 		39B665B12AD68ECD009E6A5D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA672AA5C0CB001AE0D7 /* Store.swift */; };
 		39B665B22AD68ECE009E6A5D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFFA672AA5C0CB001AE0D7 /* Store.swift */; };
 		39B665B42AD7E073009E6A5D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B665B32AD7E073009E6A5D /* Global.swift */; };
@@ -771,6 +772,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39B02CF52AFDB2AE00E99D05 /* Localizable.xcstrings in Resources */,
 				39905D702ABAF6030019CEFB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
