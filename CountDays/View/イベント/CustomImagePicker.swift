@@ -239,9 +239,9 @@ struct CropView: View {
                     do {
                         try await self.isPurchased = store.isPurchased(ProductId.super.rawValue)
                         
-//                        #if DEBUG
-//                        self.isPurchased = true
-//                        #endif
+                        #if DEBUG
+                        self.isPurchased = true
+                        #endif
                         
                     } catch(let error) {
                         print(error.localizedDescription)

@@ -140,7 +140,7 @@ struct MainView: View {
 //                                                    #else
                                                     
                                                     #if DEBUG
-//                                                    self.isPurchased = true
+                                                    self.isPurchased = true
                                                     #endif
                                                     
                                                     if self.isPurchased || RealmViewModel().events.count == 0 {
@@ -204,11 +204,11 @@ struct MainView: View {
             Spacer()
             
             #if DEBUG
-            VStack {
-                Text("デバッグモード")
-                Text("課金状態：" + isPurchased.description)
-            }
-            .background(ColorUtility.backgroundary)
+//            VStack {
+//                Text("デバッグモード")
+//                Text("課金状態：" + isPurchased.description)
+//            }
+//            .background(ColorUtility.backgroundary)
 //            Text("Launch Time:\(counter)")
 //            Button {
 //                
