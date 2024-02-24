@@ -23,10 +23,7 @@ struct MainView: View {
     @State private var isShowWelcomeView = false
     @State private var product: Product?
     @State private var isPurchased = false
-//    @State private var isPurchased2 = false
-//    @StateObject var realmMock = MockStore()
     @StateObject var realmMock = RealmMockStore()
-//    @StateObject var defaultEvent = EventCardViewModel.defaultStatus
     @EnvironmentObject var viewModel: RealmViewModel
     @State private var scale = false
     let dateViewModel = DateViewModel()
